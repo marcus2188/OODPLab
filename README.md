@@ -1,6 +1,14 @@
 # OODP Lab
 #### Working Repository for CZ2002 OODP
 
+## File Structure
+We will be following the Boundary - Controller - Entity structure.
+- src
+  - main.java
+  - boundary
+  - controller
+  - entity
+
 ## Main Menu
 - Press 1 for movie goer
 - Press 2 for admin
