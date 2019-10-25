@@ -5,9 +5,10 @@
 We will be following the Boundary - Controller - Entity structure.
 - src
   - main.java
-  - boundary
-  - controller
-  - entity
+  - boundary (all UI classes)
+  - controller (all controller interfaces and controllers)
+  - entity (all entities and type enums)
+  - utils (helper classes)
 
 ## Main Menu
 - Press 1 for movie goer
