@@ -3,5 +3,13 @@ package entity;
 import java.util.ArrayList;
 
 public class Cinema {
-    ArrayList<Seat> seats;
+    private ArrayList<Seat> seats;
+
+    public Cinema(ArrayList<Seat> seats) {
+        this.seats = seats;
+    }
+
+    public void printSeats() {
+
+    }
 }
