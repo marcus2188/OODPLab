@@ -2,7 +2,7 @@ package entity;
 
 public class Movie {
     private String title;
-    private String showingStatus;
+    private ShowingStatus showingStatus;
     private String synopsis;
     private String director;
     private String[] cast;
