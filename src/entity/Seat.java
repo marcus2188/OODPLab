@@ -1,27 +1,27 @@
 package entity;
 
 public class Seat {
-    private String row;
-    private String col;
+    private char row;
+    private int col;
 
-    public Seat(String row, String col) {
+    public Seat(char row, int col) {
         this.row = row;
         this.col = col;
     }
 
-    public String getRow() {
+    public char getRow() {
         return row;
     }
 
-    public void setRow(String row) {
+    public void setRow(char row) {
         this.row = row;
     }
 
-    public String getCol() {
+    public int getCol() {
         return col;
     }
 
-    public void setCol(String col) {
+    public void setCol(int col) {
         this.col = col;
     }
 }

@@ -1,3 +1,6 @@
+import boundary.Admin_UI;
+import controller.MovieTicketManager;
+
 import java.util.Scanner;
 
 public class Main {
@@ -30,10 +33,23 @@ public class Main {
     }
 
     private static void printAdminMenu() {
+        int choice = 0;
         System.out.println("Welcome, admin!");
+        System.out.println("Press 1 to update movie ticket prices");
+        while(choice != 9){
+            Scanner scan = new Scanner(System.in);
+            choice = scan.nextInt();
+            switch(choice){
+                case 1:
+                    Admin_UI adminUI = new MovieTicketManager();
+                    // some code here to change movie ticket prices
+            }
+        }
     }
 
     private static void printMovieGoerMenu() {
+        int choice = 0;
         System.out.println("Welcome, movie goer!");
+
     }
 }
