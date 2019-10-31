@@ -10,38 +10,43 @@ public class Cinema implements Serializable {
     private String name;
     private char aisleLocation;
 
-    public Cinema(ArrayList<Seat> seats) {
+    public Cinema(ArrayList<Seat> seats, char aisleLocation,String name) {
 
         this.seats = seats;
-        this.aisleLocation = 'C';
-        this.name = "GoldenCinema";
+        this.aisleLocation = aisleLocation;
+        this.name = name;
     }
 
     public void printSeats() { // has to be printed in order
         char c = 'A';
-        int i ,j, k;
-        System.out.print("  ");
+        int i ,j, k, counter =1;
+        System.out.print("\t");
         for (j = 0; j < this.getMaxCol(); j++) {
             if ((char)(j + 65) == this.aisleLocation) {
-                System.out.print("   ");
+                System.out.print("\t" );
             } else {
-            System.out.print(" " + c + " ");
-            c++;
+                if (j < 10) {
+                    System.out.print(" " + counter+ "\t" );
+                } else {
+                    System.out.print(counter + "\t");
+                }
+                counter++;
             }
         }
         System.out.print("\n");
-        for (i =0; i < ((int)this.getMaxRow() -64); i++){
+        for (i =0; i < ((int)this.getMaxRow() -63); i++){
             for (k = 0; k < this.getMaxCol(); k++) {
                 if (k == 0) {
-                    System.out.print(i + " ");
+                    System.out.print(c);
+                    c++;
                 }
                 if ((char)(k + 65) == this.aisleLocation) {
-                    System.out.print("| |");
+                    System.out.print("\t| |");
                 } else {
-                    System.out.print("[ ]");
+                    System.out.print("\t[ ]");
                 }
             }
-            System.out.print("\n");
+             System.out.print("\n");
         }
     }
 
