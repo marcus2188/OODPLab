@@ -11,7 +11,7 @@ public class Tester {
         ArrayList<Seat> seatlist = new ArrayList<Seat>();
         seatlist.add(seat1);
         seatlist.add(seat2);
-        Cinema cinema = new Cinema(seatlist, 'c', "name");
+        Cinema cinema = new Cinema(seatlist, (ArrayList)seatlist,'c', "name");
         ArrayList<Cinema> cinemas= new ArrayList<Cinema>();
         cinemas.add(cinema);
         Cineplex cineplex1 = new Cineplex(cinemas);

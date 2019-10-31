@@ -12,16 +12,23 @@ public class Seeder {
         // create seats list from A1 to Z20
         List seats = new ArrayList();
         for (int i = 1; i <= 20; i++) {
-            for (char c = 'A'; c < 'Z'; c++) {
+            for (char c = 'A'; c <= 'Z'; c++) {
                 Seat s1 = new Seat(c,i);
                 seats.add(s1);
             }
         }
 
+        // create some randomly occupied seats
+        List occupiedSeats = new ArrayList();
+        Seat s1 = new Seat('A', 2);
+        Seat s2 = new Seat('C', 5);
+        occupiedSeats.add(s1);
+        occupiedSeats.add(s2);
+
         // create 3 cinemas
-        Cinema cine1 = new Cinema((ArrayList) seats, 'A', "Golden Cinema");
-        Cinema cine2 = new Cinema((ArrayList) seats, 'B', "Silver Cinema");
-        Cinema cine3 = new Cinema((ArrayList) seats, 'C', "Bronze Cinema");
+        Cinema cine1 = new Cinema((ArrayList) seats, (ArrayList)occupiedSeats,1, "Golden Cinema");
+        Cinema cine2 = new Cinema((ArrayList) seats, (ArrayList)occupiedSeats,2, "Silver Cinema");
+        Cinema cine3 = new Cinema((ArrayList) seats, (ArrayList)occupiedSeats,3, "Bronze Cinema");
 
         List cinemas = new ArrayList();
         cinemas.add(cine1);

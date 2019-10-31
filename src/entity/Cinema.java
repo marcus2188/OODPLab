@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 public class Cinema implements Serializable {
     private ArrayList<Seat> seats;
+    private ArrayList<Seat> occupiedSeats;
     private String name;
-    private char aisleLocation;
+    private int aisleLocation;
 
-    public Cinema(ArrayList<Seat> seats, char aisleLocation,String name) {
-
+    public Cinema(ArrayList<Seat> seats, ArrayList<Seat> occupiedSeats,int aisleLocation,String name) {
+        this.occupiedSeats = occupiedSeats;
         this.seats = seats;
         this.aisleLocation = aisleLocation;
         this.name = name;
@@ -22,7 +23,7 @@ public class Cinema implements Serializable {
         int i ,j, k, counter =1;
         System.out.print("\t");
         for (j = 0; j < this.getMaxCol(); j++) {
-            if ((char)(j + 65) == this.aisleLocation) {
+            if (j == this.aisleLocation) {
                 System.out.print("\t" );
             } else {
                 if (j < 10) {
@@ -34,17 +35,25 @@ public class Cinema implements Serializable {
             }
         }
         System.out.print("\n");
-        for (i =0; i < ((int)this.getMaxRow() -63); i++){
+
+        for (i =0; i < ((int)this.getMaxRow() -64); i++){
+            j = 1;
             for (k = 0; k < this.getMaxCol(); k++) {
                 if (k == 0) {
                     System.out.print(c);
                     c++;
                 }
-                if ((char)(k + 65) == this.aisleLocation) {
+                if (k == this.aisleLocation) {
                     System.out.print("\t| |");
                 } else {
-                    System.out.print("\t[ ]");
+                    if (this.checkSeatOccupied( (char)(i+65), j)) {
+                        System.out.print("\t[X]");
+                    } else {
+                        System.out.print("\t[ ]");
+                    }
+                    j++;
                 }
+
             }
              System.out.print("\n");
         }
@@ -79,6 +88,16 @@ public class Cinema implements Serializable {
             }
         }
         return max;
+    }
+
+    private boolean checkSeatOccupied(char row, int col) {
+        for (int i = 0; i < this.occupiedSeats.size(); i++) {
+            Seat s = (Seat)this.occupiedSeats.get(i);
+            if (s.getRow() == row && s.getCol() == col) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
