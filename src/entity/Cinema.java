@@ -2,9 +2,10 @@ package entity;
 
 import controller.SystemSettings_inf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cinema {
+public class Cinema implements Serializable {
     private ArrayList<Seat> seats;
     private String name;
     private char aisleLocation;
@@ -13,6 +14,7 @@ public class Cinema {
 
         this.seats = seats;
         this.aisleLocation = 'C';
+        this.name = "GoldenCinema";
     }
 
     public void printSeats() { // has to be printed in order

@@ -2,9 +2,10 @@ package entity;
 
 import controller.SystemSettings_inf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cineplex {
+public class Cineplex implements Serializable {
     private ArrayList<Cinema> cinemas;
 
     public Cineplex(ArrayList<Cinema> cinemas) {
@@ -15,15 +16,12 @@ public class Cineplex {
         return cinemas;
     }
 
-    public void setCinemas(ArrayList<Cinema> cinemas) {
-        this.cinemas = cinemas;
-    }
 
     public void printCinemas(){
         for (int i = 0; i < this.cinemas.size(); i++) {
             Cinema cinema = this.cinemas.get(i);
             String cinemaName = cinema.getName();
-            System.out.println(i + ". " + cinemaName);
+            System.out.println((i+1) + ". " + cinemaName);
         }
 
     }
