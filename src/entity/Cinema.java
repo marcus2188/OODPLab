@@ -2,44 +2,60 @@ package entity;
 
 import controller.SystemSettings_inf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cinema {
+public class Cinema implements Serializable {
     private ArrayList<Seat> seats;
+    private ArrayList<Seat> occupiedSeats;
     private String name;
-    private char aisleLocation;
+    private int aisleLocation;
 
-    public Cinema(ArrayList<Seat> seats) {
-
+    public Cinema(ArrayList<Seat> seats, ArrayList<Seat> occupiedSeats,int aisleLocation,String name) {
+        this.occupiedSeats = occupiedSeats;
         this.seats = seats;
-        this.aisleLocation = 'C';
+        this.aisleLocation = aisleLocation;
+        this.name = name;
     }
 
     public void printSeats() { // has to be printed in order
         char c = 'A';
-        int i ,j, k;
-        System.out.print("  ");
+        int i ,j, k, counter =1;
+        System.out.print("\t");
         for (j = 0; j < this.getMaxCol(); j++) {
-            if ((char)(j + 65) == this.aisleLocation) {
-                System.out.print("   ");
+            if (j == this.aisleLocation) {
+                System.out.print("\t" );
             } else {
-            System.out.print(" " + c + " ");
-            c++;
+                if (j < 10) {
+                    System.out.print(" " + counter+ "\t" );
+                } else {
+                    System.out.print(counter + "\t");
+                }
+                counter++;
             }
         }
         System.out.print("\n");
+
         for (i =0; i < ((int)this.getMaxRow() -64); i++){
+            j = 1;
             for (k = 0; k < this.getMaxCol(); k++) {
                 if (k == 0) {
-                    System.out.print(i + " ");
+                    System.out.print(c);
+                    c++;
                 }
-                if ((char)(k + 65) == this.aisleLocation) {
-                    System.out.print("| |");
+                if (k == this.aisleLocation) {
+                    System.out.print("\t| |");
                 } else {
-                    System.out.print("[ ]");
+                    if (this.checkSeatOccupied( (char)(i+65), j)) {
+                        System.out.print("\t[X]");
+                    } else {
+                        System.out.print("\t[ ]");
+                    }
+                    j++;
                 }
+
             }
-            System.out.print("\n");
+             System.out.print("\n");
         }
     }
 
@@ -72,6 +88,16 @@ public class Cinema {
             }
         }
         return max;
+    }
+
+    private boolean checkSeatOccupied(char row, int col) {
+        for (int i = 0; i < this.occupiedSeats.size(); i++) {
+            Seat s = (Seat)this.occupiedSeats.get(i);
+            if (s.getRow() == row && s.getCol() == col) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
