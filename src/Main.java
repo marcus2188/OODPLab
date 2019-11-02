@@ -1,6 +1,7 @@
 import boundary.Admin_UI;
 import controller.MovieTicketManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,11 +20,17 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("Loading movie goer page...");
-                    printAdminMenu();
+                    printMovieGoerMenu();
+
                     break;
                 case 2:
                     System.out.println("Loading admin page...");
-                    printMovieGoerMenu();
+
+                    try {
+                        printAdminMenu();
+                    } catch(IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 default:
                     System.out.println("Invalid choice, try again...");
@@ -32,18 +39,22 @@ public class Main {
         }
     }
 
-    private static void printAdminMenu() {
+    private static void printAdminMenu() throws IOException {
         int choice = 0;
         System.out.println("Welcome, admin!");
         System.out.println("Press 1 to update movie ticket prices");
-        while(choice != 9){
-            Scanner scan = new Scanner(System.in);
-            choice = scan.nextInt();
-            switch(choice){
-                case 1:
-                    Admin_UI adminUI = new MovieTicketManager();
-                    // some code here to change movie ticket prices
+        try {
+            while (choice != 9) {
+                Scanner scan = new Scanner(System.in);
+                choice = scan.nextInt();
+                switch (choice) {
+                    case 1:
+                        Admin_UI adminUI = new MovieTicketManager();
+                        adminUI.importData();
+                }
             }
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
 

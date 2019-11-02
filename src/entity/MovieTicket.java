@@ -2,13 +2,38 @@ package entity;
 
 public class MovieTicket {
     private float price;
-    private AgeGroup ageGroup;
     private String TID;
 
-    public MovieTicket(float price, AgeGroup ageGroup) {
-        this.price = price;
+    // features
+    private AgeGroup ageGroup;
+    private boolean weekday;
+    private boolean before6;
+    private ScreeningFormat format;
+    private int day;
+
+    public boolean isWeekday() {
+        return weekday;
+    }
+
+    public boolean isBefore6() {
+        return before6;
+    }
+
+    public ScreeningFormat getFormat() {
+        return format;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
         this.ageGroup = ageGroup;
-        this.TID = "";
+        this.weekday = weekday;
+        this.before6 = before6;
+        this.format = format;
+        this.day = day;
+        this.price = price;
     }
 
     public float getPrice() {
