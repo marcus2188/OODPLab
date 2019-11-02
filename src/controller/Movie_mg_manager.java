@@ -8,20 +8,14 @@ import entity.MovieReview;
 
 public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf, MovieTop5_inf{
 	
-	private Movie[] m;
-	
-	public Movie_mg_manager() {
-		m=loadData();
-	}
-	
 	public void searchMovie(String movieName) {
 		Movie s = this.findMovie(movieName);
 		if (s!=null) System.out.println(s.getTitle());
 	}
 	
 	public void listAllMovie() {
-		for (int i=0;i<m.length;i++) {
-			m[i].printMovie();
+		for (int i=0;i<this.getM().length;i++) {
+			this.getM()[i].printMovie();
 		}
 	}
 	
