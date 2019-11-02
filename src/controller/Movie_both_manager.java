@@ -2,7 +2,7 @@ package controller;
 
 import entity.Movie;
 
-public class Movie_both_manager implements MovieTop5_inf {
+public class Movie_both_manager {
 	
 	private Movie[] m;
 	
@@ -12,16 +12,34 @@ public class Movie_both_manager implements MovieTop5_inf {
 	
 	public void listTop5(boolean ticketSales) {
 		Movie tmp;
-		if (ticketSales) {						//sort by ticketSales
+		if (ticketSales) {	
+			//sort by ticketSales
+			System.out.println("Top 5 Movies by ticket sales: ");
 			for (int i=0;i<m.length;i++) {
 				for (int j=i;j>0;j--) {
-					if (m[i].getTicketSales()>m[j].getTicketSales()) {
+					if (m[i].getTicketSales()<m[j].getTicketSales()) {
 						tmp = m[i];
 						m[i] = m[j];
 						m[j] = tmp;
 					}
 				}
 			}
+		}
+		else {
+			//sort by avgRating
+			System.out.println("Top 5 Movies by average rating: ");
+			for (int i=0;i<m.length;i++) {
+				for (int j=i;j>0;j--) {
+					if (m[i].getAvgRating()<m[j].getAvgRating()) {
+						tmp = m[i];
+						m[i] = m[j];
+						m[j] = tmp;
+					}
+				}
+			}
+		}
+		for (int i=0;i<m.length;i++) {
+			System.out.println(m[i].getTitle());
 		}
 	}
 	
@@ -52,5 +70,4 @@ public class Movie_both_manager implements MovieTop5_inf {
 		return null;
 	}
 
-	
 }

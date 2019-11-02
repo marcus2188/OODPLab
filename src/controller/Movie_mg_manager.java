@@ -6,7 +6,7 @@ import entity.Movie;
 import entity.MovieReview;
 
 
-public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf{
+public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf, MovieTop5_inf{
 	
 	private Movie[] m;
 	
@@ -46,10 +46,5 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 			System.out.println("Rating: " + mrlist.get(i).getRating() + "\nComments: " + mrlist.get(i).getComments());
 		}
 	}
-	
-	
-	
-	
-	
-	
+		
 }
