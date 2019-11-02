@@ -1,5 +1,6 @@
 package controller;
 
+
 public interface MovieTop5_inf {
-     void listTop5();
+     public void listTop5(boolean ticketSales);
 }
