@@ -8,4 +8,8 @@ public class MovieScreening {
     private Time showTime;
     private ScreeningFormat screeningFormat;
     private boolean isPH;
+    
+    public void printMovieScreening() {
+    	
+    }
 }

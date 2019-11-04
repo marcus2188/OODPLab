@@ -1,10 +1,12 @@
 package entity;
 
-public class MovieReview {
+import java.io.Serializable;
+
+public class MovieReview implements Serializable {
     private int rating;
     private String comments;
-
-    public MovieReview(int rating, String comments) {
+    
+    public MovieReview(String comments, int rating) {
         this.rating = rating;
         this.comments = comments;
     }
@@ -23,5 +25,10 @@ public class MovieReview {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+    
+    public void printReview() {
+    	System.out.println("Rating: " + getRating());
+    	System.out.println("Comments: " + getComments());
     }
 }
