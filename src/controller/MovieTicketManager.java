@@ -235,11 +235,26 @@ public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
         }
     }
 
-    // TODO: implement
+    // TODO: add error checking
     public void deleteData(){
+        this.printPriceTable(); // print entire table first
+        System.out.println("Enter ticket number to delete:");
+        int choice;
+        Scanner scan = new Scanner(System.in);
+        choice = scan.nextInt();
+        this.priceTable.remove(choice -1);
+        System.out.println("Ticket price removed!");
         return;
     }
 
+    public void printPriceTable(){
+        System.out.println("===The current ticket table===");
+        for (int i= 1; i <= this.priceTable.size(); i++ ) {
+            MovieTicket ticket = (MovieTicket)this.priceTable.get(i);
+            System.out.print(i + ". ");
+            ticket.printTicketDetails();
+        }
+    }
     // TODO: implement
     // updates a price of an indivdual ticket
     public void updatePriceOfTicket(MovieTicket ticket) {
