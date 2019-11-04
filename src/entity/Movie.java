@@ -14,9 +14,11 @@ public class Movie implements Serializable{
     private double avgRating;
     private boolean isBlockBuster;
     private List<MovieReview> review_list;
+    private int ticketSales;
+    private List<MovieScreening> ms;
     
 	public Movie(String title, String showingStatus, String synopsis, String director, List<String> cast,
-			double avgRating, boolean isBlockBuster, List<MovieReview> review_list) {
+			double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales, List<MovieScreening> ms) {
 		super();
 		this.title = title;
 		this.showingStatus = showingStatus;
@@ -26,6 +28,8 @@ public class Movie implements Serializable{
 		this.avgRating = avgRating;
 		this.isBlockBuster = isBlockBuster;
 		this.review_list = review_list;
+		this.ticketSales = ticketSales;
+		this.ms = ms;
 	}
 
 	public String getTitle() {
@@ -101,6 +105,22 @@ public class Movie implements Serializable{
 		this.review_list = review_list;
 	}
 	
+	public int getTicketSales() {
+		return ticketSales;
+	}
+
+	public void setTicketSales(int ticketSales) {
+		this.ticketSales = ticketSales;
+	}
+	
+	public List<MovieScreening> getMs() {
+		return ms;
+	}
+
+	public void setMs(List<MovieScreening> ms) {
+		this.ms = ms;
+	}
+
 	public void appendMovieReview(String comments, int rating) {	//added function
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
@@ -125,6 +145,13 @@ public class Movie implements Serializable{
 		for (int i=0;i<size_review;i++) {
 			System.out.println(i+1);
 			this.getReview_list().get(i).printReview();
+		}
+		
+		System.out.println("Movie Screening: ");
+		int size_ms = getMs().size();
+		for (int i=0;i<size_ms;i++) {
+			System.out.println(i+1);
+			this.getMs().get(i).printMovieScreening();
 		}
 	}
     

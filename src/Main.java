@@ -1,6 +1,7 @@
 import boundary.Admin_UI;
 import controller.MovieTicketManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -90,6 +91,7 @@ public class Main {
 
     // Admin menus
     private static void adminMenu(Admin_UI movieAdminManager, Admin_UI movieScreeningManagerAdmin) {
+
         int choice = 0;
         int id;
         Scanner scan = new Scanner(System.in);
@@ -196,6 +198,8 @@ public class Main {
                 default:
                     break;
             }
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
 
