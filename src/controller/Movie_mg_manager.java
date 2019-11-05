@@ -14,8 +14,8 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 	}
 	
 	public void listAllMovie() {
-		for (int i=0;i<this.getM().length;i++) {
-			this.getM()[i].printMovie();
+		for (int i=0;i<this.getM().size();i++) {
+			this.getM().get(i).printMovie();
 		}
 	}
 	
