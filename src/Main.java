@@ -353,13 +353,28 @@ public class Main {
 
 
     private static void adminCreateMovie() {
-        System.out.println("=== Create Movie ===");
-
+    	//create manager
+    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Create Movie ===");
+        adminManager.createMovie();
     }
 
-    private static void adminUpdateMovie() {System.out.println("=== Update Movie ===");}
+    private static void adminUpdateMovie() {
+    	//create manager
+    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Update Movie ===");
+    	adminManager.updateMovie();
+    }
 
-    private static void adminDeleteMovie() {System.out.println("=== Delete Movie === ");}
+    private static void adminDeleteMovie() {
+    	//create manager
+    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Delete Movie === ");
+    	adminManager.removeMovie();
+    }
 
     private static void adminCreateScreening() {System.out.println("=== Create Screening ===");}
 

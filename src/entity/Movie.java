@@ -2,12 +2,14 @@ package entity;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Movie implements Serializable{
     
 	private String title;
     private String showingStatus;
+    private Date endOfShowingDate;
     private String synopsis;
     private String director;
     private List<String> cast;
@@ -17,9 +19,9 @@ public class Movie implements Serializable{
     private int ticketSales;
     private List<MovieScreening> ms;
     
-	public Movie(String title, String showingStatus, String synopsis, String director, List<String> cast,
+    
+	public Movie(String title, String showingStatus, Date endOfShowingDate, String synopsis, String director, List<String> cast,
 			double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales, List<MovieScreening> ms) {
-		super();
 		this.title = title;
 		this.showingStatus = showingStatus;
 		this.synopsis = synopsis;
@@ -48,6 +50,14 @@ public class Movie implements Serializable{
 		this.showingStatus = showingStatus;
 	}
 	
+	public Date getEndOfShowingDate() {
+		return endOfShowingDate;
+	}
+
+	public void setEndOfShowingDate(Date endOfShowingDate) {
+		this.endOfShowingDate = endOfShowingDate;
+	}
+
 	public String getSynopsis() {
 		return synopsis;
 	}
@@ -103,6 +113,7 @@ public class Movie implements Serializable{
 
 	public void setReview_list(List<MovieReview> review_list) {
 		this.review_list = review_list;
+		this.setAvgRating(review_list);
 	}
 	
 	public int getTicketSales() {
@@ -125,7 +136,29 @@ public class Movie implements Serializable{
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
 	}
-
+	
+	public void printCast() {
+		int size_cast = getCast().size();
+		for (int i=0;i<size_cast;i++ ) {
+			System.out.println(getCast().get(i));
+		}
+	}
+	
+	public void printPastReviews() {
+		int size_review = getReview_list().size();
+		for (int i=0;i<size_review;i++) {
+			System.out.println(i+1);
+			this.getReview_list().get(i).printReview();
+		}
+	}
+	
+	public void printMs() {
+		int size_ms = getMs().size();
+		for (int i=0;i<size_ms;i++) {
+			System.out.println(i+1);
+			this.getMs().get(i).printMovieScreening();
+		}
+	}
 	public void printMovie() {
 		System.out.println("Title: "+getTitle());
 		System.out.println("Showing Status: "+getShowingStatus());
@@ -133,26 +166,15 @@ public class Movie implements Serializable{
 		System.out.println("Director: "+getDirector());
 		
 		System.out.println("Cast: ");
-		int size_cast = getCast().size();
-		for (int i=0;i<size_cast;i++ ) {
-			System.out.println(getCast().get(i));
-		}
+		printCast();
 		
 		System.out.println("Average Rating: "+getAvgRating());
 		
 		System.out.println("Past Reviews: ");
-		int size_review = getReview_list().size();
-		for (int i=0;i<size_review;i++) {
-			System.out.println(i+1);
-			this.getReview_list().get(i).printReview();
-		}
+		printPastReviews();
 		
 		System.out.println("Movie Screening: ");
-		int size_ms = getMs().size();
-		for (int i=0;i<size_ms;i++) {
-			System.out.println(i+1);
-			this.getMs().get(i).printMovieScreening();
-		}
+		printMs();
 	}
     
 }
