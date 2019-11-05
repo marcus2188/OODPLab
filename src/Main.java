@@ -218,7 +218,7 @@ public class Main {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
         ((Movie_mg_manager) movieMgManager).listAllMovie();
-        appState = STATE.MOVIE_GOER_MENU;
+        appState = STATE.MOVIE_GOER_MENU;   // Redirect back to main menu
     }
 
     private static void userSearchMovies() {
@@ -230,7 +230,7 @@ public class Main {
         System.out.println("Please enter the title: ");
         movieName = scan.next();
         ((Movie_mg_manager) movieMgManager).searchMovie(movieName);
-        appState = STATE.MOVIE_GOER_MENU;
+        appState = STATE.MOVIE_GOER_MENU; // Redirect back to main menu
     }
 
 
@@ -243,13 +243,19 @@ public class Main {
         System.out.println("Press 1 for top 5 movies ranked by ticket sales.");
         System.out.println("Press 2 for top 5 movies ranked by ratings");
         choice = scan.nextInt();
+        while (choice != 2 && choice != 1) {
+            System.out.println("Invalid choice, please try again: ");
+            choice = scan.nextInt();
+        }
         if(choice == 1){
             byTicketSales = true;
-            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
+
         }else if(choice == 2){
             byTicketSales = false;
-            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
+        } else {
+            byTicketSales = false;
         }
+        ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
