@@ -1,10 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ShoppingOrder {
+public class ShoppingOrder implements Serializable{
 	ArrayList<MovieTicket> tickets = new ArrayList<MovieTicket>();
 	Date dateofPurchase;
     

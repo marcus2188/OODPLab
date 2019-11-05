@@ -1,5 +1,11 @@
 package controller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -13,8 +19,44 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	ArrayList<ShoppingOrder> BookingHistory = new ArrayList<ShoppingOrder>();           // BELONGS TO THIS INSTANCE OF SHOPORD MGR?
 	ArrayList<ShoppingOrder> PaymentHistory = new ArrayList<ShoppingOrder>();  
 	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>();
-	
 	ShoppingOrder neworder;
+	
+	ShoppingOrder_manager(){
+		try {
+			this.importdata();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	// READ IN PAST PAYMENTS FROM TXT FILE
+	public void importdata() throws FileNotFoundException, IOException, ClassNotFoundException{
+		FileInputStream f = new FileInputStream(new File("payments.txt"));
+		ObjectInputStream o = new ObjectInputStream(f);
+		while((ShoppingOrder)o.readObject() != null) {
+			this.PaymentHistory.add((ShoppingOrder)o.readObject());                    // IS THIS HOW YOU DO SERIALIZABLE?? 
+		}
+		o.close();
+		
+		FileInputStream b = new FileInputStream(new File("peoplenames.txt"));
+		ObjectInputStream p = new ObjectInputStream(b);
+		while((MovieGoer)p.readObject() != null) {
+			this.people.add((MovieGoer)p.readObject());                    
+		}
+		p.close();
+		
+	}
+	// UPDATES THE NEW SHOPPING ORDER THAT HAS BEEN PAID
+	public void updatedata() throws FileNotFoundException, IOException, ClassNotFoundException{
+		FileOutputStream fo = new FileOutputStream(new File("payments.txt"));
+		ObjectOutputStream oo = new ObjectOutputStream(fo);
+		oo.writeObject(this.PaymentHistory.get(this.PaymentHistory.size() - 1));              // DOES THIS OVERWRITE THE EXISTING TEXT FILE?
+		oo.close();
+		
+		FileOutputStream bo = new FileOutputStream(new File("peoplenames.txt"));
+		ObjectOutputStream po = new ObjectOutputStream(bo);
+		po.writeObject(this.people.get(this.people.size() - 1));              // DOES THIS OVERWRITE THE EXISTING TEXT FILE?
+		po.close();
+	}
 	
 	// CREATE NEW SHOPPING ORDER AND ADD IT INTO BOOKING HISTORY, USUALLY DONE AT THE START
 	public void createShoppingOrder() {
@@ -75,6 +117,13 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		System.out.println("Here is a summary of the tickets you purchased : ");
 		System.out.println("Name : " + g.getName() + " Email : " + g.getEmail() + " Number : " + g.getMobileNumber());
 		this.PaymentHistory.get(this.PaymentHistory.size() - 1).printalltickets();
+		
+		// UPDATE BOTH PEOPLE DATA AND PAYMENTHISTORY DATA IN THE TXT FILES
+		try {
+			this.updatedata();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
