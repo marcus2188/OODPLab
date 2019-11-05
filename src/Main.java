@@ -206,14 +206,14 @@ public class Main {
     }
 
     private static void userListMovies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_manager movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
         movieMgManager.listAllMovie();
         appState = STATE.MOVIE_GOER_MENU;
     }
 
     private static void userSearchMovies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_manager movieMgManager = new Movie_mg_manager();
         String movieName;
         Scanner scan = new Scanner(System.in);
 
@@ -225,8 +225,8 @@ public class Main {
     }
 
     private static void userListTop5Movies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
-        boolean byTicketSales;
+        Movie_mg_manager movieMgManager = new Movie_mg_manager();
+        boolean byTicketSales = false;
         int choice;
         Scanner scan = new Scanner(System.in);
         System.out.println("=== Top 5 Movies ===");
@@ -249,7 +249,7 @@ public class Main {
     private static void userMovieBooking() { System.out.println(("=== Movie Booking ==="));}
 
     private static void userMovieDetails() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_manager movieMgManager = new Movie_mg_manager();
         String movieName;
         Scanner scan = new Scanner(System.in);
         System.out.println("=== Movie Details ===");
@@ -260,7 +260,7 @@ public class Main {
     }
 
     private static void userAddReview() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_manager movieMgManager = new Movie_mg_manager();
         int rating;
         String comments, movieName;
         Scanner scan = new Scanner(System.in);
