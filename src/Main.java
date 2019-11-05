@@ -215,14 +215,14 @@ public class Main {
     }
 
     private static void userListMovies() {
-        Movie_mg_manager movieMgManager = new Movie_mg_manager();
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
         ((Movie_mg_manager) movieMgManager).listAllMovie();
         appState = STATE.MOVIE_GOER_MENU;
     }
 
     private static void userSearchMovies() {
-        Movie_mg_manager movieMgManager = new Movie_mg_manager();
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
         String movieName;
         Scanner scan = new Scanner(System.in);
 
@@ -235,7 +235,7 @@ public class Main {
 
 
     private static void userListTop5Movies() {
-        Movie_mg_manager movieMgManager = new Movie_mg_manager();
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
         boolean byTicketSales = false;
         int choice;
         Scanner scan = new Scanner(System.in);
@@ -260,7 +260,7 @@ public class Main {
     private static void userMovieBooking() { System.out.println(("=== Movie Booking ==="));}
 
     private static void userMovieDetails() {
-        Movie_mg_manager movieMgManager = new Movie_mg_manager();
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
         String movieName;
         Scanner scan = new Scanner(System.in);
         System.out.println("=== Movie Details ===");
@@ -271,7 +271,7 @@ public class Main {
     }
 
     private static void userAddReview() {
-        Movie_mg_manager movieMgManager = new Movie_mg_manager();
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
         int rating;
         String comments, movieName;
         Scanner scan = new Scanner(System.in);
@@ -347,13 +347,120 @@ public class Main {
 
 
     private static void adminCreateMovie() {
-        System.out.println("=== Create Movie ===");
+        Admin_UI adminManager = new Movie_admin_manager();
+        String title, showingStatus, sypnosis, director, castName;
+        int noOfCast, i, blockBuster;
+        boolean isBlockbuster;
+        List<String> cast = new List<String>;
+        List<MovieReview> review_list = new List<MovieReview>;
+        List<MovieScreening> ms = new List<MovieScreening>;
+        Scanner scan = new Scanner(System.in);
 
+        System.out.println("=== Create Movie ===");
+        System.out.println("Please enter the movie title: ");
+        title = scan.next();
+        System.out.println("Please enter showing status: ");
+        showingStatus = scan.next();
+        System.out.println("Please enter the sypnosis: ");
+        sypnosis = scan.next();
+        System.out.println("Please enter the director: ");
+        director = scan.next();
+        System.out.println("How many cast are there in this movie?")
+        noOfCast = scan.nextInt();
+        for(i = 0; i < noOfCast; i++)}{
+            System.out.println("Please enter cast name: ");
+            castName = scan.next();
+            cast.add(castName);
+        }
+        System.out.println("Press 1 to set blockbuster.\nPress 2 to set normal.");
+        blockBuster = scan.nextInt();
+        if(blockBuster == 1){
+            isBlockbuster = true;
+        }else if(blockbuster == 2){
+            isBlockbuster = false;
+        }
+        ((Movie_admin_manager) adminManager).createMovie(title, showingStatus, sypnosis, director, cast, 0, isBlockbuster, review_list, 0 ms);
+        appState = STATE.ADMIN_MENU;
     }
 
-    private static void adminUpdateMovie() {System.out.println("=== Update Movie ===");}
+    private static void adminUpdateMovie() {
+        Admin_UI adminManager = new Movie_admin_manager();
+        String title, showingStatus, sypnosis, director, castName, movieName;
+        int noOfCast, i, choice, blockbuster;
+        boolean isBlockbuster;
+        List<String> cast = new List<String>;
+        Scanner scan = new Scanner(System.in);
 
-    private static void adminDeleteMovie() {System.out.println("=== Delete Movie === ");}
+        System.out.println("=== Update Movie ===");
+        System.out.println("Please enter the movie name to update: ");
+        movieName = scan.next();
+        System.out.println("Press 1 to update title.");
+        System.out.println("Press 2 to update showing status.");
+        System.out.println("Press 3 to update sypnosis.");
+        System.out.println("Press 4 to update director.");
+        System.out.println("Press 5 to update cast.");
+        System.out.println("Press 6 to update blockbuster status.");
+        choice = scan.next();
+
+        switch(choice){
+            case 1:
+                System.out.println("Please enter new movie title: ");
+                title = scan.next();
+                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, title);
+                break;
+            case 2:
+                System.out.println("Please enter new showing status: ");
+                showingStatus = scan.next();
+                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, showingStatus);
+                break;
+            case 3:
+                System.out.println("Please enter the sypnosis: ");
+                sypnosis = scan.next();
+                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, sypnosis);
+                break;
+            case 4:
+                System.out.println("Please enter new director: ");
+                director = scan.next();
+                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, director);
+                break;
+            case 5:
+                System.out.println("How many cast are there in this movie?")
+                noOfCast = scan.nextInt();
+                for(i = 0; i < noOfCast; i++)}{
+                    System.out.println("Please enter cast name: ");
+                    castName = scan.next();
+                    cast.add(castName);
+                }
+                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, cast);
+                break;
+            case 6:
+                System.out.println("Press 1 to set blockbuster.\nPress 2 to set normal.");
+                blockBuster = scan.nextInt();
+                if(blockBuster == 1){
+                    isBlockbuster = true;
+                }else if(blockbuster == 2){
+                    isBlockbuster = false;
+                }
+                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, isBlockbuster);
+                appState = STATE.ADMIN_MENU;
+                break;
+            default:
+                break;
+        }
+        
+    }
+
+    private static void adminDeleteMovie() {
+        Admin_UI adminManager = new Movie_admin_manager();
+        String movieName;
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("=== Delete Movie === ");
+        System.out.println("Please enter the movie name to delete: ");
+        movieName = scan.next();
+        ((Movie_admin_manager) adminManager).removeMovie(movieName);
+        appState = STATE.ADMIN_MENU;
+    }
 
     private static void adminCreateScreening() {System.out.println("=== Create Screening ===");}
 
@@ -361,7 +468,12 @@ public class Main {
 
     private static void adminDeleteScreening() {System.out.println("=== Delete Screening ===");}
 
-    private static void adminUpdatePrice() {System.out.println("=== Update Price ===");}
+    private static void adminUpdatePrice() {
+        Admin_UI adminManager = new MovieTicketManager();
+        System.out.println("=== Update Price ===");
+        ((MovieTicketManager) adminManager).updatePriceTable();
+        appState = STATE.ADMIN_MENU;
+    }
 
     private static void adminUpdatePH() {System.out.println("=== Update Public Holidays ===");}
 }
