@@ -16,6 +16,7 @@ public class Tester {
         cinemas.add(cinema);
         Cineplex cineplex1 = new Cineplex(cinemas);
         cineplex1.printCinemas();
-
+        String cinemanname = cineplex1.getCinemas().get(0).getName();
+        System.out.println(cinemanname+" wdf");
     }
 }
