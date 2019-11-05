@@ -1,8 +1,12 @@
+import boundary.Admin_UI;
+import controller.MovieTicketManager;
+import java.io.IOException;
 import java.util.Scanner;
 import controller.*;
 import boundary.*;
 
 public class Main {
+
     /* Global variables */
     private static boolean admin = false;
     private static boolean running = true;
@@ -120,6 +124,7 @@ public class Main {
         String password; // password that user will input
 
         Scanner scan = new Scanner(System.in);
+      
         System.out.println("Welcome to MOBLIMA App!");
         System.out.println("Press 1 for Movie Goer");
         System.out.println("Press 2 for admin");
@@ -154,9 +159,12 @@ public class Main {
                 }
 
             default:
+                System.out.println("Invalid choice, try again...");
+                state = STATE.LOGIN;
                 break;
         }
     }
+
 
     /*
     All user menus
@@ -223,6 +231,7 @@ public class Main {
         movieMgManager.searchMovie(movieName);
         appState = STATE.MOVIE_GOER_MENU;
     }
+
 
     private static void userListTop5Movies() {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
@@ -334,8 +343,10 @@ public class Main {
         }
     }
 
+
     private static void adminCreateMovie() {
         System.out.println("=== Create Movie ===");
+
     }
 
     private static void adminUpdateMovie() {System.out.println("=== Update Movie ===");}
