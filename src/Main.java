@@ -1,89 +1,160 @@
 import boundary.Admin_UI;
-import boundary.MovieGoer_UI;
 import controller.MovieTicketManager;
-
 import java.io.IOException;
-import java.util.Date;
 import java.util.Scanner;
+import controller.*;
+import boundary.*;
 
 public class Main {
-    private boolean admin;
+
+    /* Global variables */
+    private static boolean admin = false;
     private static boolean running = true;
     private static final String PASSWORD = "root";
-    enum STATE {LOGIN, MOVIE_GOER_MENU, ADMIN_MENU, MOVIE_GOER_MOVIE_DETAILS, MOVIE_GOER_MOVIE_LIST, MOVIE_GOER_BOOKING, 
-                ;}
-    private STATE state = STATE.LOGIN;
 
-    // Initialize controllers
-    private MovieGoer_UI = new movieMGManager;          // need to implement
-    private MovieGoer_UI = new movieScreeningManager;   // need to implement
-    private Admin_UI = new movieAdminManager;           // need to implement
-    private Admin_UI = new movieScreeningManagerAdmin;  // need to implement
+    /*
+    Acts as "routes" like in a url that renders pages based on the appState.
+    appState can be set from different methods in order to render the pages required.
+     */
+    enum STATE {
+        LOGIN,
 
-    public static void main(String[] args) {
-        while(running){
-            switch(state){
-                case STATE.LOGIN:
-                    printMenu();
-                    break;
-                case STATE.MOVIE_GOER_MENU:
-                    mgMenu(movieMGManager);
-                    break;
-                case STATE.ADMIN_MENU:
-                    adminMenu(movieAdminManager, movieScreeningManagerAdmin);
-                    break;
-                case STATE.MOVIE_GOER_MOVIE_LIST:
-                    movieListMenu(movieMGManager);
-                    break;
-                case STATE.MOVIE_GOER_MOVIE_DETAILS:
-                    movieDetailsMenu(movieMGManager, movieScreeningManager);
-                    break;
-                case STATE.MOVIE_GOER_BOOKING:
-                    bookingMenu();
-                    break;
-                case STATE.ADMIN_MENU:
-                    adminMenu();
-                    break;
+        // Movie Goer Pages
+        MOVIE_GOER_MENU,
+        MOVIE_GOER_MOVIE_DETAILS,
+        MOVIE_GOER_MOVIE_LIST,
+        MOVIE_GOER_LIST_TOP_5,
+        MOVIE_GOER_MOVIE_SEARCH,
+        MOVIE_GOER_BOOKING,
+        MOVIE_GOER_VIEW_SHOPPING_CART,
+        MOVIE_GOER_VIEW_TRANSACTIONS,
+        MOVIE_GOER_ADD_REVIEW,
 
-
-                default:
-                    break;
-            }
-        }
+        // Admin pages
+        ADMIN_MENU,
+        ADMIN_CREATE_MOVIE,
+        ADMIN_UPDATE_MOVIE,
+        ADMIN_DELETE_MOVIE,
+        ADMIN_CREATE_SCREENING,
+        ADMIN_UPDATE_SCREENING,
+        ADMIN_DELETE_SCREENING,
+        ADMIN_UPDATE_PRICE,
+        ADMIN_UPDATE_PH
     }
 
-    // Main menu
+    /* Initialize app state */
+    private static STATE appState = STATE.LOGIN;
+
+    public static void main(String[] args) {
+        /*
+        List all routes, render routes based on state
+         */
+         while(running) {
+             switch(appState) {
+                 case LOGIN:
+                     printMenu();
+                     break;
+
+                 // user routes
+                 case MOVIE_GOER_MENU:
+                     userMenu();
+                     break;
+                 case MOVIE_GOER_MOVIE_LIST:
+                     userListMovies();
+                     break;
+                 case MOVIE_GOER_MOVIE_SEARCH:
+                     userSearchMovies();
+                     break;
+                 case MOVIE_GOER_LIST_TOP_5:
+                     userListTop5Movies();
+                     break;
+                 case MOVIE_GOER_VIEW_SHOPPING_CART:
+                     userViewShoppingCart();
+                     break;
+                 case MOVIE_GOER_VIEW_TRANSACTIONS:
+                     userViewTransactions();
+                     break;
+                 case MOVIE_GOER_BOOKING:
+                     userMovieBooking();
+                     break;
+                 case MOVIE_GOER_MOVIE_DETAILS:
+                     userMovieDetails();
+                     break;
+                 case MOVIE_GOER_ADD_REVIEW:
+                     userAddReview();
+                     break;
+
+                 // admin routes
+                 case ADMIN_MENU:
+                     adminMenu();
+                     break;
+                 case ADMIN_CREATE_MOVIE:
+                     adminCreateMovie();
+                     break;
+                 case ADMIN_UPDATE_MOVIE:
+                     adminUpdateMovie();
+                     break;
+                 case ADMIN_DELETE_MOVIE:
+                     adminDeleteMovie();
+                     break;
+                 case ADMIN_CREATE_SCREENING:
+                     adminCreateScreening();
+                     break;
+                 case ADMIN_UPDATE_SCREENING:
+                     adminUpdateScreening();
+                     break;
+                 case ADMIN_DELETE_SCREENING:
+                     adminDeleteScreening();
+                     break;
+                 case ADMIN_UPDATE_PRICE:
+                     adminUpdatePrice();
+                     break;
+                 case ADMIN_UPDATE_PH:
+                     adminUpdatePH();
+                     break;
+             }
+         }
+    }
+
+    /*
+    Top level Main Menu
+     */
     private static void printMenu() {
         int choice = 0;
-        String password;    // password that user will input
-
-        System.out.println("Welcome to MOBLIMA App!");
-        System.out.println("Press 1 for movie goer");
-        System.out.println("Press 2 for admin");
-        System.out.println("========================");
+        String password; // password that user will input
 
         Scanner scan = new Scanner(System.in);
+      
+        System.out.println("Welcome to MOBLIMA App!");
+        System.out.println("Press 1 for Movie Goer");
+        System.out.println("Press 2 for admin");
+        System.out.println("=======================");
+
         choice = scan.nextInt();
+        while (choice != 1 && choice != 2) {
+            System.out.println("Invalid choice, try again:");
+            choice = scan.nextInt();
+        }
         switch (choice) {
-
-            // movie goer menu
+            // navigate to movie goer page
             case 1:
-                System.out.println("Loading movie goer page...");
-                state = STATE.MOVIE_GOER_MENU;
+                System.out.println("Loading Movie Goer page...");
+                appState = STATE.MOVIE_GOER_MENU;
                 break;
-
-            // admin menu
+            // navigate to admin page
             case 2:
+                System.out.println("Loading Admin page...");
                 System.out.println("Please enter password: ");
-                password = scan.next();
-                if(password.equals(PASSWORD)){
+                password= scan.next();
+
+                if (password.equals(PASSWORD)) {
                     System.out.println("Loading admin page...");
-                    state = STATE.ADMIN_MENU;
+                    appState = STATE.ADMIN_MENU;
                     break;
-                }else{
+                } else {
                     System.out.println("Invalid Password!");
-                    System.out.println("========================");
-                    state = STATE.LOGIN;
+                    System.out.println("Redirecting...");
+                    appState = STATE.LOGIN;
                     break;
                 }
 
@@ -94,437 +165,201 @@ public class Main {
         }
     }
 
-    // Admin menus
-    private static void adminMenu(Admin_UI movieAdminManager, Admin_UI movieScreeningManagerAdmin) {
 
+    /*
+    All user menus
+    TODO: Implement controllers in each case
+     */
+    private static void userMenu() {
         int choice = 0;
-        int id;
-        // Scanner scan = new Scanner(System.in); // declared again below
-        System.out.println("Welcome, admin!");
-        System.out.println("Press 1 to create a movie in movie listing.");
-        System.out.println("Press 2 to update a movie in movie listing.");
-        System.out.println("Press 3 to delete a movie in movie listing.");
-        System.out.println("Press 4 to create a show time for a movie.");
-        System.out.println("Press 5 to update a show time for a movie.");
-        System.out.println("Press 6 to delete a show time for a movie.");
-        System.out.println("Press 7 to update price");
-        System.out.println("Press 8 to update public holidays.");
-        System.out.println("Press 9 to exit to main menu.");
-        System.out.println("===========================================");
-
-        
         Scanner scan = new Scanner(System.in);
-        choice = scan.nextInt();
-        switch(choice){
-            case 1:
-                createMovieRequest(movieAdminManager);
-                break;
-            case 2:
-                updateMovieRequest(movieAdminManager);
-                break;
-            case 3:
-                removeMovieRequest(movieAdminManager);
-                break;
-            case 4:
-                createMovieScreeningRequest(movieScreeningManagerAdmin);
-                break;
-            case 5:
-                updateMovieScreeningRequest(movieScreeningManagerAdmin);
-                break;
-            case 6:
-                removeMovieScreeningRequest(movieScreeningManagerAdmin);
-                break;
-            case 7:
-                updateTicketPriceRequest();
-                break;
-            case 8:
-                updatePublicHolidayRequest();
-            case 9:
-                state = STATE.LOGIN;
-            default:
-                state = STATE.ADMIN_MENU;
-    }
-
-
-    // Movie goer menus
-    private static void mgMenu(MovieGoer_UI movieMGManager, MovieGoer_UI shoppingOrderManager) {
-        choice = 0;
-        // Scanner scan = new Scanner(System.in);
         System.out.println("Welcome, Movie Goer!");
-        System.out.println("Press 1 to list all movies.");
-        System.out.println("Press 2 to search a movie.");
-        System.out.println("Press 3 to list top 5 movies.");
+        System.out.println("Press 1 to list all movies");
+        System.out.println("Press 2 to search a movie");
+        System.out.println("Press 3 to list top 5 movies");
         System.out.println("Press 4 to view shopping cart");
         System.out.println("Press 5 to view transaction history");
-        System.out.println("===================================");
-        choice = scan.nextInt();
+        System.out.println("Press 0 to go to Main Menu");
 
-        switch(choice){
+        choice = scan.nextInt();
+        while (choice < 0 || choice > 5) {
+            System.out.println("Invalid choice, please try again:");
+            choice = scan.nextInt();
+        }
+
+        switch (choice) {
             case 1:
-                listAllMoviesRequest(movieMGManager);
-                state = STATE.MOVIE_GOER_MOVIE_LIST;
+                appState = STATE.MOVIE_GOER_MOVIE_LIST;
                 break;
             case 2:
-                searchMovieRequest(movieMGManager);
-                state = STATE.MOVIE_GOER_MOVIE_LIST;
+                appState = STATE.MOVIE_GOER_MOVIE_SEARCH;
                 break;
             case 3:
-                listTop5MoviesRequest(movieMGManager);
-                state = STATE.MOVIE_GOER_MOVIE_LIST;
+                appState = STATE.MOVIE_GOER_LIST_TOP_5;
                 break;
             case 4:
-                showShoppingOrderRequest(shoppingOrderManager);
-                shoppingMenu();
+                appState = STATE.MOVIE_GOER_VIEW_SHOPPING_CART;
                 break;
             case 5:
-                showTransactionHistoryRequest();
+                appState = STATE.MOVIE_GOER_VIEW_TRANSACTIONS;
                 break;
-
+            case 0:
+                System.out.println("Redirecting to main menu...");
+                appState = STATE.LOGIN;
+                break;
             default:
-                state = STATE.MOVIE_GOER_MENU;
                 break;
         }
+
     }
 
-    public static void shoppingMenu(MovieGoer_UI shoppingOrderManager){
-        int choice = 0;
-        Scanner scan = new Scanner(System.in);
-        if(!shoppingOrderManager.isEmpty()){
-            System.out.println("Press 1 to checkout.");
-            System.out.println("Press 2 to return to menu.");
-            choice = scan.nextInt();
-            switch(choice){
-                case 1:
-                    checkoutMenu(shoppingOrderManager);
-                    break;
-                case 2:
-                    state= STATE.MOVIE_GOER_MENU;
-                    break;
-                default:
-                    break;
-            }
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+    private static void userListMovies() {
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        System.out.println("=== Movie List ===");
+        movieMgManager.listAllMovie();
+        appState = STATE.MOVIE_GOER_MENU;
     }
 
-    public static checkoutMenu(MovieGoer_UI shoppingOrderManager){
-        String name;
-        String mobileNumber;
-        String email;
+    private static void userSearchMovies() {
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        String movieName;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Please enter your name: ");
-        name = scan.next();
-        System.out.println("Please enter your mobile number: ");
-        mobileNumber = scan.next();
-        System.out.println("Please enter your email: ");
-        email = scan.next();
-        shoppingOrderManager.makePurchase();
-        showShoppingOrder.printReceipt();
+        System.out.println("=== Movie search ===");
+        System.out.println("Please enter the title: ");
+        movieName = scan.next();
+        movieMgManager.searchMovie(movieName);
+        appState = STATE.MOVIE_GOER_MENU;
     }
 
-    public static void movieListMenu(MovieGoer_UI movieMGManager){
-        int id;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter movie id for more details: ");
-        id = scan.nextInt();
-        viewMovieDetailsRequest(movieAdminManager, id);
-        state = STATE.MOVIE_GOER_MOVIE_DETAILS;
-    }
 
-    public static void movieDetailsMenu(MovieGoer_UI movieMGManager, MovieGoer_UI movieScreeningManager){
-        int choice = 0;
+    private static void userListTop5Movies() {
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        boolean byTicketSales;
+        int choice;
         Scanner scan = new Scanner(System.in);
-        System.out.println("===================================");
-        System.out.println("Press 1 to add a review or rating.");
-        System.out.println("Press 2 to view show time.");
-        System.out.println("Press 3 to view pass reviews.");
-        System.out.println("Press 4 to make booking.");
-        System.out.println("===================================");
+        System.out.println("=== Top 5 Movies ===");
+        System.out.println("Press 1 for top 5 movies ranked by ticket sales.");
+        System.out.println("Press 2 for top 5 movies ranked by ratings");
         choice = scan.nextInt();
-
-        switch(choice){
-            case 1:
-                addReviewRequest(movieMGManager)
-                break;
-            case 2:
-                listShowtimeRequest(movieScreeningManager);
-                break;
-            case 3:
-                printPassReviewsRequest(movieMGManager);
-                break;
-            case 4:
-                state = STATE.MOVIE_GOER_BOOKING;
-                break;
-            default:
-                state = STATE.MOVIE_GOER_MENU;
-                break;
+        if(choice == 1){
+            byTicketSales = true;
+        }else if(choice == 2){
+            byTicketSales = false;
         }
+        movieMgManager.listTop5(byTicketSales);
+        appState = STATE.MOVIE_GOER_MENU;
     }
 
-    public static void bookingMenu(MovieGoer_UI seatManager){
-        int id = 0;
+    private static void userViewShoppingCart() {System.out.println("=== My Shopping Cart ===");}
+
+    private static void userViewTransactions() {System.out.println("=== My Transactions ===");}
+
+    private static void userMovieBooking() { System.out.println(("=== Movie Booking ==="));}
+
+    private static void userMovieDetails() {
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        String movieName;
         Scanner scan = new Scanner(System.in);
-        System.out.println("===================================");
-        System.out.println("Please enter the showtime id: ");
-        seatManager.seatAvailability();
-        System.out.println("Please enter the seats you want to book.");
-        seatManager.seatSelection();
-        state = STATE.MOVIE_GOER_MENU;
+        System.out.println("=== Movie Details ===");
+        System.out.println("Please enter the movie to view details: ");
+        movieName = scan.next();
+        movieMgManager.viewMovieDetails(movieName);
+        appState = STATE.MOVIE_GOER_MENU;
     }
 
-    public static void showShoppingOrderRequest(MovieGoer_UI shoppingOrderManager){
-        shoppingOrderManager.showShoppingOrder();
-    }
-
-    public static void listShowtimeRequest(MovieGoer_UI movieScreeningManager, Movie m){
-        movieScreeningManager.listMovieScreening(m);
-    }
-
-    public static void printPassReviewsRequest(MovieGoer_UI movieMGManager, Movie m){
-        movieMGManager.printPassReviews(m);
-    }
-
-    public static void addReviewRequest(MovieGoer_UI movieMGManager){
-        Scanner scan = new Scanner(System.in);
-        String comments;
+    private static void userAddReview() {
+        MovieGoer_UI movieMgManager = new Movie_mg_manager();
         int rating;
-
+        String comments, movieName;
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("=== Add Review ===");
+        System.out.println("Please enter the movie to review: ");
+        movieName = scan.next();
         System.out.println("Please enter your review: ");
         comments = scan.next();
-        System.out.println("Please enter your rating(1-5): ");
+        System.out.println("Please enter your rating: ");
         rating = scan.nextInt();
-        movieMGManager.addMovieReview(comments, rating);
-
+        movieMgManager.addMovieReview(movieName, comments, rating);
+        appState = STATE.MOVIE_GOER_MENU;
     }
 
-    public static void viewMovieDetailsRequest(MovieGoer_UI movieMGManager, int id){
-        movieMGManager.viewMovieDetails(id);
-    }
-
-    public static void listAllMoviesRequest(MovieGoer_UI movieMGManager){
-        movieMGManager.listAllMovie();
-    }
-
-    public static void searchMovieRequest(MovieGoer_UI movieMGManager){
-        String title;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter the Movie Title: ");
-        title = scan.next();
-        movieMGManager.searchMovie(movieTitle);
-    }
-
-    public static void listTop5MoviesRequest(MovieGoer_UI movieAdminManager){
+    /*
+    Admin pages
+   */
+    private static void adminMenu() {
         int choice = 0;
+        int id;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Press 1 to view top 5 movies ranked by ticket sales.");
-        System.out.println("Press 2 to view top 5 movies ranked by overall rating.");
-        choice = scan.nextInt();
-        switch(choice){
-            case 1:
-                movieAdminManager.listTop5(true);
-                break;
-            case 2:
-                movieAdminManager.listTop5(false);
-                break;
-            default:
-        }
-    }
-
-    public static void showTransactionHistoryRequest(){
-        
-    }
-
-    public static void createMovieRequest(Admin_UI movieAdminManager){
-        String title, showingStatus, sypnosis, director, castName, blockBuster;
-        int noOfCast, i;
-        boolean isBlockbuster;
-        String[] cast;
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Please enter the movie title: ");
-        title = scan.next();
-        System.out.println("Please enter showing status: ");
-        showingStatus = scan.next();
-        System.out.println("Please enter the sypnosis: ");
-        sypnosis = scan.next();
-        System.out.println("Please enter the director: ");
-        director = scan.next();
-        System.out.println("How many cast are there in this movie?")
-        noOfCast = scan.nextInt();
-        cast = new String[noOfCast];
-        for(i = 0; i < noOfCast; i++)}{
-            System.out.println("Please enter cast name: ");
-            castName = scan.next();
-            cast[i] = castName;
-        }
-        System.out.println("Is it a blockbuster?(Y/N)");
-        blockBuster = scan.next();
-        if(blockBuster.equals("Y")){
-            isBlockbuster = true;
-        }else if(blockbuster.equals("N")){
-            isBlockbuster = false;
-        }
-
-        movieAdminManager.createMovie(title, showingStatus, sypnosis, director, cast, isBlockbuster);
-    }
-
-    public static void updateMovieRequest(Admin_UI movieAdminManager){
-        String title, showingStatus, sypnosis, director, castName, blockBuster;
-        int noOfCast, i, choice, id;
-        boolean isBlockbuster;
-        String[] cast;
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Please enter the movie id: ");
-        id = scan.nextInt();
-        System.out.println("Press 1 to update title.");
-        System.out.println("Press 2 to update showing status.");
-        System.out.println("Press 3 to update sypnosis.");
-        System.out.println("Press 4 to update director.");
-        System.out.println("Press 5 to update cast.");
-        System.out.println("Press 6 to update blockbuster status.");
-        System.out.println("=================================");
+        System.out.println("Welcome, admin!");
+        System.out.println("Press 1 to create a movie in movie listings");
+        System.out.println("Press 2 to update a movie in movie listings");
+        System.out.println("Press 3 to delete a movie from movie listings");
+        System.out.println("Press 4 to create a new movie screening");
+        System.out.println("Press 5 to update an existing movie screening");
+        System.out.println("Press 6 to delete an existing movie screening");
+        System.out.println("Press 7 to update ticket prices");
+        System.out.println("Press 8 to update public holidays");
+        System.out.println("Press 0 to go to main menu");
 
         choice = scan.nextInt();
-        switch(choice){
+        while (choice < 0 || choice > 8) {
+            System.out.println("Invalid choice, please try again: ");
+            choice = scan.nextInt();
+        }
+
+        switch(choice) {
             case 1:
-                System.out.println("Please enter new movie title: ");
-                title = scan.next();
-                movieAdminManager.updateMovieTitle(title);
+                appState = STATE.ADMIN_CREATE_MOVIE;
                 break;
             case 2:
-                System.out.println("Please enter new showing status: ");
-                showingStatus = scan.next();
-                movieAdminManager.updateMovieShowingStatus(showingStatus);
+                appState = STATE.ADMIN_UPDATE_MOVIE;
                 break;
             case 3:
-                System.out.println("Please enter the sypnosis: ");
-                sypnosis = scan.next();
-                movieAdminManager.updateMovieSypnosis(sypnosis);
+                appState = STATE.ADMIN_DELETE_MOVIE;
                 break;
             case 4:
-                System.out.println("Please enter new director: ");
-                director = scan.next();
-                movieAdminManager.updateMovieDirector(director);
+                appState = STATE.ADMIN_CREATE_SCREENING;
                 break;
             case 5:
-                System.out.println("How many cast are there in this movie?")
-                noOfCast = scan.nextInt();
-                cast = new String[noOfCast];
-                for(i = 0; i < noOfCast; i++)}{
-                    System.out.println("Please enter cast name: ");
-                    castName = scan.next();
-                    cast[i] = castName;
-                }
-                movieAdminManager.updateMovieCast(cast);
+                appState = STATE.ADMIN_UPDATE_SCREENING;
                 break;
             case 6:
-                System.out.println("Is it a blockbuster?(Y/N)");
-                blockBuster = scan.next();
-                if(blockBuster.equals("Y")){
-                    isBlockbuster = true;
-                }else if(blockbuster.equals("N")){
-                    isBlockbuster = false;
-                }
-                movieAdminManager.updateMovieBlockBuster(isBlockbuster);
+                appState = STATE.ADMIN_DELETE_SCREENING;
+                break;
+            case 7:
+                appState = STATE.ADMIN_UPDATE_PRICE;
+                break;
+            case 8:
+                appState = STATE.ADMIN_UPDATE_PH;
+                break;
+            case 0:
+                System.out.println("Logging out, redirecting to main page...");
+                appState = STATE.LOGIN;
                 break;
             default:
                 break;
         }
     }
 
-    public static void removeMovieRequest(Admin_UI movieAdminManager){
-        Scanner scan = new Scanner(System.in);
-        int id;
 
-        System.out.println("Please enter the movie id: ");
-        id = scan.nextInt();
-        movieAdminManager.removeMovie(id);
+    private static void adminCreateMovie() {
+        System.out.println("=== Create Movie ===");
+
     }
 
-    public static void createMovieScreeningRequest(Admin_UI movieScreeningManager){
-        String screeningFormat, publicHoliday;
-        int id;
-        boolean isPH;
-        Date time, date;
-        Scanner scan = new Scanner(System.in);
+    private static void adminUpdateMovie() {System.out.println("=== Update Movie ===");}
 
-        System.out.println("Please enter the screening id: ");
-        id = scan.nextInt();
-        System.out.println("Please enter the screening format: ");
-        screeningFormat = scan.next();
-        System.out.println("Please enter the date of screening: ");
-        // KIV
-        date = scan.nextDate();
-        System.out.println("Please enter the time of screening: ");
-        // KIV
-        time = scan.nextTime();
+    private static void adminDeleteMovie() {System.out.println("=== Delete Movie === ");}
 
-       movieScreeningManager.createMovieScreening(id, screeningFormat, date, time);
-    }
+    private static void adminCreateScreening() {System.out.println("=== Create Screening ===");}
 
-    public static void updateMovieScreeningRequest(Admin_UI movieScreeningManager){
-        String screeningFormat;
-        int id, choice;
-        Date time, date;
-        Scanner scan = new Scanner(System.in);
+    private static void adminUpdateScreening() {System.out.println("=== Update Screening ===");}
 
-        System.out.println("Please enter the movie id: ");
-        id = scan.nextInt();
+    private static void adminDeleteScreening() {System.out.println("=== Delete Screening ===");}
 
-        System.out.println("Press 1 to update date.");
-        System.out.println("Press 2 to update time.");
-        System.out.println("Press 3 to update screening format.");
-        System.out.println("Press 4 to update public holiday status.");
-        System.out.println("=================================");
+    private static void adminUpdatePrice() {System.out.println("=== Update Price ===");}
 
-        choice = scan.nextInt();
-        switch(choice){
-            case 1:
-                System.out.println("Please enter new date: ");
-                date = scan.nextDate();         // no such method
-                movieScreeningManager.updateMovieScreeningDate(date);
-                break;
-            case 2:
-                System.out.println("Please enter new time: ");
-                time = scan.nextTime();         // no such method
-                movieScreeningManager.updateMovieScreeningTime(time);
-                break;
-            case 3:
-                System.out.println("Please enter the screening format: ");
-                screeningFormat = scan.next();
-                movieScreeningManager.updateMovieScreeningFormat(screeningFormat);
-                break;
-            case 4:
-                System.out.println("Is it a public holiday?(Y/N)");
-                publicHoliday = scan.next();
-                if(publicHoliday.equals("Y")){
-                    isPh = true;
-                }else if(blockbuster.equals("N")){
-                    isPH = false;
-                }
-                movieScreeningManager.updateMovieScreeningPH(isPH);
-            default:
-                break;
-        }
-    }
-
-    public static void removeMovieScreeningRequest(Admin_UI movieScreeningManager){
-        Scanner scan = new Scanner(System.in);
-        int id;
-
-        System.out.println("Please enter the screening id: ");
-        id = scan.nextInt();
-        movieScreeningManager.removeMovieScreening(id);
-    }
-
-    public static void updateTicketPriceRequest(Admin_UI movieTicketManger){
-        movieTicketManger.updatePriceTable();
-    }
-
-    public static void updatePublicHolidayRequest(){
-        
-    }
+    private static void adminUpdatePH() {System.out.println("=== Update Public Holidays ===");}
 }
