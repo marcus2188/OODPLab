@@ -45,7 +45,7 @@ public class Main {
     /* Initialize app state */
     private static STATE appState = STATE.LOGIN;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
         List all routes, render routes based on state
          */
@@ -367,7 +367,13 @@ public class Main {
 
     private static void adminDeleteScreening() {System.out.println("=== Delete Screening ===");}
 
-    private static void adminUpdatePrice() {System.out.println("=== Update Price ===");}
+    private static void adminUpdatePrice() throws IOException {
+        System.out.println("=== Update Price ===");
+        Admin_UI adminManager = new MovieTicketManager();
+        ((MovieTicketManager) adminManager).updatePriceTable();
+        appState = STATE.ADMIN_MENU;
+
+    }
 
     private static void adminUpdatePH() {System.out.println("=== Update Public Holidays ===");}
 }
