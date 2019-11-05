@@ -216,7 +216,7 @@ public class Main {
     private static void userListMovies() {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
-        movieMgManager.listAllMovie();
+        ((Movie_mg_manager) movieMgManager).listAllMovie();
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -228,7 +228,7 @@ public class Main {
         System.out.println("=== Movie search ===");
         System.out.println("Please enter the title: ");
         movieName = scan.next();
-        movieMgManager.searchMovie(movieName);
+        ((Movie_mg_manager) movieMgManager).searchMovie(movieName);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -264,7 +264,7 @@ public class Main {
         System.out.println("=== Movie Details ===");
         System.out.println("Please enter the movie to view details: ");
         movieName = scan.next();
-        movieMgManager.viewMovieDetails(movieName);
+        ((Movie_mg_manager) movieMgManager).viewMovieDetails(movieName);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -281,7 +281,7 @@ public class Main {
         comments = scan.next();
         System.out.println("Please enter your rating: ");
         rating = scan.nextInt();
-        movieMgManager.addMovieReview(movieName, comments, rating);
+        ((Movie_mg_manager) movieMgManager).addMovieReview(movieName, comments, rating);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
