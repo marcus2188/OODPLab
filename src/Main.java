@@ -45,7 +45,7 @@ public class Main {
     /* Initialize app state */
     private static STATE appState = STATE.LOGIN;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
         List all routes, render routes based on state
          */
@@ -218,7 +218,7 @@ public class Main {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
         ((Movie_mg_manager) movieMgManager).listAllMovie();
-        appState = STATE.MOVIE_GOER_MENU;
+        appState = STATE.MOVIE_GOER_MENU;   // Redirect back to main menu
     }
 
     private static void userSearchMovies() {
@@ -230,7 +230,7 @@ public class Main {
         System.out.println("Please enter the title: ");
         movieName = scan.next();
         ((Movie_mg_manager) movieMgManager).searchMovie(movieName);
-        appState = STATE.MOVIE_GOER_MENU;
+        appState = STATE.MOVIE_GOER_MENU; // Redirect back to main menu
     }
 
 
@@ -243,13 +243,19 @@ public class Main {
         System.out.println("Press 1 for top 5 movies ranked by ticket sales.");
         System.out.println("Press 2 for top 5 movies ranked by ratings");
         choice = scan.nextInt();
+        while (choice != 2 && choice != 1) {
+            System.out.println("Invalid choice, please try again: ");
+            choice = scan.nextInt();
+        }
         if(choice == 1){
             byTicketSales = true;
-            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
+
         }else if(choice == 2){
             byTicketSales = false;
-            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
+        } else {
+            byTicketSales = false;
         }
+        ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -468,12 +474,31 @@ public class Main {
 
     private static void adminDeleteScreening() {System.out.println("=== Delete Screening ===");}
 
-    private static void adminUpdatePrice() {
-        Admin_UI adminManager = new MovieTicketManager();
+    private static void adminUpdatePrice() throws IOException {
         System.out.println("=== Update Price ===");
+        Admin_UI adminManager = new MovieTicketManager();
         ((MovieTicketManager) adminManager).updatePriceTable();
         appState = STATE.ADMIN_MENU;
+
     }
 
-    private static void adminUpdatePH() {System.out.println("=== Update Public Holidays ===");}
+    private static void adminUpdatePH() {
+        System.out.println("=== Update Public Holidays ===");
+        Admin_UI holidayManager = new PublicHolidayManager();
+        holidayManager.printMenu();
+        System.out.println("Press 1 to add a new public holiday");
+        System.out.println("Press 0 to go back to menu");
+
+        Scanner scan = new Scanner(System.in);
+        int choice = scan.nextInt();
+        // TODO: add error checking
+
+        switch(choice) {
+            case 1:
+                ((PublicHolidayManager) holidayManager).addHoliday();
+                appState = STATE.ADMIN_MENU;
+            case 0:
+                appState = STATE.ADMIN_MENU;
+        }
+    }
 }

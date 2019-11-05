@@ -17,13 +17,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
+public class MovieTicketManager implements SystemSettings_inf {
     ArrayList priceTable;
-    ArrayList<MovieTicket> movieTickets[];
+
+    // constructor
+    public MovieTicketManager() throws IOException {
+        this.importData();
+    }
 
     // updates the entries in the current price table
     public void updatePriceTable() throws IOException {
-        System.out.println("===Update ticket prices===");
+        // System.out.println("===Update ticket prices===");
         System.out.println("Enter details of ticket you want to edit:");
 
         // age group to edit
@@ -34,24 +38,28 @@ public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
         System.out.println("3. Regular");
         Scanner scan = new Scanner(System.in);
         int choice = scan.nextInt();
-        while( 0 > choice || choice  < 3) {
+        while( 0 > choice || choice  > 3) {
             System.out.println("Invalid choice, try again");
             choice = scan.nextInt();
         }
         switch(choice) {
             case 1:
                 ageGroup = AgeGroup.SENIORCITIZEN;
+                break;
             case 2:
                 ageGroup = AgeGroup.STUDENT;
+                break;
             case 3:
                 ageGroup = AgeGroup.REGULAR;
+                break;
             default:
                 ageGroup = AgeGroup.REGULAR;
                 System.out.println("Invalid choice");
+                break;
         }
 
         // day to edit
-        System.out.println("Enter day of ticket (1-Mon...7-Sun");
+        System.out.println("Enter day of ticket (1-Mon...7-Sun)");
         choice = scan.nextInt();
         while(choice < 0 || choice > 7) {
             System.out.println("Invalid choice");
@@ -84,19 +92,23 @@ public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
         System.out.println("2. Regular");
         System.out.println("3. Blockbuster");
         choice = scan.nextInt();
-        while(0 < choice || choice < 3) {
+        while(0 > choice || choice > 3) {
             System.out.println("Invalid choice");
             choice = scan.nextInt();
         }
         switch (choice) {
             case 1:
                 screeningFormat = ScreeningFormat.THREEDIMENSION;
+                break;
             case 2:
                 screeningFormat = ScreeningFormat.REGULAR;
+                break;
             case 3:
                 screeningFormat = ScreeningFormat.BLOCKBUSTER;
+                break;
             default:
                 screeningFormat = ScreeningFormat.REGULAR;
+                break;
         }
 
         // check if ticket already exists
@@ -114,7 +126,7 @@ public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
             }
         }
 
-        if (found = false) {
+        if (found == false) {
             System.out.println("Price not in database, would you like to create a new entry? (Y/n)");
             char choice2 = scan.next().charAt(0);
             System.out.println("What price do you want to set?");

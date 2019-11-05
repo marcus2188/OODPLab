@@ -1,5 +1,7 @@
 package controller;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.Movie;
@@ -7,20 +9,17 @@ import entity.MovieReview;
 import entity.MovieScreening;
 
 public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf, MovieTop5_inf {
-	public Movie_admin_manager() {
-		// TODO: add data read
-	}
 
 	public void createMovie(String title, String showingStatus, String synopsis, String director, List<String> cast, double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales, List<MovieScreening> ms) {
 		Movie newm = new Movie(title, showingStatus, synopsis, director, cast, avgRating, isBlockBuster, review_list, ticketSales, ms);
 
-		Movie[] m1 = this.getM();
-		int length = m1.length;
-		Movie[] m2 = new Movie[length+1];
+		ArrayList m1 = this.getM();
+		int length = m1.size();
+		ArrayList m2 = new ArrayList();
 		for (int i=0;i<length;i++) {
-			m2[i] = m1[i];
+			m2.set(i, m1.get(i));
 		}
-		m2[length] = newm;
+		m2.set(m2.size() ,newm);
 		exportData(m2);
 	}
 	
@@ -43,11 +42,11 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	public void removeMovie(String movieName) {
 		Movie r = this.findMovie(movieName);
 		
-		Movie[] m1 = this.getM();
-		int length = m1.length;
-		Movie[] m2 = new Movie[length-1];
+		ArrayList m1 = this.getM();
+		int length = m1.size();
+		ArrayList m2 = new ArrayList();
 		for (int i=0;i<length;i++) {
-			if (!m1[i].equals(r)) m2[i] = m1[i];
+			if (!m1.get(i).equals(r)) m2.set(i,  m1.get(i));
 		}
 		exportData(m2);
 	}

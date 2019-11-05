@@ -1,7 +1,7 @@
 package controller;
 
-import java.io.IOException;
 
-public interface SystemSettings_inf {
-     void updatePriceTable() throws IOException;
+import boundary.Admin_UI;
+
+public interface SystemSettings_inf extends Admin_UI {
 }
