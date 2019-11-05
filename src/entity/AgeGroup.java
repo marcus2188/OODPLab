@@ -3,5 +3,6 @@ package entity;
 public enum AgeGroup {
     SENIORCITIZEN,
     STUDENT,
-    REGULAR
+    REGULAR,
+    CHILD
 }

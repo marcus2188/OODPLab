@@ -1,5 +1,6 @@
 package entity;
 
+// TODO: bring in moviescreening entity as an attribute
 public class MovieTicket {
     private float price;
     private String TID;

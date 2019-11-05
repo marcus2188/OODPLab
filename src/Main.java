@@ -1,22 +1,24 @@
 import boundary.Admin_UI;
+import boundary.MovieGoer_UI;
 import controller.MovieTicketManager;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     private boolean admin;
-    private boolean running = true;
+    private static boolean running = true;
     private static final String PASSWORD = "root";
     enum STATE {LOGIN, MOVIE_GOER_MENU, ADMIN_MENU, MOVIE_GOER_MOVIE_DETAILS, MOVIE_GOER_MOVIE_LIST, MOVIE_GOER_BOOKING, 
                 ;}
     private STATE state = STATE.LOGIN;
 
     // Initialize controllers
-    private MovieGoer_UI = new movieMGManager;
-    private MovieGoer_UI = new movieScreeningManager;
-    private Admin_UI = new movieAdminManager;
-    private Admin_UI = new movieScreeningManagerAdmin;
+    private MovieGoer_UI = new movieMGManager;          // need to implement
+    private MovieGoer_UI = new movieScreeningManager;   // need to implement
+    private Admin_UI = new movieAdminManager;           // need to implement
+    private Admin_UI = new movieScreeningManagerAdmin;  // need to implement
 
     public static void main(String[] args) {
         while(running){
@@ -45,14 +47,15 @@ public class Main {
 
 
                 default:
-
+                    break;
             }
         }
     }
 
+    // Main menu
     private static void printMenu() {
         int choice = 0;
-        String password;
+        String password;    // password that user will input
 
         System.out.println("Welcome to MOBLIMA App!");
         System.out.println("Press 1 for movie goer");
@@ -63,11 +66,13 @@ public class Main {
         choice = scan.nextInt();
         switch (choice) {
 
+            // movie goer menu
             case 1:
                 System.out.println("Loading movie goer page...");
                 state = STATE.MOVIE_GOER_MENU;
                 break;
 
+            // admin menu
             case 2:
                 System.out.println("Please enter password: ");
                 password = scan.next();
@@ -94,7 +99,7 @@ public class Main {
 
         int choice = 0;
         int id;
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in); // declared again below
         System.out.println("Welcome, admin!");
         System.out.println("Press 1 to create a movie in movie listing.");
         System.out.println("Press 2 to update a movie in movie listing.");
@@ -143,8 +148,8 @@ public class Main {
 
     // Movie goer menus
     private static void mgMenu(MovieGoer_UI movieMGManager, MovieGoer_UI shoppingOrderManager) {
-        int choice = 0;
-        Scanner scan = new Scanner(System.in);
+        choice = 0;
+        // Scanner scan = new Scanner(System.in);
         System.out.println("Welcome, Movie Goer!");
         System.out.println("Press 1 to list all movies.");
         System.out.println("Press 2 to search a movie.");
@@ -479,12 +484,12 @@ public class Main {
         switch(choice){
             case 1:
                 System.out.println("Please enter new date: ");
-                date = scan.nextDate();
+                date = scan.nextDate();         // no such method
                 movieScreeningManager.updateMovieScreeningDate(date);
                 break;
             case 2:
                 System.out.println("Please enter new time: ");
-                time = scan.nextTime();
+                time = scan.nextTime();         // no such method
                 movieScreeningManager.updateMovieScreeningTime(time);
                 break;
             case 3:
