@@ -255,6 +255,7 @@ public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
             ticket.printTicketDetails();
         }
     }
+
     // TODO: implement
     // updates a price of an indivdual ticket
     public void updatePriceOfTicket(MovieTicket ticket) {

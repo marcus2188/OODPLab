@@ -150,6 +150,7 @@ public class Main {
                 if (password.equals(PASSWORD)) {
                     System.out.println("Loading admin page...");
                     appState = STATE.ADMIN_MENU;
+                    admin = true;
                     break;
                 } else {
                     System.out.println("Invalid Password!");
@@ -160,7 +161,7 @@ public class Main {
 
             default:
                 System.out.println("Invalid choice, try again...");
-                state = STATE.LOGIN;
+                appState = STATE.LOGIN;
                 break;
         }
     }
@@ -244,10 +245,11 @@ public class Main {
         choice = scan.nextInt();
         if(choice == 1){
             byTicketSales = true;
+            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
         }else if(choice == 2){
             byTicketSales = false;
+            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
         }
-        movieMgManager.listTop5(byTicketSales);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
