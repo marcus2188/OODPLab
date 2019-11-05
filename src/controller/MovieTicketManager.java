@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class MovieTicketManager implements SystemSettings_inf, Admin_UI {
+public class MovieTicketManager implements SystemSettings_inf {
     ArrayList priceTable;
 
     // constructor

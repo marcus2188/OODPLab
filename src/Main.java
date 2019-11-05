@@ -375,5 +375,23 @@ public class Main {
 
     }
 
-    private static void adminUpdatePH() {System.out.println("=== Update Public Holidays ===");}
+    private static void adminUpdatePH() {
+        System.out.println("=== Update Public Holidays ===");
+        Admin_UI holidayManager = new PublicHolidayManager();
+        holidayManager.printMenu();
+        System.out.println("Press 1 to add a new public holiday");
+        System.out.println("Press 0 to go back to menu");
+
+        Scanner scan = new Scanner(System.in);
+        int choice = scan.nextInt();
+        // TODO: add error checking
+
+        switch(choice) {
+            case 1:
+                ((PublicHolidayManager) holidayManager).addHoliday();
+                appState = STATE.ADMIN_MENU;
+            case 0:
+                appState = STATE.ADMIN_MENU;
+        }
+    }
 }
