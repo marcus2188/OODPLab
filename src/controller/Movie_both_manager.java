@@ -1,13 +1,18 @@
 package controller;
 
+import boundary.MovieGoer_UI;
 import entity.Movie;
+import utils.SerializeDB;
 
-public class Movie_both_manager {
+import java.util.ArrayList;
+
+public class Movie_both_manager implements MovieGoer_UI {
 	
-	private Movie[] m;
-	
+	private ArrayList<Movie> m;
+
+	// constructor
 	public Movie_both_manager() {
-		m=loadData();
+		this.m = this.loadData();
 	}
 	
 	public void listTop5(boolean ticketSales) {
@@ -15,12 +20,12 @@ public class Movie_both_manager {
 		if (ticketSales) {	
 			//sort by ticketSales
 			System.out.println("Top 5 Movies by ticket sales: ");
-			for (int i=0;i<m.length;i++) {
+			for (int i=0;i<m.size();i++) {
 				for (int j=i;j>0;j--) {
-					if (m[i].getTicketSales()<m[j].getTicketSales()) {
-						tmp = m[i];
-						m[i] = m[j];
-						m[j] = tmp;
+					if (m.get(i).getTicketSales()<m.get(j).getTicketSales()) {
+						tmp = m.get(i);
+						m.set(i, m.get(j));
+						m.set(j, tmp);
 					}
 				}
 			}
@@ -28,42 +33,44 @@ public class Movie_both_manager {
 		else {
 			//sort by avgRating
 			System.out.println("Top 5 Movies by average rating: ");
-			for (int i=0;i<m.length;i++) {
+			for (int i=0;i<m.size();i++) {
 				for (int j=i;j>0;j--) {
-					if (m[i].getAvgRating()<m[j].getAvgRating()) {
-						tmp = m[i];
-						m[i] = m[j];
-						m[j] = tmp;
+					if (m.get(i).getAvgRating()<m.get(j).getAvgRating()) {
+						tmp = m.get(i);
+						m.set(i, m.get(j));
+						m.set(j, tmp);
 					}
 				}
 			}
 		}
-		for (int i=0;i<m.length;i++) {
-			System.out.println(m[i].getTitle());
+		for (int i=0;i<m.size();i++) {
+			System.out.println(m.get(i).getTitle());
 		}
 	}
 	
-	public Movie[] getM() {
+	public ArrayList<Movie> getM() {
 		return m;
 	}
 
-	public void setM(Movie[] m) {
+	public void setM(ArrayList m) {
 		this.m = m;
 	}
 	
-	public Movie[] loadData() { //NEEDS IMPLEMENTATION, LOADS ALL MOVIE
-		Movie[] m = null;
-		return m;
+	public ArrayList loadData() {
+		// Movie[] m = null;
+		ArrayList movies = (ArrayList)SerializeDB.readSerializedObject("Movie.dat");
+		return movies;
 	}
 	
-	public void exportData(Movie[] m) { //NEEDS IMPLEMENTATION, LOADS ALL MOVIE
-		//read to file
+	public void exportData(ArrayList m) {
+		//save movie?
+		SerializeDB.writeSerializedObject("Movie.dat", m);
 	}
 	
 	public Movie findMovie(String movieName) {	//helper method for use movie managers.
-		for (int i=0;i<m.length;i++) {
-			if (m[i].getTitle().equalsIgnoreCase(movieName)) {
-				return m[i];
+		for (int i=0;i<m.size();i++) {
+			if (m.get(i).getTitle().equalsIgnoreCase(movieName)) {
+				return m.get(i);
 			}
 		}
 		System.out.println("Movie not found.");

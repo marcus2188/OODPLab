@@ -7,7 +7,10 @@ import entity.MovieReview;
 import entity.MovieScreening;
 
 public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf, MovieTop5_inf {
-	
+	public Movie_admin_manager() {
+		// TODO: add data read
+	}
+
 	public void createMovie(String title, String showingStatus, String synopsis, String director, List<String> cast, double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales, List<MovieScreening> ms) {
 		Movie newm = new Movie(title, showingStatus, synopsis, director, cast, avgRating, isBlockBuster, review_list, ticketSales, ms);
 

@@ -40,5 +40,8 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 			System.out.println("Rating: " + mrlist.get(i).getRating() + "\nComments: " + mrlist.get(i).getComments());
 		}
 	}
-		
+
+	public void listTop5(Boolean byTicketSales) {
+		System.out.println("=== List top 5 movies ===");
+	}
 }

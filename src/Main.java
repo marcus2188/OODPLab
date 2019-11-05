@@ -1,8 +1,12 @@
+import boundary.Admin_UI;
+import controller.MovieTicketManager;
+import java.io.IOException;
 import java.util.Scanner;
 import controller.*;
 import boundary.*;
 
 public class Main {
+
     /* Global variables */
     private static boolean admin = false;
     private static boolean running = true;
@@ -120,6 +124,7 @@ public class Main {
         String password; // password that user will input
 
         Scanner scan = new Scanner(System.in);
+      
         System.out.println("Welcome to MOBLIMA App!");
         System.out.println("Press 1 for Movie Goer");
         System.out.println("Press 2 for admin");
@@ -145,6 +150,7 @@ public class Main {
                 if (password.equals(PASSWORD)) {
                     System.out.println("Loading admin page...");
                     appState = STATE.ADMIN_MENU;
+                    admin = true;
                     break;
                 } else {
                     System.out.println("Invalid Password!");
@@ -154,9 +160,12 @@ public class Main {
                 }
 
             default:
+                System.out.println("Invalid choice, try again...");
+                appState = STATE.LOGIN;
                 break;
         }
     }
+
 
     /*
     All user menus
@@ -208,7 +217,7 @@ public class Main {
     private static void userListMovies() {
         Movie_mg_manager movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
-        movieMgManager.listAllMovie();
+        ((Movie_mg_manager) movieMgManager).listAllMovie();
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -220,9 +229,10 @@ public class Main {
         System.out.println("=== Movie search ===");
         System.out.println("Please enter the title: ");
         movieName = scan.next();
-        movieMgManager.searchMovie(movieName);
+        ((Movie_mg_manager) movieMgManager).searchMovie(movieName);
         appState = STATE.MOVIE_GOER_MENU;
     }
+
 
     private static void userListTop5Movies() {
         Movie_mg_manager movieMgManager = new Movie_mg_manager();
@@ -235,10 +245,11 @@ public class Main {
         choice = scan.nextInt();
         if(choice == 1){
             byTicketSales = true;
+            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
         }else if(choice == 2){
             byTicketSales = false;
+            ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
         }
-        movieMgManager.listTop5(byTicketSales);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -255,7 +266,7 @@ public class Main {
         System.out.println("=== Movie Details ===");
         System.out.println("Please enter the movie to view details: ");
         movieName = scan.next();
-        movieMgManager.viewMovieDetails(movieName);
+        ((Movie_mg_manager) movieMgManager).viewMovieDetails(movieName);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -272,7 +283,7 @@ public class Main {
         comments = scan.next();
         System.out.println("Please enter your rating: ");
         rating = scan.nextInt();
-        movieMgManager.addMovieReview(movieName, comments, rating);
+        ((Movie_mg_manager) movieMgManager).addMovieReview(movieName, comments, rating);
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -334,8 +345,10 @@ public class Main {
         }
     }
 
+
     private static void adminCreateMovie() {
         System.out.println("=== Create Movie ===");
+
     }
 
     private static void adminUpdateMovie() {System.out.println("=== Update Movie ===");}
