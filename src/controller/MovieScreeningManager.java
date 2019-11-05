@@ -64,10 +64,10 @@ public class MovieScreeningManager  {
         Cineplex perCinema = new Cineplex(cinemaList);
         //for(int i = 0; i <= this.cinemaList.size(); i++){
                 //Cinema perCinema = this.cinemaList.get(i);
-            ArrayList<Cinema>  cinemaName = perCinema.getCinemas();
-            String NAMENAMENAME = cinemaName.get(0).getName();
-                //String cinemaName = perCinema.getCinemas().get(0).getName();
-                System.out.println((1) + ". " + NAMENAMENAME);
+            //ArrayList<Cinema>  cinemaName = perCinema.getCinemas();
+            //String NAMENAMENAME = cinemaName.get(0).getName();
+                String cinemaName = perCinema.getCinemas().get(0).getName();
+                System.out.println((1) + ". " + cinemaName);
            // }
 
        // Cineplex cineplex = new Cineplex(cinemaList);
