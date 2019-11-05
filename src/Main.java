@@ -1,9 +1,12 @@
 import boundary.Admin_UI;
 import controller.MovieTicketManager;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Scanner;
 import controller.*;
 import boundary.*;
+import entity.*;
 
 public class Main {
 
@@ -357,9 +360,9 @@ public class Main {
         String title, showingStatus, sypnosis, director, castName;
         int noOfCast, i, blockBuster;
         boolean isBlockbuster;
-        List<String> cast = new List<String>;
-        List<MovieReview> review_list = new List<MovieReview>;
-        List<MovieScreening> ms = new List<MovieScreening>;
+        List<String> cast = new ArrayList<String>();
+        List<MovieReview> review_list = new ArrayList<MovieReview>();
+        List<MovieScreening> ms = new ArrayList<MovieScreening>();
         Scanner scan = new Scanner(System.in);
 
         System.out.println("=== Create Movie ===");
@@ -371,9 +374,9 @@ public class Main {
         sypnosis = scan.next();
         System.out.println("Please enter the director: ");
         director = scan.next();
-        System.out.println("How many cast are there in this movie?")
+        System.out.println("How many cast are there in this movie?");
         noOfCast = scan.nextInt();
-        for(i = 0; i < noOfCast; i++)}{
+        for(i = 0; i < noOfCast; i++){
             System.out.println("Please enter cast name: ");
             castName = scan.next();
             cast.add(castName);
@@ -382,19 +385,19 @@ public class Main {
         blockBuster = scan.nextInt();
         if(blockBuster == 1){
             isBlockbuster = true;
-        }else if(blockbuster == 2){
+        }else if(blockBuster == 2){
             isBlockbuster = false;
         }
-        ((Movie_admin_manager) adminManager).createMovie(title, showingStatus, sypnosis, director, cast, 0, isBlockbuster, review_list, 0 ms);
+        ((Movie_admin_manager) adminManager).createMovie(title, showingStatus, sypnosis, director, cast, 0, isBlockbuster, review_list, 0, ms);
         appState = STATE.ADMIN_MENU;
     }
 
     private static void adminUpdateMovie() {
         Admin_UI adminManager = new Movie_admin_manager();
         String title, showingStatus, sypnosis, director, castName, movieName;
-        int noOfCast, i, choice, blockbuster;
+        int noOfCast, i, choice, blockBuster;
         boolean isBlockbuster;
-        List<String> cast = new List<String>;
+        List<String> cast = new ArrayList<String>();
         Scanner scan = new Scanner(System.in);
 
         System.out.println("=== Update Movie ===");
@@ -406,7 +409,7 @@ public class Main {
         System.out.println("Press 4 to update director.");
         System.out.println("Press 5 to update cast.");
         System.out.println("Press 6 to update blockbuster status.");
-        choice = scan.next();
+        choice = scan.nextInt();
 
         switch(choice){
             case 1:
@@ -430,9 +433,9 @@ public class Main {
                 ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, director);
                 break;
             case 5:
-                System.out.println("How many cast are there in this movie?")
+                System.out.println("How many cast are there in this movie?");
                 noOfCast = scan.nextInt();
-                for(i = 0; i < noOfCast; i++)}{
+                for(i = 0; i < noOfCast; i++){
                     System.out.println("Please enter cast name: ");
                     castName = scan.next();
                     cast.add(castName);
@@ -444,7 +447,7 @@ public class Main {
                 blockBuster = scan.nextInt();
                 if(blockBuster == 1){
                     isBlockbuster = true;
-                }else if(blockbuster == 2){
+                }else if(blockBuster == 2){
                     isBlockbuster = false;
                 }
                 ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, isBlockbuster);
