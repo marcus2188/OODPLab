@@ -1,9 +1,13 @@
 import boundary.Admin_UI;
 import controller.MovieTicketManager;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Scanner;
+import utils.ScannerErrorHandler;
 import controller.*;
 import boundary.*;
+import entity.*;
 
 public class Main {
 
@@ -123,7 +127,8 @@ public class Main {
         int choice = 0;
         String password; // password that user will input
 
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
       
         System.out.println("Welcome to MOBLIMA App!");
         System.out.println("Press 1 for Movie Goer");
@@ -173,7 +178,8 @@ public class Main {
      */
     private static void userMenu() {
         int choice = 0;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("Welcome, Movie Goer!");
         System.out.println("Press 1 to list all movies");
         System.out.println("Press 2 to search a movie");
@@ -224,7 +230,8 @@ public class Main {
     private static void userSearchMovies() {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
         String movieName;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
 
         System.out.println("=== Movie search ===");
         System.out.println("Please enter the title: ");
@@ -236,9 +243,10 @@ public class Main {
 
     private static void userListTop5Movies() {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
-        boolean byTicketSales;
+        boolean byTicketSales = false;
         int choice;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("=== Top 5 Movies ===");
         System.out.println("Press 1 for top 5 movies ranked by ticket sales.");
         System.out.println("Press 2 for top 5 movies ranked by ratings");
@@ -259,16 +267,32 @@ public class Main {
         appState = STATE.MOVIE_GOER_MENU;
     }
 
-    private static void userViewShoppingCart() {System.out.println("=== My Shopping Cart ===");}
+    private static void userViewShoppingCart() {
+        MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
+        System.out.println("=== My Shopping Cart ===");
+        ((ShoppingOrder_manager) shoppingOrderManager).viewshoppingcart();
+        appState = STATE.MOVIE_GOER_MENU;
+    }
 
-    private static void userViewTransactions() {System.out.println("=== My Transactions ===");}
+    private static void userViewTransactions() {
+        MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
+        System.out.println("=== My Transactions ===");
+        ((ShoppingOrder_manager) shoppingOrderManager).viewpaymenthistory();
+        appState = STATE.MOVIE_GOER_MENU;
+    }
 
-    private static void userMovieBooking() { System.out.println(("=== Movie Booking ==="));}
+    private static void userMovieBooking() { 
+        MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
+        System.out.println(("=== Movie Booking ==="));
+        ((ShoppingOrder_manager) shoppingOrderManager).bookTicket();
+        appState = STATE.MOVIE_GOER_MENU;
+    }
 
     private static void userMovieDetails() {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
         String movieName;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("=== Movie Details ===");
         System.out.println("Please enter the movie to view details: ");
         movieName = scan.next();
@@ -280,7 +304,8 @@ public class Main {
         MovieGoer_UI movieMgManager = new Movie_mg_manager();
         int rating;
         String comments, movieName;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         
         System.out.println("=== Add Review ===");
         System.out.println("Please enter the movie to review: ");
@@ -299,7 +324,8 @@ public class Main {
     private static void adminMenu() {
         int choice = 0;
         int id;
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("Welcome, admin!");
         System.out.println("Press 1 to create a movie in movie listings");
         System.out.println("Press 2 to update a movie in movie listings");
@@ -353,19 +379,58 @@ public class Main {
 
 
     private static void adminCreateMovie() {
-        System.out.println("=== Create Movie ===");
-
+    	//create manager
+    	Admin_UI adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Create Movie ===");
+        ((Movie_admin_manager) adminManager).createMovie();
+        appState = STATE.ADMIN_MENU;
     }
 
-    private static void adminUpdateMovie() {System.out.println("=== Update Movie ===");}
+    private static void adminUpdateMovie() {
+    	//create manager
+    	Admin_UI adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Update Movie ===");
+    	((Movie_admin_manager) adminManager).updateMovie();
+        appState = STATE.ADMIN_MENU;
+    }
 
-    private static void adminDeleteMovie() {System.out.println("=== Delete Movie === ");}
+    private static void adminDeleteMovie() {
+    	//create manager
+    	Admin_UI adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Delete Movie === ");
+    	((Movie_admin_manager) adminManager).removeMovie();
+        appState = STATE.ADMIN_MENU;
+    }
 
-    private static void adminCreateScreening() {System.out.println("=== Create Screening ===");}
+    private static void adminCreateScreening() {
+        //create manager
+    	Admin_UI movieScreeningManager = new MovieScreeningManager();
+    	
+    	System.out.println("=== Create Screening ===");
+        ((MovieScreeningManager) movieScreeningManager).createMovieScreening();
+        appState = STATE.ADMIN_MENU;
+    }
 
-    private static void adminUpdateScreening() {System.out.println("=== Update Screening ===");}
+    private static void adminUpdateScreening() {
+        //create manager
+    	Admin_UI movieScreeningManager = new MovieScreeningManager();
+    	
+    	System.out.println("=== Update Screening ===");
+        ((MovieScreeningManager) movieScreeningManager).updateMovieScreening();
+        appState = STATE.ADMIN_MENU;
+    }
 
-    private static void adminDeleteScreening() {System.out.println("=== Delete Screening ===");}
+    private static void adminDeleteScreening() {
+        //create manager
+    	Admin_UI movieScreeningManager = new MovieScreeningManager();
+    	
+    	System.out.println("=== Delete Screening ===");
+        ((MovieScreeningManager) movieScreeningManager).deleteMovieScreening();
+        appState = STATE.ADMIN_MENU;
+    }
 
     private static void adminUpdatePrice() throws IOException {
         System.out.println("=== Update Price ===");
@@ -383,7 +448,8 @@ public class Main {
         System.out.println("Press 2 to delete a public holiday");
         System.out.println("Press 0 to go back to menu");
 
-        Scanner scan = new Scanner(System.in);
+        //Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         int choice = scan.nextInt();
         // TODO: add error checking
 
