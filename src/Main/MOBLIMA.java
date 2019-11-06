@@ -8,6 +8,9 @@ import utils.ScannerErrorHandler;
 import java.io.IOException;
 import java.text.ParseException;
 
+/*
+main entry point
+ */
 public class MOBLIMA {
 
     /* Global variables */
@@ -30,7 +33,10 @@ public class MOBLIMA {
 
     public static void main(String[] args) throws IOException, ParseException {
         /*
-        List all routes, render routes based on state
+        List of all available routes.
+        These routes can be accessed via the setAppstate method,
+        that acts like a universal resource locater (URL) that allows
+        selection of routes anywhere throughout the app
          */
          while(running) {
              switch(appState) {
