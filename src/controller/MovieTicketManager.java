@@ -131,6 +131,7 @@ public class MovieTicketManager implements MovieTicket_inf {
                 MovieTicket newTicket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price);
                 this.priceTable.add(newTicket);
                 TextTicketDB.savePrices("prices.txt", this.priceTable);
+                System.out.println("Ticket added!");
             } else {
                 System.out.println("Operation cancelled");
             }

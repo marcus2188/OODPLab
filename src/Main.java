@@ -1,15 +1,11 @@
-import boundary.Admin_UI;
-import controller.MovieTicketManager;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.util.Scanner;
+import boundary.AdminMenu;
+import boundary.STATE;
+import boundary.UserMenu;
 import utils.ScannerErrorHandler;
-import controller.*;
-import boundary.*;
-import entity.*;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 public class Main {
 

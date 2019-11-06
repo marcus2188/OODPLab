@@ -108,14 +108,14 @@ All user menus
     public static void userViewShoppingCart() {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Shopping Cart ===");
-        ((ShoppingOrder_manager) shoppingOrderManager).viewshoppingcart();
+        ((ShoppingOrder_manager) shoppingOrderManager).viewShoppingCart();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userViewTransactions() {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Transactions ===");
-        ((ShoppingOrder_manager) shoppingOrderManager).viewpaymenthistory();
+        ((ShoppingOrder_manager) shoppingOrderManager).viewPaymentHistory();
         MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
     }
 
