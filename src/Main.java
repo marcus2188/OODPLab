@@ -445,6 +445,7 @@ public class Main {
         Admin_UI holidayManager = new PublicHolidayManager();
         holidayManager.printMenu();
         System.out.println("Press 1 to add a new public holiday");
+        System.out.println("Press 2 to delete a public holiday");
         System.out.println("Press 0 to go back to menu");
 
         //Scanner scan = new Scanner(System.in);
@@ -455,6 +456,11 @@ public class Main {
         switch(choice) {
             case 1:
                 ((PublicHolidayManager) holidayManager).addHoliday();
+                System.out.println("Redirecting to Menu...");
+                appState = STATE.ADMIN_MENU;
+            case 2:
+                ((PublicHolidayManager) holidayManager).deleteHoliday();
+                System.out.println("Redirecting to Menu...");
                 appState = STATE.ADMIN_MENU;
             case 0:
                 appState = STATE.ADMIN_MENU;

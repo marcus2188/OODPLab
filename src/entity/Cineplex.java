@@ -7,15 +7,21 @@ import java.util.ArrayList;
 
 public class Cineplex implements Serializable {
     private ArrayList<Cinema> cinemas;
+    private String name;
 
     public Cineplex(ArrayList<Cinema> cinemas) {
+
         this.cinemas = cinemas;
+        this.name = "Golden City Cineplexes";
     }
 
     public ArrayList<Cinema> getCinemas() {
         return cinemas;
     }
 
+    public String getName() {
+        return name;
+    }
 
     public void printCinemas(){
         for (int i = 0; i < this.cinemas.size(); i++) {
