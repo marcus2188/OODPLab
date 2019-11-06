@@ -3,18 +3,19 @@ package controller;
 import entity.Cinema;
 import entity.Cineplex;
 import utils.SerializeDB;
+
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 import boundary.Admin_UI;
 import entity.MovieScreening;
 
 public class MovieScreeningManager  {
-    private ArrayList<MovieScreening> movieScreeningList = new ArrayList<MovieScreening>();
-    private ArrayList<Cinema> cinemaList;
+    private ArrayList<MovieScreening> movieScreeningList = new ArrayList<>();
+    private ArrayList<Cineplex> cineplexList;
+
 
     public MovieScreeningManager(){
         this.importData();
@@ -22,17 +23,32 @@ public class MovieScreeningManager  {
 
     public void createMovieScreening() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Cineplex: ");
-        String cineplexName = scan.nextLine();
 
-        System.out.println("Enter Cinema: ");
-        String cinemaName = scan.nextLine();
+        int cineplexchoice;
+        int cinemaChoice;
+        System.out.println("Please Select Cineplex ");
+        for(int i = 0; i < this.cineplexList.size(); i++){
+            String CineplexName = this.cineplexList.get(0).getName();
+            System.out.println((i+1) + ". " + CineplexName);
+        }
+
+        cineplexchoice = scan.nextInt();
+        String cineplexName = this.cineplexList.get(cineplexchoice-1).getName();
+
+        System.out.println("Please Select Cinema ");
+        for( int i = 0; i < this.cineplexList.get(cineplexchoice-1).getCinemas().size(); i++){
+            String cinemaName = this.cineplexList.get(cineplexchoice-1).getCinemas().get(i).getName();
+            System.out.println((i+1) + ". " + cinemaName);
+        }
+        cinemaChoice = scan.nextInt();
+        String cinemaName =this.cineplexList.get(cineplexchoice-1).getCinemas().get(cinemaChoice-1).getName();
 
         System.out.println("Enter Movie: ");
+        scan.nextLine();
         String movieName = scan.nextLine();
 
-        System.out.println("Enter date: ");
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println("Enter date: (dd/MM/yyyy) ");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateInStr = scan.nextLine();
         Date date = new Date();
         try {
@@ -41,46 +57,66 @@ public class MovieScreeningManager  {
             e.printStackTrace();
             System.out.println("Problematic la: ");
         }
-
-
-        System.out.println("Enter time: ");
+        System.out.println("Enter time: (HHMM)");
         int timeSlot = scan.nextInt();
 
-        MovieScreening newScreening = new MovieScreening(cineplexName,cinemaName,movieName,dateInStr,timeSlot);
+        MovieScreening newScreening = new MovieScreening(cineplexName,cinemaName,movieName,date,timeSlot);
         this.movieScreeningList.add(newScreening);
         SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
         System.out.println("Movie Screening Added!");
     }
 
     public void printScreeningList() {
-        //System.out.println("===The current Screening Value===");
-        //for (int i = 0; i <= this.movieScreeningList.size(); i++) {
-          //  MovieScreening perScreening = (MovieScreening) this.movieScreeningList.get(i);
-         //   System.out.print(i + ". ");
-        //    perScreening.printMovieScreening();
-      //  }
-
-        System.out.println("===Cinema Listing===");
-        Cineplex perCinema = new Cineplex(cinemaList);
-        //for(int i = 0; i <= this.cinemaList.size(); i++){
-                //Cinema perCinema = this.cinemaList.get(i);
-            //ArrayList<Cinema>  cinemaName = perCinema.getCinemas();
-            //String NAMENAMENAME = cinemaName.get(0).getName();
-                String cinemaName = perCinema.getCinemas().get(0).getName();
-                System.out.println((1) + ". " + cinemaName);
-           // }
-
-       // Cineplex cineplex = new Cineplex(cinemaList);
-       // cineplex.printCinemas();
+        System.out.println("===The current Screening Value===");
+        for (int i = 0; i < this.movieScreeningList.size(); i++) {
+            MovieScreening perScreening = this.movieScreeningList.get(i);
+            System.out.print((i+1) + ". ");
+            perScreening.printMovieScreening();
+        }
     }
-   // public void updateMovieScreening()
-   // public void removeMovieScreening()
+    /*public void updateMovieScreening(){
+            printScreeningList();
+            System.out.println("===Please select the index to Update===");
+            Scanner scan = new Scanner(System.in);
+            int choice = scan.nextInt();
+            System.out.println("===Current Cineplex===");
+            String cinemaName =this.cineplexList.get(choice-1).getCinemas().get(cinemaChoice-1).getName();
+    }*/
+    /*public void manualInsertData() {
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateInStr = "24/05/2015";
+        Date date = new Date();
+        try {
+            date = dateFormatter.parse(dateInStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //int thetime = 0800;
+        //System.out.println("the time is "+justaname);
+       // MovieScreening movieScreening = new MovieScreening("Punggol","hall 3","Far from Home",date,justaname);
+       // this.movieScreeningList.add(movieScreening);
+        //SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
+    }*/
+
+    public void removeMovieScreening(){
+        printScreeningList();
+        System.out.println("===Please select the index to remove===");
+        Scanner scan = new Scanner(System.in);
+        int choice = scan.nextInt();
+        movieScreeningList.remove(choice-1);
+        SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
+        System.out.println("Have been successfully removed");
+
+    }
 
 
 
-    public void importData() {
+    private void importData() {
         this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
-        this.cinemaList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
+        this.cineplexList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
+
     }
 
     // getMovieScreening(List<MovieScreening> screeningList)
