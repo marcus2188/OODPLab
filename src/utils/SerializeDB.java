@@ -43,4 +43,10 @@ public class SerializeDB {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) {
+        ArrayList items = (ArrayList) readSerializedObject("cineplex.dat");
+        System.out.println(items.get(0));
+
+    }
 }

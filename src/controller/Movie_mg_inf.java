@@ -1,7 +1,7 @@
 package controller;
 
 
-public interface Movie_mg_inf {
+public interface Movie_mg_inf  {
 	public void searchMovie(String movieName);
 	public void listAllMovie();
 	public void viewMovieDetails(String movieName);
