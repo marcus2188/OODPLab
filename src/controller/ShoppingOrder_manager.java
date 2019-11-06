@@ -21,7 +21,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>();
 	ShoppingOrder neworder;
 	
-	ShoppingOrder_manager(){
+	public ShoppingOrder_manager(){
 		try {
 			this.importdata();
 		} catch (ClassNotFoundException | IOException e) {
