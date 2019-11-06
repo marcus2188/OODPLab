@@ -2,14 +2,14 @@ package entity;
 
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Movie implements Serializable{
     
 	private String title;
     private String showingStatus;
-    private Date endOfShowingDate;
+    private LocalDate endOfShowingDate;
     private String synopsis;
     private String director;
     private List<String> cast;
@@ -20,10 +20,11 @@ public class Movie implements Serializable{
     private List<MovieScreening> ms;
     
     
-	public Movie(String title, String showingStatus, Date endOfShowingDate, String synopsis, String director, List<String> cast,
+	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast,
 			double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales, List<MovieScreening> ms) {
 		this.title = title;
 		this.showingStatus = showingStatus;
+		this.endOfShowingDate=endOfShowingDate;
 		this.synopsis = synopsis;
 		this.director = director;
 		this.cast = cast;
@@ -43,6 +44,7 @@ public class Movie implements Serializable{
 	}
 	
 	public String getShowingStatus() {
+		if (this.showingStatus=="EndofShowing") return showingStatus+" "+this.getEndOfShowingDate();
 		return showingStatus;
 	}
 	
@@ -50,11 +52,11 @@ public class Movie implements Serializable{
 		this.showingStatus = showingStatus;
 	}
 	
-	public Date getEndOfShowingDate() {
+	public LocalDate getEndOfShowingDate() {
 		return endOfShowingDate;
 	}
 
-	public void setEndOfShowingDate(Date endOfShowingDate) {
+	public void setEndOfShowingDate(LocalDate endOfShowingDate) {
 		this.endOfShowingDate = endOfShowingDate;
 	}
 
