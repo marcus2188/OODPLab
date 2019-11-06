@@ -11,6 +11,7 @@ public class PublicHolidayManager implements SystemSettings_inf {
     public PublicHolidayManager() {
         this.importData();
     }
+
     public void printMenu() {
         System.out.println("Current Public Holidays:");
         for (int i = 0; i < this.holidays.size(); i++) {

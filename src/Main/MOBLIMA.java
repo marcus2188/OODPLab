@@ -1,17 +1,14 @@
-import boundary.Admin_UI;
-import controller.MovieTicketManager;
+package Main;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.util.Scanner;
+import boundary.AdminMenu;
+import boundary.STATE;
+import boundary.UserMenu;
 import utils.ScannerErrorHandler;
-import controller.*;
-import boundary.*;
-import entity.*;
 
-public class Main {
+import java.io.IOException;
+import java.text.ParseException;
+
+public class MOBLIMA {
 
     /* Global variables */
     private static boolean admin = false;
@@ -28,7 +25,7 @@ public class Main {
     }
 
     public static void setAppState(STATE appState) {
-        Main.appState = appState;
+        MOBLIMA.appState = appState;
     }
 
     public static void main(String[] args) throws IOException, ParseException {

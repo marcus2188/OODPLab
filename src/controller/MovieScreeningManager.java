@@ -73,8 +73,12 @@ public class MovieScreeningManager implements MovieScreening_inf {
        // Cineplex cineplex = new Cineplex(cinemaList);
        // cineplex.printCinemas();
     }
-   // public void updateMovieScreening()
-   // public void removeMovieScreening()
+   public void updateMovieScreening() {
+        System.out.println("Update movie screening");
+   }
+   public void deleteMovieScreening() {
+        System.out.println("Delete movie screening");
+   }
 
 
 
@@ -85,6 +89,8 @@ public class MovieScreeningManager implements MovieScreening_inf {
     }
 
     // getMovieScreening(List<MovieScreening> screeningList)
+
+
 
 
 }
