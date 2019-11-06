@@ -52,18 +52,19 @@ public class Movie_both_manager implements MovieGoer_UI {
 		return m;
 	}
 
-	public void setM(ArrayList m) {
+	public void setM(ArrayList<Movie> m) {
 		this.m = m;
 	}
 	
-	public ArrayList loadData() {
+	public ArrayList<Movie> loadData() {
 		// Movie[] m = null;
-		ArrayList movies = (ArrayList)SerializeDB.readSerializedObject("Movie.dat");
+		ArrayList<Movie> movies = (ArrayList<Movie>)SerializeDB.readSerializedObject("Movie.dat");
 		return movies;
 	}
 	
-	public void exportData(ArrayList m) {
-		//save movie?
+	public void exportData(ArrayList<Movie> m) {
+		//save movie data
+		this.setM(m);
 		SerializeDB.writeSerializedObject("Movie.dat", m);
 	}
 	
@@ -73,8 +74,24 @@ public class Movie_both_manager implements MovieGoer_UI {
 				return m.get(i);
 			}
 		}
-		System.out.println("Movie not found.");
 		return null;
+	}
+	
+	public void printMovieList() {
+		for (int i=0;i<m.size();i++) {
+			System.out.println((i+1)+ ". "+m.get(i).getTitle() );
+		}
+	}
+	
+	public ArrayList<Movie> getBookableMovies() {
+		int size = this.getM().size();
+		ArrayList<Movie> bookables = this.getM();
+		for (int i=0;i<size;i++) {
+			if (bookables.get(i).getShowingStatus().equals("End of Showing")) {
+				bookables.remove(i);
+			}
+		}
+		return bookables;
 	}
 
 }
