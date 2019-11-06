@@ -2,15 +2,14 @@ package controller;
 
 import entity.Cinema;
 import entity.Cineplex;
+import entity.MovieScreening;
 import utils.SerializeDB;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
-import boundary.Admin_UI;
-import entity.MovieScreening;
 
 public class MovieScreeningManager implements MovieScreening_inf {
     private ArrayList<MovieScreening> movieScreeningList = new ArrayList<MovieScreening>();
@@ -73,10 +72,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
        // Cineplex cineplex = new Cineplex(cinemaList);
        // cineplex.printCinemas();
     }
-   public void updateMovieScreening() {
+   public void updateMovieScreening() { // TODO: to be done by BENG
         System.out.println("Update movie screening");
    }
-   public void deleteMovieScreening() {
+   public void deleteMovieScreening() { // TODO: to be done by BENG
         System.out.println("Delete movie screening");
    }
 

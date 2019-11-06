@@ -1,18 +1,16 @@
 package controller;
 
+import entity.Movie;
+import entity.MovieReview;
+import entity.MovieScreening;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import entity.Movie;
-import entity.MovieReview;
-import entity.MovieScreening;
-
 public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf, MovieTop5_inf {
-	public void printMenu() {
-		System.out.println("From print menu");
-	}
+
 	public ArrayList importData() {
 		System.out.println("Import data");
 		ArrayList temp = new ArrayList();

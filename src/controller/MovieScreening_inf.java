@@ -1,10 +1,10 @@
 package controller;
 
-import boundary.Admin_UI;
-
-public interface MovieScreening_inf extends Admin_UI {
+public interface MovieScreening_inf {
+     void importData();
+     void printScreeningList();
      void createMovieScreening();
-    //  void updateMovieScreening();
-     // void removeMovieScreening();
+     void updateMovieScreening();
+     void deleteMovieScreening();
      // void updateHoliday();
 }
