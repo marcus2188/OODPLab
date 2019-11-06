@@ -356,119 +356,27 @@ public class Main {
 
 
     private static void adminCreateMovie() {
-        Admin_UI adminManager = new Movie_admin_manager();
-        String title, showingStatus, sypnosis, director, castName;
-        int noOfCast, i, blockBuster;
-        boolean isBlockbuster;
-        List<String> cast = new ArrayList<String>();
-        List<MovieReview> review_list = new ArrayList<MovieReview>();
-        List<MovieScreening> ms = new ArrayList<MovieScreening>();
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("=== Create Movie ===");
-        System.out.println("Please enter the movie title: ");
-        title = scan.next();
-        System.out.println("Please enter showing status: ");
-        showingStatus = scan.next();
-        System.out.println("Please enter the sypnosis: ");
-        sypnosis = scan.next();
-        System.out.println("Please enter the director: ");
-        director = scan.next();
-        System.out.println("How many cast are there in this movie?");
-        noOfCast = scan.nextInt();
-        for(i = 0; i < noOfCast; i++){
-            System.out.println("Please enter cast name: ");
-            castName = scan.next();
-            cast.add(castName);
-        }
-        System.out.println("Press 1 to set blockbuster.\nPress 2 to set normal.");
-        blockBuster = scan.nextInt();
-        if(blockBuster == 1){
-            isBlockbuster = true;
-        }else if(blockBuster == 2){
-            isBlockbuster = false;
-        }
-        ((Movie_admin_manager) adminManager).createMovie(title, showingStatus, sypnosis, director, cast, 0, isBlockbuster, review_list, 0, ms);
-        appState = STATE.ADMIN_MENU;
+    	//create manager
+    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Create Movie ===");
+        adminManager.createMovie();
     }
 
     private static void adminUpdateMovie() {
-        Admin_UI adminManager = new Movie_admin_manager();
-        String title, showingStatus, sypnosis, director, castName, movieName;
-        int noOfCast, i, choice, blockBuster;
-        boolean isBlockbuster;
-        List<String> cast = new ArrayList<String>();
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("=== Update Movie ===");
-        System.out.println("Please enter the movie name to update: ");
-        movieName = scan.next();
-        System.out.println("Press 1 to update title.");
-        System.out.println("Press 2 to update showing status.");
-        System.out.println("Press 3 to update sypnosis.");
-        System.out.println("Press 4 to update director.");
-        System.out.println("Press 5 to update cast.");
-        System.out.println("Press 6 to update blockbuster status.");
-        choice = scan.nextInt();
-
-        switch(choice){
-            case 1:
-                System.out.println("Please enter new movie title: ");
-                title = scan.next();
-                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, title);
-                break;
-            case 2:
-                System.out.println("Please enter new showing status: ");
-                showingStatus = scan.next();
-                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, showingStatus);
-                break;
-            case 3:
-                System.out.println("Please enter the sypnosis: ");
-                sypnosis = scan.next();
-                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, sypnosis);
-                break;
-            case 4:
-                System.out.println("Please enter new director: ");
-                director = scan.next();
-                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, director);
-                break;
-            case 5:
-                System.out.println("How many cast are there in this movie?");
-                noOfCast = scan.nextInt();
-                for(i = 0; i < noOfCast; i++){
-                    System.out.println("Please enter cast name: ");
-                    castName = scan.next();
-                    cast.add(castName);
-                }
-                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, cast);
-                break;
-            case 6:
-                System.out.println("Press 1 to set blockbuster.\nPress 2 to set normal.");
-                blockBuster = scan.nextInt();
-                if(blockBuster == 1){
-                    isBlockbuster = true;
-                }else if(blockBuster == 2){
-                    isBlockbuster = false;
-                }
-                ((Movie_admin_manager) adminManager).updateMovie(movieName, choice, isBlockbuster);
-                appState = STATE.ADMIN_MENU;
-                break;
-            default:
-                break;
-        }
-        
+    	//create manager
+    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Update Movie ===");
+    	adminManager.updateMovie();
     }
 
     private static void adminDeleteMovie() {
-        Admin_UI adminManager = new Movie_admin_manager();
-        String movieName;
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("=== Delete Movie === ");
-        System.out.println("Please enter the movie name to delete: ");
-        movieName = scan.next();
-        ((Movie_admin_manager) adminManager).removeMovie(movieName);
-        appState = STATE.ADMIN_MENU;
+    	//create manager
+    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	
+    	System.out.println("=== Delete Movie === ");
+    	adminManager.removeMovie();
     }
 
     private static void adminCreateScreening() {System.out.println("=== Create Screening ===");}

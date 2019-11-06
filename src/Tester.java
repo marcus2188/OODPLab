@@ -16,6 +16,6 @@ public class Tester {
         cinemas.add(cinema);
         Cineplex cineplex1 = new Cineplex(cinemas);
         cineplex1.printCinemas();
-
+        
     }
 }

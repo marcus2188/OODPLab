@@ -6,7 +6,9 @@ import controller.MovieScreening_inf;
 import controller.SystemSettings_inf;
 import java.io.IOException;
 
-public interface Admin_UI extends MovieTop5_inf, Movie_admin_inf, SystemSettings_inf, MovieScreening_inf{
+import controller.*;
+
+public interface Admin_UI extends Movie_mg_inf, Movie_admin_inf, MovieTop5_inf{
     public void printMenu();
     public void importData() throws IOException;
 }
