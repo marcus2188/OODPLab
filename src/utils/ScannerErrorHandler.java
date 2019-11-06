@@ -13,6 +13,7 @@ public class ScannerErrorHandler {
                 return i;
             }catch(java.util.InputMismatchException e){
                 System.out.println("Please enter an integer!");
+                scan.next();
                 continue;
             }
         }
@@ -27,6 +28,7 @@ public class ScannerErrorHandler {
                 return i;
             }catch(java.util.InputMismatchException e){
                 System.out.println("Please enter a string!");
+                scan.next();
                 continue;
             }
         }
