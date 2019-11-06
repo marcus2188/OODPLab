@@ -1,10 +1,7 @@
 package boundary;
 
 import Main.MOBLIMA;
-import controller.MovieScreeningManager;
-import controller.MovieTicketManager;
-import controller.Movie_admin_manager;
-import controller.PublicHolidayManager;
+import controller.*;
 import utils.ScannerErrorHandler;
 
 import java.io.IOException;
@@ -73,7 +70,7 @@ public class AdminMenu {
 
     public static void adminCreateMovie() {
         //create manager
-        Admin_UI adminManager = new Movie_admin_manager();
+        Movie_admin_inf adminManager = new Movie_admin_manager();
 
         System.out.println("=== Create Movie ===");
         ((Movie_admin_manager) adminManager).createMovie();
@@ -82,7 +79,7 @@ public class AdminMenu {
 
     public static void adminUpdateMovie() {
         //create manager
-        Admin_UI adminManager = new Movie_admin_manager();
+        Movie_admin_inf adminManager = new Movie_admin_manager();
 
         System.out.println("=== Update Movie ===");
         ((Movie_admin_manager) adminManager).updateMovie();
@@ -91,7 +88,7 @@ public class AdminMenu {
 
     public static void adminDeleteMovie() {
         //create manager
-        Admin_UI adminManager = new Movie_admin_manager();
+        Movie_admin_inf adminManager = new Movie_admin_manager();
 
         System.out.println("=== Delete Movie === ");
         ((Movie_admin_manager) adminManager).removeMovie();
@@ -100,7 +97,7 @@ public class AdminMenu {
 
     public static void adminCreateScreening() {
         //create manager
-        Admin_UI movieScreeningManager = new MovieScreeningManager();
+        MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
 
         System.out.println("=== Create Screening ===");
         ((MovieScreeningManager) movieScreeningManager).createMovieScreening();
@@ -109,7 +106,7 @@ public class AdminMenu {
 
     public static void adminUpdateScreening() {
         //create manager
-        Admin_UI movieScreeningManager = new MovieScreeningManager();
+        MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
 
         System.out.println("=== Update Screening ===");
         ((MovieScreeningManager) movieScreeningManager).updateMovieScreening();
@@ -118,7 +115,7 @@ public class AdminMenu {
 
     public static void adminDeleteScreening() {
         //create manager
-        Admin_UI movieScreeningManager = new MovieScreeningManager();
+        MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
 
         System.out.println("=== Delete Screening ===");
         ((MovieScreeningManager) movieScreeningManager).deleteMovieScreening();
@@ -127,7 +124,7 @@ public class AdminMenu {
 
     public static void adminUpdatePrice() throws IOException {
         System.out.println("=== Update Price ===");
-        Admin_UI adminManager = new MovieTicketManager();
+        MovieTicket_inf adminManager = new MovieTicketManager();
         ((MovieTicketManager) adminManager).updatePriceTable();
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
 
@@ -135,7 +132,7 @@ public class AdminMenu {
 
     public static void adminUpdatePH() {
         System.out.println("=== Update Public Holidays ===");
-        Admin_UI holidayManager = new PublicHolidayManager();
+        PublicHoliday_inf holidayManager = new PublicHolidayManager();
         ((PublicHolidayManager) holidayManager).printMenu();
         System.out.println("Press 1 to add a new public holiday");
         System.out.println("Press 2 to delete a public holiday");

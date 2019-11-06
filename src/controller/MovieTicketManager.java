@@ -1,8 +1,6 @@
 package controller;
 
-import boundary.Admin_UI;
 import entity.AgeGroup;
-import entity.Movie;
 import entity.MovieTicket;
 import entity.ScreeningFormat;
 import utils.TextTicketDB;
@@ -10,14 +8,12 @@ import utils.TextTicketDB;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class MovieTicketManager implements SystemSettings_inf {
+public class MovieTicketManager implements MovieTicket_inf {
     ArrayList priceTable;
 
     // constructor

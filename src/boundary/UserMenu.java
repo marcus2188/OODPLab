@@ -1,7 +1,9 @@
 package boundary;
 
 import Main.MOBLIMA;
+import controller.Movie_mg_inf;
 import controller.Movie_mg_manager;
+import controller.ShoppingOrder_inf;
 import controller.ShoppingOrder_manager;
 import utils.ScannerErrorHandler;
 
@@ -57,14 +59,14 @@ All user menus
     }
 
     public static void userListMovies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
         ((Movie_mg_manager) movieMgManager).listAllMovie();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);   // Redirect back to main menu
     }
 
     public static void userSearchMovies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         String movieName;
         //Scanner scan = new Scanner(System.in);
         ScannerErrorHandler scan = new ScannerErrorHandler();
@@ -78,7 +80,7 @@ All user menus
 
 
     public static void userListTop5Movies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         boolean byTicketSales = false;
         int choice;
         //Scanner scan = new Scanner(System.in);
@@ -104,28 +106,28 @@ All user menus
     }
 
     public static void userViewShoppingCart() {
-        MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
+        ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Shopping Cart ===");
         ((ShoppingOrder_manager) shoppingOrderManager).viewshoppingcart();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userViewTransactions() {
-        MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
+        ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Transactions ===");
         ((ShoppingOrder_manager) shoppingOrderManager).viewpaymenthistory();
         MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
     }
 
     public static void userMovieBooking() throws IOException, ParseException {
-        MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
+        ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println(("=== Movie Booking ==="));
         ((ShoppingOrder_manager) shoppingOrderManager).bookTicket();
         MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
     }
 
     public static void userMovieDetails() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         String movieName;
         //Scanner scan = new Scanner(System.in);
         ScannerErrorHandler scan = new ScannerErrorHandler();
@@ -137,7 +139,7 @@ All user menus
     }
 
     public static void userAddReview() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         int rating;
         String comments, movieName;
         //Scanner scan = new Scanner(System.in);
