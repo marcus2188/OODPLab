@@ -1,5 +1,7 @@
 import boundary.Admin_UI;
 import controller.MovieTicketManager;
+
+import java.text.ParseException;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -49,7 +51,7 @@ public class Main {
     /* Initialize app state */
     private static STATE appState = STATE.LOGIN;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         /*
         List all routes, render routes based on state
          */
@@ -174,7 +176,6 @@ public class Main {
 
     /*
     All user menus
-    TODO: Implement controllers in each case
      */
     private static void userMenu() {
         int choice = 0;
@@ -281,7 +282,7 @@ public class Main {
         appState = STATE.MOVIE_GOER_MENU;
     }
 
-    private static void userMovieBooking() { 
+    private static void userMovieBooking() throws IOException, ParseException {
         MovieGoer_UI shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println(("=== Movie Booking ==="));
         ((ShoppingOrder_manager) shoppingOrderManager).bookTicket();

@@ -12,7 +12,7 @@ import java.util.Scanner;
 import boundary.Admin_UI;
 import entity.MovieScreening;
 
-public class MovieScreeningManager  {
+public class MovieScreeningManager implements MovieScreening_inf {
     private ArrayList<MovieScreening> movieScreeningList = new ArrayList<MovieScreening>();
     private ArrayList<Cinema> cinemaList;
 
@@ -75,6 +75,7 @@ public class MovieScreeningManager  {
     }
    // public void updateMovieScreening()
    // public void removeMovieScreening()
+
 
 
 
