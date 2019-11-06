@@ -1,8 +1,7 @@
 package controller;
 
-import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 		//showing status + endOfShowingDate
 		String showingStatus = "";
-		Date endOfShowingDate = null;
+		LocalDate endOfShowingDate = null;
 		choice=0;
 		do {
 			System.out.println("Showing Status: ");
@@ -45,8 +44,13 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			else if (choice==4) {
 				showingStatus = "End of Showing";
 				System.out.println("Input end of showing date: ");
-				String in = sc.next();
-				endOfShowingDate = ;
+				System.out.println("Year: ");
+				int year = sc.nextInt();
+				System.out.println("Month: ");
+				int month = sc.nextInt();
+				System.out.println("Day: ");
+				int day = sc.nextInt();
+				endOfShowingDate = LocalDate.of(year,month,day);
 			}
 			else System.out.println("Invalid choice!\n");
 		} while (choice>=1 && choice<=4);
@@ -74,8 +78,8 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		} while (choice==1);
 		
 		//System.out.println("Average Rating: ");
-		//default to 0
-		double avgRating =0;
+		//default to -1
+		double avgRating =-1;
 		
 		char charchoice;
 		boolean isBlockBuster=false;
