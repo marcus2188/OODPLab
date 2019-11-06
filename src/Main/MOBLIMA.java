@@ -123,7 +123,7 @@ public class MOBLIMA {
             // navigate to movie goer page
             case 1:
                 System.out.println("Loading Movie Goer page...");
-                appState = STATE.MOVIE_GOER_MENU;
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
                 break;
             // navigate to admin page
             case 2:
@@ -133,19 +133,19 @@ public class MOBLIMA {
 
                 if (password.equals(PASSWORD)) {
                     System.out.println("Loading admin page...");
-                    appState = STATE.ADMIN_MENU;
+                    setAppState(STATE.ADMIN_MENU);
                     admin = true;
                     break;
                 } else {
                     System.out.println("Invalid Password!");
                     System.out.println("Redirecting...");
-                    appState = STATE.LOGIN;
+                    setAppState(STATE.LOGIN);
                     break;
                 }
 
             default:
                 System.out.println("Invalid choice, try again...");
-                appState = STATE.LOGIN;
+                setAppState(STATE.LOGIN);
                 break;
         }
     }
