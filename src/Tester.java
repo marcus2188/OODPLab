@@ -1,6 +1,7 @@
 import entity.Cinema;
 import entity.Cineplex;
 import entity.Seat;
+import utils.SerializeDB;
 
 import java.util.ArrayList;
 
@@ -17,5 +18,8 @@ public class Tester {
         Cineplex cineplex1 = new Cineplex(cinemas);
         cineplex1.printCinemas();
 
+        ArrayList cineplexes = new ArrayList();
+        cineplexes.add(cineplex1);
+        SerializeDB.writeSerializedObject("cineplex.dat", cineplexes);
     }
 }
