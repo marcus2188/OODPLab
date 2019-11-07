@@ -354,26 +354,29 @@ public class Main {
 
     private static void adminCreateMovie() {
     	//create manager
-    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	Movie_admin_inf adminManager = new Movie_admin_manager();
     	
     	System.out.println("=== Create Movie ===");
         adminManager.createMovie();
+        appState = STATE.ADMIN_MENU;
     }
 
     private static void adminUpdateMovie() {
     	//create manager
-    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	Movie_admin_inf adminManager = new Movie_admin_manager();
     	
     	System.out.println("=== Update Movie ===");
     	adminManager.updateMovie();
+    	appState = STATE.ADMIN_MENU;
     }
 
     private static void adminDeleteMovie() {
     	//create manager
-    	Movie_admin_manager adminManager = new Movie_admin_manager();
+    	Movie_admin_inf adminManager = new Movie_admin_manager();
     	
     	System.out.println("=== Delete Movie === ");
     	adminManager.removeMovie();
+    	appState = STATE.ADMIN_MENU;
     }
 
     private static void adminCreateScreening() {System.out.println("=== Create Screening ===");}
