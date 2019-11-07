@@ -1,6 +1,7 @@
 package controller;
 import entity.MovieGoer;
 import entity.ShoppingOrder;
+import utils.ScannerErrorHandler;
 
 import java.io.*;
 import java.text.ParseException;
@@ -87,7 +88,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// USER WANTS TO CHECKOUT THE CURRENT SHOPPING ORDER
 	public void makePurchase() {
-		
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		// FINDS TODAY'S DATE AND SET THE SHOPPING ORDER DATEOFPURCHASE TO TODAY , TIME NEEDED?
 		Date todaydate = new Date();
 		this.BookingHistory.get(this.BookingHistory.size() - 1).setpaymentDate(todaydate);

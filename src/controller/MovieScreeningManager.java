@@ -3,13 +3,13 @@ package controller;
 import entity.Cinema;
 import entity.Cineplex;
 import entity.MovieScreening;
+import utils.ScannerErrorHandler;
 import utils.SerializeDB;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class MovieScreeningManager implements MovieScreening_inf {
     private ArrayList<MovieScreening> movieScreeningList = new ArrayList<MovieScreening>();
@@ -20,7 +20,8 @@ public class MovieScreeningManager implements MovieScreening_inf {
     }
 
     public void createMovieScreening() {
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("Enter Cineplex: ");
         String cineplexName = scan.nextLine();
 
