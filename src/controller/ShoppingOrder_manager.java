@@ -1,18 +1,12 @@
 package controller;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.text.ParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Date;
-
 import entity.MovieGoer;
 import entity.ShoppingOrder;
+
+import java.io.*;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	Scanner sc = new Scanner(System.in);
@@ -23,30 +17,30 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	public ShoppingOrder_manager(){
 		try {
-			this.importdata();
+			this.importData();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 	// READ IN PAST PAYMENTS FROM TXT FILE
-	public void importdata() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void importData() throws FileNotFoundException, IOException, ClassNotFoundException{
 		FileInputStream f = new FileInputStream(new File("payments.txt"));
 		ObjectInputStream o = new ObjectInputStream(f);
 		while((ShoppingOrder)o.readObject() != null) {
-			this.PaymentHistory.add((ShoppingOrder)o.readObject());                    // IS THIS HOW YOU DO SERIALIZABLE?? 
+			this.PaymentHistory.add((ShoppingOrder)o.readObject());                    // IS THIS HOW YOU DO SERIALIZABLE??
 		}
 		o.close();
-		
+
 		FileInputStream b = new FileInputStream(new File("peoplenames.txt"));
 		ObjectInputStream p = new ObjectInputStream(b);
 		while((MovieGoer)p.readObject() != null) {
-			this.people.add((MovieGoer)p.readObject());                    
+			this.people.add((MovieGoer)p.readObject());
 		}
 		p.close();
-		
+
 	}
 	// UPDATES THE NEW SHOPPING ORDER THAT HAS BEEN PAID
-	public void updatedata() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void updateData() throws FileNotFoundException, IOException, ClassNotFoundException{
 		FileOutputStream fo = new FileOutputStream(new File("payments.txt"));
 		ObjectOutputStream oo = new ObjectOutputStream(fo);
 		oo.writeObject(this.PaymentHistory.get(this.PaymentHistory.size() - 1));              // DOES THIS OVERWRITE THE EXISTING TEXT FILE?
@@ -64,24 +58,24 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.BookingHistory.add(this.neworder);
 	}
 	// WHEN USER WANTS TO VIEW ALL THE TICKETS INSIDE CURRENT SHOPPING ORDER ( IE BOOKING)
-	public void viewshoppingcart() {
+	public void viewShoppingCart() {
 		this.BookingHistory.get(this.BookingHistory.size() - 1).printalltickets();
 	}
 	
 	// USER CLEAR BOOKING HISTORY
-	public void clearbookinghistory() {
+	public void clearBookingHistory() {
 		this.BookingHistory.clear();
 		System.out.println("Your booking history has been cleared! ");
 	}
 	
 	// USER CLEAR PAYMENT HISTORY
-	public void clearpaymenthistory() {
+	public void clearPaymentHistory() {
 		this.PaymentHistory.clear();
 		System.out.println("Your payment history has been cleared! ");
 	}
 	
 	// DELETE CURRENT SHOPPING ORDER 
-	public void deleteshoppingorder() {
+	public void deleteShoppingOrder() {
 		this.BookingHistory.remove(this.BookingHistory.size() - 1);
 	}
 	
@@ -120,7 +114,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		
 		// UPDATE BOTH PEOPLE DATA AND PAYMENTHISTORY DATA IN THE TXT FILES
 		try {
-			this.updatedata();
+			this.updateData();
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -128,12 +122,12 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	}
 	
 	// USER WANTS TO DELETE TICKET FROM CURRENT SHOPPING ORDER
-	public void deleteticket() {
+	public void deleteTicket() {
 		// SHOULD WE HAVE SUCH A FUNCTION ??
 	}
 	
 	// TO VIEW ENTIRE PAYMENT HISTORY OF PAID TICKETS
-	public void viewpaymenthistory() {
+	public void viewPaymentHistory() {
 		for(int i = 0; i< this.PaymentHistory.size(); i++) {
 			System.out.println("Name : " + this.people.get(i).getName() + " Email : " + this.people.get(i).getEmail() + " Number : " + this.people.get(i).getMobileNumber());
 			this.PaymentHistory.get(i).printalltickets();

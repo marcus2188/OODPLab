@@ -2,15 +2,18 @@ package controller;
 
 import utils.SerializeDB;
 
-import java.time.Year;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
 
-public class PublicHolidayManager implements SystemSettings_inf {
+public class PublicHolidayManager implements PublicHoliday_inf {
     private ArrayList holidays;
 
     public PublicHolidayManager() {
         this.importData();
     }
+
     public void printMenu() {
         System.out.println("Current Public Holidays:");
         for (int i = 0; i < this.holidays.size(); i++) {

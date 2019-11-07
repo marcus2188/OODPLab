@@ -1,3 +1,4 @@
+package Main;
 
 import boundary.AdminMenu;
 import boundary.STATE;
@@ -7,7 +8,10 @@ import utils.ScannerErrorHandler;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class Main {
+/*
+main entry point
+ */
+public class MOBLIMA {
 
     /* Global variables */
     private static boolean admin = false;
@@ -24,12 +28,15 @@ public class Main {
     }
 
     public static void setAppState(STATE appState) {
-        Main.appState = appState;
+        MOBLIMA.appState = appState;
     }
 
     public static void main(String[] args) throws IOException, ParseException {
         /*
-        List all routes, render routes based on state
+        List of all available routes.
+        These routes can be accessed via the setAppstate method,
+        that acts like a universal resource locater (URL) that allows
+        selection of routes anywhere throughout the app
          */
          while(running) {
              switch(appState) {
@@ -122,7 +129,7 @@ public class Main {
             // navigate to movie goer page
             case 1:
                 System.out.println("Loading Movie Goer page...");
-                appState = STATE.MOVIE_GOER_MENU;
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
                 break;
             // navigate to admin page
             case 2:
@@ -132,19 +139,19 @@ public class Main {
 
                 if (password.equals(PASSWORD)) {
                     System.out.println("Loading admin page...");
-                    appState = STATE.ADMIN_MENU;
+                    setAppState(STATE.ADMIN_MENU);
                     admin = true;
                     break;
                 } else {
                     System.out.println("Invalid Password!");
                     System.out.println("Redirecting...");
-                    appState = STATE.LOGIN;
+                    setAppState(STATE.LOGIN);
                     break;
                 }
 
             default:
                 System.out.println("Invalid choice, try again...");
-                appState = STATE.LOGIN;
+                setAppState(STATE.LOGIN);
                 break;
         }
     }
