@@ -7,9 +7,8 @@ import java.util.Scanner;
 
 import entity.Movie;
 import entity.MovieReview;
-import entity.MovieScreening;
 
-public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf, MovieTop5_inf {
+public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf {
 
 	public void createMovie() {
 		int choice;
@@ -114,7 +113,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 		//System.out.println("Average Rating: ");
 		//default to -1
-		double avgRating =-1;
+		float avgRating =-1;
 		
 		
 		//blockbuster

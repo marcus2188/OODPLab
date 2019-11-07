@@ -215,47 +215,24 @@ public class Main {
     }
 
     private static void userListMovies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
-        ((Movie_mg_manager) movieMgManager).listAllMovie();
+        movieMgManager.listAllMovie();
         appState = STATE.MOVIE_GOER_MENU;   // Redirect back to main menu
     }
 
     private static void userSearchMovies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
-        String movieName;
-        Scanner scan = new Scanner(System.in);
-
+    	Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie search ===");
-        System.out.println("Please enter the title: ");
-        movieName = scan.next();
-        ((Movie_mg_manager) movieMgManager).searchMovie(movieName);
+        movieMgManager.searchMovie();
         appState = STATE.MOVIE_GOER_MENU; // Redirect back to main menu
     }
 
 
     private static void userListTop5Movies() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
-        boolean byTicketSales;
-        int choice;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("=== Top 5 Movies ===");
-        System.out.println("Press 1 for top 5 movies ranked by ticket sales.");
-        System.out.println("Press 2 for top 5 movies ranked by ratings");
-        choice = scan.nextInt();
-        while (choice != 2 && choice != 1) {
-            System.out.println("Invalid choice, please try again: ");
-            choice = scan.nextInt();
-        }
-        if(choice == 1){
-            byTicketSales = true;
-
-        }else if(choice == 2){
-            byTicketSales = false;
-        } else {
-            byTicketSales = false;
-        }
-        ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
+    	Movie_mg_inf movieMgManager = new Movie_mg_manager();
+        System.out.println("=== Top 5 Movies ===");        
+        movieMgManager.listTop5();
         appState = STATE.MOVIE_GOER_MENU;
     }
 
@@ -266,30 +243,16 @@ public class Main {
     private static void userMovieBooking() { System.out.println(("=== Movie Booking ==="));}
 
     private static void userMovieDetails() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
-        String movieName;
-        Scanner scan = new Scanner(System.in);
+        Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie Details ===");
-        System.out.println("Please enter the movie to view details: ");
-        movieName = scan.next();
-        ((Movie_mg_manager) movieMgManager).viewMovieDetails(movieName);
+        movieMgManager.viewMovieDetails();
         appState = STATE.MOVIE_GOER_MENU;
     }
 
     private static void userAddReview() {
-        MovieGoer_UI movieMgManager = new Movie_mg_manager();
-        int rating;
-        String comments, movieName;
-        Scanner scan = new Scanner(System.in);
-        
+    	Movie_mg_inf movieMgManager = new Movie_mg_manager();      
         System.out.println("=== Add Review ===");
-        System.out.println("Please enter the movie to review: ");
-        movieName = scan.next();
-        System.out.println("Please enter your review: ");
-        comments = scan.next();
-        System.out.println("Please enter your rating: ");
-        rating = scan.nextInt();
-        ((Movie_mg_manager) movieMgManager).addMovieReview(movieName, comments, rating);
+        movieMgManager.addMovieReview();
         appState = STATE.MOVIE_GOER_MENU;
     }
 

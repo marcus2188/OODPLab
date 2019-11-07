@@ -13,14 +13,14 @@ public class Movie implements Serializable{
     private String synopsis;
     private String director;
     private List<String> cast;
-    private double avgRating;
+    private float avgRating;
     private boolean isBlockBuster;
     private List<MovieReview> review_list;
     private int ticketSales;
     
     
 	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast,
-			double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales) {
+			float avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales) {
 		this.title = title;
 		this.showingStatus = showingStatus;
 		this.endOfShowingDate=endOfShowingDate;
@@ -86,7 +86,7 @@ public class Movie implements Serializable{
 		return avgRating;
 	}
 	
-	public void setAvgRating(double avgRating) {
+	public void setAvgRating(float avgRating) {
 		this.avgRating = avgRating;
 	}
 	
@@ -96,7 +96,7 @@ public class Movie implements Serializable{
 		for (int i=0;i<size;i++) {
 			total += review_list.get(i).getRating();
 		}
-		this.avgRating = total/(double) size;
+		this.avgRating = total/(float) size;
 	}
 	
 	public boolean isBlockBuster() {
