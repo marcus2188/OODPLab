@@ -13,7 +13,24 @@ public class MovieTicket {
     private int day;
     private Cinema cinema;
     private Cineplex cineplex;
+    private String date;
+    private int time;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 
     public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
         this.ageGroup = ageGroup;
@@ -24,6 +41,8 @@ public class MovieTicket {
         this.price = price;
         this.cinema = null;
         this.cineplex = null;
+        this.date = null;
+        this.time = 0;
     }
 
     public Cinema getCinema() {
