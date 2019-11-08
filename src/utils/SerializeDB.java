@@ -24,11 +24,27 @@ public class SerializeDB {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        } catch (SecurityException s) {
+            s.printStackTrace();
+        }
+
+        finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return details;
     }
 
-    public static void writeSerializedObject(String filename, ArrayList list) {
+    public static void writeSerializedObject(String filename, ArrayList list)  {
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
@@ -41,6 +57,28 @@ public class SerializeDB {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
         }
+        catch (SecurityException s) {
+            s.printStackTrace();
+        }
+        finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList items = (ArrayList) readSerializedObject("cineplex.dat");
+        System.out.println(items.get(0));
+
     }
 }

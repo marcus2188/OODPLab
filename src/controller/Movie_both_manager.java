@@ -1,12 +1,11 @@
 package controller;
 
-import boundary.MovieGoer_UI;
 import entity.Movie;
 import utils.SerializeDB;
 
 import java.util.ArrayList;
 
-public class Movie_both_manager implements MovieGoer_UI {
+public class Movie_both_manager {
 	
 	private ArrayList<Movie> m;
 

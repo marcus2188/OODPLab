@@ -1,23 +1,19 @@
  package controller;
 
-import boundary.Admin_UI;
 import entity.AgeGroup;
-import entity.Movie;
 import entity.MovieTicket;
 import entity.ScreeningFormat;
+import utils.ScannerErrorHandler;
 import utils.TextTicketDB;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
 
-public class MovieTicketManager implements SystemSettings_inf {
+public class MovieTicketManager implements MovieTicket_inf {
     ArrayList priceTable;
 
     // constructor
@@ -36,7 +32,8 @@ public class MovieTicketManager implements SystemSettings_inf {
         System.out.println("1. Senior citizen");
         System.out.println("2. Student");
         System.out.println("3. Regular");
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         int choice = scan.nextInt();
         while( 0 > choice || choice  > 3) {
             System.out.println("Invalid choice, try again");
@@ -135,6 +132,7 @@ public class MovieTicketManager implements SystemSettings_inf {
                 MovieTicket newTicket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price);
                 this.priceTable.add(newTicket);
                 TextTicketDB.savePrices("prices.txt", this.priceTable);
+                System.out.println("Ticket added!");
             } else {
                 System.out.println("Operation cancelled");
             }
@@ -176,7 +174,8 @@ public class MovieTicketManager implements SystemSettings_inf {
         System.out.println("1. Senior Citizen");
         System.out.println("2. Student");
         System.out.println("3. Regular");
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         int choice = scan.nextInt();
         switch (choice) {
             case 1:
@@ -247,12 +246,12 @@ public class MovieTicketManager implements SystemSettings_inf {
         }
     }
 
-    // TODO: add error checking
     public void deleteData(){
         this.printPriceTable(); // print entire table first
         System.out.println("Enter ticket number to delete:");
         int choice;
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         choice = scan.nextInt();
         this.priceTable.remove(choice -1);
         System.out.println("Ticket price removed!");
@@ -273,4 +272,6 @@ public class MovieTicketManager implements SystemSettings_inf {
     public void updatePriceOfTicket(MovieTicket ticket) {
         return;
     }
+
+
 }

@@ -1,9 +1,7 @@
 package entity;
 
-import java.io.Serializable;
-
 // TODO: bring in moviescreening entity as an attribute
-public class MovieTicket implements Serializable {
+public class MovieTicket {
     private float price;
     private String TID;
 
@@ -13,6 +11,8 @@ public class MovieTicket implements Serializable {
     private boolean before6;
     private ScreeningFormat format;
     private int day;
+    private Cinema cinema;
+    private Cineplex cineplex;
 
 
     public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
@@ -22,6 +22,24 @@ public class MovieTicket implements Serializable {
         this.format = format;
         this.day = day;
         this.price = price;
+        this.cinema = null;
+        this.cineplex = null;
+    }
+
+    public Cinema getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
+    }
+
+    public Cineplex getCineplex() {
+        return cineplex;
+    }
+
+    public void setCineplex(Cineplex cineplex) {
+        this.cineplex = cineplex;
     }
 
     public void printTicketDetails() {

@@ -1,8 +1,10 @@
 package controller;
 
 public interface MovieScreening_inf {
+     void importData();
+     void printScreeningList();
      void createMovieScreening();
      void updateMovieScreening();
-     void removeMovieScreening();
-     void updateHoliday();
+     void deleteMovieScreening();
+     // void updateHoliday();
 }
