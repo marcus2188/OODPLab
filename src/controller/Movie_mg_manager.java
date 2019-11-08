@@ -16,7 +16,7 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		String movieName = sc.nextLine();
 		
 		Movie s = this.findMovie(movieName);
-		if (s!=null) System.out.println(s.getTitle());
+		if (s!=null) s.printMovie();
 		else System.out.println("Movie not found!");
 	}
 	
@@ -81,5 +81,16 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		for (int i=0;i<size;i++) {
 			System.out.println("Rating: " + mrlist.get(i).getRating() + "\nComments: " + mrlist.get(i).getComments());
 		}
+	}
+
+	public Movie findMovie(String title){
+		int i;
+		int size = this.getM().size();
+		for(i = 0; i < size; i++){
+			if(this.getM().get(i).getTitle().equals(title)){
+				return this.getM().get(i);
+			}
+		}
+		return null;
 	}
 }

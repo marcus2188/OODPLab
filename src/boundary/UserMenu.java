@@ -22,8 +22,9 @@ All user menus
         System.out.println("Press 1 to list all movies");
         System.out.println("Press 2 to search a movie");
         System.out.println("Press 3 to list top 5 movies");
-        System.out.println("Press 4 to view shopping cart");
-        System.out.println("Press 5 to view transaction history");
+        System.out.println("Press 4 to view movie details");
+        System.out.println("Press 5 to view shopping cart");
+        System.out.println("Press 6 to view transaction history");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
@@ -43,9 +44,12 @@ All user menus
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_LIST_TOP_5);
                 break;
             case 4:
-                MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_SHOPPING_CART);
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_MOVIE_DETAILS);
                 break;
             case 5:
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_SHOPPING_CART);
+                break;
+            case 6:
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_TRANSACTIONS);
                 break;
             case 0:
@@ -67,20 +71,24 @@ All user menus
 
     public static void userSearchMovies() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
+        /*
         String movieName;
         //Scanner scan = new Scanner(System.in);
-        ScannerErrorHandler scan = new ScannerErrorHandler();
+        ScannerErrorHandler scan = new ScannerErrorHandler();*/
 
         System.out.println("=== Movie search ===");
+        /*
         System.out.println("Please enter the title: ");
         movieName = scan.next();
-        movieMgManager.searchMovie(movieName);
+        */
+        movieMgManager.searchMovie();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU); // Redirect back to main menu
     }
 
 
     public static void userListTop5Movies() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
+        /*
         boolean byTicketSales = false;
         int choice;
         //Scanner scan = new Scanner(System.in);
@@ -100,8 +108,8 @@ All user menus
             byTicketSales = false;
         } else {
             byTicketSales = false;
-        }
-        ((Movie_mg_manager) movieMgManager).listTop5(byTicketSales);
+        }*/
+        ((Movie_mg_manager) movieMgManager).listTop5();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
@@ -128,31 +136,38 @@ All user menus
 
     public static void userMovieDetails() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
+        /*
         String movieName;
         //Scanner scan = new Scanner(System.in);
         ScannerErrorHandler scan = new ScannerErrorHandler();
+        */
         System.out.println("=== Movie Details ===");
+        /*
         System.out.println("Please enter the movie to view details: ");
         movieName = scan.next();
-        movieMgManager.viewMovieDetails(movieName);
+        */
+        movieMgManager.viewMovieDetails();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userAddReview() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
+        /*
         int rating;
         String comments, movieName;
         //Scanner scan = new Scanner(System.in);
         ScannerErrorHandler scan = new ScannerErrorHandler();
-
+        */
         System.out.println("=== Add Review ===");
+        /*
         System.out.println("Please enter the movie to review: ");
         movieName = scan.next();
         System.out.println("Please enter your review: ");
         comments = scan.next();
         System.out.println("Please enter your rating: ");
         rating = scan.nextInt();
-        movieMgManager.addMovieReview(movieName, comments, rating);
+        */
+        movieMgManager.addMovieReview();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 }
