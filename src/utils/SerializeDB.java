@@ -28,6 +28,8 @@ public class SerializeDB {
             e.printStackTrace();
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
+        } catch (SecurityException s) {
+            s.printStackTrace();
         }
 
         finally {
@@ -59,8 +61,11 @@ public class SerializeDB {
             e.printStackTrace();
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-
-        } finally {
+        }
+        catch (SecurityException s) {
+            s.printStackTrace();
+        }
+        finally {
             if (fos != null) {
                 try {
                     fos.close();
