@@ -272,4 +272,6 @@ public class MovieTicketManager implements MovieTicket_inf {
     public void updatePriceOfTicket(MovieTicket ticket) {
         return;
     }
+
+
 }
