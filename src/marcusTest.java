@@ -14,10 +14,10 @@ import entity.MovieGoer;
 
 public class marcusTest {
 	public static void main(String[] args) {
-		ArrayList<MovieGoer> people = new ArrayList<MovieGoer>();
-		MovieGoer person = new MovieGoer("lol", 8.00, "lol@outlook.com");
-		people.add(person);
-		SerializeDB.writeSerializedObject("peoplenames.dat", people);
+		ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>();
+		MovieTicket mt = new MovieTicket(AgeGroup.REGULAR, false, false, ScreeningFormat.BLOCKBUSTER, 6, (float)10.00);
+		PaymentHist.add(mt);
+		SerializeDB.writeSerializedObject("paid.dat", PaymentHist);
 		System.out.println("hi");
     }
 }

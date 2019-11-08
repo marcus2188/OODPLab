@@ -29,6 +29,17 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	ShoppingOrder_manager(){
 		// import all past booking history and payment history and people
 	}
+	
+	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
+	public void importdata() {
+		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paid.dat");
+	}
+	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
+	public void updatedata() {
+		SerializeDB.writeSerializedObject("paid.dat", this.PaymentHist);
+	}
+	
+	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
 	public void bookTicket() throws IOException, ParseException {
 		// ASK USER WHAT MOVIE NAME THEY WANNA BOOK
 		System.out.println("Please enter your movie name here :");
@@ -64,8 +75,20 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		// mt.setTID = "datestr" + "cinemaID str"
 		neword.addtix(mt);
 		
+		// PRINT OUT THE ENTIRE SEAT LAYOUT AVAILABLE IN THAT CINEMA HALL RETURNED BY BENG'S OBJ
+		// obj.cinema.printSeats()
+		System.out.println("Please select the row and column of your desired seat :");
+		System.out.println("ROW (------>) :");
+		char row = se.next().charAt(0);
+		System.out.println("COLUMN (^) :");
+		char col = se.next().charAt(0);
+		// use an if statement here to verify if seat is indeed unoccupied using obj.cinema.checkOccupied()
+		// BOOK/MARK THE SEAT AS OCCUPIED
+		// obj.cinema.reserveSeat(char row, char col)
+		
 	}
 	
+	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER
 	public void makePurchase() {
 		// PAYMENT CONFIRMATION
 		System.out.println("Are you sure you want to pay for your shopping order? ");
@@ -97,5 +120,12 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		
 		
    }
+	
+	// USER WANTS TO VIEW ALL TICKETS INSIDE CURRENT SHOPPING ORDER
+	public void viewcurrentSO() {
+		for(int k = 0; k < this.neword.getbacktix().size(); k++) {
+			this.neword.getbacktix().get(k).pr
+		}
+	}
 	
 }
