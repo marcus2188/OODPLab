@@ -3,11 +3,11 @@ package controller;
 import entity.Movie;
 import entity.MovieReview;
 import entity.MovieScreening;
+import utils.ScannerErrorHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf, MovieTop5_inf {
 
@@ -18,8 +18,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	}
 	public void createMovie() {
 		int choice;
-		Scanner sc = new Scanner(System.in);
-		
+		// Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
+
 		System.out.println("Movie title: ");
 		String title = sc.next();
 		
@@ -128,8 +129,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	
 	public void updateMovie() {
 		int choice=0;
-		Scanner sc = new Scanner(System.in);
-		
+		//Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
+
 		System.out.println("Select the movie you want: ");
 		this.printMovieList();
 		
@@ -290,8 +292,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	}
 	
 	public void removeMovie() {
-		Scanner sc = new Scanner(System.in);
-		
+		// Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
+
 		Movie r=null;
 		do {
 			System.out.println("Enter movie name to remove: ");
@@ -307,6 +310,4 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		}
 		exportData(m1);
 	}
-
-	
 }

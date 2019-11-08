@@ -1,8 +1,9 @@
-package controller;
+ package controller;
 
 import entity.AgeGroup;
 import entity.MovieTicket;
 import entity.ScreeningFormat;
+import utils.ScannerErrorHandler;
 import utils.TextTicketDB;
 
 import java.io.IOException;
@@ -11,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
 
 public class MovieTicketManager implements MovieTicket_inf {
     ArrayList priceTable;
@@ -32,7 +32,8 @@ public class MovieTicketManager implements MovieTicket_inf {
         System.out.println("1. Senior citizen");
         System.out.println("2. Student");
         System.out.println("3. Regular");
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         int choice = scan.nextInt();
         while( 0 > choice || choice  > 3) {
             System.out.println("Invalid choice, try again");
@@ -173,7 +174,8 @@ public class MovieTicketManager implements MovieTicket_inf {
         System.out.println("1. Senior Citizen");
         System.out.println("2. Student");
         System.out.println("3. Regular");
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         int choice = scan.nextInt();
         switch (choice) {
             case 1:
@@ -244,12 +246,12 @@ public class MovieTicketManager implements MovieTicket_inf {
         }
     }
 
-    // TODO: add error checking
     public void deleteData(){
         this.printPriceTable(); // print entire table first
         System.out.println("Enter ticket number to delete:");
         int choice;
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         choice = scan.nextInt();
         this.priceTable.remove(choice -1);
         System.out.println("Ticket price removed!");
@@ -270,4 +272,6 @@ public class MovieTicketManager implements MovieTicket_inf {
     public void updatePriceOfTicket(MovieTicket ticket) {
         return;
     }
+
+
 }
