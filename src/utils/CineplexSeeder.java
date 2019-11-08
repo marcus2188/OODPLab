@@ -30,6 +30,7 @@ public class CineplexSeeder {
             cinemas.add(newCinema);
         }
 
+
         ArrayList cineplexes = new ArrayList();
         for (int i = 0; i < 3; i++) {
             Cineplex newCineplex = new Cineplex(cinemas);
