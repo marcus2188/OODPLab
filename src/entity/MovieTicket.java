@@ -1,7 +1,9 @@
 package entity;
 
+import java.io.Serializable;
+
 // TODO: bring in moviescreening entity as an attribute
-public class MovieTicket {
+public class MovieTicket implements Serializable {
     private float price;
     private String TID;
 
