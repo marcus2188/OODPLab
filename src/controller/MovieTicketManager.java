@@ -1,4 +1,4 @@
-package controller;
+ package controller;
 
 import entity.AgeGroup;
 import entity.MovieTicket;
