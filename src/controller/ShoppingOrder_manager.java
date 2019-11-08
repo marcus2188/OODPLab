@@ -1,19 +1,24 @@
 package controller;
 import entity.MovieGoer;
+import entity.MovieTicket;
+import entity.Movie;
 import entity.ShoppingOrder;
+import utils.ScannerErrorHandler;
 
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.Scanner;
+import utils.SerializeDB;
+
 
 public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	Scanner sc = new Scanner(System.in);
 	ArrayList<ShoppingOrder> BookingHistory = new ArrayList<ShoppingOrder>();           // BELONGS TO THIS INSTANCE OF SHOPORD MGR?
 	ArrayList<ShoppingOrder> PaymentHistory = new ArrayList<ShoppingOrder>();  
 	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>();
-	ShoppingOrder neworder;
 	
 	public ShoppingOrder_manager(){
 		try {
@@ -23,8 +28,9 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		}
 	}
 	// READ IN PAST PAYMENTS FROM TXT FILE
-	public void importData() throws FileNotFoundException, IOException, ClassNotFoundException{
-		FileInputStream f = new FileInputStream(new File("payments.txt"));
+
+	public void importdata() throws FileNotFoundException, IOException, ClassNotFoundException{
+		/* FileInputStream f = new FileInputStream(new File("payments.txt"));
 		ObjectInputStream o = new ObjectInputStream(f);
 		while((ShoppingOrder)o.readObject() != null) {
 			this.PaymentHistory.add((ShoppingOrder)o.readObject());                    // IS THIS HOW YOU DO SERIALIZABLE??
@@ -38,10 +44,14 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		}
 		p.close();
 
+		*/
+		// BENG IMPORT
+		this.PaymentHistory = (ArrayList)SerializeDB.readSerializedObject("payments.dat");
+		this.people = (ArrayList)SerializeDB.readSerializedObject("peoplenames.dat");
 	}
 	// UPDATES THE NEW SHOPPING ORDER THAT HAS BEEN PAID
-	public void updateData() throws FileNotFoundException, IOException, ClassNotFoundException{
-		FileOutputStream fo = new FileOutputStream(new File("payments.txt"));
+	public void updatedata() throws FileNotFoundException, IOException, ClassNotFoundException{
+		/*FileOutputStream fo = new FileOutputStream(new File("payments.txt"));
 		ObjectOutputStream oo = new ObjectOutputStream(fo);
 		oo.writeObject(this.PaymentHistory.get(this.PaymentHistory.size() - 1));              // DOES THIS OVERWRITE THE EXISTING TEXT FILE?
 		oo.close();
@@ -50,12 +60,18 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		ObjectOutputStream po = new ObjectOutputStream(bo);
 		po.writeObject(this.people.get(this.people.size() - 1));              // DOES THIS OVERWRITE THE EXISTING TEXT FILE?
 		po.close();
+		*/
+		// BENG EXPORT
+		SerializeDB.writeSerializedObject("payments.dat", this.PaymentHistory);
+		SerializeDB.writeSerializedObject("peoplenames.dat", this.people);
 	}
 	
 	// CREATE NEW SHOPPING ORDER AND ADD IT INTO BOOKING HISTORY, USUALLY DONE AT THE START
 	public void createShoppingOrder() {
-		this.neworder = new ShoppingOrder(); // <------------------- DISCUSS WHETHER SHOPPING ORDER SHOULD BE ADDED IN MAIN?
-		this.BookingHistory.add(this.neworder);
+		ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
+		Date newdate = null;
+		ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
+		this.BookingHistory.add(neword);
 	}
 	// WHEN USER WANTS TO VIEW ALL THE TICKETS INSIDE CURRENT SHOPPING ORDER ( IE BOOKING)
 	public void viewShoppingCart() {
@@ -81,13 +97,23 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// ADD A NEW TICKET INTO THE CURRENT SHOPPING CART
 	public void bookTicket() throws ParseException, IOException {
-		MovieTicketManager m = new MovieTicketManager();
+		MovieTicketManager m = new MovieTicketManager();                // import nigel's class atop
 		this.BookingHistory.get(this.BookingHistory.size() - 1).addtix(m.checkPrice());
+		
+		System.out.println("Please ");
+		// Get only available screentime object from beng
+		// Get ticket price, TID, agegroup, Screenformat, from nigel
+		// Print available seats(occupied and non occupied) : Get available seats from nigel,
+		// Upon payment, mark seats as occupied using function by nigel
+		
+		// What I need to print:
+		// Movie name, Cineplex, cinema, seat number, date, time, price, TID, Screenformat, agegroup
+		
 	}
 	
 	// USER WANTS TO CHECKOUT THE CURRENT SHOPPING ORDER
 	public void makePurchase() {
-		
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		// FINDS TODAY'S DATE AND SET THE SHOPPING ORDER DATEOFPURCHASE TO TODAY , TIME NEEDED?
 		Date todaydate = new Date();
 		this.BookingHistory.get(this.BookingHistory.size() - 1).setpaymentDate(todaydate);
@@ -95,6 +121,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		// TRANSFER SHOPPING ORDER FROM BOOKING HISTORY TO PAYMENT HISTORY, AND REMOVE FROM BOOKING HISTORY
 		this.PaymentHistory.add(this.BookingHistory.get(this.BookingHistory.size() - 1));
 		this.BookingHistory.clear();
+		
 		
 		// COLLECT MOVIEGOER INFORMATION, CREATE NEW MOVIEGOER OBJECT AND STORE INTO PEOPLE
 		System.out.println("Please enter your name here : ");

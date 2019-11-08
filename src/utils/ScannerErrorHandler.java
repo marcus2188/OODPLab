@@ -33,4 +33,49 @@ public class ScannerErrorHandler {
             }
         }
     }
+
+    public Float nextFloat() {
+        Float f;
+        Scanner scan = new Scanner(System.in);
+        while(true) {
+            try {
+                f = scan.nextFloat();
+                return f;
+            } catch(java.util.InputMismatchException e) {
+                System.out.println("Please enter a float!");
+                scan.next();
+                continue;
+            }
+        }
+    }
+
+    public Double nextDouble() {
+        Double d;
+        Scanner scan = new Scanner(System.in);
+        while(true) {
+            try {
+                d = scan.nextDouble();
+                return d;
+            } catch ( java.util.InputMismatchException e) {
+                System.out.println("Please enter a double!");
+                scan.next();
+                continue;
+            }
+        }
+    }
+
+    public String nextLine() {
+        String s;
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            try {
+                s = scan.nextLine();
+                return s;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please enter a string");
+                scan.next();
+                continue;
+            }
+        }
+    }
 }
