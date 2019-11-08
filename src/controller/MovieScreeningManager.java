@@ -154,9 +154,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     }
 
-    public void mgMovieprinting(String movieTitle){
+    public ArrayList<MovieScreening> mgMovieprinting(String movieTitle){
         ArrayList<String> dateList = new ArrayList<String>();
         dateList = sortDateList();
+        ArrayList<MovieScreening> userSelection = new ArrayList<MovieScreening>();
         movieScreeningList = sortByDate(movieScreeningList);
         for(int i =0; i<cineplexList.size();i++){
             System.out.println("Cineplex:"+cineplexList.get(i).getName());
@@ -178,7 +179,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
                     for(int k=0;k<dateList.size();k++){
                         if(dateFormatter.format(movieScreeningList.get(j).getShowDate()).equals(dateList.get(k))&&cineplexList.get(i).getName().equals(movieScreeningList.get(j).getCineplex())&&movieScreeningList.get(j).getMovieTitle().equals(movieTitle)){
-
+                            userSelection.add(movieScreeningList.get(j));
                             System.out.print(String.format("%04d",movieScreeningList.get(j).getShowTime()) +" ");
                         }
                     }
@@ -188,9 +189,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
             System.out.println();
             System.out.println("=================");
         }
-
-
-
+        return userSelection;
     }
     public ArrayList<MovieScreening> sortByDate(ArrayList<MovieScreening> movieScreeningList){
         movieScreeningList.sort(Comparator.comparing(o->o.getShowDate()));
