@@ -71,6 +71,12 @@ public class Cinema implements Serializable {
         return this.name;
     }
 
+    public void reserveSeat(char row, int col) {
+        Seat reservedSeat = new Seat(row, col);
+        this.occupiedSeats.add(reservedSeat);
+        System.out.println("Seat Reserved!");
+    }
+
     private int getMaxCol(){
         int max = 0;
         int i;
@@ -107,6 +113,8 @@ public class Cinema implements Serializable {
         }
         return false;
     }
+
+
 
 
 }
