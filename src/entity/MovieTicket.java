@@ -15,6 +15,16 @@ public class MovieTicket {
     private Cineplex cineplex;
     private String date;
     private int time;
+    private String movieName;
+    private Seat seat;
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
     public String getDate() {
         return date;
@@ -43,6 +53,8 @@ public class MovieTicket {
         this.cineplex = null;
         this.date = null;
         this.time = 0;
+        this.movieName = null;
+
     }
 
     public Cinema getCinema() {
@@ -109,5 +121,16 @@ public class MovieTicket {
 
     public int getDay() {
         return day;
+    }
+
+    private void printDetails() {
+        System.out.println("===Movie Ticket Details===");
+        System.out.println("Cineplex: " + this.cineplex);
+        System.out.println("Cinema: " + this.cinema);
+        System.out.println("Movie: " + this.movieName);
+        System.out.println("Date: " + this.date);
+        System.out.println("Time: " + this.time);
+        System.out.println("Ticket ID: " + this.TID);
+        System.out.println("Price: " + this.price);
     }
 }
