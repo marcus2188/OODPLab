@@ -3,11 +3,11 @@ package controller;
 import entity.Movie;
 import entity.MovieReview;
 import entity.MovieScreening;
+import utils.ScannerErrorHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import entity.Movie;
 import entity.MovieReview;
@@ -21,9 +21,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	}
 	public void createMovie() {
 		int choice;
-		Scanner sc = new Scanner(System.in);
-		
-		
+		// Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
+
 		System.out.println("Movie title: ");
 		String title = sc.nextLine();
 		
@@ -162,10 +162,12 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	}
 	
 	public void updateMovie() {
-		int ind=0, choice=0;
-		Scanner sc = new Scanner(System.in);
-		
-		ArrayList<Movie> m1 = this.getM();
+		int choice=0;
+		//Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
+
+		System.out.println("Select the movie you want: ");
+		this.printMovieList();
 		
 		do {
 			System.out.println("Select the movie you want: (Input 0 to quit)");
@@ -410,7 +412,16 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	}
 	
 	public void removeMovie() {
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
+
+		Movie r=null;
+		do {
+			System.out.println("Enter movie name to remove: ");
+			String movieName= sc.next();
+			r = this.findMovie(movieName);
+			System.out.println("Movie not found. Please try again.\n");
+		} while (r==null);	
 		
 		ArrayList<Movie> m1 = this.getM();
 		if (m1.size()==0) {
@@ -432,6 +443,4 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 		exportData(m1);
 	}
-
-	
 }

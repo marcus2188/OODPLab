@@ -61,7 +61,7 @@ All user menus
     public static void userListMovies() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
-        ((Movie_mg_manager) movieMgManager).listAllMovie();
+        movieMgManager.listAllMovie();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);   // Redirect back to main menu
     }
 
@@ -74,7 +74,7 @@ All user menus
         System.out.println("=== Movie search ===");
         System.out.println("Please enter the title: ");
         movieName = scan.next();
-        ((Movie_mg_manager) movieMgManager).searchMovie(movieName);
+        movieMgManager.searchMovie(movieName);
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU); // Redirect back to main menu
     }
 
@@ -108,22 +108,22 @@ All user menus
     public static void userViewShoppingCart() {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Shopping Cart ===");
-        ((ShoppingOrder_manager) shoppingOrderManager).viewShoppingCart();
+        shoppingOrderManager.viewShoppingCart();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userViewTransactions() {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Transactions ===");
-        ((ShoppingOrder_manager) shoppingOrderManager).viewPaymentHistory();
-        MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
+        shoppingOrderManager.viewPaymentHistory();
+        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userMovieBooking() throws IOException, ParseException {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println(("=== Movie Booking ==="));
-        ((ShoppingOrder_manager) shoppingOrderManager).bookTicket();
-        MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
+        shoppingOrderManager.bookTicket();
+        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userMovieDetails() {
@@ -134,8 +134,8 @@ All user menus
         System.out.println("=== Movie Details ===");
         System.out.println("Please enter the movie to view details: ");
         movieName = scan.next();
-        ((Movie_mg_manager) movieMgManager).viewMovieDetails(movieName);
-        MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
+        movieMgManager.viewMovieDetails(movieName);
+        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userAddReview() {
@@ -152,7 +152,7 @@ All user menus
         comments = scan.next();
         System.out.println("Please enter your rating: ");
         rating = scan.nextInt();
-        ((Movie_mg_manager) movieMgManager).addMovieReview(movieName, comments, rating);
-        MOBLIMA.setAppState( STATE.MOVIE_GOER_MENU);
+        movieMgManager.addMovieReview(movieName, comments, rating);
+        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 }

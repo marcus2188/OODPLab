@@ -1,11 +1,11 @@
 package controller;
 
+import utils.ScannerErrorHandler;
 import utils.SerializeDB;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class PublicHolidayManager implements PublicHoliday_inf {
     private ArrayList holidays;
@@ -23,7 +23,8 @@ public class PublicHolidayManager implements PublicHoliday_inf {
     }
 
     public void addHoliday() {
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("Enter Day (DD): ");
         int day = scan.nextInt();
         while (day < 0 || day > 31) {
@@ -43,7 +44,8 @@ public class PublicHolidayManager implements PublicHoliday_inf {
     }
 
     public void deleteHoliday() {
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
         System.out.println("Enter date to remove");
         System.out.println("Enter Day (DD): ");
         int day = scan.nextInt();
