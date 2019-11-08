@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ShoppingOrder implements Serializable{
-	ArrayList<MovieTicket> tickets = new ArrayList<MovieTicket>();
+	public ShoppingOrder(ArrayList<MovieTicket> tix, Date dop){
+		this.tickets = tix;
+		this.dateofPurchase = dop;
+	}
+	ArrayList<MovieTicket> tickets;
 	Date dateofPurchase;
     
     public void addtix(MovieTicket ticket) throws ParseException {
@@ -19,5 +23,11 @@ public class ShoppingOrder implements Serializable{
     }
     public void setpaymentDate(Date newdate) {
     	this.dateofPurchase = newdate;
+    }
+    public ArrayList<MovieTicket> getbacktix(){
+    	return this.tickets;
+    }
+    public void resetcart() {
+    	this.tickets.clear();
     }
 }

@@ -1,4 +1,4 @@
-package controller;
+ package controller;
 
 import entity.AgeGroup;
 import entity.MovieTicket;
@@ -272,4 +272,6 @@ public class MovieTicketManager implements MovieTicket_inf {
     public void updatePriceOfTicket(MovieTicket ticket) {
         return;
     }
+
+
 }
