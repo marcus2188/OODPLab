@@ -58,7 +58,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 				endOfShowingDate = LocalDate.of(year,month,day);
 			}
 			else System.out.println("Invalid choice!\n");
-		} while (choice>=1 && choice<=4);
+		} while (!(choice>=1 && choice<=4));
 
 		
 		System.out.println("Synopsis: ");
