@@ -123,6 +123,14 @@ public class MovieTicket {
         return day;
     }
 
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
     private void printDetails() {
         System.out.println("===Movie Ticket Details===");
         System.out.println("Cineplex: " + this.cineplex);
