@@ -18,6 +18,21 @@ public class MovieTicket {
     private String movieName;
     private Seat seat;
 
+    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
+        this.ageGroup = ageGroup;
+        this.weekday = weekday;
+        this.before6 = before6;
+        this.format = format;
+        this.day = day;
+        this.price = price;
+        this.cinema = null;
+        this.cineplex = null;
+        this.date = null;
+        this.time = 0;
+        this.movieName = null;
+
+    }
+
     public String getMovieName() {
         return movieName;
     }
@@ -40,21 +55,6 @@ public class MovieTicket {
 
     public void setTime(int time) {
         this.time = time;
-    }
-
-    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
-        this.ageGroup = ageGroup;
-        this.weekday = weekday;
-        this.before6 = before6;
-        this.format = format;
-        this.day = day;
-        this.price = price;
-        this.cinema = null;
-        this.cineplex = null;
-        this.date = null;
-        this.time = 0;
-        this.movieName = null;
-
     }
 
     public Cinema getCinema() {
@@ -131,7 +131,7 @@ public class MovieTicket {
         this.seat = seat;
     }
 
-    private void printDetails() {
+    public void printDetails() {
         System.out.println("===Movie Ticket Details===");
         System.out.println("Cineplex: " + this.cineplex);
         System.out.println("Cinema: " + this.cinema);
