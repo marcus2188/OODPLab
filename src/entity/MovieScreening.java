@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.text.Format;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+
+
+
 public class MovieScreening implements Serializable {
     private String cineplex;
     private String cinema;
@@ -18,7 +21,15 @@ public class MovieScreening implements Serializable {
         Format f = new SimpleDateFormat("dd/MM/yyyy");
         //f.format(this.getShowDate())
         System.out.println("Date: " + f.format(this.getShowDate()));
-        System.out.println("Time: " + this.getShowTime());
+        int theTiming = this.getShowTime();
+        if(theTiming < 1000){
+            String leftpadTime = String.format("%04d",theTiming);
+            System.out.println("Time: " + leftpadTime);
+        }
+        else{
+            System.out.println("Time: " + theTiming);
+        }
+
 
     }
 
@@ -31,7 +42,7 @@ public class MovieScreening implements Serializable {
         this.showTime = showTime;
     }
     // get setter
-    private String getCineplex() {
+    public String getCineplex() {
         return cineplex;
     }
 
@@ -39,7 +50,7 @@ public class MovieScreening implements Serializable {
         this.cineplex = cineplex;
     }
 
-    private String getCinema() {
+    public String getCinema() {
         return cinema;
     }
 
@@ -47,7 +58,7 @@ public class MovieScreening implements Serializable {
         this.cinema = cinema;
     }
 
-    private String getMovieTitle() {
+    public String getMovieTitle() {
         return movieTitle;
     }
 
@@ -55,7 +66,7 @@ public class MovieScreening implements Serializable {
         this.movieTitle = movieTitle;
     }
 
-    private Date getShowDate() {
+    public Date getShowDate() {
         return showDate;
     }
 
@@ -63,7 +74,7 @@ public class MovieScreening implements Serializable {
         this.showDate = showDate;
     }
 
-    private int getShowTime() {
+    public int getShowTime() {
         return showTime;
     }
     public void setShowTime(int showTime) {

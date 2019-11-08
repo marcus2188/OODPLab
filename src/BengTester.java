@@ -8,10 +8,14 @@ public class BengTester {
     public static void main(String[] args) {
         ArrayList movieScreeningList = new ArrayList();
         MovieScreeningManager screeningManager = new MovieScreeningManager();
-       // screeningManager.createMovieScreening();
+        //screeningManager.printScreeningList();
+        screeningManager.printMgScreeninglist("Golden City Cineplexes");
+        //screeningManager.createMovieScreening();
         //screeningManager.manualInsertData();
-        screeningManager.printScreeningList();
-        //screeningManager.removeMovieScreening();
+        //screeningManager.updateMovieScreening();
+        //screeningManager.deleteMovieScreening();
+        //screeningManager.printScreeningList();
+
 
 
     }
