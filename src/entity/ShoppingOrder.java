@@ -24,4 +24,10 @@ public class ShoppingOrder implements Serializable{
     public void setpaymentDate(Date newdate) {
     	this.dateofPurchase = newdate;
     }
+    public ArrayList<MovieTicket> getbacktix(){
+    	return this.tickets;
+    }
+    public void resetcart() {
+    	this.tickets.clear();
+    }
 }
