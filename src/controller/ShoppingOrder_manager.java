@@ -26,17 +26,20 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	Date newdate = null;
 	ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
 	
+	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
 	ShoppingOrder_manager(){
-		// import all past booking history and payment history and people
+		this.importdata();
 	}
 	
 	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
 	public void importdata() {
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paid.dat");
+		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
 	}
 	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
 	public void updatedata() {
 		SerializeDB.writeSerializedObject("paid.dat", this.PaymentHist);
+		SerializeDB.writeSerializedObject("peoplenames.dat", this.people);
 	}
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
@@ -73,7 +76,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		// mt.price is already there 
 		// mt.agegroup already there
 		// mt.setTID = "datestr" + "cinemaID str"
-		neword.addtix(mt);
+		// mt.setMOVNAME = movietitle
 		
 		// PRINT OUT THE ENTIRE SEAT LAYOUT AVAILABLE IN THAT CINEMA HALL RETURNED BY BENG'S OBJ
 		// obj.cinema.printSeats()
@@ -86,6 +89,8 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		// BOOK/MARK THE SEAT AS OCCUPIED
 		// obj.cinema.reserveSeat(char row, char col)
 		
+		// mt.setSeat = new Seat(row, col)
+		neword.addtix(mt);
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER
@@ -116,16 +121,47 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		for(int i = 0; i < this.neword.getbacktix().size();i++) {
 			PaymentHist.add(neword.getbacktix().get(i));
 		}
+		
+		// PRINT PAYMENT SUMMARY
+		System.out.println("Congratulations! Your payment is successful !");
+		System.out.println("Payment Summary ");
+		System.out.println("--------------------------");
+		this.viewcurrentSO();
+		System.out.println("--------------------------");
 		this.neword.resetcart();
-		
-		
+		this.updatedata();
    }
 	
 	// USER WANTS TO VIEW ALL TICKETS INSIDE CURRENT SHOPPING ORDER
 	public void viewcurrentSO() {
 		for(int k = 0; k < this.neword.getbacktix().size(); k++) {
-			this.neword.getbacktix().get(k).pr
+			this.neword.getbacktix().get(k).printTicketDetails();
+			// THIS FUNCTION PRINT WILL BE UPDATED BY NIGEL
 		}
 	}
 	
+	// USER WANTS TO EMPTY CURRENT SHOPPING ORDER
+	public void dumpcurrentSO(){
+		this.neword.resetcart();
+	}
+	
+	// USER WANTS TO VIEW ENTIRE PAYMENT HISTORY
+	public void viewallpaidtix() {
+		this.importdata();
+		System.out.println("Your entire payment history is as follows : ");
+		for(int i = 0; i< this.PaymentHist.size(); i++) {
+			this.PaymentHist.get(i).printTicketDetails();
+			// NIGEL UPDATE PRINT FUNCTION
+		}
+		System.out.println("Thank you for using MOBLIMA!! : ");
+	}
+	
+	// USER WANTS TO GET ALL MOVIEGOER DETAILS
+	public void seepeople() {
+		System.out.println("These are all the people who purchased tickets : ");
+		for(int i = 0; i< this.people.size(); i++) {
+			System.out.println("Name : " + this.people.get(i).getName() + " | Email : " + this.people.get(i).getEmail() + " | Number : " + this.people.get(i).getMobileNumber())
+			;
+		}
+	}
 }
