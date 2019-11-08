@@ -30,8 +30,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		// import all past booking history and payment history and people
 	}
 	public void bookTicket() throws IOException, ParseException {
-		MovieTicketManager m = new MovieTicketManager();
-		
 		// ASK USER WHAT MOVIE NAME THEY WANNA BOOK
 		System.out.println("Please enter your movie name here :");
 		String movname = se.nextLine();
@@ -53,8 +51,18 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 			// time = obj.time 
 			// cineplex = obj.cineplex
 			// cinema = obj.cinema
+			// cinemaid = obj.cinema.cinemaID
 		}
+		MovieTicketManager m = new MovieTicketManager();
 		MovieTicket mt = m.checkPrice();
+		// mt.setCinema = cinema  - STRING
+		// mt.setCineplex = cineplex - STRING
+		// mt.setDate = date   - STRING
+		// mt.setTime = time   - INT
+		// mt.price is already there 
+		// mt.agegroup already there
+		// mt.setTID = "datestr" + "cinemaID str"
+		neword.addtix(mt);
 		
 	}
 	
@@ -78,11 +86,8 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		MovieGoer g = new MovieGoer(person_name, person_no, person_email);
 		this.people.add(g);
 	
-		// SET THE TID OF ALL TICKETS BEFORE MOVING INTO PAYMENT HIST
+		
 		String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
-		for(int i = 0; i < this.neword.getbacktix().size();i++) {
-			neword.getbacktix().get(i).setTID(/* TBC: String of ticket date + string of cinema code - YYYYMMDDXXX*/);
-		}
 		
 		// MOVE ALL TICKETS FROM SHOPPING ORDER INTO PAYMENT HISTORY ARRAYLIST
 		for(int i = 0; i < this.neword.getbacktix().size();i++) {
