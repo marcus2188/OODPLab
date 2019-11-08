@@ -17,6 +17,31 @@ public class MovieTicket implements Serializable{
     private Cineplex cineplex;
     private String date;
     private int time;
+    private String movieName;
+    private Seat seat;
+
+    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
+        this.ageGroup = ageGroup;
+        this.weekday = weekday;
+        this.before6 = before6;
+        this.format = format;
+        this.day = day;
+        this.price = price;
+        this.cinema = null;
+        this.cineplex = null;
+        this.date = null;
+        this.time = 0;
+        this.movieName = null;
+
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
     public String getDate() {
         return date;
@@ -32,19 +57,6 @@ public class MovieTicket implements Serializable{
 
     public void setTime(int time) {
         this.time = time;
-    }
-
-    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
-        this.ageGroup = ageGroup;
-        this.weekday = weekday;
-        this.before6 = before6;
-        this.format = format;
-        this.day = day;
-        this.price = price;
-        this.cinema = null;
-        this.cineplex = null;
-        this.date = null;
-        this.time = 0;
     }
 
     public Cinema getCinema() {
@@ -111,5 +123,24 @@ public class MovieTicket implements Serializable{
 
     public int getDay() {
         return day;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public void printDetails() {
+        System.out.println("===Movie Ticket Details===");
+        System.out.println("Cineplex: " + this.cineplex);
+        System.out.println("Cinema: " + this.cinema);
+        System.out.println("Movie: " + this.movieName);
+        System.out.println("Date: " + this.date);
+        System.out.println("Time: " + this.time);
+        System.out.println("Ticket ID: " + this.TID);
+        System.out.println("Price: " + this.price);
     }
 }
