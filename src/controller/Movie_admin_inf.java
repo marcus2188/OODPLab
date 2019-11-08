@@ -1,10 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
-
-public interface Movie_admin_inf {
-	public ArrayList importData();
-
+public interface Movie_admin_inf extends Movie_both_inf {
 	public void createMovie();
 	public void updateMovie();
 	public void removeMovie();

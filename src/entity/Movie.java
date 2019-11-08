@@ -13,15 +13,14 @@ public class Movie implements Serializable{
     private String synopsis;
     private String director;
     private List<String> cast;
-    private double avgRating;
+    private float avgRating;
     private boolean isBlockBuster;
     private List<MovieReview> review_list;
     private int ticketSales;
-    private List<MovieScreening> ms;
     
     
 	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast,
-			double avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales, List<MovieScreening> ms) {
+			float avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales) {
 		this.title = title;
 		this.showingStatus = showingStatus;
 		this.endOfShowingDate=endOfShowingDate;
@@ -32,7 +31,6 @@ public class Movie implements Serializable{
 		this.isBlockBuster = isBlockBuster;
 		this.review_list = review_list;
 		this.ticketSales = ticketSales;
-		this.ms = ms;
 	}
 
 	public String getTitle() {
@@ -88,7 +86,7 @@ public class Movie implements Serializable{
 		return avgRating;
 	}
 	
-	public void setAvgRating(double avgRating) {
+	public void setAvgRating(float avgRating) {
 		this.avgRating = avgRating;
 	}
 	
@@ -98,7 +96,7 @@ public class Movie implements Serializable{
 		for (int i=0;i<size;i++) {
 			total += review_list.get(i).getRating();
 		}
-		this.avgRating = total/(double) size;
+		this.avgRating = total/(float) size;
 	}
 	
 	public boolean isBlockBuster() {
@@ -126,14 +124,6 @@ public class Movie implements Serializable{
 		this.ticketSales = ticketSales;
 	}
 	
-	public List<MovieScreening> getMs() {
-		return ms;
-	}
-
-	public void setMs(List<MovieScreening> ms) {
-		this.ms = ms;
-	}
-
 	public void appendMovieReview(String comments, int rating) {	//added function
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
@@ -154,13 +144,6 @@ public class Movie implements Serializable{
 		}
 	}
 	
-	public void printMs() {
-		int size_ms = getMs().size();
-		for (int i=0;i<size_ms;i++) {
-			System.out.println(i+1);
-			this.getMs().get(i).printMovieScreening();
-		}
-	}
 	public void printMovie() {
 		System.out.println("Title: "+getTitle());
 		System.out.println("Showing Status: "+getShowingStatus());
@@ -174,9 +157,6 @@ public class Movie implements Serializable{
 		
 		System.out.println("Past Reviews: ");
 		printPastReviews();
-		
-		System.out.println("Movie Screening: ");
-		printMs();
 	}
     
 }
