@@ -65,7 +65,6 @@ public class MovieScreeningManager implements MovieScreening_inf {
             perScreening.printMovieScreening();
         }
     }
-    //public void updateMovieScreening(){}
 
     public void updateMovieScreening(){
             printScreeningList();
@@ -91,6 +90,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
             int cineplexchoice;
             cineplexchoice  = scan.nextInt();
             this.movieScreeningList.get(choice-1).setCineplex(this.cineplexList.get(cineplexchoice-1).getName());
+            //this.movieScreeningList.get(choice-1).setCineplex("Silver city Cineplexes");
             SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
             System.out.println("Successfully Updated!");
         }
@@ -153,60 +153,51 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
 
     }
-    /*public void manualInsertData() {
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-        String dateInStr = "24/05/2015";
-        Date date = new Date();
-        try {
-            date = dateFormatter.parse(dateInStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public void mgMovieprinting(String movieTitle){
+        ArrayList<String> dateList = new ArrayList<String>();
+        dateList = sortDateList();
+        movieScreeningList = sortByDate(movieScreeningList);
+        for(int i =0; i<cineplexList.size();i++){
+            System.out.println("Cineplex:"+cineplexList.get(i).getName());
+            System.out.println("Movie Title: "+movieTitle);
+            for(int j=0; j<movieScreeningList.size();j++){
+                if(cineplexList.get(i).getName().equals(movieScreeningList.get(j).getCineplex())&& movieScreeningList.get(j).getMovieTitle().equals(movieTitle)){
+
+                    if(j==0){
+                        System.out.println("Date: "+dateFormatter.format(movieScreeningList.get(j).getShowDate()));
+                    }
+
+                    else if(dateFormatter.format(movieScreeningList.get(j-1).getShowDate()).equals(dateFormatter.format(movieScreeningList.get(j).getShowDate()))&&movieScreeningList.get(j).getCineplex().equals(movieScreeningList.get(j-1).getCineplex())){
+
+                    }
+                    else{
+                        System.out.println();
+                        System.out.println("Date: "+dateFormatter.format(movieScreeningList.get(j).getShowDate()));
+                    }
+
+                    for(int k=0;k<dateList.size();k++){
+                        if(dateFormatter.format(movieScreeningList.get(j).getShowDate()).equals(dateList.get(k))&&cineplexList.get(i).getName().equals(movieScreeningList.get(j).getCineplex())&&movieScreeningList.get(j).getMovieTitle().equals(movieTitle)){
+
+                            System.out.print(String.format("%04d",movieScreeningList.get(j).getShowTime()) +" ");
+                        }
+                    }
+
+                }
+            }
+            System.out.println();
+            System.out.println("=================");
         }
 
-        //int thetime = 0800;
-        //System.out.println("the time is "+justaname);
-       // MovieScreening movieScreening = new MovieScreening("Punggol","hall 3","Far from Home",date,justaname);
-       // this.movieScreeningList.add(movieScreening);
-        //SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
-    }*/
-    public void printMgScreeninglist(String cineplex){
-        System.out.println("===Movie Screening===");
-            //Date date = new Date();
-            String date = dateFormatter.format(this.movieScreeningList.get(0).getShowDate());
-            System.out.println("The Date:"+date);
-            ArrayList<MovieScreening> filterMovieScreening = new ArrayList<MovieScreening>();
-
-            // Store array list of screening that have same date and cineplex
-            for(int i = 0; i < this.movieScreeningList.size();i++){
-                String listDate = dateFormatter.format(this.movieScreeningList.get(i).getShowDate());
-                if(date.equals(listDate)&& this.movieScreeningList.get(i).getCineplex().equals(cineplex)){
-                    filterMovieScreening.add(movieScreeningList.get(i));
-                }
-            }
-
-            // filter same movie and print out
-            String movieTitle = filterMovieScreening.get(0).getMovieTitle();
-            System.out.println("The Movie:"+movieTitle);
-            System.out.print("The Timings:");
-            for(int i =0; i< filterMovieScreening.size();i++){
-                if(filterMovieScreening.get(i).getMovieTitle().equals(movieTitle)){
-                    int showTime = filterMovieScreening.get(i).getShowTime();
-                    System.out.print(showTime +" ");
-                }
-            }
-
-    }
-    public void mgMovieprinting(String movieTitle, String showDate){
-
-
 
 
     }
-
-    public void mgDateList(){
+    public ArrayList<MovieScreening> sortByDate(ArrayList<MovieScreening> movieScreeningList){
+        movieScreeningList.sort(Comparator.comparing(o->o.getShowDate()));
+        return movieScreeningList;
+    }
+    public ArrayList<String> sortDateList(){
         ArrayList<String> dateList = new ArrayList<String>();
-
         for(int i =0; i < movieScreeningList.size();i++){
             String movieScreeningDate = dateFormatter.format(movieScreeningList.get(i).getShowDate());
             if(!dateList.contains(movieScreeningDate)){
@@ -214,8 +205,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
             }
         }
         // sort the date in order
-
+        Collections.sort(dateList);
+        return dateList;
     }
+
     public void deleteMovieScreening(){
         printScreeningList();
         System.out.println("===Please select the index to remove===");
@@ -230,7 +223,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     private void printCineplex(){
         for(int i = 0; i < this.cineplexList.size(); i++){
-            String CineplexName = this.cineplexList.get(0).getName();
+            String CineplexName = this.cineplexList.get(i).getName();
             System.out.println((i+1) + ". " + CineplexName);
         }
     }
@@ -246,13 +239,11 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     }
 
+
     public void importData() {
         this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
         this.cineplexList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
 
     }
-
-
-
 
 }

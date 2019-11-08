@@ -32,8 +32,8 @@ public class CineplexSeeder {
 
         ArrayList cineplexes = new ArrayList();
         for (int i = 0; i < 3; i++) {
-            Cineplex newCineplex = new Cineplex(cinemas);
-            cineplexes.add(newCineplex);
+            //Cineplex newCineplex = new Cineplex(cinemas);
+            //cineplexes.add(newCineplex);
         }
 
         SerializeDB.writeSerializedObject("cineplex2.dat", cineplexes);

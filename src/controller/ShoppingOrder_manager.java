@@ -29,7 +29,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	}
 	// READ IN PAST PAYMENTS FROM TXT FILE
 
-	public void importdata() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void importData() throws FileNotFoundException, IOException, ClassNotFoundException{
 		/* FileInputStream f = new FileInputStream(new File("payments.txt"));
 		ObjectInputStream o = new ObjectInputStream(f);
 		while((ShoppingOrder)o.readObject() != null) {
@@ -50,7 +50,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.people = (ArrayList)SerializeDB.readSerializedObject("peoplenames.dat");
 	}
 	// UPDATES THE NEW SHOPPING ORDER THAT HAS BEEN PAID
-	public void updatedata() throws FileNotFoundException, IOException, ClassNotFoundException{
+	public void updateData() throws FileNotFoundException, IOException, ClassNotFoundException{
 		/*FileOutputStream fo = new FileOutputStream(new File("payments.txt"));
 		ObjectOutputStream oo = new ObjectOutputStream(fo);
 		oo.writeObject(this.PaymentHistory.get(this.PaymentHistory.size() - 1));              // DOES THIS OVERWRITE THE EXISTING TEXT FILE?
