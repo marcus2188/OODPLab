@@ -132,10 +132,11 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.updatedata();
    }
 	
+	// SO NIGEL DID YOU UPDATE?
 	// USER WANTS TO VIEW ALL TICKETS INSIDE CURRENT SHOPPING ORDER
 	public void viewcurrentSO() {
 		for(int k = 0; k < this.neword.getbacktix().size(); k++) {
-			this.neword.getbacktix().get(k).printTicketDetails();
+			this.neword.getbacktix().get(k).printDetails();
 			// THIS FUNCTION PRINT WILL BE UPDATED BY NIGEL
 		}
 	}
@@ -150,7 +151,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.importdata();
 		System.out.println("Your entire payment history is as follows : ");
 		for(int i = 0; i< this.PaymentHist.size(); i++) {
-			this.PaymentHist.get(i).printTicketDetails();
+			this.PaymentHist.get(i).printDetails();
 			// NIGEL UPDATE PRINT FUNCTION
 		}
 		System.out.println("Thank you for using MOBLIMA!! : ");
