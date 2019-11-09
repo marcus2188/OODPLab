@@ -49,7 +49,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
 	public void bookTicket() throws ParseException {
-		MovieTicket mt;
 		// GET BEFORE6 boolean
         boolean before6;
         Date date = new Date();
@@ -113,11 +112,19 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
         
-        // GET PRICE float
-        float price = mt.calculatePrice(ageGroup, weekday, before6, screeningFormat, day, );   // nigel movieticket
-        mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price);
+        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
+        // SET TICKET PRICE PRICE float
+        mt.setPriceBasedOnAttributes();
+        
         
         // SET THE REST OF THE TICKET ATTRIBUTES
+        mt.setDate(this.obj.getShowDate()); // set ticket date
+        mt.setTime(this.obj.getShowTime()); // set ticket time
+        mt.setMovieName(this.obj.getMovieTitle());  // set ticket moviename
+        mt.setMovieScreening(this.obj);      // set ticket moviescreening
+        // LEFT WITH CINEPLEX AND CINEMA
+        
+        // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
         
         this.neword.addticket(mt);
 	}

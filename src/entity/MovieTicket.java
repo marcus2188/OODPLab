@@ -166,13 +166,14 @@ public class MovieTicket implements Serializable{
     }
 
     public void printDetails() {
-        System.out.println("===Movie Ticket Details===");
-        System.out.println("Cineplex: " + this.cineplex);
-        System.out.println("Cinema: " + this.cinema);
+        System.out.println("=====================Movie Ticket Details=====================");
+        System.out.println("Cineplex: " + this.cineplex.getName());
+        System.out.println("Cinema: " + this.cinema.getCinemaID());
         System.out.println("Movie: " + this.movieName);
         System.out.println("Date: " + this.date);
         System.out.println("Time: " + this.time);
         System.out.println("Ticket ID: " + this.TID);
         System.out.println("Price: " + this.price);
+        System.out.println("Seat: " + this.seat.getRow() + this.seat.getCol());
     }
 }
