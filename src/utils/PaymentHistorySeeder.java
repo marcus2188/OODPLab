@@ -1,6 +1,7 @@
 package utils;
 
 import entity.AgeGroup;
+import entity.MovieScreening;
 import entity.MovieTicket;
 import entity.ScreeningFormat;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class PaymentHistorySeeder {
     public static void main(String[] args) {
+       //  MovieScreening screening = new MovieScreening()
     MovieTicket tix = new MovieTicket(AgeGroup.REGULAR,
             true,
             true,

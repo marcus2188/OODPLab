@@ -3,6 +3,8 @@ package controller;
 import utils.ScannerErrorHandler;
 import utils.SerializeDB;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -70,6 +72,17 @@ public class PublicHolidayManager implements PublicHoliday_inf {
         }
         System.out.println("No such date found, could not delete.");
         return;
+    }
+
+    public boolean checkHoliday (LocalDate d) {
+        Date convertedD = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        for (int i = 0; i < this.holidays.size(); i++) {
+            Date holiday = (Date) this.holidays.get(i);
+            if (convertedD.compareTo(holiday) == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void importData() {
