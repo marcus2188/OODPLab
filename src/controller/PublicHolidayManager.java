@@ -74,11 +74,10 @@ public class PublicHolidayManager implements PublicHoliday_inf {
         return;
     }
 
-    public boolean checkHoliday (LocalDate d) {
-        Date convertedD = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    public boolean checkHoliday (Date d) {
         for (int i = 0; i < this.holidays.size(); i++) {
             Date holiday = (Date) this.holidays.get(i);
-            if (convertedD.compareTo(holiday) == 0) {
+            if (d.compareTo(holiday) == 0) {
                 return true;
             }
         }
