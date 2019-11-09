@@ -30,25 +30,24 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
 	
 	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
-	public ShoppingOrder_manager(MovieScreening obj){
-		this.obj = obj;
+	public ShoppingOrder_manager(){
 		this.importdata();
 	}
 	
 	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
 	public void importdata() {
-		// TODO: create new dat file after nigel's movieTicket is done
-		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paid.dat");
+		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paymentHistory.dat");
 		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
 	}
 	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
 	public void updatedata() {
-		SerializeDB.writeSerializedObject("paid.dat", this.PaymentHist);
+		SerializeDB.writeSerializedObject("paymentHistory.dat", this.PaymentHist);
 		SerializeDB.writeSerializedObject("peoplenames.dat", this.people);
 	}
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
-	public void bookTicket() throws ParseException {
+	public void bookTicket(MovieScreening obj, char row, int col) throws ParseException {
+		this.obj = obj;
 		// GET BEFORE6 boolean
         boolean before6;
         Date date = new Date();
@@ -116,16 +115,15 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
         
-        
         // SET THE REST OF THE TICKET ATTRIBUTES
-        mt.setDate(this.obj.getShowDate()); // set ticket date
-        mt.setTime(this.obj.getShowTime()); // set ticket time
-        mt.setMovieName(this.obj.getMovieTitle());  // set ticket moviename
-        mt.setMovieScreening(this.obj);      // set ticket moviescreening
-        // LEFT WITH CINEPLEX AND CINEMA
+        mt.setMovieScreening(this.obj);
         
         // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
+        String seatno = Character.toString(row) + Integer.toString(col);
+        mt.setSeat(seatno);
         
+        // SET THE TID OF TICKET   //TBC
+        mt.setTID("this.obj.getShowDate()" + this.obj.getCinema());
         this.neword.addticket(mt);
 	}
 	

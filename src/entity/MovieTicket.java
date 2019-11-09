@@ -13,12 +13,7 @@ public class MovieTicket implements Serializable{
     private boolean before6;
     private ScreeningFormat format;
     private int day;
-    private Cinema cinema;
-    private Cineplex cineplex;
-    private String date;
-    private int time;
-    private String movieName;
-    private Seat seat;
+    private String seat;
     private MovieScreening movieScreening;
 
     public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
@@ -28,13 +23,8 @@ public class MovieTicket implements Serializable{
         this.format = format;
         this.day = day;
         this.price = price;
-        this.cinema = null;
-        this.cineplex = null;
-        this.date = null;
-        this.time = 0;
-        this.movieName = null;
         this.movieScreening = null;
-        this.setPriceBasedOnAttributes();
+        this.seat = null;
     }
 
     // default constructor
@@ -45,11 +35,8 @@ public class MovieTicket implements Serializable{
         this.format = null;
         this.day = 0;
         this.price = 0;
-        this.cinema = null;
-        this.cineplex = null;
-        this.time = 0;
-        this.movieName = null;
         this.movieScreening = null;
+        this.seat = null;
     }
 
     public void setPriceBasedOnAttributes() {
@@ -61,50 +48,12 @@ public class MovieTicket implements Serializable{
                 this.day);
     }
 
-
-
     public void setMovieScreening (MovieScreening ms) {
         this.movieScreening = ms;
     }
 
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public Cinema getCinema() {
-        return cinema;
-    }
-
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
-    }
-
-    public Cineplex getCineplex() {
-        return cineplex;
-    }
-
-    public void setCineplex(Cineplex cineplex) {
-        this.cineplex = cineplex;
+    public MovieScreening getMovieScreening() {
+    	return this.movieScreening;
     }
 
     public void printTicketDetails() {
@@ -157,23 +106,23 @@ public class MovieTicket implements Serializable{
         return day;
     }
 
-    public Seat getSeat() {
+    public String getSeat() {
         return seat;
     }
 
-    public void setSeat(Seat seat) {
+    public void setSeat(String seat) {
         this.seat = seat;
     }
 
     public void printDetails() {
-        System.out.println("=====================Movie Ticket Details=====================");
-        System.out.println("Cineplex: " + this.cineplex.getName());
-        System.out.println("Cinema: " + this.cinema.getCinemaID());
-        System.out.println("Movie: " + this.movieName);
-        System.out.println("Date: " + this.date);
-        System.out.println("Time: " + this.time);
+        System.out.println("===============Movie Ticket Details=====================");
+        System.out.println("Cineplex: " + this.movieScreening.getCineplex());
+        System.out.println("Cinema: " + this.movieScreening.getCinema());
+        System.out.println("Movie: " + this.movieScreening.getMovieTitle());
+        System.out.println("Date: " + this.movieScreening.getShowDate());
+        System.out.println("Time: " + this.movieScreening.getShowTime());
         System.out.println("Ticket ID: " + this.TID);
         System.out.println("Price: " + this.price);
-        System.out.println("Seat: " + this.seat.getRow() + this.seat.getCol());
+        System.out.println("Seat: " + this.seat);
     }
 }

@@ -14,10 +14,13 @@ import entity.Seat;
 import entity.ShoppingOrder;
 import utils.SerializeDB;
 import entity.MovieGoer;
+import entity.MovieScreening;
+
 import java.util.Scanner;
 public class marcusTest {
 	public static void main(String[] args) throws IOException, ParseException {
 		
+		MovieScreening mj = new MovieScreening("Golden Village", "009", "Transformers 4", "20170712", 1855);
 		Scanner sc = new Scanner(System.in);
 		ShoppingOrder_manager ms = new ShoppingOrder_manager();
 		System.out.println("WELCOME TO THE BOOKING MENU");
@@ -33,7 +36,7 @@ public class marcusTest {
 		
 		int choice = sc.nextInt();
 		switch(choice) {
-		case 1: ms.bookTicket(); break;
+		case 1: ms.bookTicket(mj, 'R', 8); break;
 		case 2: ms.viewcurrentSO(); break;
 		case 3: ms.makePurchase(); break;
 		case 4: ms.viewallpaidtix(); break;
@@ -41,6 +44,9 @@ public class marcusTest {
 		case 6: ms.dumpcurrentSO(); break;
 		
 		}
-		sc.close();
+		sc.close(); 
+		
+		
+		
     }
 }
