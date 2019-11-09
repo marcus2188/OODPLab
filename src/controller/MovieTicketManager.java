@@ -144,12 +144,8 @@ public class MovieTicketManager implements MovieTicket_inf {
         System.out.println("Press 1 to list cineplexes");
     }
 
-    public void importData() throws IOException {
-        try {
-            this.priceTable = TextTicketDB.readPrices("prices.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void importData() {
+        this.priceTable = TextTicketDB.readPrices("prices.txt");
         return;
     }
 
