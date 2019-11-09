@@ -27,7 +27,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
 	
 	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
-	ShoppingOrder_manager(){
+	public ShoppingOrder_manager(){
 		this.importdata();
 	}
 	
