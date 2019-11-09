@@ -2,6 +2,7 @@ package utils;
 
 import entity.AgeGroup;
 import entity.MovieTicket;
+import entity.PriceTableTicket;
 import entity.ScreeningFormat;
 
 import java.io.FileInputStream;
@@ -29,7 +30,7 @@ public class TextTicketDB {
                 int day = Integer.parseInt(star.nextToken().trim());
                 float price = Float.parseFloat(star.nextToken().trim());
 
-                MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6, format, day, price);
+                PriceTableTicket ticket = new PriceTableTicket(ageGroup, weekday, before6, format, day, price);
                 alr.add(ticket);
 
             }
@@ -68,7 +69,7 @@ public class TextTicketDB {
 //
         for (int i =0; i < priceTable.size(); i++) {
             StringBuilder st = new StringBuilder();
-            MovieTicket ticket = (MovieTicket)priceTable.get(i);
+            PriceTableTicket ticket = (PriceTableTicket) priceTable.get(i);
             st.append(Boolean.toString(ticket.isWeekday()).trim());
             st.append(SEPARATOR);
             st.append(Boolean.toString(ticket.isBefore6()).trim());

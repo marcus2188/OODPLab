@@ -108,22 +108,28 @@ All user menus
     public static void userViewShoppingCart() {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Shopping Cart ===");
-        shoppingOrderManager.viewShoppingCart();
+        shoppingOrderManager.viewcurrentSO();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userViewTransactions() {
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Transactions ===");
-        shoppingOrderManager.viewPaymentHistory();
+        shoppingOrderManager.viewallpaidtix();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
-    public static void userMovieBooking() throws IOException, ParseException {
-        ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
-        System.out.println(("=== Movie Booking ==="));
-        shoppingOrderManager.bookTicket();
-        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
+    public static void userMovieBooking() {
+        // try {
+            ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
+            System.out.println(("=== Movie Booking ==="));
+            // shoppingOrderManager.bookTicket();
+            MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void userMovieDetails() {

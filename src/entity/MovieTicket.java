@@ -40,7 +40,9 @@ public class MovieTicket implements Serializable{
     }
 
     public void setPriceBasedOnAttributes() {
-        this.price = PriceTable.checkPrice(
+        PriceTable tbl = new PriceTable();
+        this.price = tbl
+                .checkPrice(
                 this.ageGroup,
                 this.weekday,
                 this.before6,
