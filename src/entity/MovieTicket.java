@@ -17,6 +17,7 @@ public class MovieTicket {
     private int time;
     private String movieName;
     private Seat seat;
+    private MovieScreening movieScreening;
 
     public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
         this.ageGroup = ageGroup;
@@ -30,7 +31,38 @@ public class MovieTicket {
         this.date = null;
         this.time = 0;
         this.movieName = null;
+        this.movieScreening = null;
+        this.setPriceBasedOnAttributes();
+    }
 
+    // default constructor
+    public MovieTicket() {
+        this.ageGroup = null;
+        this.weekday = false;
+        this.before6 = false;
+        this.format = null;
+        this.day = 0;
+        this.price = 0;
+        this.cinema = null;
+        this.cineplex = null;
+        this.time = 0;
+        this.movieName = null;
+        this.movieScreening = null;
+    }
+
+    public void setPriceBasedOnAttributes() {
+        this.price = PriceTable.checkPrice(
+                this.ageGroup,
+                this.weekday,
+                this.before6,
+                this.format,
+                this.day);
+    }
+
+
+
+    public void setMovieScreening (MovieScreening ms) {
+        this.movieScreening = ms;
     }
 
     public String getMovieName() {

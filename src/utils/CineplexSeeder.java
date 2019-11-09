@@ -39,6 +39,6 @@ public class CineplexSeeder {
         Cineplex newCineplex3 = new Cineplex(cinemas, "Bronze Village");
         cineplexes.add(newCineplex3);
 
-        SerializeDB.writeSerializedObject("cineplex2.dat", cineplexes);
+        SerializeDB.writeSerializedObject("cineplex3.dat", cineplexes);
     }
 }

@@ -61,7 +61,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
       //  }
 
         System.out.println("===Cinema Listing===");
-        Cineplex perCinema = new Cineplex(cinemaList);
+        Cineplex perCinema = new Cineplex(cinemaList, "Golden Village");
         //for(int i = 0; i <= this.cinemaList.size(); i++){
                 //Cinema perCinema = this.cinemaList.get(i);
             //ArrayList<Cinema>  cinemaName = perCinema.getCinemas();
