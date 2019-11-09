@@ -28,6 +28,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
 	public void importdata() {
+		// TODO: create new dat file after nigel's movieTicket is done
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paid.dat");
 		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
 	}
@@ -81,14 +82,27 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// USER WANTS TO VIEW ALL TICKETS INSIDE CURRENT SHOPPING ORDER
 	public void viewcurrentSO() {
-		for(int k = 0; k < this.neword.returnticketarray().size(); k++) {
-			this.neword.returnticketarray().get(k).printDetails();
+		if(this.neword.returnticketarray().isEmpty()) {
+			System.out.println("The current shopping order is empty");
+			return;
+		}
+		else {
+			for(int k = 0; k < this.neword.returnticketarray().size(); k++) {
+				this.neword.returnticketarray().get(k).printDetails();
+			}
 		}
 	}
 	
 	// USER WANTS TO EMPTY CURRENT SHOPPING ORDER
 	public void dumpcurrentSO(){
-		this.neword.resetcart();
+		if(this.neword.returnticketarray().isEmpty()) {
+			System.out.println("ERROR");
+			System.out.println("The current shopping order is already empty");
+			return;
+		}
+		else {
+			this.neword.resetcart();
+		}
 	}
 	
 	// USER WANTS TO VIEW ENTIRE PAYMENT HISTORY
@@ -96,7 +110,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		System.out.println("Your entire payment history is as follows : ");
 		for(int i = 0; i< this.PaymentHist.size(); i++) {
 			this.PaymentHist.get(i).printDetails();
-			// NIGEL UPDATE PRINT FUNCTION
+			
 		}
 		System.out.println("Thank you for using MOBLIMA!! : ");
 	}
