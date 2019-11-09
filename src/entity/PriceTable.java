@@ -5,17 +5,18 @@ import utils.TextTicketDB;
 import java.util.ArrayList;
 
 public class PriceTable {
-    private static ArrayList priceTable;
+    private static ArrayList<PriceTableTicket> priceTable;
 
-    public PriceTable() {
+     public PriceTable() {
         this.importData();
     }
 
+
     private void importData() {
-        this.priceTable = TextTicketDB.readPrices("prices.txt");
+        priceTable = TextTicketDB.readPrices("prices.txt");
     }
 
-    public static float checkPrice(
+    public float checkPrice(
             AgeGroup ageGroup,
             boolean isWeekDay,
             boolean isBefore6,
@@ -23,19 +24,20 @@ public class PriceTable {
             int day
     ) {
         for (int i =0; i < priceTable.size(); i++){
-            MovieTicket sampleTicket =(MovieTicket) priceTable.get(i);
-            if(sampleTicket.getAgeGroup() == ageGroup
-            && sampleTicket.isWeekday() == isWeekDay
-            && sampleTicket.isBefore6() == isBefore6
-            && sampleTicket.getFormat() == format
-            && sampleTicket.getDay() == day
+            PriceTableTicket sampleTicket = priceTable.get(i);
+            if(
+             sampleTicket.getAgeGroup() == ageGroup
+             && sampleTicket.isWeekday() == isWeekDay
+              && sampleTicket.isBefore6() == isBefore6
+             && sampleTicket.getFormat() == format
+             && sampleTicket.getDay() == day
             ) {
                 return sampleTicket.getPrice();
-            } else {
-                System.out.println("Ticket not found");
-                return 0;
             }
-        }
+         }
+        System.out.println("Ticket price not found");
         return 0;
+
+
     }
 }
