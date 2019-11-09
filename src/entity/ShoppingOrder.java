@@ -13,10 +13,8 @@ public class ShoppingOrder implements Serializable{
 	ArrayList<MovieTicket> tickets;
 	Date dateofPurchase;
     
-    public void addticket() throws ParseException {/*
-    	MovieTicket mt = new MovieTicket();           // BLANK CONSTRUCTOR HERE
-    	mt.queryUserDetails();                    // THIS FUNCTION IS INSIDE movieticket, TBD by nigel
-    	this.tickets.add(mt);  */
+    public void addticket(MovieTicket mt) throws ParseException {
+    	this.tickets.add(mt);
     }
     public void printalltickets() {
     	for(int i = 0; i < this.tickets.size(); i++) {

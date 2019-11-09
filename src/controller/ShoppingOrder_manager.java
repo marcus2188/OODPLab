@@ -1,13 +1,20 @@
 package controller;
+import entity.AgeGroup;
 import entity.MovieGoer;
+import entity.MovieScreening;
 import entity.MovieTicket;
+import entity.ScreeningFormat;
 import entity.ShoppingOrder;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import java.util.Scanner;
+
+import utils.ScannerErrorHandler;
 import utils.SerializeDB;
 
 
@@ -15,6 +22,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	Scanner se = new Scanner(System.in);
 	ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
 	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
+	MovieScreening obj;
 	
 	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
 	ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
@@ -22,7 +30,8 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
 	
 	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
-	public ShoppingOrder_manager(){
+	public ShoppingOrder_manager(MovieScreening obj){
+		this.obj = obj;
 		this.importdata();
 	}
 	
@@ -40,7 +49,77 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
 	public void bookTicket() throws ParseException {
-		neword.addticket(); 
+		MovieTicket mt;
+		// GET BEFORE6 boolean
+        boolean before6;
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat.format(date);
+        if (dateFormat.parse(dateFormat.format(date)).after(dateFormat.parse("18:00"))) {
+            before6 = false;
+        } else {
+            before6 = true;
+        }
+
+        // GET AGEGROUP agegroup
+        AgeGroup ageGroup;
+        System.out.println("What is your age group?");
+        System.out.println("1. Senior Citizen");
+        System.out.println("2. Student");
+        System.out.println("3. Regular");
+        // Scanner scan = new Scanner(System.in);
+        ScannerErrorHandler scan = new ScannerErrorHandler();
+        int choice = scan.nextInt();
+        switch (choice) {
+            case 1:
+                ageGroup = AgeGroup.SENIORCITIZEN;
+            case 2:
+                ageGroup = AgeGroup.STUDENT;
+            case 3:
+                ageGroup = AgeGroup.REGULAR;
+            default:
+                ageGroup = AgeGroup.REGULAR;
+        }
+
+        // GET WEEKDAY boolean
+        boolean weekday;
+        Calendar c1 = Calendar.getInstance();
+        if ((c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) ||
+                (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY)) {
+            weekday = false;
+        } else {
+            weekday = true;
+        }
+
+        // GET SCREENINGFORMAT screeningformat
+        ScreeningFormat screeningFormat;
+        System.out.println("What screening format?");
+        System.out.println("1. 3D");
+        System.out.println("2. Regular");
+        System.out.println("3. Blockbuster");
+        choice = scan.nextInt();
+        switch (choice) {
+            case 1:
+                screeningFormat = ScreeningFormat.THREEDIMENSION;
+            case 2:
+                screeningFormat = ScreeningFormat.REGULAR;
+            case 3:
+                screeningFormat = ScreeningFormat.BLOCKBUSTER;
+            default:
+                screeningFormat = ScreeningFormat.REGULAR;
+        }
+
+        // GET DAY int
+        int day;
+        day = (int) c1.get(Calendar.DAY_OF_WEEK);
+        
+        // GET PRICE float
+        float price = mt.calculatePrice(ageGroup, weekday, before6, screeningFormat, day, );   // nigel movieticket
+        mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price);
+        
+        // SET THE REST OF THE TICKET ATTRIBUTES
+        
+        this.neword.addticket(mt);
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER
