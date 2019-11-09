@@ -123,8 +123,11 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         mt.setSeat(seatno);
         
         // SET THE TID OF TICKET   //TBC
-        mt.setTID("this.obj.getShowDate()" + this.obj.getCinema());
+        mt.setTID(this.obj.getShowDate() + this.obj.getCinema());
         this.neword.addticket(mt);
+        
+        // TELLS USER TICKET IS SUCCESSFULLY BOOKED
+        System.out.println("Ticket has been booked");
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER
