@@ -3,92 +3,100 @@ package entity;
 import java.io.Serializable;
 import java.sql.Array;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import utils.Converter;
+import entity.Movie;
 
 public class MovieScreening implements Serializable {
-    private String cineplex;
-    private String cinema;
-    private String movieTitle;
-    private String showDate;
-    private int showTime;
+    private Cinema cinema;
+    private Movie movie;
+    private Timestamp time;
+    private ArrayList<Integer> seats;
 
-    private ArrayList<Seat> occupiedSeats;
-
+    public MovieScreening(Cinema cinema, Movie movie, Timestamp time) {
+        this.cinema = cinema;
+        this.movie = movie;
+        this.time = time;
+        seats = new ArrayList<Integer>();
+        for(int i = 0; i < cinema.maxSize; i++){
+            seats.add(0);
+        }   
+    }
 
     public void printMovieScreening() {
+        Date date = time;
         System.out.println("Movie Screening details:");
-        System.out.println("Cineplex: " + this.getCineplex());
-        System.out.println("Cinema: " + this.getCinema());
-        System.out.println("Movie: " + this.getMovieTitle());
-        System.out.println("Date: " + this.getShowDate());
-        System.out.println("Time: " + this.getShowTime());
-
-        return;
-    }
-
-    public MovieScreening(String cineplex, String cinema, String movieTitle, String showDate, int showTime) {
-
-        this.cineplex = cineplex;
-        this.cinema = cinema;
-        this.movieTitle = movieTitle;
-        this.showDate = showDate;
-        this.showTime = showTime;
-    }
-
-    public boolean reserveSeat(char row, int col) {
-        for (int i = 0; i < this.occupiedSeats.size(); i++) {
-            Seat currentSeat = (Seat) this.occupiedSeats.get(i);
-            if (currentSeat.getCol() == col && currentSeat.getRow() == row) {
-                System.out.println("Seat already taken!");
-                return false; // exits loop and tells controller that seat is already taken
-            }
-        }
-
-        Seat reservedSeat = new Seat(row, col);
-        this.occupiedSeats.add(reservedSeat);
-        System.out.println("Seat Reserved!");
-        return true;
+        System.out.println("Cineplex: " + cinema.getCineplex().getName());
+        System.out.println("Cinema: " + cinema.getName());
+        System.out.println("Movie: " + movie.getTitle());
+        System.out.println("Screen Time: " + time);
     }
 
     // get setter
-    public String getCineplex() {
-        return cineplex;
+    public Cineplex getCineplex() {
+        return cinema.getCineplex();
     }
 
-    public void setCineplex(String cineplex) {
-        this.cineplex = cineplex;
-    }
-
-    public String getCinema() {
-        return cinema;
-    }
-
-    public void setCinema(String cinema) {
+    public void setCineplex(Cinema cinema){
         this.cinema = cinema;
+        // When change cinema, reconfigure seats
+        seats = new ArrayList<Integer>();
+        for(int i = 0; i < cinema.maxSize; i++){
+            seats.add(0);
+        }  
     }
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
+        // When change cinema, reconfigure seats
+        seats = new ArrayList<Integer>();
+        for(int i = 0; i < cinema.maxSize; i++){
+            seats.add(0);
+        }  
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public Cinema getCinema(){
+        return this.cinema;
     }
 
-    public String getShowDate() {
-        return showDate;
+    public Movie getMovie() {
+        return this.movie;
     }
 
-    public void setShowDate(String showDate) {
-        this.showDate = showDate;
+    public Timestamp getShowTime() {
+        return this.time;
     }
 
-    public int getShowTime() {
-        return showTime;
+    public ArrayList<Integer> getSeatStatus(){
+        return seats;
     }
-    public void setShowTime(int showTime) {
-        this.showTime = showTime;
+
+    public void setShowTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public void bookSeat(char row, int col){
+        int r = Converter.charToInt(row);
+        int index = r*cinema.maxCol + col;
+        if(seats.get(index) == 1){
+            System.out.println("Seat is not available.");
+        }else{
+            seats.set(index, 1);
+            System.out.println("Seat is successfully booked.");
+        }
+    }
+
+    public void unbookSeat(char row, int col){
+        int r = Converter.charToInt(row);
+        int index = r*cinema.maxCol + col;
+        if(seats.get(index) == 0){
+            System.out.println("Seat is already available.");
+        }else{
+            seats.set(index, 0);
+            System.out.println("Seat is successfully unbooked.");
+        }
     }
 
 }

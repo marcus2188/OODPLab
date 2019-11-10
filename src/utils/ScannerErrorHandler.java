@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.Scanner;
+import java.sql.Timestamp;  
 
 public class ScannerErrorHandler {
     
@@ -73,6 +74,26 @@ public class ScannerErrorHandler {
                 return s;
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Please enter a string");
+                scan.next();
+                continue;
+            }
+        }
+    }
+
+    public Timestamp nextTime(){
+        String s;
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            try {
+                System.out.println("Please enter a showtime in this format (yyyy-mm-dd hh:mm:ss):");
+                s = scan.nextLine();
+                return Timestamp.valueOf(s);
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please enter a string");
+                scan.next();
+                continue;
+            } catch (java.lang.IllegalArgumentException e){
+                System.out.println("Please enter the correct format");
                 scan.next();
                 continue;
             }

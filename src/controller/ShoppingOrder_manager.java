@@ -5,6 +5,8 @@ import entity.MovieScreening;
 import entity.MovieTicket;
 import entity.ScreeningFormat;
 import entity.ShoppingOrder;
+import entity.Cineplex;
+import entity.Movie;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,13 +18,16 @@ import java.util.Scanner;
 
 import utils.ScannerErrorHandler;
 import utils.SerializeDB;
-
+import utils.Print;
+import utils.Filter;
 
 public class ShoppingOrder_manager implements ShoppingOrder_inf{
-	Scanner se = new Scanner(System.in);
-	ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
-	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
-	MovieScreening obj;
+	private ArrayList<MovieTicket> PaymentHist; 
+	private ArrayList<MovieGoer> people;
+	private ArrayList<Cineplex> cineplexes;
+	private ArrayList<Movie> movies;
+	private ArrayList<MovieScreening> movieScreeningList;
+	//MovieScreening obj;
 	
 	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
 	ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
@@ -38,16 +43,68 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	public void importdata() {
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paymentHistory.dat");
 		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
+		this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
+		this.cineplexes = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
+		this.movies = (ArrayList) SerializeDB.readSerializedObject("Movie.dat");
 	}
 	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
 	public void updatedata() {
 		SerializeDB.writeSerializedObject("paymentHistory.dat", this.PaymentHist);
 		SerializeDB.writeSerializedObject("peoplenames.dat", this.people);
+		SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
+		SerializeDB.writeSerializedObject("Movie.dat", this.movies);
 	}
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
-	public void bookTicket(MovieScreening obj, char row, int col) throws ParseException {
-		this.obj = obj;
+	public void bookTicket() throws ParseException {
+		int choice, choice2;
+        Movie movie;
+		Cineplex cineplex;
+		MovieScreening movieScreening;
+		ArrayList<MovieScreening> temp;
+        ScannerErrorHandler sc = new ScannerErrorHandler();
+
+        System.out.println("Press 1 to list movie screening by movie.");
+        System.out.println("Press 2 to list movie screening by cineplex.");
+        choice = sc.nextInt();
+        switch(choice){
+            case 1:
+                System.out.println("Choose a movie: ");
+                Print.printMovies(movies);
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>movies.size());
+                movie = movies.get(choice2-1);
+				temp = Filter.filterByMovie(movieScreeningList, movie);
+                Print.printMovieScreenings(temp);
+				System.out.println("Choose a movie screening: ");
+				do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>temp.size());
+				movieScreening = temp.get(choice2-1);
+                break;
+
+            case 2:
+                System.out.println("Choose a cineplex: ");
+                Print.printCineplexes(cineplexes);
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>cineplexes.size());
+                cineplex = cineplexes.get(choice2-1);
+
+                temp = Filter.filterByCineplex(movieScreeningList, cineplex);
+                Print.printMovieScreenings(temp);
+				System.out.println("Choose a movie screening: ");
+				do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>temp.size());
+				movieScreening = temp.get(choice2-1);
+                break;
+            default:
+                System.out.println("Invalid value!");
+                return;
+		}
+
 		// GET BEFORE6 boolean
         boolean before6;
         Date date = new Date();
@@ -67,7 +124,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         System.out.println("3. Regular");
         // Scanner scan = new Scanner(System.in);
         ScannerErrorHandler scan = new ScannerErrorHandler();
-        int choice = scan.nextInt();
+        choice = scan.nextInt();
         switch (choice) {
             case 1:
                 ageGroup = AgeGroup.SENIORCITIZEN;
@@ -110,25 +167,48 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         // GET DAY int
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
+
+		// ASK TO CHOOSE SEAT
+		System.out.println("Please choose a seat(O means available):");
+		movieScreening.getCinema().updateSeats(movieScreening.getSeatStatus());
+		movieScreening.getCinema().printSeatAvailability();
+
+		char row;
+		int col;
+
+		System.out.println("Please enter the row: ");
+		row = sc.next().charAt(0);
+		System.out.println("Please enter the column: ");
+		col = sc.nextInt();
+		try{
+			movieScreening.bookSeat(row, col);
+		}catch(Exception e){
+			System.out.println("Please enter the right format!");
+		}
         
         MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
         
         // SET THE REST OF THE TICKET ATTRIBUTES
-        mt.setMovieScreening(this.obj);
+        mt.setMovieScreening(movieScreening);
+
+		updatedata();
         
+
         // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
-        String seatno = Character.toString(row) + Integer.toString(col);
-        mt.setSeat(seatno);
+        //String seatno = Character.toString(row) + Integer.toString(col);
+        //mt.setSeat(seatno);
         
-        // SET THE TID OF TICKET   //TBC
-        mt.setTID("this.obj.getShowDate()" + this.obj.getCinema());
-        this.neword.addticket(mt);
+        // SET THE TID OF TICKET   //TBC		
+        //mt.setTID("this.obj.getShowDate()" + this.obj.getCinema());
+        //this.neword.addticket(mt);
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER
 	public void makePurchase() {
+		ScannerErrorHandler se = new ScannerErrorHandler();
+		
 		// PAYMENT CONFIRMATION
 		System.out.println("Are you sure you want to pay for your shopping order? ");
 		System.out.println("1. YES ");
@@ -138,6 +218,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 			System.out.println("Alright then, payment rejected ");
 			return;
 		}
+
 		// COLLECT MOVIEGOER INFORMATION, CREATE NEW MOVIEGOER OBJECT AND STORE INTO PEOPLE
 		System.out.println("Please enter your name here : ");
 		String person_name = se.nextLine();
@@ -148,10 +229,17 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		MovieGoer g = new MovieGoer(person_name, person_no, person_email);
 		this.people.add(g);
 	
-		
-		// MOVE ALL TICKETS FROM SHOPPING ORDER INTO PAYMENT HISTORY ARRAYLIST
+		// SET THE TID OF ALL TICKETS BEFORE MOVING INTO PAYMENT HIST
+		String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
 		for(int i = 0; i < this.neword.returnticketarray().size();i++) {
-			PaymentHist.add(neword.returnticketarray().get(i));
+			neword.returnticketarray().get(i).setTID(neword.returnticketarray().get(i).getMovieScreening().getCinema().getCinemaID() + timeStamp);
+		}
+		
+		// MOVE ALL TICKETS FROM SHOPPING ORDER INTO PAYMENT HISTORY ARRAYLIST AND ADD SALES TO CORRESPONDING MOVIE
+		for(int i = 0; i < this.neword.returnticketarray().size();i++) {
+			MovieTicket ticket = neword.returnticketarray().get(i);
+			ticket.getMovieScreening().getMovie().addTicketSales(ticket.getPrice());
+			PaymentHist.add(ticket);
 		}
 		
 		// PRINT PAYMENT SUMMARY

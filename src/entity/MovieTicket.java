@@ -13,7 +13,7 @@ public class MovieTicket implements Serializable{
     private boolean before6;
     private ScreeningFormat format;
     private int day;
-    private String seat;
+    private Seat seat;
     private MovieScreening movieScreening;
 
     public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
@@ -108,21 +108,17 @@ public class MovieTicket implements Serializable{
         return day;
     }
 
-    public String getSeat() {
+    public Seat getSeat() {
         return seat;
     }
 
-    public void setSeat(String seat) {
+    public void setSeat(Seat seat) {
         this.seat = seat;
     }
 
     public void printDetails() {
         System.out.println("===============Movie Ticket Details=====================");
-        System.out.println("Cineplex: " + this.movieScreening.getCineplex());
-        System.out.println("Cinema: " + this.movieScreening.getCinema());
-        System.out.println("Movie: " + this.movieScreening.getMovieTitle());
-        System.out.println("Date: " + this.movieScreening.getShowDate());
-        System.out.println("Time: " + this.movieScreening.getShowTime());
+        movieScreening.printMovieScreening();
         System.out.println("Ticket ID: " + this.TID);
         System.out.println("Price: " + this.price);
         System.out.println("Seat: " + this.seat);

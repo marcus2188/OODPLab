@@ -3,27 +3,21 @@ package entity;
 import java.io.Serializable;
 
 public class Seat implements Serializable {
-    private char row;
-    private int col;
+    boolean taken;
 
-    public Seat(char row, int col) {
-        this.row = row;
-        this.col = col;
+    public Seat() {
+        taken = false;
     }
 
-    public char getRow() {
-        return row;
+    public boolean isTaken(){
+        return taken;
     }
 
-    public void setRow(char row) {
-        this.row = row;
+    public void bookSeat(){
+        taken = true;
     }
 
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
+    public void unbookSeat(){
+        taken = false;
     }
 }
