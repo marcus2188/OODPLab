@@ -62,7 +62,7 @@ public class MovieTicketManager implements MovieTicket_inf {
             System.out.println("Invalid choice");
             choice = scan.nextInt();
         }
-        int day = choice;
+        int day = (choice % 7) +1;
         boolean weekday;
         if (1 <= choice && choice <=5) {
             weekday = true;
