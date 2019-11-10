@@ -29,10 +29,11 @@ All user menus
         System.out.println("Press 6 to book tickets.");
         System.out.println("Press 7 to view shopping cart");
         System.out.println("Press 8 to view transaction history");
+        System.out.println("Press 9 to make payment");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 8) {
+        while (choice < 0 || choice > 9) {
             System.out.println("Invalid choice, please try again:");
             choice = scan.nextInt();
         }
@@ -61,6 +62,9 @@ All user menus
                 break;
             case 8:
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_TRANSACTIONS);
+                break;
+            case 9:
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_PAYMENT);
                 break;
             case 0:
                 System.out.println("Redirecting to main menu...");
@@ -134,6 +138,13 @@ All user menus
         ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
         System.out.println("=== My Transactions ===");
         shoppingOrderManager.viewallpaidtix();
+        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
+    }
+
+    public static void userPayment() {
+        ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
+        System.out.println("=== My Payments ===");
+        shoppingOrderManager.makePurchase();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 

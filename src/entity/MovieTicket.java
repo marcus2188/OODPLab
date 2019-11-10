@@ -121,6 +121,6 @@ public class MovieTicket implements Serializable{
         movieScreening.printMovieScreening();
         System.out.println("Ticket ID: " + this.TID);
         System.out.println("Price: " + this.price);
-        System.out.println("Seat: " + this.seat);
+        System.out.println("Seat: " + this.seat.getSeatID());
     }
 }

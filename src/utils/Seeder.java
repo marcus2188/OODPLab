@@ -70,7 +70,9 @@ public class Seeder {
         MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6,format, day, 0);
         ticket.setPriceBasedOnAttributes();
         ticket.setMovieScreening(movieScreenings.get(0));
+        ticket.setSeat(movieScreenings.get(0).getCinema().getSeatList().get(0));
         tickets.add(ticket);
         SerializeDB.writeSerializedObject("paymentHistory.dat", tickets);
+        SerializeDB.writeSerializedObject("bookingtickets.dat", tickets);
     }
 }

@@ -142,9 +142,8 @@ public class Movie implements Serializable{
 	
 	public void printPastReviews() {
 		int size_review = getReview_list().size();
-		System.out.println(size_review);
 		for (int i=0;i<size_review;i++) {
-			System.out.println(i+1);
+			System.out.println(i+1 + ". ");
 			this.getReview_list().get(i).printReview();
 		}
 	}
