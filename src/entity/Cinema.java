@@ -20,10 +20,7 @@ public class Cinema implements Serializable {
         this.cineplex = cineplex;
         seats = new ArrayList<Seat>();
         for(int i = 0; i < maxSize; i++){
-            Seat s = new Seat();
-            s.setSeatID(i, maxCol);
-            seats.add(s);
-            
+            seats.add(new Seat());
         }   
     }
 

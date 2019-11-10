@@ -75,9 +75,6 @@ public class MOBLIMA {
                 case MOVIE_GOER_MOVIESCREENING_LIST:
                     UserMenu.userListMovieScreening();
                     break;
-                case MOVIE_GOER_PAYMENT:
-                    UserMenu.userPayment();
-                    break;
 
 
                  // admin routes

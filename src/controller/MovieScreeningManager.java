@@ -110,7 +110,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
         do {
             choice = sc.nextInt();
         } while (choice<1 || choice>movieScreeningList.size());
-        movieScreening = movieScreeningList.get(choice-1);
+        movieScreening = movieScreeningList.get(choice);
 
         System.out.println("Press 1 to change Cineplex:");
         System.out.println("Press 2 to change Cinema:");

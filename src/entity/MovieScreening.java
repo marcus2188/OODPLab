@@ -77,29 +77,25 @@ public class MovieScreening implements Serializable {
         this.time = time;
     }
 
-    public int bookSeat(char row, int col){
+    public void bookSeat(char row, int col){
         int r = Converter.charToInt(row);
         int index = r*cinema.maxCol + col;
         if(seats.get(index) == 1){
             System.out.println("Seat is not available.");
-            return index;
         }else{
             seats.set(index, 1);
             System.out.println("Seat is successfully booked.");
-            return index;
         }
     }
 
-    public int unbookSeat(char row, int col){
+    public void unbookSeat(char row, int col){
         int r = Converter.charToInt(row);
         int index = r*cinema.maxCol + col;
         if(seats.get(index) == 0){
             System.out.println("Seat is already available.");
-            return index;
         }else{
             seats.set(index, 0);
             System.out.println("Seat is successfully unbooked.");
-            return index;
         }
     }
 

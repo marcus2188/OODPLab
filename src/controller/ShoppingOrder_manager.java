@@ -27,9 +27,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	private ArrayList<Cineplex> cineplexes;
 	private ArrayList<Movie> movies;
 	private ArrayList<MovieScreening> movieScreeningList;
-	private ArrayList<MovieTicket> tixlist;
-	Date newdate;
-	ShoppingOrder neword;
+	//MovieScreening obj;
 	
 	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
 	public ShoppingOrder_manager(){
@@ -45,7 +43,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
 		this.cineplexes = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
 		this.movies = (ArrayList) SerializeDB.readSerializedObject("Movie.dat");
-		this.tixlist = (ArrayList) SerializeDB.readSerializedObject("bookingtickets.dat");
 	}
 	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
 	public void updatedata() {
@@ -53,7 +50,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		SerializeDB.writeSerializedObject("peoplenames.dat", this.people);
 		SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
 		SerializeDB.writeSerializedObject("Movie.dat", this.movies);
-		SerializeDB.writeSerializedObject("bookingtickets.dat", this.tixlist);
 	}
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
@@ -176,31 +172,22 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 
 		char row;
 		int col;
-		int index;
 
 		System.out.println("Please enter the row: ");
 		row = sc.next().charAt(0);
 		System.out.println("Please enter the column: ");
 		col = sc.nextInt();
 		try{
-			index = movieScreening.bookSeat(row, col);
-			MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
-			// SET TICKET PRICE PRICE float
-			mt.setPriceBasedOnAttributes();
-			
-			// SET THE REST OF THE TICKET ATTRIBUTES
-			mt.setMovieScreening(movieScreening);
-			
-			mt.setSeat(movieScreening.getCinema().getSeatList().get(index));
-
-			this.tixlist.add(mt);
-
-			updatedata();
-
+			movieScreening.bookSeat(row, col);
 		}catch(Exception e){
 			System.out.println("Please enter the right format!");
 		}
         
+        
+        // SET THE REST OF THE TICKET ATTRIBUTES
+        mt.setMovieScreening(movieScreening);
+
+		updatedata();
         
 
         // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
