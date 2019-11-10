@@ -71,12 +71,16 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         switch (choice) {
             case 1:
                 ageGroup = AgeGroup.SENIORCITIZEN;
+                break;
             case 2:
                 ageGroup = AgeGroup.STUDENT;
+                break;
             case 3:
                 ageGroup = AgeGroup.REGULAR;
+                break;
             default:
                 ageGroup = AgeGroup.REGULAR;
+                break;
         }
 
         // GET WEEKDAY boolean
@@ -88,7 +92,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         } else {
             weekday = true;
         }
-        System.out.println("weekday is" + weekday);
+        // System.out.println("weekday is" + weekday);
 
         // GET SCREENINGFORMAT screeningformat
         ScreeningFormat screeningFormat;
@@ -100,18 +104,22 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         switch (choice) {
             case 1:
                 screeningFormat = ScreeningFormat.THREEDIMENSION;
+                break;
             case 2:
                 screeningFormat = ScreeningFormat.REGULAR;
+                break;
             case 3:
                 screeningFormat = ScreeningFormat.BLOCKBUSTER;
+                break;
             default:
                 screeningFormat = ScreeningFormat.REGULAR;
+                break;
         }
 
         // GET DAY int
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
-        System.out.println("Day is" + day); 
+        // System.out.println("Day is" + day);
         
         MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
         
