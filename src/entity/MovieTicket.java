@@ -67,7 +67,37 @@ public class MovieTicket implements Serializable{
         System.out.println("Price: " + this.getPrice());
         return;
     }
-
+    
+    public void setweekday(boolean bool) {
+    	this.weekday = bool;
+    }
+    
+    public boolean getweekday() {
+    	return this.weekday;
+    }
+    
+    public void setbefore6(boolean bool) {
+    	this.before6 = bool;
+    }
+    
+    public boolean getbefore6() {
+    	return this.before6;
+    }
+    
+    public void setScreeningFormat(ScreeningFormat format) {
+    	this.format= format;
+    }
+    
+    public ScreeningFormat getScreeningFormat() {
+    	return this.format;
+    }
+    
+    public void setday(int day) {
+    	this.day = day;
+    }
+    public int getday() {
+    	return this.day;
+    }
 
     public float getPrice() {
         return price;
@@ -117,14 +147,15 @@ public class MovieTicket implements Serializable{
     }
 
     public void printDetails() {
-        System.out.println("===============Movie Ticket Details=====================");
+        System.out.println("======================================================");
+        System.out.println("Price: $" + this.price);
         System.out.println("Cineplex: " + this.movieScreening.getCineplex());
         System.out.println("Cinema: " + this.movieScreening.getCinema());
         System.out.println("Movie: " + this.movieScreening.getMovieTitle());
         System.out.println("Date: " + this.movieScreening.getShowDate());
         System.out.println("Time: " + this.movieScreening.getShowTime());
         System.out.println("Ticket ID: " + this.TID);
-        System.out.println("Price: " + this.price);
         System.out.println("Seat: " + this.seat);
+        System.out.println("======================================================");
     }
 }

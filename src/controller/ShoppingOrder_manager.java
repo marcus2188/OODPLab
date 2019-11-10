@@ -88,6 +88,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         } else {
             weekday = true;
         }
+        System.out.println("weekday is" + weekday);
 
         // GET SCREENINGFORMAT screeningformat
         ScreeningFormat screeningFormat;
@@ -110,8 +111,10 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         // GET DAY int
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
+        System.out.println("Day is" + day); 
         
         MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
+        
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
         
@@ -123,8 +126,11 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         mt.setSeat(seatno);
         
         // SET THE TID OF TICKET   //TBC
-        mt.setTID("this.obj.getShowDate()" + this.obj.getCinema());
+        mt.setTID(this.obj.getShowDate() + this.obj.getCinema());
         this.neword.addticket(mt);
+        
+        // TELLS USER TICKET IS SUCCESSFULLY BOOKED
+        System.out.println("Ticket has been booked");
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER
@@ -144,7 +150,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		System.out.println("Please enter your email here : ");
 		String person_email = se.nextLine();
 		System.out.println("Please enter your mobile number here : ");
-		double person_no = se.nextDouble();
+		String person_no = se.nextLine();
 		MovieGoer g = new MovieGoer(person_name, person_no, person_email);
 		this.people.add(g);
 	
