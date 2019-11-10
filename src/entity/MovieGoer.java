@@ -1,8 +1,10 @@
 package entity;
 
-public class MovieGoer {
+import java.io.Serializable;
+
+public class MovieGoer implements Serializable{
     private String name;
-    private double mobileNumber;
+    private String mobileNumber;
     private String email;
 
     public String getName() {
@@ -13,11 +15,11 @@ public class MovieGoer {
         this.name = name;
     }
 
-    public double getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(double mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
@@ -29,7 +31,7 @@ public class MovieGoer {
         this.email = email;
     }
 
-    public MovieGoer(String name, double mobileNumber, String email) {
+    public MovieGoer(String name, String mobileNumber, String email) {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.email = email;

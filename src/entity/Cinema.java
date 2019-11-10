@@ -1,7 +1,5 @@
 package entity;
 
-import controller.SystemSettings_inf;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,12 +8,22 @@ public class Cinema implements Serializable {
     private ArrayList<Seat> occupiedSeats;
     private String name;
     private int aisleLocation;
+    private String cinemaID;
 
-    public Cinema(ArrayList<Seat> seats, ArrayList<Seat> occupiedSeats,int aisleLocation,String name) {
+    public Cinema(ArrayList<Seat> seats, ArrayList<Seat> occupiedSeats, int aisleLocation, String name, String cinemaID) {
         this.occupiedSeats = occupiedSeats;
         this.seats = seats;
         this.aisleLocation = aisleLocation;
         this.name = name;
+        this.cinemaID = cinemaID;
+    }
+
+    public String getCinemaID() {
+        return cinemaID;
+    }
+
+    public void setCinemaID(String cinemaID) {
+        this.cinemaID = cinemaID;
     }
 
     public void printSeats() { // has to be printed in order
@@ -63,7 +71,13 @@ public class Cinema implements Serializable {
         return this.name;
     }
 
-    private int getMaxCol(){
+    public void reserveSeat(char row, int col) {
+        Seat reservedSeat = new Seat(row, col);
+        this.occupiedSeats.add(reservedSeat);
+        System.out.println("Seat Reserved!");
+    }
+
+    public int getMaxCol(){
         int max = 0;
         int i;
         for (i = 0; i < this.seats.size(); i++) {
@@ -79,7 +93,7 @@ public class Cinema implements Serializable {
 
     }
 
-    private char getMaxRow() {
+    public char getMaxRow() {
         char max = 'A';
         int i;
         for (i = 0; i < this.seats.size(); i++) {
@@ -99,6 +113,8 @@ public class Cinema implements Serializable {
         }
         return false;
     }
+
+
 
 
 }

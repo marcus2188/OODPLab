@@ -2,6 +2,7 @@ package utils;
 
 import entity.AgeGroup;
 import entity.MovieTicket;
+import entity.PriceTableTicket;
 import entity.ScreeningFormat;
 
 import java.io.FileInputStream;
@@ -12,26 +13,32 @@ import java.util.*;
 
 public class TextTicketDB {
     public static final String SEPARATOR = "|";
-    public static ArrayList readPrices(String filename) throws IOException {
-        ArrayList stringArray = (ArrayList)read(filename);
-        ArrayList alr = new ArrayList();
-        for (int i = 0; i < stringArray.size(); i++) {
-            String st = (String)stringArray.get(i);
 
-            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+    public static ArrayList readPrices(String filename) {
+        try {
+            ArrayList stringArray = (ArrayList) read(filename);
+            ArrayList alr = new ArrayList();
+            for (int i = 0; i < stringArray.size(); i++) {
+                String st = (String) stringArray.get(i);
 
-            boolean weekday = star.nextToken().trim().equals("weekday") ? true : false;
-            boolean before6 = star.nextToken().trim().equals("before6") ? true: false;
-            AgeGroup ageGroup = AgeGroup.valueOf(star.nextToken().trim());
-            ScreeningFormat format = ScreeningFormat.valueOf(star.nextToken().trim());
-            int day = Integer.parseInt(star.nextToken().trim());
-            float price = Float.parseFloat(star.nextToken().trim());
+                StringTokenizer star = new StringTokenizer(st, SEPARATOR);
 
-            MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6, format, day, price);
-            alr.add(ticket);
+                boolean weekday = star.nextToken().trim().equals("weekday") ? true : false;
+                boolean before6 = star.nextToken().trim().equals("before6") ? true : false;
+                AgeGroup ageGroup = AgeGroup.valueOf(star.nextToken().trim());
+                ScreeningFormat format = ScreeningFormat.valueOf(star.nextToken().trim());
+                int day = Integer.parseInt(star.nextToken().trim());
+                float price = Float.parseFloat(star.nextToken().trim());
 
+                PriceTableTicket ticket = new PriceTableTicket(ageGroup, weekday, before6, format, day, price);
+                alr.add(ticket);
+
+            }
+            return alr;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return alr;
+        return null;
     }
 
     public static List read (String filename) throws IOException {
@@ -62,7 +69,7 @@ public class TextTicketDB {
 //
         for (int i =0; i < priceTable.size(); i++) {
             StringBuilder st = new StringBuilder();
-            MovieTicket ticket = (MovieTicket)priceTable.get(i);
+            PriceTableTicket ticket = (PriceTableTicket) priceTable.get(i);
             st.append(Boolean.toString(ticket.isWeekday()).trim());
             st.append(SEPARATOR);
             st.append(Boolean.toString(ticket.isBefore6()).trim());

@@ -1,5 +1,5 @@
 package controller;
 
-
-public interface SystemSettings_inf {
+// TODO: remove if no class uses it
+public interface SystemSettings_inf{
 }

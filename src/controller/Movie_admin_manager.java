@@ -1,5 +1,10 @@
 package controller;
 
+import entity.Movie;
+import entity.MovieReview;
+import entity.MovieScreening;
+import utils.ScannerErrorHandler;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
