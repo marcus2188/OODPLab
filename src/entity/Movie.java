@@ -16,7 +16,7 @@ public class Movie implements Serializable{
     private float avgRating;
     private boolean isBlockBuster;
     private List<MovieReview> review_list;
-    private int ticketSales;
+    private float ticketSales;
     
     
 	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast,
@@ -116,12 +116,16 @@ public class Movie implements Serializable{
 		this.setAvgRating(review_list);
 	}
 	
-	public int getTicketSales() {
+	public float getTicketSales() {
 		return ticketSales;
 	}
 
-	public void setTicketSales(int ticketSales) {
+	public void setTicketSales(float ticketSales) {
 		this.ticketSales = ticketSales;
+	}
+
+	public void addTicketSales(float ticketSales) {
+		this.ticketSales += ticketSales;
 	}
 	
 	public void appendMovieReview(String comments, int rating) {	//added function
@@ -138,6 +142,7 @@ public class Movie implements Serializable{
 	
 	public void printPastReviews() {
 		int size_review = getReview_list().size();
+		System.out.println(size_review);
 		for (int i=0;i<size_review;i++) {
 			System.out.println(i+1);
 			this.getReview_list().get(i).printReview();

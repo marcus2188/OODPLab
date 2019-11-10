@@ -72,6 +72,10 @@ public class MOBLIMA {
                  case MOVIE_GOER_ADD_REVIEW:
                      UserMenu.userAddReview();
                      break;
+                case MOVIE_GOER_MOVIESCREENING_LIST:
+                    UserMenu.userListMovieScreening();
+                    break;
+
 
                  // admin routes
                  case ADMIN_MENU:

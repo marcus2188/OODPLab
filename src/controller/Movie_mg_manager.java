@@ -1,14 +1,20 @@
 package controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import utils.SerializeDB;
 import entity.Movie;
 import entity.MovieReview;
 
 
 public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf {
-	
+	private ArrayList<MovieReview> movieReviews;
+
+	public Movie_mg_manager(){
+        this.importData();
+    }
+
 	public void searchMovie() {
 		Scanner sc = new Scanner(System.in);
 		
@@ -61,6 +67,9 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		String comments = sc.nextLine();
 		
 		d.appendMovieReview(comments, rating);
+		MovieReview mr = new MovieReview(comments,rating);
+		movieReviews.add(mr);
+		SerializeDB.writeSerializedObject("MovieReview.dat", this.movieReviews);
 		System.out.println("Review successfully added.");
 	}
 	
@@ -93,4 +102,8 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		}
 		return null;
 	}
+
+	public void importData() {
+        this.movieReviews = (ArrayList) SerializeDB.readSerializedObject("MovieReview.dat");
+    }
 }

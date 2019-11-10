@@ -3,6 +3,8 @@ package boundary;
 import Main.MOBLIMA;
 import controller.Movie_mg_inf;
 import controller.Movie_mg_manager;
+import controller.MovieScreening_inf;
+import controller.MovieScreeningManager;
 import controller.ShoppingOrder_inf;
 import controller.ShoppingOrder_manager;
 import utils.ScannerErrorHandler;
@@ -23,12 +25,14 @@ All user menus
         System.out.println("Press 2 to search a movie");
         System.out.println("Press 3 to list top 5 movies");
         System.out.println("Press 4 to view movie details");
-        System.out.println("Press 5 to view shopping cart");
-        System.out.println("Press 6 to view transaction history");
+        System.out.println("Press 5 to add a review.");
+        System.out.println("Press 6 to book tickets.");
+        System.out.println("Press 7 to view shopping cart");
+        System.out.println("Press 8 to view transaction history");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 5) {
+        while (choice < 0 || choice > 8) {
             System.out.println("Invalid choice, please try again:");
             choice = scan.nextInt();
         }
@@ -47,9 +51,15 @@ All user menus
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_MOVIE_DETAILS);
                 break;
             case 5:
-                MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_SHOPPING_CART);
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_ADD_REVIEW);
                 break;
             case 6:
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_BOOKING);
+                break;
+            case 7:
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_SHOPPING_CART);
+                break;
+            case 8:
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_VIEW_TRANSACTIONS);
                 break;
             case 0:
@@ -131,7 +141,13 @@ All user menus
         // try {
             ShoppingOrder_inf shoppingOrderManager = new ShoppingOrder_manager();
             System.out.println(("=== Movie Booking ==="));
-            // shoppingOrderManager.bookTicket();
+            try{
+                shoppingOrderManager.bookTicket();
+            }catch (ParseException e){
+
+            }catch(IOException e){
+                
+            }
             MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
 //        } catch (IOException e) {
 //            e.printStackTrace();
@@ -175,5 +191,10 @@ All user menus
         */
         movieMgManager.addMovieReview();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
+    }
+
+    public static void userListMovieScreening(){
+        MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
+        
     }
 }

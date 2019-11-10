@@ -5,92 +5,179 @@ import entity.Cineplex;
 import entity.MovieScreening;
 import utils.ScannerErrorHandler;
 import utils.SerializeDB;
+import entity.Movie;
+import utils.Print;
+import utils.Filter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.Timestamp;
 
 public class MovieScreeningManager implements MovieScreening_inf {
-    private ArrayList<MovieScreening> movieScreeningList = new ArrayList<MovieScreening>();
-    private ArrayList<Cinema> cinemaList;
+    private ArrayList<MovieScreening> movieScreeningList;
+    private ArrayList<Cineplex> cineplexes;
+    private ArrayList<Movie> movies;
 
     public MovieScreeningManager(){
         this.importData();
     }
 
     public void createMovieScreening() {
-        // Scanner scan = new Scanner(System.in);
-        ScannerErrorHandler scan = new ScannerErrorHandler();
-        System.out.println("Enter Cineplex: ");
-        String cineplexName = scan.nextLine();
+        ScannerErrorHandler sc = new ScannerErrorHandler();
+        Cineplex cineplex;
+        Cinema cinema;
+        Movie movie;
+        Timestamp time;
+		
+		System.out.println("Choose a cineplex: ");
+		Print.printCineplexes(cineplexes);
+		int choice;
+		do {
+			choice = sc.nextInt();
+		} while (choice<1 || choice>cineplexes.size());
+		cineplex = cineplexes.get(choice-1);
+		
+        System.out.println("Choose a cinema: ");
+		cineplex.printCinemas();
+		do {
+			choice = sc.nextInt();
+		} while (choice<1 || choice>cineplex.getCinemas().size());
+		cinema = cineplex.getCinemas().get(choice-1);
 
-        System.out.println("Enter Cinema: ");
-        String cinemaName = scan.nextLine();
+        System.out.println("Choose a movie: ");
+		Print.printMovies(movies);
+		do {
+			choice = sc.nextInt();
+		} while (choice<1 || choice>movies.size());
+		movie = movies.get(choice-1);
 
-        System.out.println("Enter Movie: ");
-        String movieName = scan.nextLine();
+        time = sc.nextTime();
 
-        System.out.println("Enter date: ");
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-        String dateInStr = scan.nextLine();
-        Date date = new Date();
-        try {
-            date = dateFormatter.parse(dateInStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            System.out.println("Problematic la: ");
-        }
-
-
-        System.out.println("Enter time: ");
-        int timeSlot = scan.nextInt();
-
-        MovieScreening newScreening = new MovieScreening(cineplexName,cinemaName,movieName,dateInStr,timeSlot);
+        MovieScreening newScreening = new MovieScreening(cinema, movie, time);
         this.movieScreeningList.add(newScreening);
         SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
         System.out.println("Movie Screening Added!");
     }
 
+
     public void printScreeningList() {
-        //System.out.println("===The current Screening Value===");
-        //for (int i = 0; i <= this.movieScreeningList.size(); i++) {
-          //  MovieScreening perScreening = (MovieScreening) this.movieScreeningList.get(i);
-         //   System.out.print(i + ". ");
-        //    perScreening.printMovieScreening();
-      //  }
+        int choice, choice2;
+        Movie movie;
+        Cineplex cineplex;
+        ScannerErrorHandler sc = new ScannerErrorHandler();
 
-        System.out.println("===Cinema Listing===");
-        Cineplex perCinema = new Cineplex(cinemaList, "Golden Village");
-        //for(int i = 0; i <= this.cinemaList.size(); i++){
-                //Cinema perCinema = this.cinemaList.get(i);
-            //ArrayList<Cinema>  cinemaName = perCinema.getCinemas();
-            //String NAMENAMENAME = cinemaName.get(0).getName();
-                String cinemaName = perCinema.getCinemas().get(0).getName();
-                System.out.println((1) + ". " + cinemaName);
-           // }
+        System.out.println("Press 1 to list movie screening by movie.");
+        System.out.println("Press 2 to list movie screening by cineplex.");
+        choice = sc.nextInt();
+        switch(choice){
+            case 1:
+                System.out.println("Choose a movie: ");
+                Print.printMovies(movies);
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>movies.size());
+                movie = movies.get(choice2-1);
+                Print.printMovieScreenings(Filter.filterByMovie(movieScreeningList, movie));
+                break;
+            case 2:
+                System.out.println("Choose a cineplex: ");
+                Print.printCineplexes(cineplexes);
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>cineplexes.size());
+                cineplex = cineplexes.get(choice2-1);
+                Print.printMovieScreenings(Filter.filterByCineplex(movieScreeningList, cineplex));
+                break;
+            default:
+                System.out.println("Invalid value!");
+                break;
+        } 
 
-       // Cineplex cineplex = new Cineplex(cinemaList);
-       // cineplex.printCinemas();
     }
-   public void updateMovieScreening() { // TODO: to be done by BENG
+
+   public void updateMovieScreening() {
+        int choice, choice2;
+        MovieScreening movieScreening;
+        Cinema cinema;
+        Cineplex cineplex;
+        ScannerErrorHandler sc = new ScannerErrorHandler();
+
         System.out.println("Update movie screening");
+        Print.printMovieScreenings(movieScreeningList);
+        System.out.println("Select the movie screening you want to update:");
+        do {
+            choice = sc.nextInt();
+        } while (choice<1 || choice>movieScreeningList.size());
+        movieScreening = movieScreeningList.get(choice);
+
+        System.out.println("Press 1 to change Cineplex:");
+        System.out.println("Press 2 to change Cinema:");
+        System.out.println("Press 3 to change screen time:");
+        choice = sc.nextInt();
+        switch(choice){
+            case 1:
+                System.out.println("Choose a cineplex: ");
+                Print.printCineplexes(cineplexes);
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>cineplexes.size());
+                cineplex = cineplexes.get(choice2-1);
+                
+                System.out.println("Choose a cinema: ");
+                cineplex.printCinemas();
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>cineplex.getCinemas().size());
+                cinema = cineplex.getCinemas().get(choice2-1);
+
+                movieScreening.setCineplex(cinema);
+                break;
+
+            case 2:
+                cineplex = movieScreening.getCineplex();
+                System.out.println("Choose a cinema: ");
+                cineplex.printCinemas();
+                do {
+                    choice2 = sc.nextInt();
+                } while (choice2<1 || choice2>cineplex.getCinemas().size());
+                cinema = cineplex.getCinemas().get(choice2-1);
+
+                movieScreening.setCinema(cinema);
+                break;
+            case 3:
+                Timestamp time = sc.nextTime();
+                movieScreening.setShowTime(time);
+                break;
+            default:
+                System.out.println("Invalid value!");
+                break;
+        }
+
+        SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
+        System.out.println("Movie Screening Updated!");
    }
-   public void deleteMovieScreening() { // TODO: to be done by BENG
+
+   public void deleteMovieScreening() {
+        int choice;
+        ScannerErrorHandler sc = new ScannerErrorHandler();
+
         System.out.println("Delete movie screening");
+        Print.printMovieScreenings(movieScreeningList);
+        System.out.println("Select the movie screening you want to delete:");
+        do {
+            choice = sc.nextInt();
+        } while (choice<1 || choice>movieScreeningList.size());
+        movieScreeningList.remove(choice);
+        SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
+        System.out.println("Movie Screening Removed!");
    }
-
-
-
 
     public void importData() {
         this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
-        this.cinemaList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
+        this.cineplexes = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
+        this.movies = (ArrayList) SerializeDB.readSerializedObject("Movie.dat");
     }
-
-    // getMovieScreening(List<MovieScreening> screeningList)
-
-
-
 
 }
