@@ -29,10 +29,11 @@ All user menus
         System.out.println("Press 6 to book tickets.");
         System.out.println("Press 7 to view shopping cart");
         System.out.println("Press 8 to view transaction history");
+        System.out.println("Press 9 to make payment");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 8) {
+        while (choice < 0 || choice > 9) {
             System.out.println("Invalid choice, please try again:");
             choice = scan.nextInt();
         }

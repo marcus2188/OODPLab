@@ -5,6 +5,7 @@ import utils.Converter;
 
 public class Seat implements Serializable {
     boolean taken;
+    String ID;
 
     public Seat() {
         taken = false;
@@ -20,5 +21,16 @@ public class Seat implements Serializable {
 
     public void unbookSeat(){
         taken = false;
+    }
+
+    public void setSeatID(int index, int maxCol){
+        int row, col;
+        col = index % maxCol;
+        row = (int)Math.floor(index / maxCol);
+        ID = Converter.intToChar(row) + String.valueOf(col);
+    }
+
+    public String getSeatID(){
+        return ID;
     }
 }
