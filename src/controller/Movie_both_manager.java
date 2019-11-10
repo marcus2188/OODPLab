@@ -3,7 +3,10 @@ package controller;
 import entity.Movie;
 import utils.SerializeDB;
 
+import java.io.InvalidClassException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Movie_both_manager {
@@ -28,37 +31,60 @@ public class Movie_both_manager {
             sc.nextLine();
         }
         
+        //copy out the ArrayList<Movie>
+        ArrayList<Movie> tmplist = (ArrayList<Movie>) m.clone();
 		Movie tmp;
 		if (choice==1) {	
 			//sort by ticketSales
 			System.out.println("Top 5 Movies by ticket sales: ");
-			for (int i=0;i<m.size();i++) {
+			for (int i=1;i<tmplist.size();i++) {
 				for (int j=i;j>0;j--) {
-					if (m.get(i).getTicketSales()<m.get(j).getTicketSales()) {
-						tmp = m.get(i);
-						m.set(i, m.get(j));
-						m.set(j, tmp);
+					if (tmplist.get(j).getTicketSales()<tmplist.get(j-1).getTicketSales()) {
+						tmp = tmplist.get(j);
+						tmplist.set(j, tmplist.get(j-1));
+						tmplist.set(j-1, tmp);
 					}
 				}
 			}
-			for (int i=0;i<m.size();i++) {
-				System.out.println(m.get(i).getTitle() + ", " + m.get(i).getTicketSales());
+			for (int i=0;i<tmplist.size();i++) {
+				System.out.println(tmplist.get(i).getTitle() + ", " + tmplist.get(i).getTicketSales());
 			}
 		}
 		else if (choice==2) {
 			//sort by avgRating
 			System.out.println("Top 5 Movies by average rating: ");
+			
+			//transfer NA ratings away first
+			ArrayList<Movie> nr = new ArrayList<Movie>();
 			for (int i=0;i<m.size();i++) {
+				if (m.get(i).getAvgRating()==-1) {
+					nr.add(m.get(i));
+					tmplist.remove(i);
+				}
+			}
+			
+			//sort nonNA ratings
+			for (int i=1;i<tmplist.size();i++) {
 				for (int j=i;j>0;j--) {
-					if (m.get(i).getAvgRating()<m.get(j).getAvgRating()) {
-						tmp = m.get(i);
-						m.set(i, m.get(j));
-						m.set(j, tmp);
+					if (tmplist.get(j).getAvgRating()<tmplist.get(j-1).getAvgRating()) {
+						tmp = tmplist.get(j);
+						tmplist.set(j, tmplist.get(j-1));
+						tmplist.set(j-1, tmp);
 					}
 				}
 			}
-			for (int i=0;i<m.size();i++) {
-				System.out.println(m.get(i).getTitle() + ", " + m.get(i).getAvgRating());
+			
+			//print nonNA ratings
+			for (int i=0;i<tmplist.size();i++) {
+				System.out.print(tmplist.get(i).getTitle() + ", ");
+				tmplist.get(i).printReviewRating();
+				System.out.println();
+			}
+			
+			System.out.println("\nMovies with rating NA:");
+			for (int i=0;i<nr.size();i++) {
+				System.out.println(nr.get(i).getTitle());
+				System.out.println();
 			}
 		}
 	}
@@ -72,24 +98,21 @@ public class Movie_both_manager {
 	}
 	
 	public ArrayList<Movie> loadData() {
-		// Movie[] m = null;
-		ArrayList<Movie> movies = (ArrayList<Movie>) SerializeDB.readSerializedObject("Movie.dat");
-		return movies;
+		List movies;
+		try {
+			movies = SerializeDB.readSerializedObject("Movie.dat");
+			return (ArrayList<Movie>) movies;
+		} catch (InvalidClassException e) {
+			// TODO Auto-generated catch block
+			movies = new ArrayList<Movie>();
+			return (ArrayList<Movie>) movies;
+		}
 	}
 	
 	public void exportData(ArrayList<Movie> m) {
 		//save movie data
-		this.setM(m);
+		this.setM(m); //setM so that can update the ArrayList m without reimporting.
 		SerializeDB.writeSerializedObject("Movie.dat", m);
-	}
-	
-	public Movie findMovie(String movieName) {	//helper method for use movie managers.
-		for (int i=0;i<m.size();i++) {
-			if (m.get(i).getTitle().equalsIgnoreCase(movieName)) {
-				return m.get(i);
-			}
-		}
-		return null;
 	}
 	
 	public void printMovieList() {

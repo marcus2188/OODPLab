@@ -225,7 +225,7 @@ public class Main {
     	Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie search ===");
         movieMgManager.searchMovie();
-        appState = STATE.MOVIE_GOER_MENU; // Redirect back to main menu
+       	appState = STATE.MOVIE_GOER_MENU; // Redirect back to main menu
     }
 
 

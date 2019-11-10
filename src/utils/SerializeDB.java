@@ -8,7 +8,7 @@ import java.util.List;
 Entity classes need to implement Serializable
  */
 public class SerializeDB {
-    public static List readSerializedObject(String filename) {
+    public static List readSerializedObject(String filename) throws InvalidClassException{
         List details = null;
         FileInputStream fis = null;
         ObjectInputStream in = null;

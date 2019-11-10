@@ -1,9 +1,14 @@
 package entity;
 
 
+import java.io.InvalidClassException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import utils.SerializeDB;
 
 public class Movie implements Serializable{
     
@@ -93,6 +98,10 @@ public class Movie implements Serializable{
 	public void setAvgRating(List<MovieReview> review_list) {	//added function
 		int total=0;
 		int size = review_list.size();
+		if (size<=1) {
+			this.avgRating=-1;
+			return;
+		}
 		for (int i=0;i<size;i++) {
 			total += review_list.get(i).getRating();
 		}
@@ -124,9 +133,21 @@ public class Movie implements Serializable{
 		this.ticketSales = ticketSales;
 	}
 	
-	public void appendMovieReview(String comments, int rating) {	//added function
+	public void appendMovieReviewList() {	//added function
+		Scanner sc = new Scanner(System.in);
+		int rating;
+		System.out.println("Rate this movie: 1 2 3 4 5");
+		do {
+			rating = sc.nextInt();
+			sc.nextLine();
+		} while (rating<1 || rating>5);
+		
+		System.out.println("Comments: ");
+		String comments = sc.nextLine();
+		
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
+		this.setAvgRating(this.getReview_list());
 	}
 	
 	public void printCast() {
@@ -144,6 +165,16 @@ public class Movie implements Serializable{
 		}
 	}
 	
+	public void printReviewRating() {
+		List<MovieReview> rlist = this.getReview_list();
+		if (rlist.size()<=1 || this.getAvgRating()==-1) {
+			System.out.print("NA");
+			return;
+		}
+		System.out.printf("%.2f",this.getAvgRating());
+		return;
+	}
+	
 	public void printMovie() {
 		System.out.println("Title: "+getTitle());
 		System.out.println("Showing Status: "+getShowingStatus());
@@ -153,7 +184,9 @@ public class Movie implements Serializable{
 		System.out.println("Cast: ");
 		printCast();
 		
-		System.out.println("Average Rating: "+getAvgRating());
+		System.out.print("Average Rating: ");
+		this.printReviewRating();
+		System.out.println();
 		
 		System.out.println("Past Reviews: ");
 		printPastReviews();

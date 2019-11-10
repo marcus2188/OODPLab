@@ -1,6 +1,5 @@
 package controller;
 
-import boundary.Admin_UI;
 import entity.AgeGroup;
 import entity.Movie;
 import entity.MovieTicket;

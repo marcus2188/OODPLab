@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import controller.Movie_mg_inf;
+import controller.Movie_mg_manager;
+
 public class Tester {
     public static void main(String[] args) {
         /*
@@ -48,6 +51,9 @@ public class Tester {
     	for (int i=0;i<m.size();i++) {
     		m.get(i).printMovie();
     	}
+    	/*
+    	Movie_mg_inf mgr = new Movie_mg_manager();
+    	mgr.addMovieReview();
     	*/
     }
 }
