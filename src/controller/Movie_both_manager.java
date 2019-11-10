@@ -99,14 +99,8 @@ public class Movie_both_manager {
 	
 	public ArrayList<Movie> loadData() {
 		List movies;
-		try {
-			movies = SerializeDB.readSerializedObject("Movie.dat");
-			return (ArrayList<Movie>) movies;
-		} catch (InvalidClassException e) {
-			// TODO Auto-generated catch block
-			movies = new ArrayList<Movie>();
-			return (ArrayList<Movie>) movies;
-		}
+		movies = SerializeDB.readSerializedObject("Movie.dat");
+		return (ArrayList<Movie>) movies;
 	}
 	
 	public void exportData(ArrayList<Movie> m) {

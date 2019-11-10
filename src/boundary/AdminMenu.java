@@ -68,7 +68,7 @@ public class AdminMenu {
     }
 
 
-    private static void adminCreateMovie() {
+    public static void adminCreateMovie() {
     	//create manager
     	Movie_admin_inf adminManager = new Movie_admin_manager();
     	
@@ -77,7 +77,7 @@ public class AdminMenu {
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
-    private static void adminUpdateMovie() {
+    public static void adminUpdateMovie() {
     	//create manager
     	Movie_admin_inf adminManager = new Movie_admin_manager();
     	
@@ -86,7 +86,7 @@ public class AdminMenu {
     	MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
-    private static void adminDeleteMovie() {
+    public static void adminDeleteMovie() {
     	//create manager
     	Movie_admin_inf adminManager = new Movie_admin_manager();
     	

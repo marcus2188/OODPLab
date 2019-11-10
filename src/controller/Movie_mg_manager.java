@@ -26,7 +26,10 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 				System.out.println(returnCount+ ". " + mTitle);
 			}
 		}
-		if (returnCount==0) System.out.println("No movies found.");
+		if (returnCount==0) {
+			System.out.println("No movies found.");
+			return;
+		}
 		else System.out.println(returnCount + " movies returned from search.");
 		
 		int choice, mchoice=0;
@@ -59,6 +62,10 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 	}
 	
 	public void listAllMovie() {
+		if (this.getM().size()==0) {
+			System.out.println("No movies are being shown now.");
+			return;
+		}
 		this.printMovieList();
 		Scanner sc = new Scanner(System.in);
 		int choice, mchoice=0;

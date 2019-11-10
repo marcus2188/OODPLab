@@ -38,6 +38,7 @@ public class MOBLIMA {
         that acts like a universal resource locater (URL) that allows
         selection of routes anywhere throughout the app
          */
+    	
          while(running) {
              switch(appState) {
                  case LOGIN:
@@ -65,12 +66,6 @@ public class MOBLIMA {
                      break;
                  case MOVIE_GOER_BOOKING:
                      UserMenu.userMovieBooking();
-                     break;
-                 case MOVIE_GOER_MOVIE_DETAILS:
-                     UserMenu.userMovieDetails();
-                     break;
-                 case MOVIE_GOER_ADD_REVIEW:
-                     UserMenu.userAddReview();
                      break;
 
                  // admin routes

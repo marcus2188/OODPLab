@@ -58,14 +58,14 @@ All user menus
 
     }
 
-    private static void userListMovies() {
+    public static void userListMovies() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
         movieMgManager.listAllMovie();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);   // Redirect back to main menu
     }
 
-    private static void userSearchMovies() {
+    public static void userSearchMovies() {
     	Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie search ===");
         movieMgManager.searchMovie();
@@ -73,7 +73,7 @@ All user menus
     }
 
 
-    private static void userListTop5Movies() {
+    public static void userListTop5Movies() {
     	Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Top 5 Movies ===");        
         movieMgManager.listTop5();
@@ -107,33 +107,4 @@ All user menus
 //        }
     }
 
-    public static void userMovieDetails() {
-        Movie_mg_inf movieMgManager = new Movie_mg_manager();
-        String movieName;
-        //Scanner scan = new Scanner(System.in);
-        ScannerErrorHandler scan = new ScannerErrorHandler();
-        System.out.println("=== Movie Details ===");
-        System.out.println("Please enter the movie to view details: ");
-        movieName = scan.next();
-        movieMgManager.viewMovieDetails(movieName);
-        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
-    }
-
-    public static void userAddReview() {
-        Movie_mg_inf movieMgManager = new Movie_mg_manager();
-        int rating;
-        String comments, movieName;
-        //Scanner scan = new Scanner(System.in);
-        ScannerErrorHandler scan = new ScannerErrorHandler();
-
-        System.out.println("=== Add Review ===");
-        System.out.println("Please enter the movie to review: ");
-        movieName = scan.next();
-        System.out.println("Please enter your review: ");
-        comments = scan.next();
-        System.out.println("Please enter your rating: ");
-        rating = scan.nextInt();
-        movieMgManager.addMovieReview(movieName, comments, rating);
-        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
-    }
 }
