@@ -17,7 +17,9 @@ public class Cinema implements Serializable {
         this.name = name;
         this.cinemaID = cinemaID;
     }
-
+    public ArrayList<Seat> getSeats(){return seats;}
+    public ArrayList<Seat> getOccupiedSeats(){return occupiedSeats;}
+    public int getAisleLocation(){return aisleLocation;}
     public String getCinemaID() {
         return cinemaID;
     }
@@ -69,6 +71,9 @@ public class Cinema implements Serializable {
 
     public String getName() {
         return this.name;
+    }
+    public void setName(String cinemaName) {
+        this.name = cinemaName;
     }
 
     public void reserveSeat(char row, int col) {

@@ -112,7 +112,17 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		}
 		else if (choice == 2) {
 			//addMovieReview();
-			d.appendMovieReviewList();
+			Scanner sc = new Scanner(System.in);
+			int rating;
+			System.out.println("Rate this movie: 1 2 3 4 5");
+			do {
+				rating = sc.nextInt();
+				sc.nextLine();
+			} while (rating<1 || rating>5);
+			
+			System.out.println("Comments: ");
+			String comments = sc.nextLine();
+			d.appendMovieReviewList(comments, rating);
 			this.exportData(m1);
 			System.out.println("Review successfully added.");
 		}

@@ -1,8 +1,6 @@
  package controller;
 
-import entity.AgeGroup;
-import entity.MovieTicket;
-import entity.ScreeningFormat;
+import entity.*;
 import utils.ScannerErrorHandler;
 import utils.TextTicketDB;
 
@@ -62,7 +60,7 @@ public class MovieTicketManager implements MovieTicket_inf {
             System.out.println("Invalid choice");
             choice = scan.nextInt();
         }
-        int day = (choice % 7) +1;
+        int day = choice;
         boolean weekday;
         if (1 <= choice && choice <=5) {
             weekday = true;
@@ -230,7 +228,7 @@ public class MovieTicketManager implements MovieTicket_inf {
     }
 
     private boolean checkEqualTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat screeningFormat, int day, int i) {
-        MovieTicket ticket = (MovieTicket)this.priceTable.get(i);
+        PriceTableTicket ticket = (PriceTableTicket)this.priceTable.get(i);
         if (ticket.getAgeGroup() == ageGroup
         && ticket.isWeekday() == weekday
         && ticket.isBefore6() == before6
@@ -257,7 +255,7 @@ public class MovieTicketManager implements MovieTicket_inf {
     public void printPriceTable(){
         System.out.println("===The current ticket table===");
         for (int i= 1; i <= this.priceTable.size(); i++ ) {
-            MovieTicket ticket = (MovieTicket)this.priceTable.get(i);
+            PriceTableTicket ticket = (PriceTableTicket)this.priceTable.get(i);
             System.out.print(i + ". ");
             ticket.printTicketDetails();
         }

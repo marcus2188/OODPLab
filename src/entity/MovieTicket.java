@@ -48,7 +48,7 @@ public class MovieTicket implements Serializable{
                 this.before6,
                 this.format,
                 this.day);
-        System.out.println(this.price);
+        System.out.println("Ticket Price: " + this.price);
     }
 
     public void setMovieScreening (MovieScreening ms) {
@@ -150,9 +150,9 @@ public class MovieTicket implements Serializable{
     public void printDetails() {
         System.out.println("======================================================");
         System.out.printf("Price: $%.2f\n", this.price);
-        System.out.println("Cineplex: " + this.movieScreening.getCineplex());
-        System.out.println("Cinema: " + this.movieScreening.getCinema());
-        System.out.println("Movie: " + this.movieScreening.getMovieTitle());
+        //System.out.println("Cineplex: " + this.movieScreening.getCineplex());
+        //System.out.println("Cinema: " + this.movieScreening.getCinema());
+        //System.out.println("Movie: " + this.movieScreening.getMovieTitle());
         System.out.println("Date: " + this.movieScreening.getShowDate());
         System.out.println("Time: " + this.movieScreening.getShowTime());
         System.out.println("Ticket ID: " + this.TID);

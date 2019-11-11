@@ -24,7 +24,7 @@ public class YnTest {
         movie2.printMovie();
         
         ArrayList<Movie> m = new ArrayList<Movie>(Arrays.asList(movie1,movie2));
-        SerializeDB.writeSerializedObject("Movie.dat", m);
+        SerializeDB.writeSerializedObject("Movie2.dat", m);
         /*
     	ArrayList<Movie> m = (ArrayList<Movie>) SerializeDB.readSerializedObject("Movie.dat");
     	for (int i=0;i<m.size();i++) {
