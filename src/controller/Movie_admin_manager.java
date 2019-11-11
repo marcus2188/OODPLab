@@ -140,7 +140,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		//System.out.println("Review list: ");
 		//default to empty list;
 		List<MovieReview> review_list = new ArrayList<MovieReview>();
-		if (review_list.size()==0) System.out.println("Empty review list");
+		//if (review_list.size()==0) System.out.println("Empty review list");
 		
 		//System.out.println("Ticket sales: ");
 		//deafult to 0;
