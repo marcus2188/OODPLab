@@ -58,14 +58,9 @@ public class MOBLIMA {
                  case MOVIE_GOER_LIST_TOP_5:
                      UserMenu.userListTop5Movies();
                      break;
-                 case MOVIE_GOER_VIEW_SHOPPING_CART:
-                     UserMenu.userViewShoppingCart();
-                     break;
-                 case MOVIE_GOER_VIEW_TRANSACTIONS:
-                     UserMenu.userViewTransactions();
-                     break;
-                 case MOVIE_GOER_BOOKING:
-                     UserMenu.userMovieBooking();
+                 case MOVIE_GOER_BOOKING_MENU:
+                     UserMenu userMenu = new UserMenu();
+                     userMenu.userBookingMenu();
                      break;
 
                  // admin routes

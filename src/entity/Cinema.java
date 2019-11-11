@@ -2,24 +2,31 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import utils.Converter;
 
 public class Cinema implements Serializable {
-    private ArrayList<Seat> seats;
-    private ArrayList<Seat> occupiedSeats;
-    private String name;
-    private int aisleLocation;
-    private String cinemaID;
+    public int maxSize = 100;
+    public int maxRow = 10;
+    public int maxCol = 10;
 
-    public Cinema(ArrayList<Seat> seats, ArrayList<Seat> occupiedSeats, int aisleLocation, String name, String cinemaID) {
-        this.occupiedSeats = occupiedSeats;
-        this.seats = seats;
-        this.aisleLocation = aisleLocation;
+    protected ArrayList<Seat> seats;
+    private String name;
+    private String cinemaID;
+    private Cineplex cineplex;
+
+    public Cinema(String name, String cinemaID, Cineplex cineplex) {
         this.name = name;
         this.cinemaID = cinemaID;
+        this.cineplex = cineplex;
+        seats = new ArrayList<Seat>();
+        for(int i = 0; i < maxSize; i++){
+            Seat s = new Seat();
+            s.setSeatID(i, maxCol);
+            seats.add(s);
+            
+        }   
     }
-    public ArrayList<Seat> getSeats(){return seats;}
-    public ArrayList<Seat> getOccupiedSeats(){return occupiedSeats;}
-    public int getAisleLocation(){return aisleLocation;}
+
     public String getCinemaID() {
         return cinemaID;
     }
@@ -28,98 +35,78 @@ public class Cinema implements Serializable {
         this.cinemaID = cinemaID;
     }
 
-    public void printSeats() { // has to be printed in order
-        char c = 'A';
-        int i ,j, k, counter =1;
-        System.out.print("\t");
-        for (j = 0; j < this.getMaxCol(); j++) {
-            if (j == this.aisleLocation) {
-                System.out.print("\t" );
-            } else {
-                if (j < 10) {
-                    System.out.print(" " + counter+ "\t" );
-                } else {
-                    System.out.print(counter + "\t");
-                }
-                counter++;
-            }
-        }
-        System.out.print("\n");
-
-        for (i =0; i < ((int)this.getMaxRow() -64); i++){
-            j = 1;
-            for (k = 0; k < this.getMaxCol(); k++) {
-                if (k == 0) {
-                    System.out.print(c);
-                    c++;
-                }
-                if (k == this.aisleLocation) {
-                    System.out.print("\t| |");
-                } else {
-                    if (this.checkSeatOccupied( (char)(i+65), j)) {
-                        System.out.print("\t[X]");
-                    } else {
-                        System.out.print("\t[ ]");
-                    }
-                    j++;
-                }
-
-            }
-             System.out.print("\n");
-        }
-    }
-
     public String getName() {
         return this.name;
     }
-    public void setName(String cinemaName) {
-        this.name = cinemaName;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void reserveSeat(char row, int col) {
-        Seat reservedSeat = new Seat(row, col);
-        this.occupiedSeats.add(reservedSeat);
-        System.out.println("Seat Reserved!");
+    public ArrayList<Seat> getSeatList(){
+        return seats;
     }
 
-    public int getMaxCol(){
-        int max = 0;
-        int i;
-        for (i = 0; i < this.seats.size(); i++) {
-            if (max < this.seats.get(i).getCol()) {
-                max = this.seats.get(i).getCol();
+    public Cineplex getCineplex(){
+        return cineplex;
+    }
+
+    public void printSeatAvailability(){
+        int index;
+        char col;
+        int row;
+        for(int i = 0; i < maxCol; i++){
+            for(int j = 0; j < maxRow; j++){
+                index = i*maxCol + j;
+                if(seats.get(index).isTaken()){
+                    if(j == 1){
+                        System.out.print("X   ");
+                    }else if(j == 7){
+                        System.out.print("X   ");
+                    }else if(j == 0){
+                        System.out.print(Converter.intToChar(i)+" X ");
+                    }
+                    else{
+                        System.out.print("X ");
+                    }
+                }else{
+                    if(j == 1){
+                        System.out.print("O   ");
+                    }else if(j == 7){
+                        System.out.print("O   ");
+                    }else if(j == 0){
+                        System.out.print(Converter.intToChar(i)+" O ");
+                    }
+                    else{
+                        System.out.print("O ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+        for(int i = 0; i < maxCol; i++){
+            if(i == 1){
+                System.out.print(i+ "   ");
+            }else if(i == 7){
+                System.out.print(i+ "   ");
+            }else if(i == 0){
+                System.out.print("  " + i + " ");
+            }else{
+                System.out.print(i+ " ");
             }
         }
-        if (this.aisleLocation == '\u0000') {
-            return max ;
-        } else {
-            return max + 1;
-        }
-
+        System.out.println();
     }
 
-    public char getMaxRow() {
-        char max = 'A';
-        int i;
-        for (i = 0; i < this.seats.size(); i++) {
-            if (max < this.seats.get(i).getRow()) {
-                max = this.seats.get(i).getRow();
+    public void updateSeats(ArrayList<Integer> s){
+        for(int i = 0; i < s.size(); i++){
+            if(s.get(i) == 0){
+                seats.get(i).unbookSeat();
+            }else if(s.get(i) == 1){
+                seats.get(i).bookSeat();
             }
         }
-        return max;
     }
-
-    private boolean checkSeatOccupied(char row, int col) {
-        for (int i = 0; i < this.occupiedSeats.size(); i++) {
-            Seat s = (Seat)this.occupiedSeats.get(i);
-            if (s.getRow() == row && s.getCol() == col) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 
 
 }

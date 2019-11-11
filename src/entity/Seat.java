@@ -1,29 +1,36 @@
 package entity;
 
 import java.io.Serializable;
+import utils.Converter;
 
 public class Seat implements Serializable {
-    private char row;
-    private int col;
+    boolean taken;
+    String ID;
 
-    public Seat(char row, int col) {
-        this.row = row;
-        this.col = col;
+    public Seat() {
+        taken = false;
     }
 
-    public char getRow() {
-        return row;
+    public boolean isTaken(){
+        return taken;
     }
 
-    public void setRow(char row) {
-        this.row = row;
+    public void bookSeat(){
+        taken = true;
     }
 
-    public int getCol() {
-        return col;
+    public void unbookSeat(){
+        taken = false;
     }
 
-    public void setCol(int col) {
-        this.col = col;
+    public void setSeatID(int index, int maxCol){
+        int row, col;
+        col = index % maxCol;
+        row = (int)Math.floor(index / maxCol);
+        ID = Converter.intToChar(row) + String.valueOf(col);
+    }
+
+    public String getSeatID(){
+        return ID;
     }
 }
