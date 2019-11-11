@@ -48,7 +48,7 @@ public class MovieTicket implements Serializable{
                 this.before6,
                 this.format,
                 this.day);
-        System.out.println(this.price);
+        System.out.println("Ticket Price: " + this.price);
     }
 
     public void setMovieScreening (MovieScreening ms) {

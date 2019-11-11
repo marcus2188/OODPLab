@@ -77,8 +77,8 @@ public class SerializeDB {
     }
 
     public static void main(String[] args) {
-        ArrayList items = (ArrayList) readSerializedObject("cineplex.dat");
-        System.out.println(items.get(0));
+      //   ArrayList items = (ArrayList) readSerializedObject("cineplex.dat");
+       //  System.out.println(items.get(0));
 
     }
 }

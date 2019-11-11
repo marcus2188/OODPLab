@@ -133,18 +133,7 @@ public class Movie implements Serializable{
 		this.ticketSales = ticketSales;
 	}
 	
-	public void appendMovieReviewList() {	//added function
-		Scanner sc = new Scanner(System.in);
-		int rating;
-		System.out.println("Rate this movie: 1 2 3 4 5");
-		do {
-			rating = sc.nextInt();
-			sc.nextLine();
-		} while (rating<1 || rating>5);
-		
-		System.out.println("Comments: ");
-		String comments = sc.nextLine();
-		
+	public void appendMovieReviewList(String comments, int rating) {	//added function
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
 		this.setAvgRating(this.getReview_list());
