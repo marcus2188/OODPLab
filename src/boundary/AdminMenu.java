@@ -145,15 +145,43 @@ public class AdminMenu {
 
         switch(choice) {
             case 1:
-                ((PublicHolidayManager) holidayManager).addHoliday();
+                ScannerErrorHandler scanner = new ScannerErrorHandler();
+                System.out.println("Enter Day (DD): ");
+                int day = scanner.nextInt();
+                while (day < 0 || day > 31) {
+                    System.out.println("Invalid choice, please try again: ");
+                    day = scanner.nextInt();
+                }
+                System.out.println("Enter Month (MM): ");
+                int month = scanner.nextInt();
+                System.out.println("Enter Year (YYYY): ");
+                int year = scanner.nextInt();
+
+                ((PublicHolidayManager) holidayManager).addHoliday(day, month, year);
                 System.out.println("Redirecting to Menu...");
                 MOBLIMA.setAppState( STATE.ADMIN_MENU);
+                break;
             case 2:
-                ((PublicHolidayManager) holidayManager).deleteHoliday();
+                ScannerErrorHandler sc = new ScannerErrorHandler();
+                System.out.println("Enter date to remove");
+                System.out.println("Enter Day (DD): ");
+                day = sc.nextInt();
+                while (day < 0 || day > 31) {
+                    System.out.println("Invalid choice, please try again: ");
+                    day = sc.nextInt();
+                }
+                System.out.println("Enter Month (MM): ");
+                month = sc.nextInt();
+                System.out.println("Enter Year (YYYY): ");
+                year = sc.nextInt();
+
+                ((PublicHolidayManager) holidayManager).deleteHoliday(day, month, year);
                 System.out.println("Redirecting to Menu...");
                 MOBLIMA.setAppState(STATE.ADMIN_MENU);
+                break;
             case 0:
                 MOBLIMA.setAppState( STATE.ADMIN_MENU);
+                break;
         }
     }
 }
