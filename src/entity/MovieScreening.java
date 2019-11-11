@@ -7,34 +7,54 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MovieScreening implements Serializable {
-    private String cineplex;
-    private String cinema;
-    private String movieTitle;
-    private String showDate;
+
+
+
+    private Date showDate;
     private int showTime;
-
     private ArrayList<Seat> occupiedSeats;
+    private  ArrayList<Movie> movies;
+    private ArrayList<Cineplex> cineplexes;
 
-
-    public void printMovieScreening() {
-        System.out.println("Movie Screening details:");
-        System.out.println("Cineplex: " + this.getCineplex());
-        System.out.println("Cinema: " + this.getCinema());
-        System.out.println("Movie: " + this.getMovieTitle());
-        System.out.println("Date: " + this.getShowDate());
-        System.out.println("Time: " + this.getShowTime());
-
-        return;
+    public void setOccupiedSeats(ArrayList<Seat> occupiedSeats) {
+        this.occupiedSeats = occupiedSeats;
     }
 
-    public MovieScreening(String cineplex, String cinema, String movieTitle, String showDate, int showTime) {
+    public void setMovies(String movies) {
+        this.movies.get(0).setTitle(movies);
+    }
 
-        this.cineplex = cineplex;
-        this.cinema = cinema;
-        this.movieTitle = movieTitle;
+    public void setCineplexes(String cineplexesName) {
+        this.cineplexes.get(0).setName(cineplexesName);
+    }
+
+    public void setCinema(String cinemaName) {
+        this.cineplexes.get(0).getCinemas().get(0).setName(cinemaName);
+    }
+
+    public ArrayList<Seat> getOccupiedSeats() {
+        return occupiedSeats;
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    public ArrayList<Cineplex> getCineplexes() {
+        return cineplexes;
+    }
+
+
+
+    public MovieScreening(ArrayList<Cineplex> cineplexes,ArrayList<Movie> movies,Date showDate, int showTime ) {
         this.showDate = showDate;
         this.showTime = showTime;
+        this.movies = movies;
+        this.cineplexes = cineplexes;
     }
+
+
+
 
     public boolean reserveSeat(char row, int col) {
         for (int i = 0; i < this.occupiedSeats.size(); i++) {
@@ -51,36 +71,13 @@ public class MovieScreening implements Serializable {
         return true;
     }
 
-    // get setter
-    public String getCineplex() {
-        return cineplex;
-    }
 
-    public void setCineplex(String cineplex) {
-        this.cineplex = cineplex;
-    }
 
-    public String getCinema() {
-        return cinema;
-    }
-
-    public void setCinema(String cinema) {
-        this.cinema = cinema;
-    }
-
-    public String getMovieTitle() {
-        return movieTitle;
-    }
-
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
-
-    public String getShowDate() {
+    public Date getShowDate() {
         return showDate;
     }
 
-    public void setShowDate(String showDate) {
+    public void setShowDate(Date showDate) {
         this.showDate = showDate;
     }
 
