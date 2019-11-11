@@ -8,9 +8,7 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class MovieScreeningManager implements MovieScreening_inf {
     private ArrayList<MovieScreening> movieScreeningList = new ArrayList<MovieScreening>();
@@ -20,6 +18,44 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     public MovieScreeningManager(){
         this.importData();
+    }
+
+    public ArrayList<MovieScreening> mgMovieprinting(String movieTitle){
+        ArrayList<MovieScreening> userSelection = new ArrayList<MovieScreening>();
+        int userIndex =1;
+        movieScreeningList = sortByDate(movieScreeningList);
+        ArrayList<String> cinplexToPrint = cineplexToPrint(movieTitle);
+        ArrayList<MovieScreening> filteredList =  filterMovieScreening(movieTitle);
+        for(int i =0; i<cinplexToPrint.size();i++){
+            System.out.println("Cineplex:"+cinplexToPrint.get(i));
+            System.out.println("Movie Title: "+movieTitle);
+            for(int j=0; j<filteredList.size();j++){
+                    if(j == 0){
+                        if(filteredList.get(j).getCineplexes().get(0).getName().equals(cineplexList.get(i))){
+                            System.out.println("Date:"+dateFormatter.format(filteredList.get(j).getShowDate()));
+                        }
+
+                    }
+
+                    else if (!dateFormatter.format(filteredList.get(j).getShowDate()).equals(dateFormatter.format(filteredList.get(j-1).getShowDate()))&&filteredList.get(j).getCineplexes().get(0).getName().equals(cinplexToPrint.get(i))) {
+                            System.out.println();
+                            System.out.println("Date:" + dateFormatter.format(filteredList.get(j).getShowDate()));
+                        }
+
+                    if(cinplexToPrint.get(i).equals(filteredList.get(j).getCineplexes().get(0).getName())){
+                        userSelection.add(filteredList.get(j));
+                        System.out.print(String.format("%04d",filteredList.get(j).getShowTime()) + "["+userIndex+"]"+" ");
+                        userIndex++;
+                    }
+
+            }
+            System.out.println();
+            System.out.println("=================");
+        }
+
+
+
+        return userSelection;
     }
 
     public void createMovieScreening() {
@@ -232,6 +268,54 @@ public class MovieScreeningManager implements MovieScreening_inf {
             String movieTitle = this.movieList.get(i).getTitle();
             System.out.println((i+1) + ". " + movieTitle);
         }
+    }
+
+    public ArrayList<String> sortDateList(){
+        ArrayList<String> dateList = new ArrayList<String>();
+        for(int i =0; i < movieScreeningList.size();i++){
+            String movieScreeningDate = dateFormatter.format(movieScreeningList.get(i).getShowDate());
+            if(!dateList.contains(movieScreeningDate)){
+                dateList.add(movieScreeningDate);
+            }
+        }
+        // sort the date in order
+        Collections.sort(dateList);
+        return dateList;
+    }
+
+    public ArrayList<String> cineplexToPrint(String movieTitle){
+        ArrayList<String> cineplexToShow = new ArrayList<String>();
+        for(int i =0; i < movieScreeningList.size();i++){
+            String movie = movieScreeningList.get(i).getMovies().get(0).getTitle();
+            String cineplex = movieScreeningList.get(i).getCineplexes().get(0).getName();
+            if(movie.equals(movieTitle)){
+                if(!cineplexToShow.contains(cineplex)){
+                    cineplexToShow.add(cineplex);
+                }
+            }
+
+        }
+        return cineplexToShow;
+    }
+
+    public ArrayList<MovieScreening> filterMovieScreening(String movieTitle){
+        ArrayList<MovieScreening> filtedList = new ArrayList<MovieScreening>();
+        for(int i =0; i < movieScreeningList.size();i++){
+            String movie = movieScreeningList.get(i).getMovies().get(0).getTitle();
+            if(movie.equals(movieTitle)){
+                if(!filtedList.contains(movie)){
+                    filtedList.add(movieScreeningList.get(i));
+                }
+            }
+
+        }
+        return filtedList;
+    }
+
+    public ArrayList<MovieScreening> sortByDate(ArrayList<MovieScreening> movieScreeningList){
+        movieScreeningList.sort(Comparator.comparing(o->o.getShowTime()));
+        movieScreeningList.sort(Comparator.comparing(o->o.getShowDate()));
+        return movieScreeningList;
     }
 
 

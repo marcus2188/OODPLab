@@ -8,9 +8,10 @@ public class BengTester {
     public static void main(String[] args) {
         MovieScreeningManager screeningManager = new MovieScreeningManager();
         //screeningManager.printScreeningList();
-        screeningManager.updateMovieScreening();
+        //screeningManager.updateMovieScreening();
         //screeningManager.deleteMovieScreening();
         //screeningManager.createMovieScreening();
+        screeningManager.mgMovieprinting("Avenger");
     }
 
 }
