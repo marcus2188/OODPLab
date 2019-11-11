@@ -121,7 +121,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
         // System.out.println("Day is" + day);
         
-        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
+        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)-1.00);
         
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
@@ -138,7 +138,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         this.neword.addticket(mt);
         
         // TELLS USER TICKET IS SUCCESSFULLY BOOKED
-        System.out.println("Ticket has been booked");
+        System.out.println("Ticket has been added to your shopping cart");
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER

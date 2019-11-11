@@ -29,7 +29,7 @@ public class marcusTest {
 		System.out.println("2. view current shopping cart");  // TESTED WORKING
 		System.out.println("3. make your purchase");
 		System.out.println("4. see purchase history"); // TESTED WORKING
-		System.out.println("5. see all past purchasers");      // TESTED WORKING
+		System.out.println("5. see all past purchasers");      // TESTED WORKING 
 		System.out.println("6. clear current shopping cart");   // TESTED WORKING
 		System.out.println("7. quit now");    
 		System.out.println("-------------------------------------");
