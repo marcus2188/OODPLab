@@ -44,8 +44,8 @@ public class PriceTable {
 
             for (int i = 0; i < priceTable.size(); i++) {
                 PriceTableTicket ticket = priceTable.get(i);
-                if (ticket.getFormat() == ScreeningFormat.THREEDIMENSION
-                && ticket.getAgeGroup() == AgeGroup.REGULAR
+                if (ticket.getFormat().equals(ScreeningFormat.THREEDIMENSION)
+                && ticket.getAgeGroup().equals(AgeGroup.REGULAR)
                 && ticket.isBefore6() == isBefore6
                         && ticket.getDay() == day
                         && ticket.isWeekday() == isWeekDay
@@ -58,8 +58,8 @@ public class PriceTable {
         } else if (format == ScreeningFormat.REGULAR) {
             for (int i = 0; i < priceTable.size(); i++) {
                 PriceTableTicket ticket = priceTable.get(i);
-                if (ticket.getFormat() == ScreeningFormat.REGULAR
-                        && ticket.getAgeGroup() == AgeGroup.REGULAR
+                if (ticket.getFormat().equals(ScreeningFormat.REGULAR)
+                        && ticket.getAgeGroup().equals(AgeGroup.REGULAR)
                         && ticket.isBefore6() == isBefore6
                         && ticket.getDay() == day
                         && ticket.isWeekday() == isWeekDay
