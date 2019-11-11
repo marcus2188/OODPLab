@@ -43,7 +43,7 @@ public class TextTicketDB {
 
     public static List read (String filename) throws IOException {
         List data = new ArrayList();
-        Scanner scan = new Scanner( new FileInputStream("data/" + filename));
+        Scanner scan = new Scanner( new FileInputStream("src/data/" + filename));
         try {
             while(scan.hasNextLine()) {
                 data.add(scan.nextLine());
@@ -87,7 +87,7 @@ public class TextTicketDB {
     }
 
     public static void write(String filename, List data) throws IOException {
-        PrintWriter out = new PrintWriter(new FileWriter("data/" + filename));
+        PrintWriter out = new PrintWriter(new FileWriter("src/data/" + filename));
 
         try {
             for (int i =0; i < data.size(); i++) {

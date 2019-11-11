@@ -14,7 +14,7 @@ public class SerializeDB {
         ObjectInputStream in = null;
 
         try {
-            fis = new FileInputStream("data/" + filename);
+            fis = new FileInputStream("src/data/" + filename);
             in = new ObjectInputStream(fis);
             details = (ArrayList) in.readObject();
             in.close();
@@ -48,7 +48,7 @@ public class SerializeDB {
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
-            fos = new FileOutputStream("data/"+filename);
+            fos = new FileOutputStream("src/data/"+filename);
             out = new ObjectOutputStream(fos);
             out.writeObject(list);
             out.close();
