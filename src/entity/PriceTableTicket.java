@@ -65,4 +65,10 @@ public class PriceTableTicket {
         this.format = format;
         this.day = day;
     }
+
+    public void printTicketDetails() {
+        System.out.println("======================================================");
+        System.out.printf("Price: $%.2f\n", this.price);
+        System.out.println("======================================================");
+    }
 }
