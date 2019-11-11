@@ -162,7 +162,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
        }
 
        else if (attr==4) {
-           System.out.println("Current Date: "+this.movieScreeningList.get(choice-1).getShowDate());
+           System.out.print("Current Date: ");
+           Date newdate = movieScreeningList.get(choice-1).getShowDate();
+           String showdate = dateFormatter.format(newdate);
+           System.out.println(showdate);
            System.out.println("Enter New Date:(dd/MM/yyyy)");
 
            String dateInStr = scan.nextLine();
@@ -179,7 +182,15 @@ public class MovieScreeningManager implements MovieScreening_inf {
        }
 
        else if (attr==5) {
-           System.out.println("Current Time: "+this.movieScreeningList.get(choice-1).getShowTime());
+           System.out.println("Current Time: ");
+           int theTiming =this.movieScreeningList.get(choice-1).getShowTime();
+           if(theTiming < 1000){
+               String leftpadTime = String.format("%04d",theTiming);
+               System.out.println(leftpadTime);
+           }
+           else{
+               System.out.println(theTiming);
+           }
            System.out.println("Enter New Time: ");
            int showTime = scan.nextInt();
            this.movieScreeningList.get(choice-1).setShowTime(showTime);

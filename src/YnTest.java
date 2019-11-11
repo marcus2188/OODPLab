@@ -18,9 +18,9 @@ public class YnTest {
         
         ArrayList<String> cast = new ArrayList<String>(Arrays.asList("Nigel","Yuan Neng", "Marcus", "Beng", "Jozua"));
         
-        Movie movie1 = new Movie("Hello world", "Now Showing", (LocalDate) null, "World says hello to all", "Owen", cast, (float) 5.0, true, r, 9999999);
+        Movie movie1 = new Movie("Avenger", "Now Showing", (LocalDate) null, "World says hello to all", "Owen", cast, (float) 5.0, true, r, 9999999);
         movie1.printMovie();
-        Movie movie2 = new Movie("Hello world", "Now Showing", (LocalDate) null, "World says hello to all", "Noel", cast, (float) 5.0, true, r, 9999999);
+        Movie movie2 = new Movie("Ironman", "Now Showing", (LocalDate) null, "World says hello to all", "Noel", cast, (float) 5.0, true, r, 9999999);
         movie2.printMovie();
         
         ArrayList<Movie> m = new ArrayList<Movie>(Arrays.asList(movie1,movie2));
