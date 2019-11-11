@@ -60,7 +60,7 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 			rating = sc.nextInt();
 			sc.nextLine();
 		} while (rating<1 || rating>5);
-		
+		System.out.println("Please enter a comment: ");
 		String comments = sc.nextLine();
 		
 		d.appendMovieReview(comments, rating);
