@@ -24,19 +24,9 @@ public class PublicHolidayManager implements PublicHoliday_inf {
         }
     }
 
-    public void addHoliday() {
+    public void addHoliday(int day, int month, int year) {
         // Scanner scan = new Scanner(System.in);
-        ScannerErrorHandler scan = new ScannerErrorHandler();
-        System.out.println("Enter Day (DD): ");
-        int day = scan.nextInt();
-        while (day < 0 || day > 31) {
-            System.out.println("Invalid choice, please try again: ");
-            day = scan.nextInt();
-        }
-        System.out.println("Enter Month (MM): ");
-        int month = scan.nextInt();
-        System.out.println("Enter Year (YYYY): ");
-        int year = scan.nextInt();
+
         Date newDate = new GregorianCalendar(year, month -1, day).getTime();
 
         this.holidays.add(newDate);
@@ -45,20 +35,9 @@ public class PublicHolidayManager implements PublicHoliday_inf {
         System.out.println("Holiday Added!");
     }
 
-    public void deleteHoliday() {
+    public void deleteHoliday(int day, int month, int year) {
         // Scanner scan = new Scanner(System.in);
-        ScannerErrorHandler scan = new ScannerErrorHandler();
-        System.out.println("Enter date to remove");
-        System.out.println("Enter Day (DD): ");
-        int day = scan.nextInt();
-        while (day < 0 || day > 31) {
-            System.out.println("Invalid choice, please try again: ");
-            day = scan.nextInt();
-        }
-        System.out.println("Enter Month (MM): ");
-        int month = scan.nextInt();
-        System.out.println("Enter Year (YYYY): ");
-        int year = scan.nextInt();
+
         Date newDate = new GregorianCalendar(year, month -1, day).getTime();
 
         for (int i= 0; i < this.holidays.size(); i++) {
