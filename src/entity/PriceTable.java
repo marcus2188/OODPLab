@@ -23,13 +23,15 @@ public class PriceTable {
             ScreeningFormat format,
             int day
     ) {
+
         for (int i =0; i < priceTable.size(); i++){
             PriceTableTicket sampleTicket = priceTable.get(i);
+
             if(
-             sampleTicket.getAgeGroup() == ageGroup
+             sampleTicket.getAgeGroup().equals(ageGroup)
              && sampleTicket.isWeekday() == isWeekDay
               && sampleTicket.isBefore6() == isBefore6
-             && sampleTicket.getFormat() == format
+             && sampleTicket.getFormat().equals(format)
              && sampleTicket.getDay() == day
             ) {
                 System.out.println("Age Group: " + ageGroup);
@@ -40,7 +42,7 @@ public class PriceTable {
                 return sampleTicket.getPrice();
             }
          }
-        if (format == ScreeningFormat.THREEDIMENSION) {
+        if (format.equals(ScreeningFormat.THREEDIMENSION)) {
 
             for (int i = 0; i < priceTable.size(); i++) {
                 PriceTableTicket ticket = priceTable.get(i);
@@ -55,7 +57,7 @@ public class PriceTable {
                 }
             }
 
-        } else if (format == ScreeningFormat.REGULAR) {
+        } else if (format.equals(ScreeningFormat.REGULAR)){
             for (int i = 0; i < priceTable.size(); i++) {
                 PriceTableTicket ticket = priceTable.get(i);
                 if (ticket.getFormat().equals(ScreeningFormat.REGULAR)
@@ -69,8 +71,7 @@ public class PriceTable {
                 }
             }
         }
+        System.out.println("Last");
         return 0;
-
-
     }
 }
