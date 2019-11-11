@@ -33,7 +33,7 @@ public class marcusTest {
 		System.out.println("6. clear current shopping cart");
 		System.out.println("-------------------------------------");
 		System.out.println("What do you wanna do? : ");
-
+		// merged with jozua
 		int choice = sc.nextInt();
 		switch(choice) {
 		case 1: ms.bookTicket(mj, 'R', 8); break;
