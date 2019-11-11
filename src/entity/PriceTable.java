@@ -34,11 +34,6 @@ public class PriceTable {
              && sampleTicket.getFormat().equals(format)
              && sampleTicket.getDay() == day
             ) {
-                System.out.println("Age Group: " + ageGroup);
-                System.out.println("Before 6: "+ isBefore6);
-                System.out.println("Weekday: " + isWeekDay);
-                System.out.println("Screening Format: " + format);
-                System.out.println("Ticket price: " + sampleTicket.getPrice());
                 return sampleTicket.getPrice();
             }
          }

@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ShoppingOrder implements Serializable{
+	ArrayList<MovieTicket> tickets;
+	Date dateofPurchase;
+	
 	public ShoppingOrder(ArrayList<MovieTicket> tix, Date dop){
 		this.tickets = tix;
 		this.dateofPurchase = dop;
 	}
-	ArrayList<MovieTicket> tickets;
-	Date dateofPurchase;
+	
     
     public void addticket(MovieTicket mt) throws ParseException {
     	this.tickets.add(mt);
