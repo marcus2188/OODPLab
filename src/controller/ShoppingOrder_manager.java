@@ -47,7 +47,16 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
 	public void bookTicket(MovieScreening obj, char row, int col) throws ParseException {
+		
+		
+		// Ask user for their choice of cineplex, cinema, movietitle, showdate, showtime
+		// Call beng's print all movies method, his method will return me a arraylist of movie objects.
+		MovieScreening mj;
+		
+		
+		
 		this.obj = obj;
+		System.out.println("Please enter ");
 		// GET BEFORE6 boolean
         boolean before6;
         Date date = new Date();
@@ -99,7 +108,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         System.out.println("What screening format?");
         System.out.println("1. 3D");
         System.out.println("2. Regular");
-        System.out.println("3. Blockbuster");
         choice = scan.nextInt();
         switch (choice) {
             case 1:
@@ -107,9 +115,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
                 break;
             case 2:
                 screeningFormat = ScreeningFormat.REGULAR;
-                break;
-            case 3:
-                screeningFormat = ScreeningFormat.BLOCKBUSTER;
                 break;
             default:
                 screeningFormat = ScreeningFormat.REGULAR;
@@ -121,7 +126,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
         // System.out.println("Day is" + day);
         
-        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)0.00);
+        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)-1.00);
         
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
@@ -138,7 +143,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         this.neword.addticket(mt);
         
         // TELLS USER TICKET IS SUCCESSFULLY BOOKED
-        System.out.println("Ticket has been booked");
+        System.out.println("Ticket has been added to your shopping cart");
 	}
 	
 	// MAIN CALLS THIS FUNCTION TO ACTUALLY PURCHASE THE TICKETS INSIDE SHOPPING ORDER

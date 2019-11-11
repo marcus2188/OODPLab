@@ -23,8 +23,8 @@ public class TextTicketDB {
 
                 StringTokenizer star = new StringTokenizer(st, SEPARATOR);
 
-                boolean weekday = star.nextToken().trim().equals("weekday") ? true : false;
-                boolean before6 = star.nextToken().trim().equals("before6") ? true : false;
+                boolean weekday = star.nextToken().trim().equals("true") ? true : false;
+                boolean before6 = star.nextToken().trim().equals("true") ? true : false;
                 AgeGroup ageGroup = AgeGroup.valueOf(star.nextToken().trim());
                 ScreeningFormat format = ScreeningFormat.valueOf(star.nextToken().trim());
                 int day = Integer.parseInt(star.nextToken().trim());
