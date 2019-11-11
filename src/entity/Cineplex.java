@@ -7,10 +7,12 @@ public class Cineplex implements Serializable {
     private ArrayList<Cinema> cinemas;
     private String name;
 
-    public Cineplex(ArrayList<Cinema> cinemas, String name) {
-
-        this.cinemas = cinemas;
+    public Cineplex(String name, String ID) {
         this.name = name;
+        cinemas = new ArrayList<Cinema>();
+        cinemas.add(new Cinema("Hall 1", ID + "1", this));
+        cinemas.add(new Cinema("Hall 2", ID + "2", this));
+        cinemas.add(new PlatinumCinema("Hall 3", ID + "3", this));
     }
 
     public ArrayList<Cinema> getCinemas() {

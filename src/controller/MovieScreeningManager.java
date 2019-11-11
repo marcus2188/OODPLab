@@ -62,13 +62,15 @@ public class MovieScreeningManager implements MovieScreening_inf {
         ScannerErrorHandler scan = new ScannerErrorHandler();
         int cineplexchoice;
         int cinemaChoice;
+
         System.out.println("===Create Movie Screening===");
         System.out.println("Please Select Cineplex ");
         printCineplex();
         cineplexchoice = scan.nextInt();
+        Cineplex cineplex = cineplexList.get(cineplexchoice-1);
 
         System.out.println("Please Select Cinema ");
-        printCinema(cineplexchoice-1);
+        printCinema(cineplex);
         cinemaChoice = scan.nextInt();
 
 
@@ -84,32 +86,37 @@ public class MovieScreeningManager implements MovieScreening_inf {
             date = dateFormatter.parse(dateInStr);
         } catch (ParseException e) {
             e.printStackTrace();
-            System.out.println("Problematic la: ");
+            System.out.println("Wrong Format!");
         }
 
         System.out.println("Enter time: (HHMM)");
         int timeSlot = scan.nextInt();
 
+        /*
         ArrayList<Seat> seats= ((Cineplex)cineplexList.get(cineplexchoice-1)).getCinemas().get(cinemaChoice-1).getSeats();
         ArrayList<Seat> occupySeats= ((Cineplex)cineplexList.get(cineplexchoice-1)).getCinemas().get(cinemaChoice-1).getOccupiedSeats();
         int aisleLocation = ((Cineplex)cineplexList.get(cineplexchoice-1)).getCinemas().get(cinemaChoice-1).getAisleLocation();
         String name = ((Cineplex)cineplexList.get(cineplexchoice-1)).getCinemas().get(cinemaChoice-1).getName();
         String cinemaID = ((Cineplex)cineplexList.get(cineplexchoice-1)).getCinemas().get(cinemaChoice-1).getCinemaID();
         String cineplexName2 = ((Cineplex)cineplexList.get(cineplexchoice-1)).getName();
-        Cinema cinema = new Cinema(seats,occupySeats,aisleLocation,name,cinemaID);
+        */
+        Cinema cinema = cineplex.getCinemas().get(cinemaChoice-1);
+        Movie movie = movieList.get(movieIndex-1);
+        /*
         ArrayList<Cinema> cinemaArrayList = new ArrayList<Cinema>();
         cinemaArrayList.add(cinema);
         ArrayList<Movie> movie = new ArrayList<Movie>();
         movie.add(movieList.get(movieIndex-1));
-
+        */
+        /*
         Cineplex cineplex = new Cineplex(cinemaArrayList,cineplexName2);
         ArrayList<Cineplex> cineplexList = new ArrayList<Cineplex>();
         cineplexList.add(cineplex);
+        */
 
-
-        MovieScreening newScreening = new MovieScreening(cineplexList,movie,date,timeSlot);
+        MovieScreening newScreening = new MovieScreening(cinema, movie,date,timeSlot);
         this.movieScreeningList.add(newScreening);
-        SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+        SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
         System.out.println("Movie Screening Added!");
 
     }
@@ -117,34 +124,26 @@ public class MovieScreeningManager implements MovieScreening_inf {
     public void printScreeningList() {
         System.out.println("===The Current Screening Value===");
         for (int i = 0; i < this.movieScreeningList.size(); i++) {
-            System.out.println("["+(i+1)+"]"+"Cineplex: "+ movieScreeningList.get(i).getCineplexes().get(0).getName());
-            System.out.println("Cinema:"+movieScreeningList.get(i).getCineplexes().get(0).getCinemas().get(0).getName());
-            System.out.println( "Movie:"+ movieScreeningList.get(i).getMovies().get(0).getTitle());
-            int theTiming = movieScreeningList.get(i).getShowTime();
-            if(theTiming < 1000){
-                String leftpadTime = String.format("%04d",theTiming);
-            }
-            Date newdate = movieScreeningList.get(i).getShowDate();
-            String showdate = dateFormatter.format(newdate);
-
-            System.out.println( "Show Date:"+ showdate);
-
-            if(theTiming < 1000){
-                String leftpadTime = String.format("%04d",theTiming);
-                System.out.println("Show Time: " + leftpadTime);
-            }
-            else{
-                System.out.println("Show Time: " + theTiming);
-            }
-         System.out.println("===============");
+            System.out.print("["+(i+1)+"]");
+            movieScreeningList.get(i).printMovieScreening();
         }
     }
-   public void updateMovieScreening() { // TODO: to be done by BENG
+
+   public void updateMovieScreening() { 
+       int cineplexchoice;
+       Cineplex cineplex;
+       int cinemachoice;
+       MovieScreening movieScreening;
+       Cinema cinema;
+       Movie movie;
+
 
        printScreeningList();
        System.out.println("===Please select the index to Update===");
        ScannerErrorHandler scan = new ScannerErrorHandler();
        int choice = scan.nextInt();
+       movieScreening = movieScreeningList.get(choice-1);
+
        int attr=0;
        do {
            System.out.println("What attribute would you like to update?");
@@ -157,51 +156,45 @@ public class MovieScreeningManager implements MovieScreening_inf {
        } while (attr <0 && attr>5);
 
        if (attr==1) {
-           System.out.println("Current Cineplex: "+this.movieScreeningList.get(choice-1).getCineplexes().get(0).getName());
+           System.out.println("Current Cineplex: "+ movieScreening.getCineplex().getName());
            System.out.println("Select New Cineplex Index: ");
            printCineplex();
-           int cineplexchoice;
            cineplexchoice  = scan.nextInt();
-           this.movieScreeningList.get(choice-1).setCineplexes(cineplexList.get(cineplexchoice-1).getName());
-           SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+           cineplex = cineplexList.get(cineplexchoice-1);
+           System.out.println("Select New Cinema Index: ");
+           printCinema(cineplex);
+           cinemachoice = scan.nextInt();
+           cinema = cineplex.getCinemas().get(cinemachoice-1);
+           movieScreening.setCineplex(cinema);
+           SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
            System.out.println("Successfully Updated!");
        }
 
        else if (attr==2) {
-           System.out.println("Current Cinema: "+this.movieScreeningList.get(choice-1).getCineplexes().get(0).getCinemas().get(0).getName());
+           System.out.println("Current Cinema: "+ movieScreening.getCinema().getName());
            System.out.println("Select New Cinema Index: ");
-           int cineplexchoice =0;
-           String currentCineplex = this.movieScreeningList.get(choice-1).getCineplexes().get(0).getCinemas().get(0).getName();
-           // get cineplex index
-           for(int i =0; i < this.cineplexList.size();i++){
-               if (currentCineplex.equals(this.cineplexList.get(i).getName())){
-                   cineplexchoice = i;
-                   break;
-               }
-           }
-           printCinema(cineplexchoice);
-           int cinemaChoice = scan.nextInt();
-           this.movieScreeningList.get(choice-1).setCinema(cineplexList.get(cineplexchoice).getCinemas().get(cinemaChoice-1).getName());
-           SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+           cineplex = movieScreening.getCinema().getCineplex();
+           printCinema(cineplex);
+           cinemachoice = scan.nextInt();
+           cinema = cineplex.getCinemas().get(cinemachoice-1);
+           movieScreening.setCinema(cinema);
+           SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
            System.out.println("Successfully Updated!");
        }
 
        else if (attr==3) {
-           System.out.println("Current Movie: "+this.movieScreeningList.get(choice-1).getMovies().get(0).getTitle());
-           // TO ADD YN PART
+           System.out.println("Current Movie: "+movieScreening.getMovie().getTitle());
            System.out.println("Select New Movie Index: ");
            printMovie();
            int movieChoice = scan.nextInt();
-           this.movieScreeningList.get(choice-1).setMovies(movieList.get(movieChoice-1).getTitle());
-           SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+           movie = movieList.get(movieChoice-1);
+           movieScreening.setMovie(movie);
+           SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
            System.out.println("Successfully Updated!");
        }
 
        else if (attr==4) {
-           System.out.print("Current Date: ");
-           Date newdate = movieScreeningList.get(choice-1).getShowDate();
-           String showdate = dateFormatter.format(newdate);
-           System.out.println(showdate);
+           System.out.println("Current Date: "+movieScreening.getShowDate());
            System.out.println("Enter New Date:(dd/MM/yyyy)");
 
            String dateInStr = scan.nextLine();
@@ -210,43 +203,33 @@ public class MovieScreeningManager implements MovieScreening_inf {
                date = dateFormatter.parse(dateInStr);
            } catch (ParseException e) {
                e.printStackTrace();
-               System.out.println("Problematic la: ");
+               System.out.println("Wrong Format!");
            }
-           this.movieScreeningList.get(choice-1).setShowDate(date);
-           SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+           movieScreening.setShowDate(date);
+           SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
            System.out.println("Successfully Updated!");
        }
 
        else if (attr==5) {
-           System.out.println("Current Time: ");
-           int theTiming =this.movieScreeningList.get(choice-1).getShowTime();
-           if(theTiming < 1000){
-               String leftpadTime = String.format("%04d",theTiming);
-               System.out.println(leftpadTime);
-           }
-           else{
-               System.out.println(theTiming);
-           }
+           System.out.println("Current Time: "+movieScreening.getShowTime());
            System.out.println("Enter New Time: ");
            int showTime = scan.nextInt();
-           this.movieScreeningList.get(choice-1).setShowTime(showTime);
-           SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+           movieScreening.setShowTime(showTime);
+           SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
            System.out.println("Successfully Updated!");
        }
    }
 
 
 
-   public void deleteMovieScreening() { // TODO: to be done by BENG
+   public void deleteMovieScreening() {
        printScreeningList();
        System.out.println("===Please select the index to remove===");
        ScannerErrorHandler scan = new ScannerErrorHandler();
        int choice = scan.nextInt();
        movieScreeningList.remove(choice-1);
-       SerializeDB.writeSerializedObject("moviescreening4.dat", this.movieScreeningList);
+       SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
        System.out.println("Have been successfully removed");
-
-
    }
 
     private void printCineplex(){
@@ -256,9 +239,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
         }
     }
 
-    private void printCinema(int cineplexchoice){
-        for( int i = 0; i < this.cineplexList.get(cineplexchoice).getCinemas().size(); i++){
-            String cinemaName = this.cineplexList.get(cineplexchoice).getCinemas().get(i).getName();
+    private void printCinema(Cineplex cineplex){
+        for( int i = 0; i < cineplex.getCinemas().size(); i++){
+            String cinemaName = cineplex.getCinemas().get(i).getName();
             System.out.println((i+1) + ". " + cinemaName);
         }
     }
@@ -320,13 +303,8 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
 
     public void importData() {
-        this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening4.dat");
-        this.cineplexList = (ArrayList) SerializeDB.readSerializedObject("cineplex6.dat");
-        this.movieList = (ArrayList) SerializeDB.readSerializedObject("Movie2.dat");
+        this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
+        this.cineplexList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
+        this.movieList = (ArrayList) SerializeDB.readSerializedObject("Movie.dat");
     }
-
-
-
-
-
 }

@@ -5,6 +5,7 @@ import entity.MovieScreening;
 import entity.MovieTicket;
 import entity.ScreeningFormat;
 import entity.ShoppingOrder;
+import entity.Seat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ import utils.SerializeDB;
 
 
 public class ShoppingOrder_manager implements ShoppingOrder_inf{
-	Scanner se = new Scanner(System.in);
+	ScannerErrorHandler se = new ScannerErrorHandler();
 	ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
 	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
 	MovieScreening obj;
@@ -46,21 +47,13 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	}
 	
 	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
-	public void bookTicket(MovieScreening obj, char row, int col) throws ParseException {
-		
-		
-		// Ask user for their choice of cineplex, cinema, movietitle, showdate, showtime
-		// Call beng's print all movies method, his method will return me a arraylist of movie objects.
-		MovieScreening mj;
-		
-		
-		
-		this.obj = obj;
+	public void bookTicket(MovieScreening obj, Seat seat) throws ParseException {
 		System.out.println("Please enter ");
 		// GET BEFORE6 boolean
         boolean before6;
-        Date date = new Date();
+        Date date = obj.getShowDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yymmdd");
         dateFormat.format(date);
         if (dateFormat.parse(dateFormat.format(date)).after(dateFormat.parse("18:00"))) {
             before6 = false;
@@ -125,20 +118,19 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
         // System.out.println("Day is" + day);
-        
+        System.out.println("1");
         MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)-1.00);
         
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
-        
         // SET THE REST OF THE TICKET ATTRIBUTES
-        mt.setMovieScreening(this.obj);
-        
+        mt.setMovieScreening(obj);
         // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
-        String seatno = Character.toString(row) + Integer.toString(col);
-        mt.setSeat(seatno);
-        
-        // SET THE TID OF TICKET   //TBC
+        //String seatno = Character.toString(row) + Integer.toString(col);
+        mt.setSeat(seat);
+        // SET THE TID OF TICKETDate date = Calendar.getInstance().getTime();   
+		String id = obj.getCinema().getCinemaID() + dateFormat2.format(obj.getShowDate()) + String.valueOf(obj.getShowTime());
+		mt.setTID(id);
         //mt.setTID(this.obj.getShowDate() + this.obj.getCinema());
         this.neword.addticket(mt);
         
@@ -168,9 +160,10 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.people.add(g);
 	
 		
-		// MOVE ALL TICKETS FROM SHOPPING ORDER INTO PAYMENT HISTORY ARRAYLIST
+		// MOVE ALL TICKETS FROM SHOPPING ORDER INTO PAYMENT HISTORY ARRAYLIST AND UPDATE TICKETSALES
 		for(int i = 0; i < this.neword.returnticketarray().size();i++) {
 			PaymentHist.add(neword.returnticketarray().get(i));
+			neword.returnticketarray().get(i).getMovieScreening().getMovie().addTicketSales();
 		}
 		
 		// PRINT PAYMENT SUMMARY

@@ -45,6 +45,9 @@ public class Movie implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getShowStatus() {
+		return showingStatus;
+	}
 	
 	public String getShowingStatus() {
 		if (this.showingStatus=="EndofShowing") return showingStatus+" "+this.getEndOfShowingDate();
@@ -131,6 +134,10 @@ public class Movie implements Serializable{
 
 	public void setTicketSales(int ticketSales) {
 		this.ticketSales = ticketSales;
+	}
+
+	public void addTicketSales(){
+		this.ticketSales++;
 	}
 	
 	public void appendMovieReviewList(String comments, int rating) {	//added function
