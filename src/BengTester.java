@@ -11,7 +11,8 @@ public class BengTester {
         //screeningManager.updateMovieScreening();
         //screeningManager.deleteMovieScreening();
         //screeningManager.createMovieScreening();
-        screeningManager.mgMovieprinting("Avenger");
+        screeningManager.mgMovieprinting("Joker");
+        //screeningManager.viewAllListing();
     }
 
 }
