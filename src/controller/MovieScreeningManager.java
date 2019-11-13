@@ -8,7 +8,9 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,7 +23,39 @@ public class MovieScreeningManager implements MovieScreening_inf {
     public MovieScreeningManager(){
         this.importData();
     }
+    
+    public ArrayList<MovieScreening> getMovieScreeningList() {
+		return movieScreeningList;
+	}
 
+	public void setMovieScreeningList(ArrayList<MovieScreening> movieScreeningList) {
+		this.movieScreeningList = movieScreeningList;
+	}
+
+	public ArrayList<Cineplex> getCineplexList() {
+		return cineplexList;
+	}
+
+	public void setCineplexList(ArrayList<Cineplex> cineplexList) {
+		this.cineplexList = cineplexList;
+	}
+
+	public ArrayList<Movie> getMovieList() {
+		return movieList;
+	}
+
+	public void setMovieList(ArrayList<Movie> movieList) {
+		this.movieList = movieList;
+	}
+
+	public DateFormat getDateFormatter() {
+		return dateFormatter;
+	}
+
+	public void setDateFormatter(DateFormat dateFormatter) {
+		this.dateFormatter = dateFormatter;
+	}
+    
     public void createMovieScreening() {
         ScannerErrorHandler scan = new ScannerErrorHandler();
         int cineplexchoice;
@@ -221,6 +255,21 @@ public class MovieScreeningManager implements MovieScreening_inf {
     public void importData() {
         this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
         this.cineplexList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
-        this.movieList = (ArrayList) SerializeDB.readSerializedObject("Movie.dat");
+        this.movieList = getBookableMovies((ArrayList) SerializeDB.readSerializedObject("Movie.dat"));
     }
+    
+    public ArrayList<Movie> getBookableMovies (ArrayList<Movie> m) {
+    	for (int i=0;i<m.size();i++) {
+    		if (m.get(i).getShowingStatus().equalsIgnoreCase("End of Showing")) {
+    			m.remove(i);
+    			i--;
+    		}
+    	}
+    	return m;
+    }
+
+	
+    
+    
+    
 }
