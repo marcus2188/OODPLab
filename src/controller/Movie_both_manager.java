@@ -32,7 +32,7 @@ public class Movie_both_manager {
         }
         
         //copy out the ArrayList<Movie>
-        ArrayList<Movie> tmplist = (ArrayList<Movie>) m.clone();
+        ArrayList<Movie> tmplist = new ArrayList<Movie>();
 		Movie tmp;
 		if (choice==1) {	
 			//sort by ticketSales
@@ -57,10 +57,8 @@ public class Movie_both_manager {
 			//transfer NA ratings away first
 			ArrayList<Movie> nr = new ArrayList<Movie>();
 			for (int i=0;i<m.size();i++) {
-				if (m.get(i).getAvgRating()==-1) {
-					nr.add(m.get(i));
-					tmplist.remove(i);
-				}
+				if (m.get(i).getAvgRating()==-1) nr.add(m.get(i));
+				else tmplist.add(m.get(i));
 			}
 			
 			//sort nonNA ratings
@@ -84,8 +82,8 @@ public class Movie_both_manager {
 			System.out.println("\nMovies with rating NA:");
 			for (int i=0;i<nr.size();i++) {
 				System.out.println(nr.get(i).getTitle());
-				System.out.println();
 			}
+			System.out.println();
 		}
 	}
 	
@@ -113,17 +111,6 @@ public class Movie_both_manager {
 		for (int i=0;i<m.size();i++) {
 			System.out.println((i+1)+ ". "+m.get(i).getTitle() );
 		}
+		System.out.println();
 	}
-	
-	public ArrayList<Movie> getBookableMovies() {
-		int size = this.getM().size();
-		ArrayList<Movie> bookables = this.getM();
-		for (int i=0;i<size;i++) {
-			if (bookables.get(i).getShowingStatus().equals("End of Showing")) {
-				bookables.remove(i);
-			}
-		}
-		return bookables;
-	}
-
 }
