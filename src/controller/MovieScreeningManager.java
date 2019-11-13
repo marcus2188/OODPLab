@@ -27,38 +27,50 @@ public class MovieScreeningManager implements MovieScreening_inf {
         ArrayList<String> distinctMovie = distinctMovie();
         int userIndex =1;
         int timeslot=0;
-        int dateUsed=0;
+
+        String movieFlag = " ";
+        String dateFlag = " ";
         for(int i=0;i<cineplexList.size();i++){
+            System.out.println();
+            System.out.println("============");
           System.out.println("Cineplex:" +cineplexList.get(i).getName());
           for(int j=0; j<sortedList.size();j++){
 
               for(int k =0; k<distinctDate.size();k++){
                   if(cineplexList.get(i).getName().equals(sortedList.get(j).getCineplex().getName())&&dateFormatter.format(sortedList.get(j).getShowDate()).equals(distinctDate.get(k))){
-                      System.out.println("Date: "+distinctDate.get(k));
-                      dateUsed =1;
+
+                        if(!dateFlag.equals(distinctDate.get(k))){
+
+
+                            System.out.println("Date: "+distinctDate.get(k));
+                            dateFlag = distinctDate.get(k);
+                        }
                   }
 
 
                   for(int l=0; l<distinctMovie.size();l++){
 
                       if(cineplexList.get(i).getName().equals(sortedList.get(j).getCineplex().getName())&&distinctDate.get(k).equals(dateFormatter.format(sortedList.get(j).getShowDate()))&&distinctMovie.get(l).equals(sortedList.get(j).getMovie().getTitle())){
-                          System.out.println("Movie Title:"+distinctMovie.get(l));
+                          if(!movieFlag.equals(distinctMovie.get(l))){
+                              System.out.println("Movie Title:"+distinctMovie.get(l));
+                              movieFlag = distinctMovie.get(l);
+                          }
+
+
                           System.out.print(String.format("%04d",sortedList.get(timeslot).getShowTime())+"["+userIndex+"] ");
                           userIndex++;
                           userSelection.add(sortedList.get(timeslot));
                           timeslot++;
-                          System.out.println();
-                          System.out.println("============");
+
                       }
 
                   }
 
               }
 
-
-
           }
-
+            movieFlag = " ";
+            dateFlag = " ";
 
         }
 
