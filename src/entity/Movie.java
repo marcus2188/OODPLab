@@ -21,7 +21,7 @@ public class Movie implements Serializable{
     private boolean isBlockBuster;
     private List<MovieReview> review_list;
     private int ticketSales;
-    
+
     
 	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast, boolean isBlockBuster, int ticketSales) {
 		this.title = title;

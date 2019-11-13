@@ -20,7 +20,29 @@ public class Seeder {
 
         SerializeDB.writeSerializedObject("cineplex.dat", cineplexes);
 
-        // Initialize Data for Movie
+        // Initialize Data for Movie    
+        String title = "Joker";
+        String showingStatus = "Now Showing";
+        LocalDate endOfShowingDate = null;
+        String synopsis = "Forever alone in a crowd, failed comedian Arthur Fleck seeks connection as he walks the streets of Gotham City. Arthur wears two masks -- the one he paints for his day job as a clown, and the guise he projects in a futile attempt to feel like he's part of the world around him. Isolated, bullied and disregarded by society, Fleck begins a slow descent into madness as he transforms into the criminal mastermind known as the Joker.";
+        String director = "Todd Philips";
+        ArrayList<String> cast2 = new ArrayList<String>();
+        cast2.add("Joaquin Phoenix");
+        cast2.add("Robert De Niro");
+        cast2.add("Zazie Beetz");
+        cast2.add("Frances Conroy");
+        float avgRating = 4;
+        boolean isBlockBuster = true;
+        ArrayList<MovieReview> review_list = new ArrayList<MovieReview>();
+
+        int ticketSales = 0;
+
+        MovieReview mr = new MovieReview("A grim, shallow, distractingly derivative homage to 1970s movies at their grittiest, Joker continues the dubious darker-is-deeper tradition.", 4);
+        review_list.add(mr);
+        Movie m2 = new Movie(title, showingStatus, endOfShowingDate, synopsis, director, cast2, isBlockBuster, ticketSales);
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        movies.add(m2);
+        
         MovieReview r1 = new MovieReview("5.0 like our GPA", 5);
         MovieReview r2 = new MovieReview("Pull up ur socks man",4);
         ArrayList<MovieReview> r = new ArrayList<MovieReview>(Arrays.asList(r1));
@@ -43,31 +65,13 @@ public class Seeder {
         Movie movie7 = new Movie("Frozen 2", "Coming Soon", (LocalDate) null, "Elsa kills Anna", "Owen", cast, true, 9999999);
         movie7.printMovie();
         
-        ArrayList<Movie> m = new ArrayList<Movie>(Arrays.asList(movie1,movie2));
-        SerializeDB.writeSerializedObject("Movie.dat", m);
-        
-        
-        String title = "Joker";
-        String showingStatus = "Now Showing";
-        LocalDate endOfShowingDate = null;
-        String synopsis = "Forever alone in a crowd, failed comedian Arthur Fleck seeks connection as he walks the streets of Gotham City. Arthur wears two masks -- the one he paints for his day job as a clown, and the guise he projects in a futile attempt to feel like he's part of the world around him. Isolated, bullied and disregarded by society, Fleck begins a slow descent into madness as he transforms into the criminal mastermind known as the Joker.";
-        String director = "Todd Philips";
-        ArrayList<String> cast2 = new ArrayList<String>();
-        cast2.add("Joaquin Phoenix");
-        cast2.add("Robert De Niro");
-        cast2.add("Zazie Beetz");
-        cast2.add("Frances Conroy");
-        float avgRating = 4;
-        boolean isBlockBuster = true;
-        ArrayList<MovieReview> review_list = new ArrayList<MovieReview>();
-
-        int ticketSales = 0;
-
-        MovieReview mr = new MovieReview("A grim, shallow, distractingly derivative homage to 1970s movies at their grittiest, Joker continues the dubious darker-is-deeper tradition.", 4);
-        review_list.add(mr);
-        Movie m2 = new Movie(title, showingStatus, endOfShowingDate, synopsis, director, cast2, isBlockBuster, ticketSales);
-        ArrayList<Movie> movies = new ArrayList<Movie>();
-        movies.add(m2);
+        movies.add(movie1);
+        movies.add(movie2);
+        movies.add(movie3);
+        movies.add(movie4);
+        movies.add(movie5);
+        movies.add(movie6);
+        movies.add(movie7);
         
         SerializeDB.writeSerializedObject("MovieReview.dat", review_list);
         SerializeDB.writeSerializedObject("Movie.dat", movies);
