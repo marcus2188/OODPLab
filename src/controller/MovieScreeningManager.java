@@ -24,38 +24,6 @@ public class MovieScreeningManager implements MovieScreening_inf {
         this.importData();
     }
     
-    public ArrayList<MovieScreening> getMovieScreeningList() {
-		return movieScreeningList;
-	}
-
-	public void setMovieScreeningList(ArrayList<MovieScreening> movieScreeningList) {
-		this.movieScreeningList = movieScreeningList;
-	}
-
-	public ArrayList<Cineplex> getCineplexList() {
-		return cineplexList;
-	}
-
-	public void setCineplexList(ArrayList<Cineplex> cineplexList) {
-		this.cineplexList = cineplexList;
-	}
-
-	public ArrayList<Movie> getMovieList() {
-		return movieList;
-	}
-
-	public void setMovieList(ArrayList<Movie> movieList) {
-		this.movieList = movieList;
-	}
-
-	public DateFormat getDateFormatter() {
-		return dateFormatter;
-	}
-
-	public void setDateFormatter(DateFormat dateFormatter) {
-		this.dateFormatter = dateFormatter;
-	}
-    
     public void createMovieScreening() {
         ScannerErrorHandler scan = new ScannerErrorHandler();
         int cineplexchoice;
