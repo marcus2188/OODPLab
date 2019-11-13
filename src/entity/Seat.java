@@ -1,7 +1,6 @@
 package entity;
 
 import java.io.Serializable;
-import utils.Converter;
 
 public class Seat implements Serializable {
     boolean taken;
@@ -27,7 +26,7 @@ public class Seat implements Serializable {
         int row, col;
         col = index % maxCol;
         row = (int)Math.floor(index / maxCol);
-        ID = Converter.intToChar(row) + String.valueOf(col);
+        ID = (char)(64+row) + String.valueOf(col); //assuming row starts from 1.
     }
 
     public String getSeatID(){

@@ -118,7 +118,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 		//System.out.println("Average Rating: ");
 		//default to -1
-		float avgRating =-1;
+		//float avgRating =-1;
 		
 		
 		//blockbuster
@@ -147,7 +147,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		int ticketSales = 0;
 		
 		//make new movie using given and default parameters
-		Movie newm = new Movie(title, showingStatus, endOfShowingDate, synopsis, director, cast, avgRating, isBlockBuster, review_list, ticketSales);
+		Movie newm = new Movie(title, showingStatus, endOfShowingDate, synopsis, director, cast, isBlockBuster, ticketSales);
 		
 		//add new movie to current movie list
 		ArrayList<Movie> m1 = this.getM();

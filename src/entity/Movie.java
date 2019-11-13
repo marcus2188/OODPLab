@@ -1,7 +1,6 @@
 package entity;
 
 
-import java.io.InvalidClassException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,17 +23,16 @@ public class Movie implements Serializable{
     private int ticketSales;
     
     
-	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast,
-			float avgRating, boolean isBlockBuster, List<MovieReview> review_list, int ticketSales) {
+	public Movie(String title, String showingStatus, LocalDate endOfShowingDate, String synopsis, String director, List<String> cast, boolean isBlockBuster, int ticketSales) {
 		this.title = title;
 		this.showingStatus = showingStatus;
 		this.endOfShowingDate=endOfShowingDate;
 		this.synopsis = synopsis;
 		this.director = director;
 		this.cast = cast;
-		this.avgRating = avgRating;
 		this.isBlockBuster = isBlockBuster;
-		this.review_list = review_list;
+		this.review_list = new ArrayList<MovieReview>();
+		this.setAvgRating(review_list);
 		this.ticketSales = ticketSales;
 	}
 
@@ -45,12 +43,8 @@ public class Movie implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getShowStatus() {
-		return showingStatus;
-	}
 	
 	public String getShowingStatus() {
-		if (this.showingStatus=="EndofShowing") return showingStatus+" "+this.getEndOfShowingDate();
 		return showingStatus;
 	}
 	
@@ -148,6 +142,7 @@ public class Movie implements Serializable{
 	
 	public void printCast() {
 		int size_cast = getCast().size();
+		if (size_cast==0) System.out.println("No cast found.");
 		for (int i=0;i<size_cast;i++ ) {
 			System.out.println(getCast().get(i));
 		}
@@ -155,6 +150,7 @@ public class Movie implements Serializable{
 	
 	public void printPastReviews() {
 		int size_review = getReview_list().size();
+		if (size_review==0) System.out.println("No review found.");
 		for (int i=0;i<size_review;i++) {
 			System.out.println(i+1);
 			this.getReview_list().get(i).printReview();
@@ -173,19 +169,31 @@ public class Movie implements Serializable{
 	
 	public void printMovie() {
 		System.out.println("Title: "+getTitle());
+		System.out.println();
+		
 		System.out.println("Showing Status: "+getShowingStatus());
+		if (getShowingStatus().equalsIgnoreCase("End of Showing")) System.out.println("\nEnd of showing date: "+getEndOfShowingDate());
+		System.out.println();
+		
 		System.out.println("Synopsis: "+getSynopsis());
+		System.out.println();
+		
 		System.out.println("Director: "+getDirector());
+		System.out.println();
 		
 		System.out.println("Cast: ");
 		printCast();
+		System.out.println();
 		
 		System.out.print("Average Rating: ");
 		this.printReviewRating();
-		System.out.println();
+		System.out.println('\n');
 		
 		System.out.println("Past Reviews: ");
 		printPastReviews();
+		System.out.println();
+		
+		System.out.println('\n');
 	}
     
 }
