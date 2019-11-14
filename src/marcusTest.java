@@ -19,7 +19,7 @@
 //import java.util.Scanner;
 //public class marcusTest {
 //	public static void main(String[] args) throws IOException, ParseException {
-//
+///*
 //		MovieScreening mj = new MovieScreening("Golden Village", "009", "Transformers 4", "20170712", 1855);
 //		Scanner sc = new Scanner(System.in);
 //		ShoppingOrder_manager ms = new ShoppingOrder_manager();
@@ -44,8 +44,20 @@
 //		case 6: ms.dumpcurrentSO(); break;
 //
 //		}
-//		sc.close();
-//
+//		sc.close();*/
+//		ArrayList<MovieTicket> tickets = new ArrayList<MovieTicket>();
+//        AgeGroup ageGroup = AgeGroup.STUDENT;
+//        boolean weekday = true;
+//        boolean before6 = true;
+//        ScreeningFormat format = ScreeningFormat.REGULAR;
+//        int day = 3;
+//        MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6,format, day, 0, false);
+//        ticket.setPriceBasedOnAttributes();
+//        ticket.setMovieScreening(movieScreenings.get(0));
+//        ticket.setSeat(movieScreenings.get(0).getCinema().getSeatList().get(0));
+//        tickets.add(ticket);
+//        SerializeDB.writeSerializedObject("paymentHistory.dat", tickets);
+//		
 //
 //
 //    }

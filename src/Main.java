@@ -1,4 +1,4 @@
-//import boundary.Admin_UI;
+//import boundary.AdminMenu;
 //import controller.MovieTicketManager;
 //import java.io.IOException;
 //import java.util.Scanner;

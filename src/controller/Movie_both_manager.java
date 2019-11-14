@@ -31,11 +31,10 @@ public class Movie_both_manager {
             sc.nextLine();
         }
         
-        //copy out the ArrayList<Movie>
-        ArrayList<Movie> tmplist = new ArrayList<Movie>();
 		Movie tmp;
 		if (choice==1) {	
 			//sort by ticketSales
+			ArrayList<Movie> tmplist = this.getM();
 			System.out.println("Top 5 Movies by ticket sales: ");
 			for (int i=1;i<tmplist.size();i++) {
 				for (int j=i;j>0;j--) {
@@ -52,6 +51,7 @@ public class Movie_both_manager {
 		}
 		else if (choice==2) {
 			//sort by avgRating
+			ArrayList<Movie> tmplist = new ArrayList<Movie>();
 			System.out.println("Top 5 Movies by average rating: ");
 			
 			//transfer NA ratings away first
@@ -79,6 +79,7 @@ public class Movie_both_manager {
 				System.out.println();
 			}
 			
+			//print NA ratings
 			System.out.println("\nMovies with rating NA:");
 			for (int i=0;i<nr.size();i++) {
 				System.out.println(nr.get(i).getTitle());

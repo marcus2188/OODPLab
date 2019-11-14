@@ -140,10 +140,18 @@ All user menus
                             movieChoice = sc.nextInt();
                         } while (movieChoice<1 || movieChoice>movies.size());
                             movie = movies.get(movieChoice-1);
-                            temp = Filter.filterByMovie(movieScreeningList, movie);
+                            temp = Filter.filterByMovie(movieScreeningList, movie); 
+                            if(temp.isEmpty()) {
+                            	System.out.println("There are no movie screenings for this movie currently");
+                            	System.out.println("We apologise for any inconvenience");
+                            	System.out.println("V   V");
+                            	System.out.println("  W  ");
+                            	continue;
+                            }
                             System.out.println("Choose a movie screening: ");
                             Print.printMovieScreenings(temp);
                         do {
+                        	System.out.println("Please enter a valid item :");
                             screeningChoice = sc.nextInt();
                         } while (screeningChoice<1 || screeningChoice>temp.size());
                             movieScreening = temp.get(screeningChoice-1);
@@ -160,6 +168,13 @@ All user menus
                             temp = Filter.filterByCineplex(movieScreeningList, cineplex);
                             System.out.println("Choose a movie screening: ");
                             Print.printMovieScreenings(temp);
+                            if(temp.isEmpty()) {
+                            	System.out.println("There are no movie screenings for this  currently");
+                            	System.out.println("We apologise for any inconvenience");
+                            	System.out.println("V   V");
+                            	System.out.println("  W  ");
+                            	continue;
+                            }
                             do {
                                 screeningChoice = sc.nextInt();
                             } while (screeningChoice<1 || screeningChoice>temp.size());
@@ -170,25 +185,30 @@ All user menus
                             movieScreening = null;
                             break;
                     }
-
-                    System.out.println("Please choose a seat(O means available):");
-                    movieScreening.getCinema().updateSeats(movieScreening.getSeatStatus());
-                    movieScreening.getCinema().printSeatAvailability();
-
-                    System.out.println("Please enter the row: ");
-                    row = sc.next().charAt(0);
-                    System.out.println("Please enter the column: ");
-                    col = sc.nextInt();
-                    try{
-                        index = movieScreening.bookSeat(row, col);
-                        if(index == -1){
-                            continue;
-                        }
-                        ms.bookTicket(movieScreening, movieScreening.getCinema().getSeatList().get(index));
-                    }catch(java.lang.ArrayIndexOutOfBoundsException e){
-                        System.out.println("Please enter the correct format for choosing the seat");
-                    }catch(Exception e){
-                        e.printStackTrace();
+                    boolean correctseat = false;
+                    while(!correctseat) {
+	                    System.out.println("Please choose a seat(O means available):");
+	                    movieScreening.getCinema().updateSeats(movieScreening.getSeatStatus());
+	                    movieScreening.getCinema().printSeatAvailability();
+	
+	                    System.out.println("Please enter the row: ");
+	                    row = sc.next().charAt(0);
+	                    System.out.println("Please enter the column: ");
+	                    col = sc.nextInt();
+	                    try{
+	                        index = movieScreening.bookSeat(row, col);
+	                        if(index == -1){
+	                            continue;
+	                        }
+	                        ms.bookTicket(movieScreening, movieScreening.getCinema().getSeatList().get(index));
+	                        correctseat = true;
+	                    }catch(IndexOutOfBoundsException e){
+	                        System.out.println("You have entered an invalid seat row or column");
+	                        System.out.println("Please try again");
+	                        System.out.println("");
+	                    }catch(ParseException f){
+	                    	System.out.println("There is a parsing error");
+	                    }
                     }
                     updatedata();
                     break;

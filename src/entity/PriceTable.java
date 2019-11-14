@@ -24,10 +24,6 @@ public class PriceTable {
             int day,
             boolean isPlatinum
     ) {
-         System.out.println(isWeekDay);
-         System.out.println(isBefore6);
-         System.out.println(day);
-
         for (int i =0; i < priceTable.size(); i++){
             PriceTableTicket sampleTicket = priceTable.get(i);
 
@@ -82,7 +78,6 @@ public class PriceTable {
                 }
             }
         }
-        System.out.println("Last");
         return 0;
     }
 }
