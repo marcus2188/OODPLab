@@ -17,7 +17,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 
 	public void createMovie() {
 		int choice;
-		Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
 		
 		System.out.println("Movie title: ");
