@@ -127,7 +127,7 @@ public class MovieTicketManager implements MovieTicket_inf {
             System.out.println("What price do you want to set?");
             float price = scan.nextFloat();
             if (choice2 == 'y' || choice2 == 'Y') {
-                MovieTicket newTicket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price);
+                MovieTicket newTicket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price, false);
                 this.priceTable.add(newTicket);
                 TextTicketDB.savePrices("prices.txt", this.priceTable);
                 System.out.println("Ticket added!");
@@ -210,6 +210,24 @@ public class MovieTicketManager implements MovieTicket_inf {
                 screeningFormat = ScreeningFormat.REGULAR;
         }
 
+        System.out.println("Would you like to upgrade to platinum suite for $10? (y/n)");
+        boolean isPlatinum;
+        choice = scan.next().charAt(0);
+
+        while (choice != 'Y'
+                && choice != 'y'
+                && choice != 'n'
+                && choice != 'N') {
+            System.out.println("Invalid choice, please try again.");
+            choice = scan.next().charAt(0);
+        }
+        if (choice == 'y' || choice == 'Y') {
+            isPlatinum = true;
+        } else if (choice == 'n' || choice == 'N') {
+            isPlatinum = false;
+        } else {
+            isPlatinum = false;
+        }
 
         // set the day
         int day;
@@ -223,7 +241,7 @@ public class MovieTicketManager implements MovieTicket_inf {
             }
         }
 
-        MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price);
+        MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price, isPlatinum);
         return ticket;
     }
 

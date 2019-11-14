@@ -99,7 +99,7 @@ public class Seeder {
         boolean before6 = true;
         ScreeningFormat format = ScreeningFormat.REGULAR;
         int day = 3;
-        MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6,format, day, 0);
+        MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6,format, day, 0, false);
         ticket.setPriceBasedOnAttributes();
         ticket.setMovieScreening(movieScreenings.get(0));
         ticket.setSeat(movieScreenings.get(0).getCinema().getSeatList().get(0));

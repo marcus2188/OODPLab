@@ -11,15 +11,19 @@ public class MovieTicket implements Serializable{
     private AgeGroup ageGroup;
     private boolean weekday;
     private boolean before6;
+    private boolean platinum;
+
+
     private ScreeningFormat format;
     private int day;
     private Seat seat;
     private MovieScreening movieScreening;
 
-    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price) {
+    public MovieTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat format, int day, float price, boolean platinum) {
         this.ageGroup = ageGroup;
         this.weekday = weekday;
         this.before6 = before6;
+        this.platinum = platinum;
         this.format = format;
         this.day = day;
         this.price = price;
@@ -32,6 +36,7 @@ public class MovieTicket implements Serializable{
         this.ageGroup = null;
         this.weekday = false;
         this.before6 = false;
+        this.platinum = false;
         this.format = null;
         this.day = 0;
         this.price = 0;
@@ -47,7 +52,8 @@ public class MovieTicket implements Serializable{
                 this.weekday,
                 this.before6,
                 this.format,
-                this.day);
+                this.day,
+                this.platinum);
         System.out.println("Ticket Price: " + this.price);
     }
 
@@ -68,7 +74,16 @@ public class MovieTicket implements Serializable{
         System.out.println("Price: " + this.getPrice());
         return;
     }
-    
+
+    public boolean isPlatinum() {
+        return platinum;
+    }
+
+    public void setPlatinum(boolean platinum) {
+        this.platinum = platinum;
+    }
+
+
     public void setweekday(boolean bool) {
     	this.weekday = bool;
     }

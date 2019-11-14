@@ -21,7 +21,8 @@ public class PriceTable {
             boolean isWeekDay,
             boolean isBefore6,
             ScreeningFormat format,
-            int day
+            int day,
+            boolean isPlatinum
     ) {
 
         for (int i =0; i < priceTable.size(); i++){
@@ -34,7 +35,11 @@ public class PriceTable {
              && sampleTicket.getFormat().equals(format)
              && sampleTicket.getDay() == day
             ) {
-                return sampleTicket.getPrice();
+                if (isPlatinum) {
+                    return sampleTicket.getPrice() + 10;
+                } else {
+                    return sampleTicket.getPrice();
+                }
             }
          }
         if (format.equals(ScreeningFormat.THREEDIMENSION)) {
@@ -48,7 +53,11 @@ public class PriceTable {
                         && ticket.isWeekday() == isWeekDay
             ) {
                     System.out.println("No concession prices found. Regular price: " + ticket.getPrice());
-                    return ticket.getPrice();
+                    if (isPlatinum) {
+                        return ticket.getPrice() + 10;
+                    } else {
+                        return ticket.getPrice();
+                    }
                 }
             }
 
@@ -62,7 +71,11 @@ public class PriceTable {
                         && ticket.isWeekday() == isWeekDay
                 ) {
                     System.out.println("No concession prices found. Regular price: " + ticket.getPrice());
-                    return ticket.getPrice();
+                    if (isPlatinum) {
+                        return ticket.getPrice() + 10;
+                    } else {
+                        return ticket.getPrice();
+                    }
                 }
             }
         }

@@ -100,9 +100,9 @@ public class TextTicketDB {
 
 
     public static void main(String[] args) throws IOException {
-        ArrayList priceTable = readPrices("prices.txt");
-        MovieTicket newTicket = new MovieTicket(AgeGroup.REGULAR, true, true,ScreeningFormat.THREEDIMENSION, 1, 10);
-        priceTable.add(newTicket);
-        savePrices("prices.txt", priceTable);
+//        ArrayList priceTable = readPrices("prices.txt");
+//        MovieTicket newTicket = new MovieTicket(AgeGroup.REGULAR, true, true,ScreeningFormat.THREEDIMENSION, 1, 10);
+//        priceTable.add(newTicket);
+//        savePrices("prices.txt", priceTable);
     }
 }

@@ -16,7 +16,8 @@ public class PaymentHistorySeeder {
             true,
             ScreeningFormat.REGULAR,
             6,
-            10
+            10,
+            true
             );
         ArrayList history = new ArrayList();
         history.add(tix);

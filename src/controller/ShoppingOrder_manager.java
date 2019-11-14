@@ -114,12 +114,32 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
                 break;
         }
 
+        System.out.println("Would you like to upgrade to platinum suite for $10? (y/n)");
+        boolean isPlatinum;
+        choice = scan.next().charAt(0);
+
+        while (choice != 'Y'
+		 && choice != 'y'
+		&& choice != 'n'
+		&& choice != 'N') {
+        	System.out.println("Invalid choice, please try again.");
+        	choice = scan.next().charAt(0);
+		}
+        if (choice == 'y' || choice == 'Y') {
+        	isPlatinum = true;
+		} else if (choice == 'n' || choice == 'N') {
+        	isPlatinum = false;
+		} else {
+        	isPlatinum = false;
+		}
+
+
         // GET DAY int
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
         // System.out.println("Day is" + day);
         System.out.println("1");
-        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)-1.00);
+        MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)-1.00, isPlatinum);
         
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
