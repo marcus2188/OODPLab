@@ -3,6 +3,8 @@ package boundary;
 import Main.MOBLIMA;
 import controller.Movie_mg_inf;
 import controller.Movie_mg_manager;
+import controller.MovieScreening_inf;
+import controller.MovieScreeningManager;
 import controller.ShoppingOrder_inf;
 import controller.ShoppingOrder_manager;
 import utils.ScannerErrorHandler;
@@ -31,7 +33,8 @@ All user menus
         System.out.println("Press 1 to list all movies");
         System.out.println("Press 2 to search a movie");
         System.out.println("Press 3 to list top 5 movies");
-        System.out.println("Press 4 to enter Booking Menu");
+        System.out.println("Press 4 to see all movie screening");
+        System.out.println("Press 5 to enter Booking Menu");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
@@ -51,6 +54,9 @@ All user menus
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_LIST_TOP_5);
                 break;
             case 4:
+                MOBLIMA.setAppState(STATE.MOVIE_GOER_MOVIE_SCREENING_LIST);
+                break;
+            case 5:
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_BOOKING_MENU);
                 break;
             case 0:
@@ -61,6 +67,12 @@ All user menus
                 break;
         }
 
+    }
+
+    public static void userListScreening(){
+        MovieScreening_inf  movieMgManager = new MovieScreeningManager();
+        movieMgManager.viewAllListing();
+        MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
     public static void userListMovies() {
@@ -122,6 +134,7 @@ All user menus
                     switch(choice2){
                         case 1:
                             System.out.println("Choose a movie: ");
+                            movies = Filter.filterByShowStatus(movies);
                             Print.printMovies(movies);
                         do {
                             movieChoice = sc.nextInt();

@@ -58,6 +58,9 @@ public class MOBLIMA {
                  case MOVIE_GOER_LIST_TOP_5:
                      UserMenu.userListTop5Movies();
                      break;
+                 case MOVIE_GOER_MOVIE_SCREENING_LIST:
+                    UserMenu.userListScreening();
+                    break;
                  case MOVIE_GOER_BOOKING_MENU:
                      UserMenu userMenu = new UserMenu();
                      userMenu.userBookingMenu();
@@ -91,6 +94,9 @@ public class MOBLIMA {
                  case ADMIN_UPDATE_PH:
                      AdminMenu.adminUpdatePH();
                      break;
+                 case ADMIN_LIST_TOP:
+                    AdminMenu.adminListTop5();
+                    break;
              }
          }
     }

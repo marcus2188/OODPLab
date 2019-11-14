@@ -124,6 +124,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
                 break;
         }
 
+		/*
         System.out.println("Would you like to upgrade to platinum suite for $10? (y/n)");
         boolean isPlatinum;
         choice = scan.next().charAt(0);
@@ -141,7 +142,8 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         	isPlatinum = false;
 		} else {
         	isPlatinum = false;
-		}
+		}*/
+		boolean isPlatinum = obj.getCinema().getPlatinum();
 
 
         // GET DAY int

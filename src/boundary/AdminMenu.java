@@ -24,10 +24,11 @@ public class AdminMenu {
         System.out.println("Press 6 to delete an existing movie screening");
         System.out.println("Press 7 to update ticket prices");
         System.out.println("Press 8 to update public holidays");
+        System.out.println("Press 9 to list top 5 movies");
         System.out.println("Press 0 to go to main menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 8) {
+        while (choice < 0 || choice > 9) {
             System.out.println("Invalid choice, please try again: ");
             choice = scan.nextInt();
         }
@@ -57,6 +58,9 @@ public class AdminMenu {
             case 8:
                 MOBLIMA.setAppState(STATE.ADMIN_UPDATE_PH);
                 break;
+            case 9:
+                MOBLIMA.setAppState(STATE.ADMIN_LIST_TOP);
+                break;
             case 0:
                 System.out.println("Logging out, redirecting to main page...");
                 MOBLIMA.setAppState(STATE.LOGIN);
@@ -67,6 +71,12 @@ public class AdminMenu {
         }
     }
 
+    public static void adminListTop5 (){
+        Movie_admin_inf adminManager = new Movie_admin_manager();
+        System.out.println("=== Top 5 Movies ===");        
+        adminManager.listTop5();
+        MOBLIMA.setAppState(STATE.ADMIN_MENU);
+    }
 
     public static void adminCreateMovie() {
     	//create manager

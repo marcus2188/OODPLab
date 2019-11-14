@@ -11,6 +11,7 @@ public class PlatinumCinema extends Cinema implements Serializable {
 
     public PlatinumCinema(String name, String cinemaID, Cineplex cineplex) {
         super(name, cinemaID, cineplex);
+        super.setPlatinum(true);
     }
 
     public void printSeatAvailability(){

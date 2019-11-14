@@ -20,7 +20,8 @@ public class Seeder {
 
         SerializeDB.writeSerializedObject("cineplex.dat", cineplexes);
 
-        // Initialize Data for Movie    
+        // Initialize Data for Movie 
+        // Joker   
         String title = "Joker";
         String showingStatus = "Now Showing";
         LocalDate endOfShowingDate = null;
@@ -42,27 +43,28 @@ public class Seeder {
         Movie m2 = new Movie(title, showingStatus, endOfShowingDate, synopsis, director, cast2, isBlockBuster, ticketSales);
         ArrayList<Movie> movies = new ArrayList<Movie>();
         movies.add(m2);
+
+        ArrayList<String> cast = new ArrayList<String>(Arrays.asList("Nigel","Yuan Neng", "Marcus", "Beng", "Jozua"));
         
+        // Avenger
+        Movie movie1 = new Movie("Avenger", "Now Showing", (LocalDate) null, "Assemble!", "Owen", cast, true, 9999999);
+        movie1.printMovie();
         MovieReview r1 = new MovieReview("5.0 like our GPA", 5);
         MovieReview r2 = new MovieReview("Pull up ur socks man",4);
         ArrayList<MovieReview> r = new ArrayList<MovieReview>(Arrays.asList(r1));
         SerializeDB.writeSerializedObject("MovieReview.dat", r);
         
-        ArrayList<String> cast = new ArrayList<String>(Arrays.asList("Nigel","Yuan Neng", "Marcus", "Beng", "Jozua"));
-        
-        Movie movie1 = new Movie("Avenger", "Now Showing", (LocalDate) null, "World says hello to all", "Owen", cast, true, 9999999);
-        movie1.printMovie();
-        Movie movie2 = new Movie("Ironman", "Now Showing", (LocalDate) null, "World says hello to all", "Noel", cast, true, 9999999);
+        Movie movie2 = new Movie("Ironman", "Now Showing", (LocalDate) null, "And I.. am Iron Man", "Noel", cast, true, 1230);
         movie2.printMovie();
-        Movie movie3 = new Movie("Batman bin supaman", "End of Showing", (LocalDate) null, "World says hello to all", "Owen", cast, true, 9999999);
+        Movie movie3 = new Movie("Batman bin supaman", "End of Showing", (LocalDate) LocalDate.now(), "Because I'm Batman", "Bruce", cast, true, 999);
         movie3.printMovie();
-        Movie movie4 = new Movie("Sonic", "End of Showing", (LocalDate) null, "World says hello to all", "Owen", cast, true, 9999999);
+        Movie movie4 = new Movie("Sonic", "End of Showing", (LocalDate) LocalDate.now(), "World says hello to all", "Owen Who", cast, true, 99329);
         movie4.printMovie();
-        Movie movie5 = new Movie("Powerpuff girls", "Preview", (LocalDate) null, "World says hello to all", "Owen", cast, true, 9999999);
+        Movie movie5 = new Movie("Powerpuff girls", "Preview", (LocalDate) null, "MOJO", "Dr E", cast, true, 12321);
         movie5.printMovie();
-        Movie movie6 = new Movie("Frozen", "Coming Soon", (LocalDate) null, "Elsa vs Anna", "Owen", cast, true, 9999999);
+        Movie movie6 = new Movie("Frozen", "Coming Soon", (LocalDate) null, "Elsa vs Anna", "Owen", cast, true, 0);
         movie6.printMovie();
-        Movie movie7 = new Movie("Frozen 2", "Coming Soon", (LocalDate) null, "Elsa kills Anna", "Owen", cast, true, 9999999);
+        Movie movie7 = new Movie("Frozen 2", "Coming Soon", (LocalDate) null, "Elsa kills Anna", "Owen", cast, true, 0);
         movie7.printMovie();
         
         movies.add(movie1);
@@ -85,6 +87,41 @@ public class Seeder {
         ArrayList<MovieScreening> movieScreenings = new ArrayList<MovieScreening>();
         MovieScreening ms = new MovieScreening(cinema, movie, date, 1400);
         movieScreenings.add(ms);
+
+        Cinema cinema1 = cineplexes.get(0).getCinemas().get(0);
+        Date date1 = new Date();
+        MovieScreening ms1 = new MovieScreening(cinema1, movie, date1, 1700);
+        movieScreenings.add(ms1);
+
+        Cinema cinema2 = cineplexes.get(0).getCinemas().get(2);
+        Date date2 = new Date();
+        MovieScreening ms2 = new MovieScreening(cinema2, movie1, date2, 1200);
+        movieScreenings.add(ms2);
+
+        Cinema cinema3 = cineplexes.get(1).getCinemas().get(1);
+        Date date3 = new Date();
+        MovieScreening ms3 = new MovieScreening(cinema3, movie2, date3, 1130);
+        movieScreenings.add(ms3);
+
+        Cinema cinema4 = cineplexes.get(2).getCinemas().get(2);
+        Date date4 = new Date();
+        MovieScreening ms4 = new MovieScreening(cinema4, movie5, date4, 2030);
+        movieScreenings.add(ms4);
+
+        Cinema cinema7 = cineplexes.get(2).getCinemas().get(1);
+        MovieScreening ms7 = new MovieScreening(cinema7, movie5, date4, 2030);
+        movieScreenings.add(ms7);
+
+        Cinema cinema5 = cineplexes.get(1).getCinemas().get(1);
+        Date date5 = new Date();
+        MovieScreening ms5 = new MovieScreening(cinema5, movie5, date5, 1330);
+        movieScreenings.add(ms5);
+
+        Cinema cinema6 = cineplexes.get(0).getCinemas().get(1);
+        Date date6 = new Date();
+        MovieScreening ms6 = new MovieScreening(cinema6, movie6, date6, 1330);
+        movieScreenings.add(ms6);
+
         SerializeDB.writeSerializedObject("moviescreening.dat", movieScreenings);
 
         // Initialize Data for MovieGoer

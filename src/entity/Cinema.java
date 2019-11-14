@@ -13,11 +13,13 @@ public class Cinema implements Serializable {
     private String name;
     private String cinemaID;
     private Cineplex cineplex;
+    private boolean isPlatinum;
 
     public Cinema(String name, String cinemaID, Cineplex cineplex) {
         this.name = name;
         this.cinemaID = cinemaID;
         this.cineplex = cineplex;
+        this.isPlatinum = false;
         seats = new ArrayList<Seat>();
         for(int i = 0; i < maxSize; i++){
             Seat s = new Seat();
@@ -25,6 +27,14 @@ public class Cinema implements Serializable {
             seats.add(s);
             
         }   
+    }
+
+    public void setPlatinum(boolean p){
+        this.isPlatinum = p;
+    }
+
+    public boolean getPlatinum(){
+        return isPlatinum;
     }
 
     public String getCinemaID() {
