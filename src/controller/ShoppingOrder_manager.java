@@ -54,8 +54,16 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         Date date = obj.getShowDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yymmdd");
-        dateFormat.format(date);
-        if (dateFormat.parse(dateFormat.format(date)).after(dateFormat.parse("18:00"))) {
+
+		Calendar c = Calendar.getInstance();
+		int hour = obj.getShowTime() / 100;
+		int minute = obj.getShowTime() % 100;
+		c.set(Calendar.HOUR, hour);
+		c.set(Calendar.MINUTE, minute);
+		Date d = c.getTime();
+
+        // System.out.println("time "+ dateFormat.format(d));
+        if (dateFormat.parse(dateFormat.format(d)).after(dateFormat.parse("18:00"))) {
             before6 = false;
         } else {
             before6 = true;
