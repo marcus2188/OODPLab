@@ -87,7 +87,9 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 
         // GET WEEKDAY boolean
         boolean weekday;
+
         Calendar c1 = Calendar.getInstance();
+        c1.setTime(date);
         if ((c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) ||
                 (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY)) {
             weekday = false;
@@ -138,7 +140,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         int day;
         day = (int) c1.get(Calendar.DAY_OF_WEEK);
         // System.out.println("Day is" + day);
-        System.out.println("1");
+        // System.out.println("1");
         MovieTicket mt = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, (float)-1.00, isPlatinum);
         
         // SET TICKET PRICE PRICE float
