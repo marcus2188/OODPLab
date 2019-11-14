@@ -45,7 +45,7 @@ public class Movie_both_manager {
 					}
 				}
 			}
-			for (int i=0;i<tmplist.size();i++) {
+			for (int i=tmplist.size()-1; i>=tmplist.size()-5; i--) {
 				System.out.println(tmplist.get(i).getTitle() + ", " + tmplist.get(i).getTicketSales());
 			}
 		}
