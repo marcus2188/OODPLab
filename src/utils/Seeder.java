@@ -102,7 +102,7 @@ public class Seeder {
         MovieTicket ticket = new MovieTicket(ageGroup, weekday, before6,format, day, 0, false);
         ticket.setPriceBasedOnAttributes();
         ticket.setMovieScreening(movieScreenings.get(0));
-        ticket.setSeat(movieScreenings.get(0).getCinema().getSeatList().get(1));
+        ticket.setSeat(movieScreenings.get(0).getCinema().getSeatList().get(0));
         tickets.add(ticket);
         SerializeDB.writeSerializedObject("paymentHistory.dat", tickets);
     }
