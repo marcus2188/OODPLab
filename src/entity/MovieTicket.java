@@ -54,9 +54,16 @@ public class MovieTicket implements Serializable{
                 this.format,
                 this.day,
                 this.platinum);
-        System.out.println("Ticket Price: " + this.price);
+        
+    }
+    public void setHolidayRate() {
+    	this.price = this.price * (float)1.5;
+    	
     }
 
+    public void printPrice() {
+    	System.out.println("Ticket Price: " + this.price);
+    }
     public void setMovieScreening (MovieScreening ms) {
         this.movieScreening = ms;
     }
