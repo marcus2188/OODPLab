@@ -71,7 +71,7 @@ public class Seeder {
         movies.add(movie2);
         movies.add(movie3);
         movies.add(movie4);
-        movies.add(movie5);
+        movies.add(movie5);1
         movies.add(movie6);
         movies.add(movie7);
         

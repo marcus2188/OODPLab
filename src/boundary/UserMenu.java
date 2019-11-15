@@ -120,6 +120,7 @@ All user menus
             System.out.println("5. See all past purchasers");      // TESTED WORKING
             System.out.println("6. Clear current shopping cart");
             System.out.println("7. Back to Movie Menu");
+            System.out.println("8. Exit MOBLIMA");
             System.out.println("-------------------------------------");
             System.out.println("What do you wanna do? : ");
             
@@ -242,6 +243,9 @@ All user menus
                 case 7:
                 	loop = false;
                     break;
+                case 8: 
+                	System.out.println("You have closed the program, goodbye!!!! :))");
+                	System.exit(0);
                 default:
                     System.out.println("Please enter a valid choice, thank you");
                 	break;
