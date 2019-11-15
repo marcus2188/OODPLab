@@ -24,6 +24,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	private ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
 	private ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
 	private MovieScreening obj;
+	private ArrayList<Date> holidays = new ArrayList<Date>();
 	
 	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
 	private ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
@@ -34,11 +35,12 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	public ShoppingOrder_manager(){
 		this.importdata();
 	}
-	
+	//type one
 	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
 	public void importdata() {
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paymentHistory.dat");
 		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
+		this.holidays = (ArrayList) SerializeDB.readSerializedObject("dates.dat");
 	}
 	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
 	public void updatedata() {
@@ -53,21 +55,25 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         boolean before6;
         Date date = obj.getShowDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yymmdd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar c = Calendar.getInstance();
-		int hour = obj.getShowTime() / 100;
-		int minute = obj.getShowTime() % 100;
-		c.set(Calendar.HOUR, hour);
-		c.set(Calendar.MINUTE, minute);
-		Date d = c.getTime();
-
-        // System.out.println("time "+ dateFormat.format(d));
-        if (dateFormat.parse(dateFormat.format(d)).after(dateFormat.parse("18:00"))) {
-            before6 = false;
-        } else {
-            before6 = true;
-        }
+		int timing = obj.getShowTime();
+		//int minute = obj.getShowTime() % 100;
+		if(timing < 1800)
+			before6 = true;
+		else
+			before6 = false;
+//		c.set(Calendar.HOUR, hour);
+//		c.set(Calendar.MINUTE, minute);
+//		Date d = c.getTime();
+//
+//        // System.out.println("time "+ dateFormat.format(d));
+//        if (dateFormat.parse(dateFormat.format(d)).after(dateFormat.parse("18:00"))) {
+//            before6 = false;
+//        } else {
+//            before6 = true;
+//        }
 
         // GET AGEGROUP agegroup
         AgeGroup ageGroup;
@@ -155,8 +161,17 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
+        
+        //price
         // SET THE REST OF THE TICKET ATTRIBUTES
         mt.setMovieScreening(obj);
+        
+        for (int i = 0; i < this.holidays.size(); i++) {
+            Date holiday = (Date) this.holidays.get(i);
+            if (obj.getShowDate().equals(holiday)) {
+            	mt.setHolidayRate();
+            }
+        }
         // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
         //String seatno = Character.toString(row) + Integer.toString(col);
         mt.setSeat(seat);
@@ -166,6 +181,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         //mt.setTID(this.obj.getShowDate() + this.obj.getCinema());
         this.neword.addticket(mt);
         
+        mt.printPrice();
         // TELLS USER TICKET IS SUCCESSFULLY BOOKED
         System.out.println("Ticket has been added to your shopping cart");
 	}
@@ -182,12 +198,21 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 			return;
 		}
 		// COLLECT MOVIEGOER INFORMATION, CREATE NEW MOVIEGOER OBJECT AND STORE INTO PEOPLE
-		System.out.println("Please enter your name here : ");
+		System.out.println("We need to collect your credentials");
+		System.out.println("");
+		System.out.println("Please enter your full name : ");
 		String person_name = se.nextLine();
-		System.out.println("Please enter your email here : ");
+		System.out.println("Please enter your email : ");
 		String person_email = se.nextLine();
-		System.out.println("Please enter your mobile number here : ");
+		System.out.println("Please enter your mobile number : ");
 		String person_no = se.nextLine();
+		/*if(!person_no.matches("[0-9]{8}") || !person_name.matches("[a-zA-Z]+") || !person_email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") || !(person_name == person_email) ) {
+			System.out.println("There is an error in one of your information entered");
+			System.out.println("Payment denied");
+			System.out.println("heading back.... ");
+			System.out.println(":(");
+			return;
+		}*/
 		MovieGoer g = new MovieGoer(person_name, person_no, person_email);
 		this.people.add(g);
 	

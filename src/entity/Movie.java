@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import utils.SerializeDB;
 
 public class Movie implements Serializable{
     
@@ -138,7 +135,7 @@ public class Movie implements Serializable{
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
 		this.setAvgRating(this.getReview_list());
-		System.out.println("Rating new: " + getAvgRating());
+		//System.out.println("Rating new: " + getAvgRating());
 	}
 	
 	public void printCast() {
