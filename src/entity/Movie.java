@@ -190,8 +190,6 @@ public class Movie implements Serializable{
 		System.out.println("Past Reviews: ");
 		printPastReviews();
 		System.out.println();
-		
-		System.out.println('\n');
 	}
     
 }

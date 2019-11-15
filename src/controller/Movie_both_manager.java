@@ -89,8 +89,9 @@ public class Movie_both_manager {
 				if (i<0) break;
 				System.out.print(tmplist.get(i).getTitle() + ", ");
 				tmplist.get(i).printReviewRating();
+				System.out.println();
 			}
-			System.out.println('\n');
+			System.out.println();
 		}
 	}
 	
