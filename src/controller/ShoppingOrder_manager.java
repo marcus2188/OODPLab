@@ -24,6 +24,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	private ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
 	private ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
 	private MovieScreening obj;
+	private ArrayList<Date> holidays = new ArrayList<Date>();
 	
 	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
 	private ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
@@ -39,6 +40,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	public void importdata() {
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paymentHistory.dat");
 		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
+		this.holidays = (ArrayList) SerializeDB.readSerializedObject("dates.dat");
 	}
 	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
 	public void updatedata() {
@@ -159,8 +161,17 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
+        
+        //price
         // SET THE REST OF THE TICKET ATTRIBUTES
         mt.setMovieScreening(obj);
+        
+        for (int i = 0; i < this.holidays.size(); i++) {
+            Date holiday = (Date) this.holidays.get(i);
+            if (obj.getShowDate().equals(holiday)) {
+            	mt.setHolidayRate();
+            }
+        }
         // SET THE SEAT NUMBER ONLY AFTER I CAN ACCESS THE CINEPLEX AND CINEMA OBJECTS
         //String seatno = Character.toString(row) + Integer.toString(col);
         mt.setSeat(seat);
@@ -170,6 +181,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         //mt.setTID(this.obj.getShowDate() + this.obj.getCinema());
         this.neword.addticket(mt);
         
+        mt.printPrice();
         // TELLS USER TICKET IS SUCCESSFULLY BOOKED
         System.out.println("Ticket has been added to your shopping cart");
 	}
@@ -186,7 +198,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 			return;
 		}
 		// COLLECT MOVIEGOER INFORMATION, CREATE NEW MOVIEGOER OBJECT AND STORE INTO PEOPLE
-		System.out.println("We need to collect your crudentials");
+		System.out.println("We need to collect your credentials");
 		System.out.println("");
 		System.out.println("Please enter your full name : ");
 		String person_name = se.nextLine();

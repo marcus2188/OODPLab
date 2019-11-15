@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MovieTicketManager implements MovieTicket_inf {
-    ArrayList priceTable;
+    private ArrayList priceTable;
 
     // constructor
     public MovieTicketManager() throws IOException {
@@ -285,9 +285,9 @@ public class MovieTicketManager implements MovieTicket_inf {
 
     // TODO: implement
     // updates a price of an indivdual ticket
-    public void updatePriceOfTicket(MovieTicket ticket) {
-        return;
-    }
+//    public void updatePriceOfTicket(MovieTicket ticket) {
+//        return;
+//    }
 
 
 }
