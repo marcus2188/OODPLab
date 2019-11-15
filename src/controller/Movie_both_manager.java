@@ -67,7 +67,9 @@ public class Movie_both_manager {
 			
 			//filter for nonNA ratings away first
 			for (int i=0;i<m.size();i++) {
-				if (m.get(i).getAvgRating()!=-1) tmplist.add(m.get(i));
+				if (m.get(i).getAvgRating()!=-1) {
+					tmplist.add(m.get(i));
+				}
 			}
 			
 			//sort nonNA ratings
@@ -85,15 +87,14 @@ public class Movie_both_manager {
 				System.out.println("No movies in the database have a rating.\n");
 				return;
 			}
-			
+
 			//print nonNA ratings
-			for (int i=tmplist.size()-1;i<=tmplist.size()-5;i++) {
+			for (int i=tmplist.size()-1;i>=tmplist.size()-5;i--) {
 				if (i<0) break;
 				System.out.print(tmplist.get(i).getTitle() + ", ");
 				tmplist.get(i).printReviewRating();
-				System.out.println();
 			}
-			System.out.println();
+			System.out.println('\n');
 		}
 	}
 	
