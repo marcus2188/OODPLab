@@ -141,6 +141,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 		//export to serialisable file
 		exportData(m1);
+		System.out.println("Movie successfully created.");
 	}
 	
 	public void updateMovie() {
@@ -377,6 +378,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		//after updating then need to update .dat
 		m1.set(ind-1, u);
 		this.exportData(m1);
+		System.out.println("Movie successfully updated.");
 		
 	}
 	
@@ -401,6 +403,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		} while (true);	
 		
 		exportData(m1);
+		System.out.println("Movie successfully removed.");
 	}
 
 	
