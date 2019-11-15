@@ -50,10 +50,9 @@ public class Seeder {
         // Avenger
         Movie movie1 = new Movie("Avenger", "Now Showing", (LocalDate) null, "Assemble!", "Oxley", cast, true, 9999999);
         movie1.printMovie();
-        MovieReview r1 = new MovieReview("5.0 like our GPA", 5);
-        MovieReview r2 = new MovieReview("Pull up ur socks man",4);
-        ArrayList<MovieReview> r = new ArrayList<MovieReview>(Arrays.asList(r1));
-        SerializeDB.writeSerializedObject("MovieReview.dat", r);
+        movie1.appendMovieReviewList("5.0 like our GPA", 5);
+        movie1.appendMovieReviewList("Pull up ur socks man",4);       
+       
         
         Movie movie2 = new Movie("Ironman", "Now Showing", (LocalDate) null, "And I.. am Iron Man", "Noel", cast, true, 1230);
         movie2.printMovie();
@@ -62,22 +61,42 @@ public class Seeder {
         		5);
         movie2.appendMovieReviewList(
         		"Iron man is a fun and enjoyable but a flawed film", 3);
+        
+        
+        
         Movie movie3 = new Movie("Batman bin supaman", "End of Showing", (LocalDate) LocalDate.now(), "Because I'm Batman", "Bruce", cast, true, 999);
         movie3.printMovie();
+        movie3.appendMovieReviewList(
+        		"funny!", 4);
+        movie3.appendMovieReviewList(
+        		"Batman is a fun and enjoyable but a flawed film", 3);
+        
         Movie movie4 = new Movie("Sonic", "End of Showing", (LocalDate) LocalDate.now(), "World says hello to all", "Owen Who", cast, true, 99329);
         movie4.printMovie();
+        movie4.appendMovieReviewList(
+        		"Animation was so bad!", 1);
+        movie4.appendMovieReviewList(
+        		"Ok movie", 3);
+        
+        
         Movie movie5 = new Movie("Powerpuff girls", "Preview", (LocalDate) null, "MOJO", "Dr E", cast, true, 12321);
         movie5.printMovie();
         movie5.appendMovieReviewList(
         		"used to think it was a girly, sweet show, ...untill I watched it.", 3);
         movie5.appendMovieReviewList(
         		"Do not listen to that review,the powerpuff girls were GREAT i loved them age 9-12 and i was never violent.", 5);
+        
         Movie movie6 = new Movie("Frozen", "Now Showing", (LocalDate) null, "Elsa vs Anna", "Owen", cast, true, 0);
         movie6.printMovie();
         movie6.appendMovieReviewList(
         		"Make room for two more wonderful princesses in this perfect combination of the best Disney has to offer.",5);
+        movie6.appendMovieReviewList(
+        		"Totally for kids.",1);
+        
         Movie movie7 = new Movie("Frozen 2", "Coming Soon", (LocalDate) null, "Elsa kills Anna", "Owen", cast, true, 0);
         movie7.printMovie();
+        movie7.appendMovieReviewList(
+        		"Make room for two more wonderful princesses in this perfect combination of the best Disney has to offer.",5);
         
         movies.add(movie1);
         movies.add(movie2);
