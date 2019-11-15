@@ -128,13 +128,14 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		}
 		else if (choice == 3) {
 			//printPastReviews();
-			List<MovieReview> mrlist = d.getReview_list();
+			/*List<MovieReview> mrlist = d.getReview_list();
 			int size = mrlist.size();
 			for (int i=0;i<size;i++) {
 				System.out.println(i);
 				System.out.println("Rating: " + mrlist.get(i).getRating() + "\nComments: " + mrlist.get(i).getComments());
 			}
-			
+			*/
+			d.printPastReviews();			
 		}
 		return;
 	}

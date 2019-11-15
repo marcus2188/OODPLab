@@ -34,8 +34,15 @@ public class Movie_both_manager {
 		Movie tmp;
 		if (choice==1) {	
 			//sort by ticketSales
-			ArrayList<Movie> tmplist = this.getM();
+			ArrayList<Movie> tmplist = new ArrayList<Movie>(this.getM().size());
+			for (Movie x:this.getM()) {
+				tmplist.add(x);
+			}
 			System.out.println("Top 5 Movies by ticket sales: ");
+			if (tmplist.size()==0) {
+				System.out.println("No movies in the database have a ticket sale.\n");
+				return;
+			}
 			for (int i=1;i<tmplist.size();i++) {
 				for (int j=i;j>0;j--) {
 					if (tmplist.get(j).getTicketSales()<tmplist.get(j-1).getTicketSales()) {
@@ -46,19 +53,19 @@ public class Movie_both_manager {
 				}
 			}
 			for (int i=tmplist.size()-1; i>=tmplist.size()-5; i--) {
+				if (i<0) break;
 				System.out.println(tmplist.get(i).getTitle() + ", " + tmplist.get(i).getTicketSales());
 			}
+			System.out.println();
 		}
 		else if (choice==2) {
 			//sort by avgRating
 			ArrayList<Movie> tmplist = new ArrayList<Movie>();
 			System.out.println("Top 5 Movies by average rating: ");
 			
-			//transfer NA ratings away first
-			ArrayList<Movie> nr = new ArrayList<Movie>();
+			//filter for nonNA ratings away first
 			for (int i=0;i<m.size();i++) {
-				if (m.get(i).getAvgRating()==-1) nr.add(m.get(i));
-				else tmplist.add(m.get(i));
+				if (m.get(i).getAvgRating()!=-1) tmplist.add(m.get(i));
 			}
 			
 			//sort nonNA ratings
@@ -72,17 +79,17 @@ public class Movie_both_manager {
 				}
 			}
 			
+			if (tmplist.size()==0) {
+				System.out.println("No movies in the database have a rating.\n");
+				return;
+			}
+			
 			//print nonNA ratings
-			for (int i=0;i<tmplist.size();i++) {
+			for (int i=tmplist.size()-1;i<=tmplist.size()-5;i++) {
+				if (i<0) break;
 				System.out.print(tmplist.get(i).getTitle() + ", ");
 				tmplist.get(i).printReviewRating();
 				System.out.println();
-			}
-			
-			//print NA ratings
-			System.out.println("\nMovies with rating NA:");
-			for (int i=0;i<nr.size();i++) {
-				System.out.println(nr.get(i).getTitle());
 			}
 			System.out.println();
 		}
