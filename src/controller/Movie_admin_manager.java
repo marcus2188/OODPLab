@@ -398,12 +398,15 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			int choice = sc.nextInt();
 			
 			if (choice==0) break;
-			else if (choice>m1.size()) System.out.println("Invalid choice!\n"); 
-			else m1.remove(choice-1);
+			else if (choice>m1.size()) System.out.println("Invalid choice!\n");
+			else {
+				m1.remove(choice-1);
+				System.out.println("Movie successfully removed.");
+			}
 		} while (true);	
 		
 		exportData(m1);
-		System.out.println("Movie successfully removed.");
+		
 	}
 
 	
