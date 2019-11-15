@@ -162,7 +162,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         // SET TICKET PRICE PRICE float
         mt.setPriceBasedOnAttributes();
         
-        	
+        //price
         // SET THE REST OF THE TICKET ATTRIBUTES
         mt.setMovieScreening(obj);
         
