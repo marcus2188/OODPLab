@@ -137,6 +137,7 @@ All user menus
                             movies = Filter.filterByShowStatus(movies);
                             Print.printMovies(movies);
                         do {
+                        	System.out.println("Please enter a valid item :");
                             movieChoice = sc.nextInt();
                         } while (movieChoice<1 || movieChoice>movies.size());
                             movie = movies.get(movieChoice-1);
@@ -161,6 +162,7 @@ All user menus
                             System.out.println("Choose a cineplex: ");
                             Print.printCineplexes(cineplexes);
                             do {
+                            	System.out.println("Please enter a valid item :");
                                 cineplexChoice = sc.nextInt();
                             } while (cineplexChoice<1 || cineplexChoice>cineplexes.size());
                             cineplex = cineplexes.get(cineplexChoice-1);
@@ -176,14 +178,15 @@ All user menus
                             	continue;
                             }
                             do {
+                            	System.out.println("Please enter a valid item :");
                                 screeningChoice = sc.nextInt();
                             } while (screeningChoice<1 || screeningChoice>temp.size());
                             movieScreening = temp.get(screeningChoice-1);
                             break;
                         default:
-                            System.out.println("Invalid value!");
+                            System.out.println("You have entered an invalid input, please check");
                             movieScreening = null;
-                            break;
+                            continue;
                     }
                     boolean correctseat = false;
                     while(!correctseat) {
@@ -192,7 +195,13 @@ All user menus
 	                    movieScreening.getCinema().printSeatAvailability();
 	
 	                    System.out.println("Please enter the row: ");
-	                    row = sc.next().charAt(0);
+	                    String intake = sc.nextLine();
+	                    if(!intake.matches("[a-zA-Z]")) {
+	                    	System.out.println("Please type a correct row please");
+	                    	System.out.println("");
+	                    	continue;
+	                    }
+	                    row = Character.toUpperCase(intake.charAt(0));
 	                    System.out.println("Please enter the column: ");
 	                    col = sc.nextInt();
 	                    try{
@@ -229,9 +238,12 @@ All user menus
                 case 6: 
                     ms.dumpcurrentSO(); 
                     break;
-                default:
-                    loop = false;
+                case 7:
+                	loop = false;
                     break;
+                default:
+                    System.out.println("Please enter a valid choice, thank you");
+                	break;
             }
         }
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);

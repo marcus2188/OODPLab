@@ -182,12 +182,21 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 			return;
 		}
 		// COLLECT MOVIEGOER INFORMATION, CREATE NEW MOVIEGOER OBJECT AND STORE INTO PEOPLE
-		System.out.println("Please enter your name here : ");
+		System.out.println("We need to collect your crudentials");
+		System.out.println("");
+		System.out.println("Please enter your full name : ");
 		String person_name = se.nextLine();
-		System.out.println("Please enter your email here : ");
+		System.out.println("Please enter your email : ");
 		String person_email = se.nextLine();
-		System.out.println("Please enter your mobile number here : ");
+		System.out.println("Please enter your mobile number : ");
 		String person_no = se.nextLine();
+		if(!person_no.matches("[0-9]{8}") || person_name.matches("[a-zA-Z]+") || !person_email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") || !(person_name == person_email) ) {
+			System.out.println("There is an error in one of your information entered");
+			System.out.println("Payment denied");
+			System.out.println("heading back.... ");
+			System.out.println(":(");
+			return;
+		}
 		MovieGoer g = new MovieGoer(person_name, person_no, person_email);
 		this.people.add(g);
 	

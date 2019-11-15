@@ -26,7 +26,7 @@ public class Seat implements Serializable {
         int row, col;
         col = index % maxCol;
         row = (int)Math.floor(index / maxCol);
-        ID = (char)(64+row) + String.valueOf(col); //assuming row starts from 1.
+        ID = (char)(65+row) + String.valueOf(col); //assuming row starts from 1.
     }
 
     public String getSeatID(){
