@@ -25,10 +25,11 @@ public class AdminMenu {
         System.out.println("Press 7 to update ticket prices");
         System.out.println("Press 8 to update public holidays");
         System.out.println("Press 9 to list top 5 movies");
+        System.out.println("Press 10 to exit MOBLIMA");
         System.out.println("Press 0 to go to main menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 9) {
+        while (choice < 0 || choice > 10) {
             System.out.println("Invalid choice, please try again: ");
             choice = scan.nextInt();
         }
@@ -61,6 +62,9 @@ public class AdminMenu {
             case 9:
                 MOBLIMA.setAppState(STATE.ADMIN_LIST_TOP);
                 break;
+            case 10: 
+            	System.out.println("You have closed the program, goodbye!!!! :))");
+            	System.exit(0);
             case 0:
                 System.out.println("Logging out, redirecting to main page...");
                 MOBLIMA.setAppState(STATE.LOGIN);

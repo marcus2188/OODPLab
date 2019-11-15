@@ -35,10 +35,11 @@ All user menus
         System.out.println("Press 3 to list top 5 movies");
         System.out.println("Press 4 to see all movie screening");
         System.out.println("Press 5 to enter Booking Menu");
+        System.out.println("Press 6 to exit MOBLIMA");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 5) {
+        while (choice < 0 || choice > 6) {
             System.out.println("Invalid choice, please try again:");
             choice = scan.nextInt();
         }
@@ -59,6 +60,9 @@ All user menus
             case 5:
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_BOOKING_MENU);
                 break;
+            case 6: 
+            	System.out.println("You have closed the program, goodbye!!!! :))");
+            	System.exit(0);
             case 0:
                 System.out.println("Redirecting to main menu...");
                 MOBLIMA.setAppState(STATE.LOGIN);
@@ -100,6 +104,7 @@ All user menus
     public void userBookingMenu() {
 		ScannerErrorHandler sc = new ScannerErrorHandler();
 		ShoppingOrder_manager ms = new ShoppingOrder_manager();
+		ArrayList<Movie> temp2;
         int choice, choice2, movieChoice, screeningChoice, cineplexChoice;
         Movie movie;
 		Cineplex cineplex;
@@ -134,13 +139,13 @@ All user menus
                     switch(choice2){
                         case 1:
                             System.out.println("Choose a movie: ");
-                            movies = Filter.filterByShowStatus(movies);
-                            Print.printMovies(movies);
+                            temp2 = Filter.filterByShowStatus(movies);
+                            Print.printMovies(temp2);
                         do {
                         	System.out.println("Please enter a valid item :");
                             movieChoice = sc.nextInt();
                         } while (movieChoice<1 || movieChoice>movies.size());
-                            movie = movies.get(movieChoice-1);
+                            movie = temp2.get(movieChoice-1);
                             temp = Filter.filterByMovie(movieScreeningList, movie); 
                             if(temp.isEmpty()) {
                             	System.out.println("There are no movie screenings for this movie currently");

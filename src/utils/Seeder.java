@@ -4,6 +4,7 @@ import entity.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java. sql. Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,6 +21,7 @@ public class Seeder {
 
         SerializeDB.writeSerializedObject("cineplex.dat", cineplexes);
 
+        
         // Initialize Data for Movie 
         // Joker   
         String title = "Joker";
@@ -99,8 +101,8 @@ public class Seeder {
         movieScreenings.add(ms2);
 
         Cinema cinema3 = cineplexes.get(1).getCinemas().get(1);
-        Date date3 = new Date();
-        MovieScreening ms3 = new MovieScreening(cinema3, movie2, date3, 1130);
+        Date date3 = parseDate("2019-11-09");
+        MovieScreening ms3 = new MovieScreening(cinema3, movie5, date3, 1130);
         movieScreenings.add(ms3);
 
         Cinema cinema4 = cineplexes.get(2).getCinemas().get(2);
@@ -144,4 +146,11 @@ public class Seeder {
         tickets.add(ticket);
         SerializeDB.writeSerializedObject("paymentHistory.dat", tickets);
     }
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (Exception e) {
+            return null;
+        }
+     }
 }

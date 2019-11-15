@@ -352,8 +352,8 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     private ArrayList<MovieScreening> sortMovieScreening(ArrayList<MovieScreening> movieScreeningList){
         movieScreeningList.sort(Comparator.comparing(o1->o1.getCineplex().getName()));
-        movieScreeningList.sort(Comparator.comparing(o2->o2.getMovie().getTitle()));
         movieScreeningList.sort(Comparator.comparing(o3->o3.getShowDate()));
+        movieScreeningList.sort(Comparator.comparing(o2->o2.getMovie().getTitle()));
         return movieScreeningList;
     }
 
