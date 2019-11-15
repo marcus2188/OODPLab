@@ -113,7 +113,7 @@ public class MovieTicketManager implements MovieTicket_inf {
                 found = true;
                 System.out.println("What price do you want to set?");
                 float price = (float)scan.nextFloat();
-                MovieTicket ticket = (MovieTicket)this.priceTable.get(i);
+                PriceTableTicket ticket = (PriceTableTicket)this.priceTable.get(i);
                 ticket.setPrice(price);
                 priceTable.remove(i);
                 priceTable.add(ticket);
