@@ -138,7 +138,7 @@ public class Movie implements Serializable{
 		MovieReview mr = new MovieReview(comments,rating);
 		this.getReview_list().add(mr);
 		this.setAvgRating(this.getReview_list());
-		System.out.println("Rating new: " + getAvgRating());
+		//System.out.println("Rating new: " + getAvgRating());
 	}
 	
 	public void printCast() {
