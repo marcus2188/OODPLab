@@ -6,6 +6,8 @@ import boundary.UserMenu;
 import utils.ScannerErrorHandler;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 
 /*
@@ -101,12 +103,29 @@ public class MOBLIMA {
          }
     }
 
+    public static String readFileAsString(String fileName)throws Exception
+    {
+        String data = "";
+        data = new String(Files.readAllBytes(Paths.get(fileName)));
+        return data;
+    }
+
     /*
     Top level Main Menu
      */
     private static void printMenu() {
         int choice = 0;
         String password; // password that user will input
+
+        //Print Banner
+        String data = null;
+        try {
+            data = readFileAsString("src/data/moblima.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(data);
+
 
         //Scanner scan = new Scanner(System.in);
         ScannerErrorHandler scan = new ScannerErrorHandler();
