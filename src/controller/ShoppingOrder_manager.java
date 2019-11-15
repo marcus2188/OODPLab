@@ -34,7 +34,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	public ShoppingOrder_manager(){
 		this.importdata();
 	}
-	
+	//type one
 	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
 	public void importdata() {
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paymentHistory.dat");

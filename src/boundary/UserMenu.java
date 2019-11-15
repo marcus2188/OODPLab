@@ -201,6 +201,7 @@ All user menus
 	                    	System.out.println("");
 	                    	continue;
 	                    }
+	                    //type 2
 	                    row = Character.toUpperCase(intake.charAt(0));
 	                    System.out.println("Please enter the column: ");
 	                    col = sc.nextInt();
