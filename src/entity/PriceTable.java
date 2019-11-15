@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class PriceTable {
     private static ArrayList<PriceTableTicket> priceTable;
-
+ 
      public PriceTable() {
         this.importData();
     }
