@@ -13,8 +13,17 @@ import java.util.Scanner;
 import entity.Movie;
 import entity.MovieReview;
 
-public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf {
+/**
+ A manager to handle admin request for movies.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
 
+public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf {
+	/** 
+	* Creates a movie
+	*/
 	public void createMovie() {
 		int choice;
 		ScannerErrorHandler sc = new ScannerErrorHandler();
@@ -157,6 +166,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		exportData(m1);
 	}
 	
+	/** 
+	* Update a movie
+	*/
 	public void updateMovie() {
 		int ind=0, choice=0;
 		Scanner sc = new Scanner(System.in);
@@ -405,6 +417,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 	}
 	
+	/** 
+	* Remove a movie
+	*/
 	public void removeMovie() {
 		Scanner sc = new Scanner(System.in);
 		

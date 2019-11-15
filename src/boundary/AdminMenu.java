@@ -6,10 +6,20 @@ import utils.ScannerErrorHandler;
 
 import java.io.IOException;
 
+/**
+ A boundary class to interact with admin.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class AdminMenu {
     /*
     Admin pages
-   */
+    */
+    /**
+    * Show admin menu
+    */
     public static void adminMenu() {
         int choice = 0;
         int id;
@@ -71,6 +81,10 @@ public class AdminMenu {
         }
     }
 
+    /** 
+    * Shows admin top 5 movies
+    * Uses movie admin interface
+    */
     public static void adminListTop5 (){
         Movie_admin_inf adminManager = new Movie_admin_manager();
         System.out.println("=== Top 5 Movies ===");        
@@ -78,6 +92,10 @@ public class AdminMenu {
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+    /** 
+    * Allows admin to create a movie
+    * Uses movie admin interface
+    */
     public static void adminCreateMovie() {
     	//create manager
     	Movie_admin_inf adminManager = new Movie_admin_manager();
@@ -87,6 +105,10 @@ public class AdminMenu {
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+    /** 
+    * Allows admin to update a movie
+    * Uses movie admin interface
+    */
     public static void adminUpdateMovie() {
     	//create manager
     	Movie_admin_inf adminManager = new Movie_admin_manager();
@@ -96,6 +118,10 @@ public class AdminMenu {
     	MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+    /** 
+    * Allows admin to delete a movie
+    * Uses movie admin interface
+    */
     public static void adminDeleteMovie() {
     	//create manager
     	Movie_admin_inf adminManager = new Movie_admin_manager();
@@ -105,6 +131,10 @@ public class AdminMenu {
     	MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+    /** 
+    * Allows admin to create a movie screening
+    * Uses movie screening interface
+    */
     public static void adminCreateScreening() {
         //create manager
         MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
@@ -114,6 +144,10 @@ public class AdminMenu {
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+    /** 
+    * Allows admin to update a movie screening
+    * Uses movie screening interface
+    */
     public static void adminUpdateScreening() {
         //create manager
         MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
@@ -123,6 +157,11 @@ public class AdminMenu {
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+
+    /** 
+    * Allows admin to delete a movie screening
+    * Uses movie screening interface
+    */
     public static void adminDeleteScreening() {
         //create manager
         MovieScreening_inf movieScreeningManager = new MovieScreeningManager();
@@ -132,6 +171,11 @@ public class AdminMenu {
         MOBLIMA.setAppState(STATE.ADMIN_MENU);
     }
 
+
+    /** 
+    * Allows admin to update a price
+    * Uses movie ticket interface
+    */
     public static void adminUpdatePrice() throws IOException {
         System.out.println("=== Update Price ===");
         MovieTicket_inf adminManager = new MovieTicketManager();
@@ -140,6 +184,10 @@ public class AdminMenu {
 
     }
 
+    /** 
+    * Allows admin to update public holidays
+    * Uses public holiday interface
+    */
     public static void adminUpdatePH() {
         System.out.println("=== Update Public Holidays ===");
         PublicHoliday_inf holidayManager = new PublicHolidayManager();
