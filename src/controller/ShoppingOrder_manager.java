@@ -56,18 +56,22 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar c = Calendar.getInstance();
-		int hour = obj.getShowTime() / 100;
-		int minute = obj.getShowTime() % 100;
-		c.set(Calendar.HOUR, hour);
-		c.set(Calendar.MINUTE, minute);
-		Date d = c.getTime();
-
-        // System.out.println("time "+ dateFormat.format(d));
-        if (dateFormat.parse(dateFormat.format(d)).after(dateFormat.parse("18:00"))) {
-            before6 = false;
-        } else {
-            before6 = true;
-        }
+		int timing = obj.getShowTime();
+		//int minute = obj.getShowTime() % 100;
+		if(timing < 1800)
+			before6 = true;
+		else
+			before6 = false;
+//		c.set(Calendar.HOUR, hour);
+//		c.set(Calendar.MINUTE, minute);
+//		Date d = c.getTime();
+//
+//        // System.out.println("time "+ dateFormat.format(d));
+//        if (dateFormat.parse(dateFormat.format(d)).after(dateFormat.parse("18:00"))) {
+//            before6 = false;
+//        } else {
+//            before6 = true;
+//        }
 
         // GET AGEGROUP agegroup
         AgeGroup ageGroup;

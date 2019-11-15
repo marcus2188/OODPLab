@@ -100,6 +100,7 @@ All user menus
     public void userBookingMenu() {
 		ScannerErrorHandler sc = new ScannerErrorHandler();
 		ShoppingOrder_manager ms = new ShoppingOrder_manager();
+		ArrayList<Movie> temp2;
         int choice, choice2, movieChoice, screeningChoice, cineplexChoice;
         Movie movie;
 		Cineplex cineplex;
@@ -120,6 +121,7 @@ All user menus
             System.out.println("5. See all past purchasers");      // TESTED WORKING
             System.out.println("6. Clear current shopping cart");
             System.out.println("7. Back to Movie Menu");
+            System.out.println("8. Exit MOBLIMA");
             System.out.println("-------------------------------------");
             System.out.println("What do you wanna do? : ");
             
@@ -134,13 +136,13 @@ All user menus
                     switch(choice2){
                         case 1:
                             System.out.println("Choose a movie: ");
-                            movies = Filter.filterByShowStatus(movies);
-                            Print.printMovies(movies);
+                            temp2 = Filter.filterByShowStatus(movies);
+                            Print.printMovies(temp2);
                         do {
                         	System.out.println("Please enter a valid item :");
                             movieChoice = sc.nextInt();
                         } while (movieChoice<1 || movieChoice>movies.size());
-                            movie = movies.get(movieChoice-1);
+                            movie = temp2.get(movieChoice-1);
                             temp = Filter.filterByMovie(movieScreeningList, movie); 
                             if(temp.isEmpty()) {
                             	System.out.println("There are no movie screenings for this movie currently");
@@ -242,6 +244,9 @@ All user menus
                 case 7:
                 	loop = false;
                     break;
+                case 8: 
+                	System.out.println("You have closed the program, goodbye!!!! :))");
+                	System.exit(0);
                 default:
                     System.out.println("Please enter a valid choice, thank you");
                 	break;
