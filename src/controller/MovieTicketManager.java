@@ -54,7 +54,7 @@ public class MovieTicketManager implements MovieTicket_inf {
         }
 
         // day to edit
-        System.out.println("Enter day of ticket (1-Mon...7-Sun)");
+        System.out.println("Enter day of ticket (1-Sun|2-Mon|3-Tue|4-Wed|5-Thu|6-Fri|7-Sat)");
         choice = scan.nextInt();
         while(choice < 0 || choice > 7) {
             System.out.println("Invalid choice");
@@ -62,7 +62,7 @@ public class MovieTicketManager implements MovieTicket_inf {
         }
         int day = choice;
         boolean weekday;
-        if (1 <= choice && choice <=5) {
+        if (2 <= choice && choice <=6) {
             weekday = true;
         } else {
             weekday = false;
@@ -113,27 +113,31 @@ public class MovieTicketManager implements MovieTicket_inf {
                 found = true;
                 System.out.println("What price do you want to set?");
                 float price = (float)scan.nextFloat();
-                MovieTicket ticket = (MovieTicket)this.priceTable.get(i);
+                PriceTableTicket ticket = (PriceTableTicket)this.priceTable.get(i);
                 ticket.setPrice(price);
                 priceTable.remove(i);
                 priceTable.add(ticket);
                 TextTicketDB.savePrices("prices.txt", this.priceTable);
+                break;
             }
         }
 
         if (found == false) {
-            System.out.println("Price not in database, would you like to create a new entry? (Y/n)");
+            System.out.println("Criteria not valid!");
+        	/*
+        	System.out.println("Price not in database, would you like to create a new entry? (Y/n)");
             char choice2 = scan.next().charAt(0);
             System.out.println("What price do you want to set?");
             float price = scan.nextFloat();
             if (choice2 == 'y' || choice2 == 'Y') {
-                MovieTicket newTicket = new MovieTicket(ageGroup, weekday, before6, screeningFormat, day, price, false);
+                PriceTableTicket newTicket = new PriceTableTicket(ageGroup, weekday, before6, screeningFormat, day, price);
                 this.priceTable.add(newTicket);
                 TextTicketDB.savePrices("prices.txt", this.priceTable);
                 System.out.println("Ticket added!");
             } else {
                 System.out.println("Operation cancelled");
             }
+            */
         }
         return;
     }

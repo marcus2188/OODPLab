@@ -35,10 +35,11 @@ All user menus
         System.out.println("Press 3 to list top 5 movies");
         System.out.println("Press 4 to see all movie screening");
         System.out.println("Press 5 to enter Booking Menu");
+        System.out.println("Press 6 to exit MOBLIMA");
         System.out.println("Press 0 to go to Main Menu");
 
         choice = scan.nextInt();
-        while (choice < 0 || choice > 5) {
+        while (choice < 0 || choice > 6) {
             System.out.println("Invalid choice, please try again:");
             choice = scan.nextInt();
         }
@@ -59,6 +60,9 @@ All user menus
             case 5:
                 MOBLIMA.setAppState(STATE.MOVIE_GOER_BOOKING_MENU);
                 break;
+            case 6: 
+            	System.out.println("You have closed the program, goodbye!!!! :))");
+            	System.exit(0);
             case 0:
                 System.out.println("Redirecting to main menu...");
                 MOBLIMA.setAppState(STATE.LOGIN);
@@ -121,7 +125,6 @@ All user menus
             System.out.println("5. See all past purchasers");      // TESTED WORKING
             System.out.println("6. Clear current shopping cart");
             System.out.println("7. Back to Movie Menu");
-            System.out.println("8. Exit MOBLIMA");
             System.out.println("-------------------------------------");
             System.out.println("What do you wanna do? : ");
             
@@ -244,9 +247,6 @@ All user menus
                 case 7:
                 	loop = false;
                     break;
-                case 8: 
-                	System.out.println("You have closed the program, goodbye!!!! :))");
-                	System.exit(0);
                 default:
                     System.out.println("Please enter a valid choice, thank you");
                 	break;

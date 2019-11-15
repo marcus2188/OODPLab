@@ -114,10 +114,11 @@ public class MOBLIMA {
         System.out.println("Welcome to MOBLIMA App!");
         System.out.println("Press 1 for Movie Goer");
         System.out.println("Press 2 for admin");
+        System.out.println("Press 3 to exit MOBLIMA");
         System.out.println("=======================");
 
         choice = scan.nextInt();
-        while (choice != 1 && choice != 2) {
+        while (choice != 1 && choice != 2 && choice!=3) {
             System.out.println("Invalid choice, try again:");
             choice = scan.nextInt();
         }
@@ -144,7 +145,9 @@ public class MOBLIMA {
                     setAppState(STATE.LOGIN);
                     break;
                 }
-
+            case 3: 
+            	System.out.println("You have closed the program, goodbye!!!! :))");
+            	System.exit(0);
             default:
                 System.out.println("Invalid choice, try again...");
                 setAppState(STATE.LOGIN);
