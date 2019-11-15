@@ -140,6 +140,7 @@ public class Seeder {
         ticket.setPriceBasedOnAttributes();
         ticket.setMovieScreening(movieScreenings.get(0));
         ticket.setSeat(movieScreenings.get(0).getCinema().getSeatList().get(0));
+        ticket.setTID("GVS1202011151200");
         tickets.add(ticket);
         SerializeDB.writeSerializedObject("paymentHistory.dat", tickets);
     }

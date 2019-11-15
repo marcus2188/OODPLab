@@ -53,7 +53,7 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
         boolean before6;
         Date date = obj.getShowDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yymmdd");
+		SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyyMMdd");
 
 		Calendar c = Calendar.getInstance();
 		int hour = obj.getShowTime() / 100;
@@ -190,13 +190,13 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		String person_email = se.nextLine();
 		System.out.println("Please enter your mobile number : ");
 		String person_no = se.nextLine();
-		if(!person_no.matches("[0-9]{8}") || person_name.matches("[a-zA-Z]+") || !person_email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") || !(person_name == person_email) ) {
+		/*if(!person_no.matches("[0-9]{8}") || !person_name.matches("[a-zA-Z]+") || !person_email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") || !(person_name == person_email) ) {
 			System.out.println("There is an error in one of your information entered");
 			System.out.println("Payment denied");
 			System.out.println("heading back.... ");
 			System.out.println(":(");
 			return;
-		}
+		}*/
 		MovieGoer g = new MovieGoer(person_name, person_no, person_email);
 		this.people.add(g);
 	
