@@ -100,6 +100,7 @@ All user menus
     public void userBookingMenu() {
 		ScannerErrorHandler sc = new ScannerErrorHandler();
 		ShoppingOrder_manager ms = new ShoppingOrder_manager();
+		ArrayList<Movie> temp2;
         int choice, choice2, movieChoice, screeningChoice, cineplexChoice;
         Movie movie;
 		Cineplex cineplex;
@@ -135,13 +136,13 @@ All user menus
                     switch(choice2){
                         case 1:
                             System.out.println("Choose a movie: ");
-                            movies = Filter.filterByShowStatus(movies);
-                            Print.printMovies(movies);
+                            temp2 = Filter.filterByShowStatus(movies);
+                            Print.printMovies(temp2);
                         do {
                         	System.out.println("Please enter a valid item :");
                             movieChoice = sc.nextInt();
                         } while (movieChoice<1 || movieChoice>movies.size());
-                            movie = movies.get(movieChoice-1);
+                            movie = temp2.get(movieChoice-1);
                             temp = Filter.filterByMovie(movieScreeningList, movie); 
                             if(temp.isEmpty()) {
                             	System.out.println("There are no movie screenings for this movie currently");
