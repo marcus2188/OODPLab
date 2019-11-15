@@ -20,15 +20,15 @@ import utils.SerializeDB;
 
 
 public class ShoppingOrder_manager implements ShoppingOrder_inf{
-	ScannerErrorHandler se = new ScannerErrorHandler();
-	ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
-	ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
-	MovieScreening obj;
+	private ScannerErrorHandler se = new ScannerErrorHandler();
+	private ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
+	private ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
+	private MovieScreening obj;
 	
 	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
-	ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
-	Date newdate = null;
-	ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
+	private ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
+	private Date newdate = null;
+	private ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
 	
 	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
 	public ShoppingOrder_manager(){
