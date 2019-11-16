@@ -12,5 +12,4 @@ public interface MovieTicket_inf {
     MovieTicket checkPrice() throws ParseException;
     void deleteData();
     void printPriceTable();
-    void updatePriceOfTicket(MovieTicket ticket);
 }

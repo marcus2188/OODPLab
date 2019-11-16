@@ -283,11 +283,6 @@ public class MovieTicketManager implements MovieTicket_inf {
         }
     }
 
-    // TODO: implement
-    // updates a price of an indivdual ticket
-//    public void updatePriceOfTicket(MovieTicket ticket) {
-//        return;
-//    }
 
 
 }
