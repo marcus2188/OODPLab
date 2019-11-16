@@ -10,29 +10,58 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 
-/*
-main entry point
- */
+/**
+ Main entry point of application
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class MOBLIMA {
 
     /* Global variables */
+
+    /**
+    * Determiner for admin access.
+    */
     private static boolean admin = false;
+    /**
+    * Determiner for running
+    */
     private static boolean running = true;
+    /**
+    * Password
+    */
     private static final String PASSWORD = "root";
 
 
 
     /* Initialize app state */
-    private static STATE appState = STATE.LOGIN;
 
+    /**
+    * Application state/route.
+    */
+    private static STATE appState = STATE.LOGIN;
+    /**
+    * Gets the application state.
+    * @return this application's state.
+    */
     public static STATE getAppState() {
         return appState;
     }
 
+
+    /**
+    * Change application state.
+    * @param appState The next state of the application.
+    */
     public static void setAppState(STATE appState) {
         MOBLIMA.appState = appState;
     }
 
+    /**
+    * Main program logic.
+    */
     public static void main(String[] args) throws IOException, ParseException {
         /*
         List of all available routes.
@@ -103,6 +132,12 @@ public class MOBLIMA {
          }
     }
 
+    /** 
+    * Read a file and return it as String
+    * @param fileName The file name to read from
+    * @return the String read from the file
+    */
+
     public static String readFileAsString(String fileName)throws Exception
     {
         String data = "";
@@ -110,9 +145,9 @@ public class MOBLIMA {
         return data;
     }
 
-    /*
-    Top level Main Menu
-     */
+    /** 
+    * Print top level Main Menu
+    */
     private static void printMenu() {
         int choice = 0;
         String password; // password that user will input

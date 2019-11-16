@@ -1,10 +1,13 @@
 package boundary;
 
+ /**
+ Acts as "routes" like in a url that renders pages based on the appState.
+ appState can be set from different methods in order to render the pages required.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
 
-/*
-Acts as "routes" like in a url that renders pages based on the appState.
-appState can be set from different methods in order to render the pages required.
- */
 public enum STATE {
     LOGIN,
 

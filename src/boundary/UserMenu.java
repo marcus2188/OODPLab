@@ -18,13 +18,32 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ A boundary class to interact with movie goer.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class UserMenu {
+    /** 
+    * An arraylist of moviescreenings from database(.dat file)
+    */
     private ArrayList<MovieScreening> movieScreeningList;
+    /** 
+    * An arraylist of cineplexes from database(.dat file)
+    */
 	private	ArrayList<Cineplex> cineplexes;
+    /** 
+    * An arraylist of movies from database(.dat file)
+    */
 	private	ArrayList<Movie> movies;
     /*
 All user menus
  */
+    /** 
+    * Show user menu
+    */
     public static void userMenu() {
         int choice = 0;
         //Scanner scan = new Scanner(System.in);
@@ -73,12 +92,21 @@ All user menus
 
     }
 
+    /** 
+    * Shows movie goer a list of movie screenings
+    * Movie screenings are filtered
+    * Uses movie screening interface
+    */
     public static void userListScreening(){
         MovieScreening_inf  movieMgManager = new MovieScreeningManager();
         movieMgManager.viewAllListing();
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
+    /** 
+    * Shows movie goer a list of all movies
+    * Uses movie movie goer interface
+    */
     public static void userListMovies() {
         Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie List ===");
@@ -86,6 +114,11 @@ All user menus
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);   // Redirect back to main menu
     }
 
+    
+    /** 
+    * Allows movie goer to search for movies
+    * Uses movie movie goer interface
+    */
     public static void userSearchMovies() {
     	Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Movie search ===");
@@ -93,7 +126,10 @@ All user menus
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU); // Redirect back to main menu
     }
 
-
+    /** 
+    * Allows movie goer to list top 5 movies by ticket sales or rating
+    * Uses movie movie goer interface
+    */
     public static void userListTop5Movies() {
     	Movie_mg_inf movieMgManager = new Movie_mg_manager();
         System.out.println("=== Top 5 Movies ===");        
@@ -101,6 +137,10 @@ All user menus
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
+    /** 
+    * Allows movie goer to enter booking menu to make transactions
+    * Uses shopping order interface
+    */
     public void userBookingMenu() {
 		ScannerErrorHandler sc = new ScannerErrorHandler();
 		ShoppingOrder_manager ms = new ShoppingOrder_manager();
@@ -255,11 +295,17 @@ All user menus
         MOBLIMA.setAppState(STATE.MOVIE_GOER_MENU);
     }
 
+    /** 
+    * Update data
+    */
     public void updatedata() {
 		SerializeDB.writeSerializedObject("moviescreening.dat", this.movieScreeningList);
 		SerializeDB.writeSerializedObject("Movie.dat", this.movies);
 	}
 
+    /** 
+    * Import data
+    */
     public void importdata() {
 		this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
 		this.cineplexes = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");

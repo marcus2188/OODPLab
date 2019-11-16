@@ -8,8 +8,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf {
+/**
+ A manager to handle admin request for movies.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
 
+public class Movie_admin_manager extends Movie_both_manager implements Movie_admin_inf {
+	/** 
+	* Creates a movie
+	*/
 	public void createMovie() {
 		int choice;
 		ScannerErrorHandler sc = new ScannerErrorHandler();
@@ -144,6 +153,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		System.out.println("Movie successfully created.");
 	}
 	
+	/** 
+	* Update a movie
+	*/
 	public void updateMovie() {
 		int ind=0, choice=0;
 		ScannerErrorHandler sc = new ScannerErrorHandler();
@@ -382,6 +394,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 	}
 	
+	/** 
+	* Remove a movie
+	*/
 	public void removeMovie() {
 		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
