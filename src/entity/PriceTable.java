@@ -4,18 +4,38 @@ import utils.TextTicketDB;
 
 import java.util.ArrayList;
 
+ /**
+ Represents the price table for our pricing scheme
+ A price table is the aggregation of price table ticket
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class PriceTable {
+    /** 
+    * The array list of price table ticket in this price table
+    */
     private static ArrayList<PriceTableTicket> priceTable;
  
-     public PriceTable() {
+    /** 
+    * Creates a price table
+    */
+    public PriceTable() {
         this.importData();
     }
 
 
+    /** 
+    * Import date from prices.txt
+    */
     private void importData() {
         priceTable = TextTicketDB.readPrices("prices.txt");
     }
 
+    /** 
+    * Check price from price table
+    */
     public float checkPrice(
             AgeGroup ageGroup,
             boolean isWeekDay,

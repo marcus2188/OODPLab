@@ -20,6 +20,7 @@ import java.text.ParseException;
 public class MOBLIMA {
 
     /* Global variables */
+
     /**
     * Determiner for admin access.
     */
@@ -36,6 +37,7 @@ public class MOBLIMA {
 
 
     /* Initialize app state */
+
     /**
     * Application state/route.
     */
@@ -130,6 +132,12 @@ public class MOBLIMA {
          }
     }
 
+    /** 
+    * Read a file and return it as String
+    * @param fileName The file name to read from
+    * @return the String read from the file
+    */
+
     public static String readFileAsString(String fileName)throws Exception
     {
         String data = "";
@@ -137,9 +145,9 @@ public class MOBLIMA {
         return data;
     }
 
-    /*
-    Top level Main Menu
-     */
+    /** 
+    * Print top level Main Menu
+    */
     private static void printMenu() {
         int choice = 0;
         String password; // password that user will input

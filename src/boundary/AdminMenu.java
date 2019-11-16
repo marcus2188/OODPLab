@@ -17,6 +17,7 @@ public class AdminMenu {
     /*
     Admin pages
     */
+    
     /**
     * Show admin menu
     */
