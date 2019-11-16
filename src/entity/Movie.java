@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import utils.SerializeDB;
 
 public class Movie implements Serializable{
     
@@ -164,7 +161,7 @@ public class Movie implements Serializable{
 			System.out.print("NA");
 			return;
 		}
-		System.out.printf("%.2f",this.getAvgRating());
+		System.out.printf("%.1f",this.getAvgRating());
 		return;
 	}
 	
@@ -193,8 +190,6 @@ public class Movie implements Serializable{
 		System.out.println("Past Reviews: ");
 		printPastReviews();
 		System.out.println();
-		
-		System.out.println('\n');
 	}
     
 }

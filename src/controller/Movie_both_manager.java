@@ -2,12 +2,10 @@ package controller;
 
 import entity.Movie;
 import utils.SerializeDB;
+import utils.ScannerErrorHandler;
 
-import java.io.InvalidClassException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class Movie_both_manager {
 	
@@ -19,16 +17,14 @@ public class Movie_both_manager {
 	}
 	
 	public void listTop5() {
-		Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
 		System.out.println("Press 1 for top 5 movies ranked by ticket sales.");
         System.out.println("Press 2 for top 5 movies ranked by ratings");
         int choice = sc.nextInt();
-        sc.nextLine();
         while (choice<1 || choice>2) {
             System.out.println("Invalid choice, please try again: ");
             choice = sc.nextInt();
-            sc.nextLine();
         }
         
 		Movie tmp;
@@ -67,7 +63,9 @@ public class Movie_both_manager {
 			
 			//filter for nonNA ratings away first
 			for (int i=0;i<m.size();i++) {
-				if (m.get(i).getAvgRating()!=-1) tmplist.add(m.get(i));
+				if (m.get(i).getAvgRating()!=-1) {
+					tmplist.add(m.get(i));
+				}
 			}
 			
 			//sort nonNA ratings
@@ -85,9 +83,9 @@ public class Movie_both_manager {
 				System.out.println("No movies in the database have a rating.\n");
 				return;
 			}
-			
+
 			//print nonNA ratings
-			for (int i=tmplist.size()-1;i<=tmplist.size()-5;i++) {
+			for (int i=tmplist.size()-1;i>=tmplist.size()-5;i--) {
 				if (i<0) break;
 				System.out.print(tmplist.get(i).getTitle() + ", ");
 				tmplist.get(i).printReviewRating();
@@ -105,6 +103,7 @@ public class Movie_both_manager {
 		this.m = m;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList<Movie> loadData() {
 		List movies;
 		movies = SerializeDB.readSerializedObject("Movie.dat");
