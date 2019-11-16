@@ -11,6 +11,7 @@ package utils;
 public class Converter {
     /** 
     * Convert char to int
+    * @return The int
     */
     public static int charToInt(char c){
         // A -> 0
@@ -21,6 +22,7 @@ public class Converter {
     
     /** 
     * Convert int to char
+    * @return The char
     */
     public static char intToChar(int i){
         // 0 -> A

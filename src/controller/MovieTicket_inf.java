@@ -27,6 +27,7 @@ public interface MovieTicket_inf {
     void importData() throws IOException;
     /** 
     * Takes in details and returns a movie ticket with appropriate price
+    * @return The movie ticket with appropriate price
     */
     MovieTicket checkPrice() throws ParseException;
     /** 

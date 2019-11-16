@@ -28,6 +28,7 @@ public class TextTicketDB {
     /** 
     * Read price from file
     * @param filename The file's name
+    * @return The entry containing the price
     */
     public static ArrayList readPrices(String filename) {
         try {
@@ -59,6 +60,7 @@ public class TextTicketDB {
     /** 
     * Read from file
     * @param filename The file's name
+    * @return The list of objects read
     */
     public static List read (String filename) throws IOException {
         List data = new ArrayList();

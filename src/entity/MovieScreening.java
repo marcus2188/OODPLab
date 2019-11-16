@@ -129,6 +129,7 @@ public class MovieScreening implements Serializable {
     * Update seat status by setting a specific seat to book
     * @param row The row alphabet of the seat
     * @param col The col number of the seat
+    * @return The index of the seat
     */
     public int bookSeat(char row, int col){
         int r = Converter.charToInt(row);
@@ -147,6 +148,7 @@ public class MovieScreening implements Serializable {
     * Update seat status by setting a specific seat to unbook
     * @param row The row alphabet of the seat
     * @param col The col number of the seat
+    * @return The index of the seat
     */
     public int unbookSeat(char row, int col){
         int r = Converter.charToInt(row);

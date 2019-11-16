@@ -428,6 +428,7 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     /** 
     * Sort an array list of movie screening
+    * @param movieScreeningList The list of movie screening to be sorted
     * @return The sorted list of movie screening
     */
     private ArrayList<MovieScreening> sortMovieScreening(ArrayList<MovieScreening> movieScreeningList){

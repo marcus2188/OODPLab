@@ -16,6 +16,7 @@ public class SerializeDB {
     /** 
     * Read from file
     * @param filename The file's name
+    * @return The list of objects
     */
     public static List readSerializedObject(String filename) {
         List details = null;

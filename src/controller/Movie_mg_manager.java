@@ -117,6 +117,9 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 	
 	/** 
 	* A menu to view movie details, add reviews or view pass reviews
+	* @param m1 The array list of movie
+	* @param d The chosen movie
+	* @param choice An integer choice
 	*/
 	public void actOnMovie(ArrayList<Movie> m1, Movie d, int choice) {
 		if (choice == 1) {

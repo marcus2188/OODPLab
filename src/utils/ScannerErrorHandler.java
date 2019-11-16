@@ -14,6 +14,7 @@ public class ScannerErrorHandler {
     /** 
     * Handle scanner next int
     * Only can scan in int
+    * @return The next int
     */
     public int nextInt(){
         int i;
@@ -34,6 +35,7 @@ public class ScannerErrorHandler {
     /** 
     * Handle scanner next line
     * Only can scan in line
+    * @return The next line
     */
     public String next(){
         String i;
@@ -54,6 +56,7 @@ public class ScannerErrorHandler {
     /** 
     * Handle scanner next float
     * Only can scan in float
+    * @return The next float
     */
     public Float nextFloat() {
         Float f;
@@ -74,6 +77,7 @@ public class ScannerErrorHandler {
     /** 
     * Handle scanner next double
     * Only can scan in double
+    * @return The next double
     */
     public Double nextDouble() {
         Double d;
@@ -94,6 +98,7 @@ public class ScannerErrorHandler {
     /** 
     * Handle scanner next line
     * Only can scan in line
+    * @return The next line
     */
     public String nextLine() {
         String s;

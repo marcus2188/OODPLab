@@ -65,9 +65,9 @@ public class Movie implements Serializable{
     * @param title This movie's title
     * @param showingStatus This movie's showing status
 	* @param endOfShowingDate This movie's end of showing date
-	* @param sypnosis This movie's sypnosis
+	* @param synopsis This movie's synopsis
 	* @param director This movie's director
-	* @param casts This movie's casts
+	* @param cast This movie's casts
 	* @param isBlockBuster This movie's determinant for blockbuster
 	* @param ticketSales This movie's ticket sales
 
@@ -111,7 +111,7 @@ public class Movie implements Serializable{
 	
 	/** 
 	* Change the showing statys for this movie
-	* @param showStatus The new status for this movie
+	* @param showingStatus The new status for this movie
 	*/
 	public void setShowingStatus(String showingStatus) {
 		this.showingStatus = showingStatus;
@@ -143,7 +143,7 @@ public class Movie implements Serializable{
 	
 	/** 
 	* Change the sypnosis for this movie
-	* @param synpnosis The new sypnosis of this movie
+	* @param synopsis The new sypnosis of this movie
 	*/
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
@@ -199,7 +199,7 @@ public class Movie implements Serializable{
 	
 	/** 
 	* Change the average rating for this movie 
-	* @param avgRating The reviews of this movie
+	* @param review_list The reviews of this movie
 	*/
 	public void setAvgRating(List<MovieReview> review_list) {	//added function
 		int total=0;
@@ -273,7 +273,7 @@ public class Movie implements Serializable{
 	/** 
 	* Add a new movie review for this movie
 	* @param comments The comment for the new movie review for this movie
-	* @param raing The rating for the new movie review for this movie
+	* @param rating The rating for the new movie review for this movie
 	*/
 	public void appendMovieReviewList(String comments, int rating) {	//added function
 		MovieReview mr = new MovieReview(comments,rating);

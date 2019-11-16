@@ -35,6 +35,12 @@ public class PriceTable {
 
     /** 
     * Check price from price table
+    * @param ageGroup The age group of purchaser
+    * @param isWeekDay The determinant for weekday during the time of boooking
+    * @param isBefore6 The determinant for before 6 during the time of booking
+    * @param format The screening format of the movie screening
+    * @param day The day during the time of booking
+    * @param isPlatinum The determinant for platinum with respect to the cinema 
     */
     public float checkPrice(
             AgeGroup ageGroup,

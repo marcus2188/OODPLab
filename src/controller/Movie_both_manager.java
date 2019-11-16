@@ -129,6 +129,7 @@ public class Movie_both_manager {
 	
 	/** 
 	* Read data from Movie.dat
+	* @return The array list of movie loaded
 	*/
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public ArrayList<Movie> loadData() {
@@ -139,6 +140,7 @@ public class Movie_both_manager {
 	
 	/** 
 	* Write data to Movie.dat
+	* @param m The data to be written in
 	*/
 	public void exportData(ArrayList<Movie> m) {
 		//save movie data

@@ -30,7 +30,8 @@ public interface PublicHoliday_inf {
 	public void deleteHoliday(int day, int month, int year);
 	/** 
 	* Check a public holiday
-	* @param date The date to check for
+	* @param d The date to check for
+	* @return The determinant to see if a date is a holiday
 	*/
 	public boolean checkHoliday (Date d);
 	
