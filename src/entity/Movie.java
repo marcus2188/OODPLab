@@ -314,7 +314,7 @@ public class Movie implements Serializable{
 			System.out.print("NA");
 			return;
 		}
-		System.out.printf("%.2f",this.getAvgRating());
+		System.out.printf("%.1f",this.getAvgRating());
 		return;
 	}
 	
@@ -346,8 +346,6 @@ public class Movie implements Serializable{
 		System.out.println("Past Reviews: ");
 		printPastReviews();
 		System.out.println();
-		
-		System.out.println('\n');
 	}
     
 }

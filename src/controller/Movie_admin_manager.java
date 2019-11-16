@@ -2,16 +2,11 @@ package controller;
 
 import entity.Movie;
 import entity.MovieReview;
-import entity.MovieScreening;
 import utils.ScannerErrorHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import entity.Movie;
-import entity.MovieReview;
 
 /**
  A manager to handle admin request for movies.
@@ -46,7 +41,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			System.out.println("4. End of Showing");
 			
 			choice = sc.nextInt();
-			sc.nextLine();
 			
 			if (choice==1) {
 				showingStatus = "Coming Soon";
@@ -68,11 +62,9 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 				do {
 					System.out.println("Year: ");
 					year = sc.nextInt();
-					sc.nextLine();
 					
 					System.out.println("Month: ");
 					month = sc.nextInt();
-					sc.nextLine();
 					if (month<1 || month>12) {
 						System.out.println("Invalid month!\n");
 						continue;
@@ -80,7 +72,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 					
 					System.out.println("Day: ");
 					day = sc.nextInt();
-					sc.nextLine();
 					if (day<1 || day>31) {
 						System.out.println("Invalid day!\n");
 						continue;
@@ -115,14 +106,14 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			System.out.println("1. Insert cast");
 			System.out.println("2. Done");
 			choice=sc.nextInt();
-			sc.nextLine();
 			
 			if (choice==1) {
 				System.out.println("Name of cast:");
 				cast.add(sc.nextLine());
 			}
+			else if (choice!=2) System.out.println("Invalid choice!\n");
 			
-		} while (choice==1);
+		} while (choice!=2);
 		
 		
 		//System.out.println("Average Rating: ");
@@ -146,11 +137,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			break;
 		} while (true);
 		
-		//System.out.println("Review list: ");
-		//default to empty list;
-		List<MovieReview> review_list = new ArrayList<MovieReview>();
-		//if (review_list.size()==0) System.out.println("Empty review list");
-		
 		//System.out.println("Ticket sales: ");
 		//deafult to 0;
 		int ticketSales = 0;
@@ -164,6 +150,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		
 		//export to serialisable file
 		exportData(m1);
+		System.out.println("Movie successfully created.");
 	}
 	
 	/** 
@@ -171,7 +158,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	*/
 	public void updateMovie() {
 		int ind=0, choice=0;
-		Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
 		ArrayList<Movie> m1 = this.getM();
 		
@@ -179,7 +166,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			System.out.println("Select the movie you want: (Input 0 to quit)");
 			this.printMovieList();
 			ind = sc.nextInt();
-			sc.nextLine();
 			if (ind==0) return; //quit
 			else if (ind>=1 && ind<=m1.size()) {
 				break;
@@ -204,7 +190,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			System.out.println("9. Movie Review list");
 			System.out.println("10. Ticket sales");
 			attr = sc.nextInt();
-			sc.nextLine();
 		} while (attr<1 || attr>10);
 		
 		
@@ -225,7 +210,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 				System.out.println("3. Now Showing");
 				System.out.println("4. End of Showing");
 				choice = sc.nextInt();
-				sc.nextLine();
 				int day, month, year;
 				if (choice==1) value = "Coming Soon";
 				else if (choice==2) value = "Preview";
@@ -236,17 +220,14 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 						System.out.println("Input end-of-showing date: ");
 						System.out.print("Year: ");
 						year = sc.nextInt();
-						sc.nextLine();
 						System.out.print("Month: ");
 						month = sc.nextInt();
-						sc.nextLine();
 						if (month<1 || month>12) {
 							System.out.println("Invalid month!\n");
 							continue;
 						}
 						System.out.print("Day: ");
 						day = sc.nextInt();
-						sc.nextLine();
 						if (day<1 || day>31) {
 							System.out.println("Invalid day!\n");
 							continue;
@@ -307,7 +288,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			System.out.println("What do you want to do? \n1. Add cast \n2. Update cast details \n3. Delete cast");
 			do {
 				choice = sc.nextInt();
-				sc.nextLine();
 				if (choice>=1 && choice<=3) break;
 				else System.out.println("Invalid choice!\n");
 			} while (true);
@@ -339,7 +319,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 				do {
 					System.out.println("Enter cast number to update: (Input 0 to quit)");
 					num = sc.nextInt();
-					sc.nextLine();
 					if (num==0) break;
 					List<String> value = new ArrayList<String>();
 					value = u.getCast();
@@ -360,7 +339,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 				do {
 					System.out.println("Enter cast number to delete: (Input 0 to quit)");
 					num = sc.nextInt();
-					sc.nextLine();
 					if (num==0) break;
 					List<String> value = new ArrayList<String>();
 					value = u.getCast();
@@ -391,7 +369,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			do {
 				System.out.println("Enter review number to delete: (Input 0 to quit)");
 				num = sc.nextInt();
-				sc.nextLine();
 				if (num==0) break;
 				List<MovieReview> value = new ArrayList<MovieReview>();
 				value = u.getReview_list();
@@ -403,7 +380,6 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			System.out.println("Current ticket sales: "+u.getTicketSales());
 			System.out.println("Enter new ticket sale numbers: ");
 			int value = sc.nextInt();
-			sc.nextLine();
 			u.setTicketSales(value);
 		}
 		else {
@@ -414,6 +390,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 		//after updating then need to update .dat
 		m1.set(ind-1, u);
 		this.exportData(m1);
+		System.out.println("Movie successfully updated.");
 		
 	}
 	
@@ -421,7 +398,7 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 	* Remove a movie
 	*/
 	public void removeMovie() {
-		Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
 		ArrayList<Movie> m1 = this.getM();
 		if (m1.size()==0) {
@@ -434,14 +411,17 @@ public class Movie_admin_manager extends Movie_both_manager implements Movie_adm
 			this.printMovieList();
 			
 			int choice = sc.nextInt();
-			sc.nextLine();
 			
 			if (choice==0) break;
-			else if (choice>m1.size()) System.out.println("Invalid choice!\n"); 
-			else m1.remove(choice-1);
+			else if (choice>m1.size()) System.out.println("Invalid choice!\n");
+			else {
+				m1.remove(choice-1);
+				System.out.println("Movie successfully removed.");
+			}
 		} while (true);	
 		
 		exportData(m1);
+		
 	}
 
 	

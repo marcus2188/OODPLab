@@ -7,10 +7,10 @@ import java.text.ParseException;
 
 public interface MovieTicket_inf {
     void updatePriceTable() throws IOException;
-   void printMenu();
-   void importData() throws IOException;
-  MovieTicket checkPrice() throws ParseException;
-  void deleteData();
-   void printPriceTable();
-   void updatePriceOfTicket(MovieTicket ticket);
+    void printMenu();
+    void importData() throws IOException;
+    MovieTicket checkPrice() throws ParseException;
+    void deleteData();
+    void printPriceTable();
+    void updatePriceOfTicket(MovieTicket ticket);
 }

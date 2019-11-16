@@ -1,17 +1,15 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import entity.Movie;
-import entity.MovieReview;
+import utils.ScannerErrorHandler;
 
 
 public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf {
 	
 	public void searchMovie() {
-		Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
 		System.out.println("Enter movie title: ");
 		CharSequence movieName = sc.nextLine().toLowerCase();
@@ -37,14 +35,12 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 			System.out.println("Would you like to do anything else?");
 			System.out.println("0. No, let's return\n1. See details for a movie. \n2. Add review for a movie. \n3. Print past reviews of a movie");
 			choice = sc.nextInt();
-			sc.nextLine();
 			if (choice == 0) break;
 			else if (choice==1||choice==2||choice==3){
 				//choose movie d
 				do {
 					System.out.println("Select movie from the above list.");
 					mchoice = sc.nextInt();
-					sc.nextLine();
 					if (mchoice<1||mchoice>returnCount) System.out.println("Invalid selection!\n");
 					else break;
 				} while (true);
@@ -67,14 +63,14 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 			return;
 		}
 		this.printMovieList();
-		Scanner sc = new Scanner(System.in);
+		ScannerErrorHandler sc = new ScannerErrorHandler();
 		int choice, mchoice=0;
 		do {
 			//choose what to do
 			System.out.println("Would you like to do anything else?");
 			System.out.println("0. No, let's return\n1. See details for a movie. \n2. Add review for a movie. \n3. Print past reviews of a movie");
 			choice = sc.nextInt();
-			sc.nextLine();
+			
 			
 			if (choice == 0) break;
 			else if (choice==1||choice==2||choice==3){
@@ -87,7 +83,7 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 				do {
 					System.out.println("Select movie from the above list.");
 					mchoice = sc.nextInt();
-					sc.nextLine();
+					
 					int msize = m1.size();
 					if (mchoice<1||mchoice>msize) System.out.println("Invalid selection!\n");
 					else break;
@@ -112,12 +108,12 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		}
 		else if (choice == 2) {
 			//addMovieReview();
-			Scanner sc = new Scanner(System.in);
+			ScannerErrorHandler sc = new ScannerErrorHandler();
 			int rating;
 			System.out.println("Rate this movie: 1 2 3 4 5");
 			do {
 				rating = sc.nextInt();
-				sc.nextLine();
+				
 			} while (rating<1 || rating>5);
 			
 			System.out.println("Comments: ");
@@ -128,13 +124,6 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		}
 		else if (choice == 3) {
 			//printPastReviews();
-			/*List<MovieReview> mrlist = d.getReview_list();
-			int size = mrlist.size();
-			for (int i=0;i<size;i++) {
-				System.out.println((i+1) + ".");
-				System.out.println("Rating: " + mrlist.get(i).getRating() + "\nComments: " + mrlist.get(i).getComments());
-			}
-			*/
 			d.printPastReviews();			
 		}
 		return;
