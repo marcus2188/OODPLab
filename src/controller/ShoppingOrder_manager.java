@@ -23,7 +23,6 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 	private ScannerErrorHandler se = new ScannerErrorHandler();
 	private ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
 	private ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
-	private MovieScreening obj;
 	private ArrayList<Date> holidays = new ArrayList<Date>();
 	
 	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
