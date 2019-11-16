@@ -11,15 +11,31 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
+/**
+ A manager to handle admin request for price table updates.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class MovieTicketManager implements MovieTicket_inf {
+    /** 
+    * The price table
+    */
     private ArrayList priceTable;
 
     // constructor
+    /** 
+    * Creates a movie ticket manager and imports data
+    */
     public MovieTicketManager() throws IOException {
         this.importData();
     }
 
-    // updates the entries in the current price table
+    /** 
+    * Updates the entries in the current price table
+    */
     public void updatePriceTable() throws IOException {
         // System.out.println("===Update ticket prices===");
         System.out.println("Enter details of ticket you want to edit:");
@@ -142,17 +158,26 @@ public class MovieTicketManager implements MovieTicket_inf {
         return;
     }
 
+    /** 
+    * Print menu for update price table
+    */
     public void printMenu() {
         System.out.println("Press 1 to list cineplexes");
     }
 
+    /** 
+    * Read data from prices.txt
+    */
     public void importData() {
         this.priceTable = TextTicketDB.readPrices("prices.txt");
         return;
     }
 
 
-    // takes in details and returns a movie ticket with appropriate price
+    /**
+    * Takes in details and returns a movie ticket with appropriate price
+    * @return The movie ticket with appropriate price
+    */
     public MovieTicket checkPrice() throws ParseException {
         // check before 6
         boolean before6;
@@ -249,6 +274,15 @@ public class MovieTicketManager implements MovieTicket_inf {
         return ticket;
     }
 
+    /** Check if the criteria exist in the price table 
+    * @param ageGroup The age group of purchaser
+    * @param weekday The determinant for weekday
+    * @param before6 The determinant for before 6
+    * @param screeningFormat The screening format of the movie screening
+    * @param day The day of movie screening
+    * @param i The index of the price table
+    * @return A boolean to determine if the criteria exist
+    */
     private boolean checkEqualTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat screeningFormat, int day, int i) {
         PriceTableTicket ticket = (PriceTableTicket)this.priceTable.get(i);
         if (ticket.getAgeGroup() == ageGroup
@@ -262,6 +296,9 @@ public class MovieTicketManager implements MovieTicket_inf {
         }
     }
 
+    /** 
+    * Delete data from the price table
+    */
     public void deleteData(){
         this.printPriceTable(); // print entire table first
         System.out.println("Enter ticket number to delete:");
@@ -274,6 +311,9 @@ public class MovieTicketManager implements MovieTicket_inf {
         return;
     }
 
+    /** 
+    * Print the price table
+    */
     public void printPriceTable(){
         System.out.println("===The current ticket table===");
         for (int i= 1; i <= this.priceTable.size(); i++ ) {

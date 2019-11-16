@@ -96,7 +96,7 @@ public class Cinema implements Serializable {
 
     /** 
     * Change the ID of this cinema
-    * @return this Cinema's ID
+    * @param cinemaID This Cinema's ID
     */
     public void setCinemaID(String cinemaID) {
         this.cinemaID = cinemaID;

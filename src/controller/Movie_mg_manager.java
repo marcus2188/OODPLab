@@ -6,8 +6,19 @@ import entity.Movie;
 import utils.ScannerErrorHandler;
 
 
+/**
+ A manager to handle movie goer request for movies.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
+
 public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf {
 	
+	/** 
+	* Search movies
+	*/
 	public void searchMovie() {
 		ScannerErrorHandler sc = new ScannerErrorHandler();
 		
@@ -57,6 +68,9 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		return;
 	}
 	
+	/** 
+	* List all movies
+	*/
 	public void listAllMovie() {
 		if (this.getM().size()==0) {
 			System.out.println("No movies are being shown now.");
@@ -101,6 +115,12 @@ public class Movie_mg_manager extends Movie_both_manager implements Movie_mg_inf
 		return;
 	}
 	
+	/** 
+	* A menu to view movie details, add reviews or view pass reviews
+	* @param m1 The array list of movie
+	* @param d The chosen movie
+	* @param choice An integer choice
+	*/
 	public void actOnMovie(ArrayList<Movie> m1, Movie d, int choice) {
 		if (choice == 1) {
 			//viewMovieDetails();

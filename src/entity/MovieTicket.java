@@ -61,7 +61,7 @@ public class MovieTicket implements Serializable{
     * @param weekday The determinant for weekday during the time of boooking
     * @param before6 The determinant for before 6 during the time of booking
     * @param format The screening format of the movie screening
-    * @param int The day during the time of booking
+    * @param day The day during the time of booking
     * @param price The price of this movie ticket
     * @param platinum The determinant for platinum with respect to the cinema
     */

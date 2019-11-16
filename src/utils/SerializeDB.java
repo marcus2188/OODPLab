@@ -4,10 +4,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Generic Serialize DB class that reads and writes arraylist of entities to dat file
+/**
+ Generic Serialize DB class that reads and writes arraylist of entities to dat file
 Entity classes need to implement Serializable
- */
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class SerializeDB {
+    /** 
+    * Read from file
+    * @param filename The file's name
+    * @return The list of objects
+    */
     public static List readSerializedObject(String filename) {
         List details = null;
         FileInputStream fis = null;
@@ -44,6 +54,11 @@ public class SerializeDB {
         return details;
     }
 
+    /** 
+    * Write to file
+    * @param filename The file's name
+    * @param list The data to be written
+    */
     public static void writeSerializedObject(String filename, ArrayList list)  {
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
