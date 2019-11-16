@@ -19,35 +19,73 @@ import utils.ScannerErrorHandler;
 import utils.SerializeDB;
 
 
+/**
+ A manager to handle movie goer request to book/purchase tickets.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class ShoppingOrder_manager implements ShoppingOrder_inf{
+	/** 
+	* The scanner that handles error
+	*/
 	private ScannerErrorHandler se = new ScannerErrorHandler();
+	/** 
+	* An array list of movie ticket that represents payment history
+	*/
 	private ArrayList<MovieTicket> PaymentHist = new ArrayList<MovieTicket>(); 
+	/** 
+	* An array list of movie goer
+	*/
 	private ArrayList<MovieGoer> people = new ArrayList<MovieGoer>(); 
+	/** 
+	* An array list of dates that represents holidays
+	*/
 	private ArrayList<Date> holidays = new ArrayList<Date>();
 	
-	// AUTO CREATE NEW SHOPPING ORDER ON CALLING MANAGER
+	/** 
+	* An array list of tickets in shopping order
+	*/
 	private ArrayList<MovieTicket> tixlist = new ArrayList<MovieTicket>();
+	/** 
+	* Purchase date
+	*/
 	private Date newdate = null;
+	/** 
+	* A shopping order
+	*/
 	private ShoppingOrder neword = new ShoppingOrder(tixlist, newdate);
 	
-	// CONSTRUCTOR RUNS WHEN MAIN CREATES MY MANAGER INSTANCE
+	/** 
+	* Creates a shopping order manager and import data
+	*/
 	public ShoppingOrder_manager(){
 		this.importdata();
 	}
-	//type one
-	// TO FETCH ALL PAST PAID TICKETS INTO THE PAYMENTHIST
+	
+	/** 
+	* Read data from paymentHistory.dat, peoplenames.dat and dates.dat
+	*/
 	public void importdata() {
 		this.PaymentHist = (ArrayList) SerializeDB.readSerializedObject("paymentHistory.dat");
 		this.people = (ArrayList) SerializeDB.readSerializedObject("peoplenames.dat");
 		this.holidays = (ArrayList) SerializeDB.readSerializedObject("dates.dat");
 	}
-	// TO UPDATE PAID TICKETS FROM PAYMENT HIST TO PAID.dat
+
+	/** 
+	* Write data to paymentHistory.dat and peoplenames.date
+	*/
 	public void updatedata() {
 		SerializeDB.writeSerializedObject("paymentHistory.dat", this.PaymentHist);
 		SerializeDB.writeSerializedObject("peoplenames.dat", this.people);
 	}
 	
-	// MAIN CALLS THIS FUNCTION FOR BOOKING TICKETS
+	/** 
+     * Book a ticket
+     * @param obj The movie screening chosen
+     * @param seat The seat chosen
+     */
 	public void bookTicket(MovieScreening obj, Seat seat) throws ParseException {
 		System.out.println("Please enter ");
 		// GET BEFORE6 boolean
@@ -232,7 +270,9 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		this.updatedata();
    }
 	
-	// USER WANTS TO VIEW ALL TICKETS INSIDE CURRENT SHOPPING ORDER
+	/** 
+     * View current shopping order
+     */
 	public void viewcurrentSO() {
 		if(this.neword.returnticketarray().isEmpty()) {
 			System.out.println("The current shopping order is empty");
@@ -245,7 +285,9 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		}
 	}
 	
-	// USER WANTS TO EMPTY CURRENT SHOPPING ORDER
+	/** 
+     * Reset current shopping order
+     */
 	public void dumpcurrentSO(){
 		if(this.neword.returnticketarray().isEmpty()) {
 			System.out.println("ERROR");
@@ -257,7 +299,9 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		}
 	}
 	
-	// USER WANTS TO VIEW ENTIRE PAYMENT HISTORY
+	/** 
+     * View all paid tickets
+     */
 	public void viewallpaidtix() {
 		System.out.println("Your entire payment history is as follows : ");
 		for(int i = 0; i< this.PaymentHist.size(); i++) {
@@ -267,7 +311,9 @@ public class ShoppingOrder_manager implements ShoppingOrder_inf{
 		System.out.println("Thank you for using MOBLIMA!! : ");
 	}
 	
-	// USER WANTS TO GET ALL MOVIEGOER DETAILS
+	/** 
+     * See all past purchasers
+     */
 	public void seepeople() {
 		System.out.println("These are all the people who purchased tickets : ");
 		for(int i = 0; i< this.people.size(); i++) {

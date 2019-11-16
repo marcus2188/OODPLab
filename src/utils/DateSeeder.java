@@ -5,6 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ A utility class to initialize data for dates.dat
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class DateSeeder {
     //public static void main(String[] arg) {
         // read dates

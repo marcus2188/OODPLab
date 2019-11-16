@@ -8,6 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ A utility class to initialize data
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class Seeder {
     public static void main(String[] args) {
         // Initialize Data for Cineplex

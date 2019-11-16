@@ -9,16 +9,43 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ A manager to handle admin request for movie screening.
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
+
 public class MovieScreeningManager implements MovieScreening_inf {
+    /** 
+    * The list of movie screening from moviescreening.dat
+    */
     private ArrayList<MovieScreening> movieScreeningList = new ArrayList<>();
+    /** 
+    * The list of cineplex from cineplex.dat
+    */
     private ArrayList<Cineplex> cineplexList;
+    /** 
+    * The list of movie from Movie.dat
+    */
     private ArrayList<Movie> movieList;
+    /** 
+    * A formarter to format dd/MM/yyyy into date
+    */
     private DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
+    /** 
+    * Creates a movie screening manager and import data
+    */
     public MovieScreeningManager(){
         this.importData();
     }
 
+    /** 
+    * Allows movie goer to view all movie screening list
+    * @return The array list of user selected movie screening
+    */
     public ArrayList<MovieScreening> viewAllListing(){
         ArrayList<MovieScreening> sortedList = sortMovieScreening(movieScreeningList);
         ArrayList<MovieScreening> userSelection = new ArrayList<>();
@@ -74,6 +101,11 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return userSelection;
     }
 
+    /**
+    * View movie screening based on movie title
+    * @param movieTitle The movie title to filter by
+    * @return The array list of user selected movie screening 
+    */
     public ArrayList<MovieScreening> mgMovieprinting(String movieTitle){
         ArrayList<MovieScreening> userSelection = new ArrayList<>();
         ArrayList<String> distinctDate =sortDateList();
@@ -111,6 +143,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return userSelection;
     }
     
+    /** 
+    * Create a movie screening
+    */
     public void createMovieScreening() {
         ScannerErrorHandler scan = new ScannerErrorHandler();
         int cineplexchoice;
@@ -155,6 +190,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
 
     }
 
+    /** 
+    * Print list of movie screening
+    */
     public void printScreeningList() {
         System.out.println("===The Current Screening Value===");
         for (int i = 0; i < this.movieScreeningList.size(); i++) {
@@ -163,6 +201,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
         }
     }
 
+    /** 
+    * Update movie screening
+    */
    public void updateMovieScreening() { 
        int cineplexchoice;
        Cineplex cineplex;
@@ -255,7 +296,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
    }
 
 
-
+    /** 
+    * Delete movie screening
+    */
    public void deleteMovieScreening() {
        printScreeningList();
        System.out.println("===Please select the index to remove===");
@@ -266,6 +309,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
        System.out.println("Have been successfully removed");
    }
 
+    /** 
+    * Print all the cineplexes
+    */
     private void printCineplex(){
         for(int i = 0; i < this.cineplexList.size(); i++){
             String CineplexName = this.cineplexList.get(i).getName();
@@ -273,6 +319,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
         }
     }
 
+    /**
+    * Print all the cinemas in the given cineplex
+    * @param cineplex The cineplex choice 
+    */
     private void printCinema(Cineplex cineplex){
         for( int i = 0; i < cineplex.getCinemas().size(); i++){
             String cinemaName = cineplex.getCinemas().get(i).getName();
@@ -280,6 +330,9 @@ public class MovieScreeningManager implements MovieScreening_inf {
         }
     }
 
+    /** 
+    * Print all movies
+    */
     private void printMovie(){
         for( int i = 0; i < this.movieList.size(); i++){
             String movieTitle = this.movieList.get(i).getTitle();
@@ -287,12 +340,21 @@ public class MovieScreeningManager implements MovieScreening_inf {
         }
     }
 
+    /** 
+    * Sort the array list of movie screening by date and time
+    * @param movieScreeningList The array list of movie screening
+    * @return The sorted array list of movie screening
+    */
     private ArrayList<MovieScreening> sortByDateTime(ArrayList<MovieScreening> movieScreeningList){
         movieScreeningList.sort(Comparator.comparing(o->o.getShowTime()));
         movieScreeningList.sort(Comparator.comparing(o->o.getShowDate()));
         return movieScreeningList;
     }
 
+    /** 
+    * Sort the date array list
+    * @return The sorted date array list
+    */
     private ArrayList<String> sortDateList(){
         ArrayList<String> dateList = new ArrayList<>();
         for(int i =0; i < movieScreeningList.size();i++){
@@ -306,6 +368,11 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return dateList;
     }
 
+    /** 
+    * Filters movie screening list by movie title and return an array list of cineplex names to print
+    * @param movieTitle The movie title to filter by
+    * @return The array list of cineplex names 
+    */
     private ArrayList<String> cineplexToPrint(String movieTitle){
         ArrayList<String> cineplexToShow = new ArrayList<>();
         for(int i =0; i < movieScreeningList.size();i++){
@@ -321,6 +388,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return cineplexToShow;
     }
 
+    /** 
+    * Return an array list of cineplex names to print
+    * @return The array list of cineplex names 
+    */
     public ArrayList<String> cineplexToPrint2(){
         ArrayList<String> cineplexToShow = new ArrayList<>();
         for(int i =0; i < movieScreeningList.size();i++){
@@ -335,6 +406,11 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return cineplexToShow;
     }
 
+     /** 
+    * Filters movie screening list by movie title
+    * @param movieTitle The movie title to filter by
+    * @return The array list of filtered movie screening
+    */
     private ArrayList<MovieScreening> filterMovieScreening(String movieTitle){
         ArrayList<MovieScreening> filtedList = new ArrayList<>();
         for(int i =0; i < movieScreeningList.size();i++){
@@ -350,6 +426,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return filtedList;
     }
 
+    /** 
+    * Sort an array list of movie screening
+    * @return The sorted list of movie screening
+    */
     private ArrayList<MovieScreening> sortMovieScreening(ArrayList<MovieScreening> movieScreeningList){
         movieScreeningList.sort(Comparator.comparing(o1->o1.getCineplex().getName()));
         movieScreeningList.sort(Comparator.comparing(o3->o3.getShowDate()));
@@ -357,6 +437,10 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return movieScreeningList;
     }
 
+    /** 
+    * Gets movie screenings with distinct movie
+    * @return The array list of movie screening with distinct movie
+    */
     private ArrayList<String> distinctMovie(){
         ArrayList<String> distinctMovie = new ArrayList<>();
         for(int i =0; i < movieScreeningList.size();i++){
@@ -370,12 +454,20 @@ public class MovieScreeningManager implements MovieScreening_inf {
         return distinctMovie;
     }
 
+    /** 
+    * Read data from moviescreening.dat, cineplex.dat and Movie.dat
+    */
     public void importData() {
         this.movieScreeningList = (ArrayList) SerializeDB.readSerializedObject("moviescreening.dat");
         this.cineplexList = (ArrayList) SerializeDB.readSerializedObject("cineplex.dat");
         this.movieList = getBookableMovies((ArrayList) SerializeDB.readSerializedObject("Movie.dat"));
     }
     
+    /** 
+    * Filter out the array list of movie with status end of showing
+    * @param m The array list of movie to be filtered
+    * @return The filtered array list of movie
+    */
     public ArrayList<Movie> getBookableMovies (ArrayList<Movie> m) {
     	for (int i=0;i<m.size();i++) {
     		if (m.get(i).getShowingStatus().equalsIgnoreCase("End of Showing")) {

@@ -11,9 +11,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+
+/**
+ Generic TextTicket DB class that reads and writes price tablr data into text file
+ @author SS3_Group4
+ @version 1.0
+ @since 2019-11-15
+*/
+
 public class TextTicketDB {
+    /**
+    * The separator used in the text file
+    */
     public static final String SEPARATOR = "|";
 
+    /** 
+    * Read price from file
+    * @param filename The file's name
+    */
     public static ArrayList readPrices(String filename) {
         try {
             ArrayList stringArray = (ArrayList) read(filename);
@@ -41,6 +56,10 @@ public class TextTicketDB {
         return null;
     }
 
+    /** 
+    * Read from file
+    * @param filename The file's name
+    */
     public static List read (String filename) throws IOException {
         List data = new ArrayList();
         Scanner scan = new Scanner( new FileInputStream("src/data/" + filename));
@@ -54,6 +73,11 @@ public class TextTicketDB {
         return data;
     }
 
+    /** 
+    * Write price into the file
+    * @param filename The file's name
+    * @param priceTable The new price table
+    */
     public static void savePrices(String filename, ArrayList priceTable) throws IOException {
         List alw = new ArrayList();
 
@@ -86,6 +110,11 @@ public class TextTicketDB {
         write(filename, alw);
     }
 
+    /** 
+    * Write into file
+    * @param filename The file's name
+    * @param data The data to be written in
+    */
     public static void write(String filename, List data) throws IOException {
         PrintWriter out = new PrintWriter(new FileWriter("src/data/" + filename));
 
