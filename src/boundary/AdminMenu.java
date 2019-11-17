@@ -217,6 +217,10 @@ public class AdminMenu {
                 }
                 System.out.println("Enter Month (MM): ");
                 int month = scanner.nextInt();
+                while (month < 0 || month > 12) {
+                    System.out.println("Invalid choice, please try again: ");
+                    month = scanner.nextInt();
+                }
                 System.out.println("Enter Year (YYYY): ");
                 int year = scanner.nextInt();
 
@@ -235,6 +239,10 @@ public class AdminMenu {
                 }
                 System.out.println("Enter Month (MM): ");
                 month = sc.nextInt();
+                while (month < 0 || month > 12) {
+                    System.out.println("Invalid choice, please try again: ");
+                    month = sc.nextInt();
+                }
                 System.out.println("Enter Year (YYYY): ");
                 year = sc.nextInt();
 
