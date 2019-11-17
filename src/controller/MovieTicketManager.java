@@ -118,6 +118,7 @@ public class MovieTicketManager implements MovieTicket_inf {
                 priceTable.remove(i);
                 priceTable.add(ticket);
                 TextTicketDB.savePrices("prices.txt", this.priceTable);
+                System.out.println("Price updated!");
                 break;
             }
         }
@@ -251,10 +252,10 @@ public class MovieTicketManager implements MovieTicket_inf {
 
     private boolean checkEqualTicket(AgeGroup ageGroup, boolean weekday, boolean before6, ScreeningFormat screeningFormat, int day, int i) {
         PriceTableTicket ticket = (PriceTableTicket)this.priceTable.get(i);
-        if (ticket.getAgeGroup() == ageGroup
+        if (ticket.getAgeGroup().equals(ageGroup)
         && ticket.isWeekday() == weekday
         && ticket.isBefore6() == before6
-        && ticket.getFormat() == screeningFormat
+        && ticket.getFormat().equals(screeningFormat)
         && ticket.getDay() == day) {
             return true;
         } else {
